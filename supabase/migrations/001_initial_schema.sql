@@ -107,3 +107,8 @@ insert into sections (number, title) values
   (19, 'Budgeting: The Operating Budget and Fund'),
   (20, 'Budgeting: The Contingency Reserve Fund and Depreciation Reports'),
   (21, 'Purchasing and Personnel Management');
+
+  -- Grants
+grant usage on schema public to anon, authenticated, service_role;
+grant select on sections to anon, authenticated, service_role;
+grant select on questions to anon, authenticated, service_role;
