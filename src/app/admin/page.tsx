@@ -199,4 +199,4 @@ export default function AdminPage() {
         {activeTab === 'upload' && (
           <div className="bg-white rounded-lg border border-gray-200 p-6">
             <h2 className="text-lg font-semibold text-gray-900 mb-1">Bulk Upload</h2>
-"            <p className="text-sm text-gray-500 mb-4">
+            <p className="text-sm text-gray-500 mb-4">
