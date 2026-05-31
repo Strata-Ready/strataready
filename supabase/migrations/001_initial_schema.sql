@@ -112,3 +112,22 @@ insert into sections (number, title) values
 grant usage on schema public to anon, authenticated, service_role;
 grant select on sections to anon, authenticated, service_role;
 grant select on questions to anon, authenticated, service_role;
+
+-- Knowledge base documents table
+create table kb_documents (
+  id            uuid primary key default gen_random_uuid(),
+  file_name     text not null,
+  file_path     text not null unique,
+  doc_type      text not null check (doc_type in ('chapter','assignment','act','regulation')),
+  lesson_number integer,          -- for chapters/assignments: which lesson (1-21)
+  chapter_number integer,         -- for chapters: chapter number (1-27)
+  act_name      text,             -- for acts: e.g. 'BCSPA', 'RESA', 'PIPA'
+  extracted_text text,            -- full text content extracted from PDF
+  page_count    integer,
+  processed     boolean default false,
+  created_at    timestamptz default now()
+);
+
+-- Grant access
+grant all on kb_documents to service_role;
+grant select on kb_documents to anon, authenticated;
