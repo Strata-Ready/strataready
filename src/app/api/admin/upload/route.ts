@@ -1,5 +1,6 @@
 import { adminClient } from '@/lib/supabase/admin'
-import pdf from 'pdf-parse'
+import * as pdfParse from 'pdf-parse'
+const pdf = (pdfParse as any).default || pdfParse
 
 export const maxDuration = 60
 
