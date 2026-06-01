@@ -62,58 +62,7 @@ export async function POST(request: Request) {
     return Response.json({ error: 'filePath required' }, { status: 400 })
   }
 
-  try {
-    const { data: fileData, error: downloadError } = await adminClient.storage
-      .from('knowledge-base')
-      .download(filePath)
-
-    if (downloadError || !fileData) {
-      return Response.json({ error: `Download failed: ${downloadError?.message}` }, { status: 500 })
-    }
-
-    const arrayBuffer = await fileData.arrayBuffer()
-    const buffer = Buffer.from(arrayBuffer)
-
-    const pdfParseModule = await import('pdf-parse')
-    const pdfParse = (pdfParseModule as any).default ?? pdfParseModule
-    const pdfData = await pdfParse(buffer)
-    const extractedText = pdfData.text
-    const pageCount = pdfData.numpages
-
-    const fileName = filePath.split('/').pop() || filePath
-    const { docType, lessonNumber, chapterNumber, actName } = detectFileInfo(fileName)
-
-    const { error: dbError } = await adminClient
-      .from('kb_documents')
-      .upsert({
-        file_name: fileName,
-        file_path: filePath,
-        doc_type: docType,
-        lesson_number: lessonNumber,
-        chapter_number: chapterNumber,
-        act_name: actName,
-        extracted_text: extractedText,
-        page_count: pageCount,
-        processed: true,
-      }, { onConflict: 'file_path' })
-
-    if (dbError) {
-      return Response.json({ error: `DB error: ${dbError.message}` }, { status: 500 })
-    }
-
-    return Response.json({
-      ok: true,
-      file: fileName,
-      pages: pageCount,
-      docType,
-      lessonNumber,
-      chars: extractedText.length,
-    })
-
-  } catch (err) {
-    return Response.json(
-      { error: err instanceof Error ? err.message : 'Processing failed' },
-      { status: 500 }
-    )
-  }
+  return Response.json({
+    error: 'Direct upload via API is disabled. Use the local sync script instead.',
+  }, { status: 400 })
 }

@@ -2,193 +2,226 @@ import Link from 'next/link'
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen" style={{ backgroundColor: '#F7F9FC', color: '#0B1F33' }}>
 
       {/* Nav */}
-      <nav className="border-b border-gray-100 px-6 py-4">
-        <div className="max-w-5xl mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-blue-700 rounded-lg flex items-center justify-center">
-              <span className="text-white text-sm font-bold">SR</span>
+      <nav style={{ backgroundColor: '#0B1F33', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
+        <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div style={{ width: 32, height: 32, backgroundColor: '#B08D57', borderRadius: 6, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <span style={{ color: '#0B1F33', fontSize: 12, fontWeight: 700, letterSpacing: '-0.5px' }}>SR</span>
             </div>
-            <span className="font-semibold text-gray-900 text-lg">StrataReady</span>
+            <span style={{ color: '#F7F9FC', fontSize: 16, fontWeight: 600, letterSpacing: '-0.3px' }}>StrataReady</span>
           </div>
-          <div className="flex items-center gap-6">
-            <a href="#how-it-works" className="text-sm text-gray-500 hover:text-gray-900 hidden md:block">How it works</a>
-            <a href="#pricing" className="text-sm text-gray-500 hover:text-gray-900 hidden md:block">Pricing</a>
-            <Link href="/login" className="text-sm text-gray-700 hover:text-gray-900">Sign in</Link>
-            <Link href="/demo" className="bg-blue-700 text-white text-sm font-medium px-4 py-2 rounded-lg hover:bg-blue-800 transition-colors">
-              Try free demo
+          <div className="flex items-center gap-8">
+            <a href="#how-it-works" style={{ color: 'rgba(247,249,252,0.6)', fontSize: 14 }} className="hidden md:block hover:text-white transition-colors">How it works</a>
+            <a href="#citations" style={{ color: 'rgba(247,249,252,0.6)', fontSize: 14 }} className="hidden md:block hover:text-white transition-colors">Citations</a>
+            <a href="#pricing" style={{ color: 'rgba(247,249,252,0.6)', fontSize: 14 }} className="hidden md:block hover:text-white transition-colors">Pricing</a>
+            <Link href="/login" style={{ color: 'rgba(247,249,252,0.6)', fontSize: 14 }} className="hover:text-white transition-colors">Sign in</Link>
+            <Link href="/demo" style={{ backgroundColor: '#B08D57', color: '#0B1F33', fontSize: 13, fontWeight: 600, padding: '8px 18px', borderRadius: 6, letterSpacing: '0.01em' }} className="hover:opacity-90 transition-opacity">
+              Free Diagnostic
             </Link>
           </div>
         </div>
       </nav>
 
       {/* Hero */}
-      <section className="max-w-5xl mx-auto px-6 pt-20 pb-16 text-center">
-        <div className="inline-flex items-center gap-2 bg-blue-50 text-blue-700 text-sm font-medium px-4 py-1.5 rounded-full mb-8">
-          <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
-          BC Strata Management Licensing Exam Prep
+      <section style={{ backgroundColor: '#0B1F33' }} className="pb-0">
+        <div className="max-w-6xl mx-auto px-6 pt-24 pb-16">
+          <div className="max-w-2xl">
+            <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, backgroundColor: 'rgba(176,141,87,0.15)', border: '1px solid rgba(176,141,87,0.3)', borderRadius: 4, padding: '5px 12px', marginBottom: 32 }}>
+              <div style={{ width: 6, height: 6, backgroundColor: '#B08D57', borderRadius: '50%' }}></div>
+              <span style={{ color: '#B08D57', fontSize: 12, fontWeight: 500, letterSpacing: '0.08em', textTransform: 'uppercase' }}>BC Strata Management Licensing</span>
+            </div>
+            <h1 style={{ fontSize: 56, fontWeight: 700, color: '#F7F9FC', lineHeight: 1.05, letterSpacing: '-1.5px', marginBottom: 24 }}>
+              Two attempts.<br />Make the first<br />one count.
+            </h1>
+            <p style={{ fontSize: 18, color: 'rgba(247,249,252,0.65)', lineHeight: 1.7, marginBottom: 40, maxWidth: 480 }}>
+              Practice exams built from the official UBC Sauder course materials. Every wrong answer comes with exact textbook page references and Act citations — so you know precisely what to study before you sit.
+            </p>
+            <div className="flex items-center gap-4">
+              <Link href="/demo" style={{ backgroundColor: '#B08D57', color: '#0B1F33', fontSize: 15, fontWeight: 600, padding: '14px 28px', borderRadius: 8, letterSpacing: '-0.2px' }} className="hover:opacity-90 transition-opacity">
+                Start Free Diagnostic Exam →
+              </Link>
+              <a href="#how-it-works" style={{ color: 'rgba(247,249,252,0.6)', fontSize: 14, borderBottom: '1px solid rgba(247,249,252,0.2)', paddingBottom: 1 }} className="hover:text-white transition-colors">
+                View exam format
+              </a>
+            </div>
+            <p style={{ color: 'rgba(247,249,252,0.35)', fontSize: 13, marginTop: 16 }}>No account required · 10 questions · Instant results</p>
+          </div>
         </div>
-        <h1 className="text-5xl font-bold text-gray-900 leading-tight mb-6 max-w-3xl mx-auto">
-          Find out if you&apos;re ready.<br />
-          If not, know exactly what to study.
-        </h1>
-        <p className="text-xl text-gray-500 mb-10 max-w-2xl mx-auto leading-relaxed">
-          Practice exams built from the official UBC Sauder course materials. 
-          Instant results. Exact page references and Act citations for every wrong answer.
-        </p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Link
-            href="/demo"
-            className="bg-blue-700 text-white text-lg font-medium px-8 py-4 rounded-xl hover:bg-blue-800 transition-colors"
-          >
-            Try 10 free questions →
-          </Link>
-          <a
-            href="#how-it-works"
-            className="border border-gray-200 text-gray-700 text-lg font-medium px-8 py-4 rounded-xl hover:bg-gray-50 transition-colors"
-          >
-            See how it works
-          </a>
+
+        {/* Exam UI mockup */}
+        <div className="max-w-6xl mx-auto px-6 pb-0">
+          <div style={{ backgroundColor: '#F7F9FC', borderRadius: '16px 16px 0 0', padding: '28px 32px', border: '1px solid rgba(0,0,0,0.08)', borderBottom: 'none', boxShadow: '0 -8px 40px rgba(0,0,0,0.3)' }}>
+
+            {/* Exam header */}
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 24, paddingBottom: 20, borderBottom: '1px solid #E2E8F0' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+                <span style={{ fontSize: 12, color: '#64748B', fontWeight: 500 }}>QUESTION 23 OF 105</span>
+                <div style={{ height: 4, width: 200, backgroundColor: '#E2E8F0', borderRadius: 2 }}>
+                  <div style={{ height: 4, width: '22%', backgroundColor: '#0B1F33', borderRadius: 2 }}></div>
+                </div>
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 6, backgroundColor: '#FEF3C7', padding: '6px 12px', borderRadius: 6 }}>
+                <div style={{ width: 7, height: 7, backgroundColor: '#D97706', borderRadius: '50%' }}></div>
+                <span style={{ fontSize: 13, fontWeight: 600, color: '#92400E' }}>2:18:44 remaining</span>
+              </div>
+            </div>
+
+            {/* Question */}
+            <p style={{ fontSize: 15, color: '#0B1F33', lineHeight: 1.7, marginBottom: 24, maxWidth: 640 }}>
+              A strata corporation has 42 strata lots. Under the <em>Strata Property Act</em>, what is the minimum number of council members required to constitute a quorum at a council meeting?
+            </p>
+
+            {/* Options */}
+            <div style={{ display: 'grid', gap: 10, maxWidth: 640 }}>
+              {[
+                { label: 'A', text: 'Two council members, regardless of total council size', selected: false },
+                { label: 'B', text: 'A majority of the council members then holding office', selected: true },
+                { label: 'C', text: 'Three council members, or one-third of the council', selected: false },
+                { label: 'D', text: 'All council members must be present to constitute a quorum', selected: false },
+              ].map(opt => (
+                <div key={opt.label} style={{
+                  display: 'flex', alignItems: 'flex-start', gap: 12, padding: '12px 16px',
+                  borderRadius: 8, border: `1.5px solid ${opt.selected ? '#0B1F33' : '#E2E8F0'}`,
+                  backgroundColor: opt.selected ? 'rgba(11,31,51,0.04)' : 'white',
+                  cursor: 'pointer'
+                }}>
+                  <div style={{
+                    width: 24, height: 24, borderRadius: '50%', flexShrink: 0,
+                    border: `2px solid ${opt.selected ? '#0B1F33' : '#CBD5E1'}`,
+                    backgroundColor: opt.selected ? '#0B1F33' : 'transparent',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center'
+                  }}>
+                    {opt.selected && <div style={{ width: 8, height: 8, borderRadius: '50%', backgroundColor: 'white' }}></div>}
+                  </div>
+                  <span style={{ fontSize: 13, color: '#2D3748', lineHeight: 1.5 }}>
+                    <strong style={{ color: '#0B1F33' }}>{opt.label}.</strong> {opt.text}
+                  </span>
+                </div>
+              ))}
+            </div>
+
+          </div>
         </div>
-        <p className="text-sm text-gray-400 mt-6">No account required for the free demo</p>
       </section>
 
-      {/* Social proof bar */}
-      <section className="border-y border-gray-100 bg-gray-50 py-6">
-        <div className="max-w-5xl mx-auto px-6">
-          <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16 text-center">
-            <div>
-              <p className="text-2xl font-bold text-gray-900">105</p>
-              <p className="text-sm text-gray-500">questions per exam</p>
-            </div>
-            <div className="hidden md:block w-px h-10 bg-gray-200"></div>
-            <div>
-              <p className="text-2xl font-bold text-gray-900">21</p>
-              <p className="text-sm text-gray-500">course sections covered</p>
-            </div>
-            <div className="hidden md:block w-px h-10 bg-gray-200"></div>
-            <div>
-              <p className="text-2xl font-bold text-gray-900">70%</p>
-              <p className="text-sm text-gray-500">passing grade required</p>
-            </div>
-            <div className="hidden md:block w-px h-10 bg-gray-200"></div>
-            <div>
-              <p className="text-2xl font-bold text-gray-900">UBC</p>
-              <p className="text-sm text-gray-500">official course materials</p>
-            </div>
+      {/* Exam format bar */}
+      <section style={{ backgroundColor: '#F0F4F8', borderBottom: '1px solid #E2E8F0' }}>
+        <div className="max-w-6xl mx-auto px-6 py-5">
+          <div className="flex flex-wrap items-center justify-center gap-8 md:gap-16">
+            {[
+              { value: '100', label: 'Multiple choice questions' },
+              { value: '3 hrs', label: 'Exam duration' },
+              { value: '70%', label: 'Required to pass' },
+              { value: '2', label: 'Attempts permitted' },
+              { value: 'UBC', label: 'Sauder School of Business' },
+            ].map(item => (
+              <div key={item.label} className="text-center">
+                <p style={{ fontSize: 20, fontWeight: 700, color: '#0B1F33', letterSpacing: '-0.5px' }}>{item.value}</p>
+                <p style={{ fontSize: 12, color: '#64748B', marginTop: 2 }}>{item.label}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* How it works */}
-      <section id="how-it-works" className="max-w-5xl mx-auto px-6 py-24">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">How StrataReady works</h2>
-          <p className="text-gray-500 text-lg max-w-xl mx-auto">
-            The fastest way to know you&apos;re ready for the UBC Sauder licensing exam.
-          </p>
-        </div>
-        <div className="grid md:grid-cols-3 gap-8">
-          {[
-            {
-              step: '01',
-              title: 'Take a practice exam',
-              desc: 'Answer 105 multiple choice questions that mirror the real UBC exam format. Questions are drawn from all 21 course sections.',
-            },
-            {
-              step: '02',
-              title: 'Get instant results',
-              desc: 'See your score immediately. Every wrong answer shows you exactly why — with the correct answer and a full explanation.',
-            },
-            {
-              step: '03',
-              title: 'Know exactly what to study',
-              desc: 'Receive a personalised study plan with exact page numbers, chapter references, and Act citations for everything you missed.',
-            },
-          ].map(item => (
-            <div key={item.step} className="bg-gray-50 rounded-2xl p-8">
-              <div className="text-blue-600 font-bold text-sm mb-4">{item.step}</div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-3">{item.title}</h3>
-              <p className="text-gray-500 leading-relaxed">{item.desc}</p>
-            </div>
-          ))}
+      <section id="how-it-works" className="py-24">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="mb-16">
+            <p style={{ fontSize: 11, fontWeight: 600, color: '#B08D57', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 12 }}>Process</p>
+            <h2 style={{ fontSize: 36, fontWeight: 700, color: '#0B1F33', letterSpacing: '-0.8px', maxWidth: 480 }}>
+              Verify your readiness before your first attempt.
+            </h2>
+          </div>
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              {
+                num: '01',
+                title: 'Practice under real exam conditions',
+                desc: '105 multiple choice questions. 21 course sections. Timed. The same format as the UBC Sauder licensing examination — no surprises on exam day.',
+              },
+              {
+                num: '02',
+                title: 'Receive your score instantly',
+                desc: 'No waiting. Your score appears the moment you submit. Every wrong answer is shown alongside the correct answer and a full explanation of why.',
+              },
+              {
+                num: '03',
+                title: 'Know exactly what to study',
+                desc: 'A personalised study plan identifies your weak areas with exact textbook page numbers and legislation references. Not "study more" — study this, on this page.',
+              },
+            ].map(item => (
+              <div key={item.num}>
+                <p style={{ fontSize: 11, fontWeight: 600, color: '#B08D57', letterSpacing: '0.08em', marginBottom: 16 }}>{item.num}</p>
+                <h3 style={{ fontSize: 17, fontWeight: 600, color: '#0B1F33', letterSpacing: '-0.3px', marginBottom: 10 }}>{item.title}</h3>
+                <p style={{ fontSize: 14, color: '#64748B', lineHeight: 1.7 }}>{item.desc}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* Feature highlight */}
-      <section className="bg-gray-50 py-24">
-        <div className="max-w-5xl mx-auto px-6">
+      {/* Citation section */}
+      <section id="citations" style={{ backgroundColor: '#0B1F33' }} className="py-24">
+        <div className="max-w-6xl mx-auto px-6">
           <div className="grid md:grid-cols-2 gap-16 items-center">
             <div>
-              <h2 className="text-3xl font-bold text-gray-900 mb-6">
-                Not just a score — a precise study plan
+              <p style={{ fontSize: 11, fontWeight: 600, color: '#B08D57', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 12 }}>Differentiator</p>
+              <h2 style={{ fontSize: 36, fontWeight: 700, color: '#F7F9FC', letterSpacing: '-0.8px', marginBottom: 20 }}>
+                Every answer is traceable.
               </h2>
-              <p className="text-gray-500 leading-relaxed mb-8">
-                Most practice tests tell you what you got wrong. StrataReady tells you 
-                exactly where to find the right answer — down to the page number and 
-                the specific section of the Strata Property Act.
+              <p style={{ fontSize: 16, color: 'rgba(247,249,252,0.6)', lineHeight: 1.7, marginBottom: 24 }}>
+                Every question in StrataReady is sourced directly from the official UBC Sauder course materials. When you get something wrong, you don&apos;t just see the correct answer — you see exactly where to find it.
               </p>
-              <ul className="space-y-4">
+              <ul style={{ listStyle: 'none', padding: 0, margin: 0 }} className="space-y-3">
                 {[
-                  'Exact textbook page references for every missed question',
-                  'Specific Act and regulation citations (BCSPA, RESA, PIPA)',
-                  'Section-by-section performance breakdown',
-                  'Retake with a fresh set of questions each time',
-                  'Questions written from the official UBC course materials only',
+                  'Textbook chapter and page number',
+                  'Strata Property Act section reference',
+                  'Real Estate Services Act citations',
+                  'Regulation and bylaw references where applicable',
                 ].map(item => (
-                  <li key={item} className="flex items-start gap-3">
-                    <div className="w-5 h-5 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
-                    </div>
-                    <span className="text-gray-700">{item}</span>
+                  <li key={item} style={{ display: 'flex', alignItems: 'center', gap: 10, fontSize: 14, color: 'rgba(247,249,252,0.75)' }}>
+                    <div style={{ width: 4, height: 4, backgroundColor: '#B08D57', borderRadius: '50%', flexShrink: 0 }}></div>
+                    {item}
                   </li>
                 ))}
               </ul>
             </div>
-            <div className="bg-white rounded-2xl border border-gray-200 p-6 shadow-sm">
-              <div className="flex items-center justify-between mb-4">
-                <span className="text-sm font-medium text-gray-500">Study guide — after your exam</span>
-                <span className="text-xs bg-red-100 text-red-700 px-2 py-1 rounded-full font-medium">3 areas to review</span>
+
+            {/* Citation card */}
+            <div style={{ backgroundColor: '#F7F9FC', borderRadius: 12, overflow: 'hidden', boxShadow: '0 24px 64px rgba(0,0,0,0.4)' }}>
+              <div style={{ padding: '16px 20px', borderBottom: '1px solid #E2E8F0', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                <span style={{ fontSize: 12, fontWeight: 600, color: '#64748B', letterSpacing: '0.05em' }}>QUESTION 47 — RESULT</span>
+                <span style={{ fontSize: 12, backgroundColor: '#FEE2E2', color: '#991B1B', padding: '3px 8px', borderRadius: 4, fontWeight: 500 }}>Incorrect</span>
               </div>
-              <div className="space-y-4">
-                {[
-                  {
-                    topic: 'Strata Property Act — Governance',
-                    ref: 'BCSPA s.26–s.35',
-                    pages: 'Chapter 10, pp. 188–204',
-                    score: '40%',
-                    color: 'red',
-                  },
-                  {
-                    topic: 'Operating Budget Fundamentals',
-                    ref: 'Chapter 19',
-                    pages: 'pp. 312–328',
-                    score: '60%',
-                    color: 'amber',
-                  },
-                  {
-                    topic: 'Strata Meetings & Communications',
-                    ref: 'BCSPA s.40–s.48',
-                    pages: 'Chapter 12, pp. 220–236',
-                    score: '55%',
-                    color: 'amber',
-                  },
-                ].map(item => (
-                  <div key={item.topic} className="border border-gray-100 rounded-xl p-4">
-                    <div className="flex items-start justify-between mb-2">
-                      <span className="text-sm font-medium text-gray-900">{item.topic}</span>
-                      <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${
-                        item.color === 'red' 
-                          ? 'bg-red-100 text-red-700' 
-                          : 'bg-amber-100 text-amber-700'
-                      }`}>{item.score}</span>
-                    </div>
-                    <p className="text-xs text-blue-600 font-medium">{item.ref}</p>
-                    <p className="text-xs text-gray-400 mt-0.5">{item.pages}</p>
+              <div style={{ padding: '20px' }}>
+                <p style={{ fontSize: 13, color: '#2D3748', lineHeight: 1.6, marginBottom: 16 }}>
+                  Which of the following best describes the strata corporation&apos;s duty to repair and maintain common property under the <em>Strata Property Act</em>?
+                </p>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 20 }}>
+                  <div style={{ padding: '10px 14px', borderRadius: 6, backgroundColor: '#FEE2E2', border: '1.5px solid #FECACA', fontSize: 13, color: '#991B1B' }}>
+                    <strong>Your answer (C):</strong> The duty applies only to structural elements
                   </div>
-                ))}
+                  <div style={{ padding: '10px 14px', borderRadius: 6, backgroundColor: '#DCFCE7', border: '1.5px solid #BBF7D0', fontSize: 13, color: '#166534' }}>
+                    <strong>Correct answer (A):</strong> The strata corporation must repair and maintain common property and common assets
+                  </div>
+                </div>
+                <div style={{ backgroundColor: '#F8FAFC', borderRadius: 8, padding: '14px 16px', borderLeft: '3px solid #B08D57' }}>
+                  <p style={{ fontSize: 11, fontWeight: 600, color: '#B08D57', letterSpacing: '0.08em', marginBottom: 8 }}>SOURCE REFERENCES</p>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                      <span style={{ fontFamily: 'monospace', fontSize: 12, backgroundColor: '#E2E8F0', padding: '2px 8px', borderRadius: 4, color: '#0B1F33', fontWeight: 600 }}>BCSPA s.72</span>
+                      <span style={{ fontSize: 12, color: '#64748B' }}>Strata Property Act — Repair and maintenance</span>
+                    </div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                      <span style={{ fontFamily: 'monospace', fontSize: 12, backgroundColor: '#E2E8F0', padding: '2px 8px', borderRadius: 4, color: '#0B1F33', fontWeight: 600 }}>Ch. 10 p.188</span>
+                      <span style={{ fontSize: 12, color: '#64748B' }}>Applied Strata Management Practice</span>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -196,113 +229,107 @@ export default function Home() {
       </section>
 
       {/* Pricing */}
-      <section id="pricing" className="max-w-5xl mx-auto px-6 py-24">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">Simple pricing</h2>
-          <p className="text-gray-500 text-lg">
-            You have two attempts at the real exam. Make them count.
-          </p>
-        </div>
-        <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-
-          {/* Free */}
-          <div className="border border-gray-200 rounded-2xl p-8">
-            <h3 className="font-semibold text-gray-900 mb-1">Free demo</h3>
-            <p className="text-gray-400 text-sm mb-6">See what StrataReady can do</p>
-            <div className="mb-8">
-              <span className="text-4xl font-bold text-gray-900">$0</span>
-            </div>
-            <ul className="space-y-3 mb-8 text-sm text-gray-600">
-              {['10 sample questions','Instant score','Basic study references','No account needed'].map(f => (
-                <li key={f} className="flex items-center gap-2">
-                  <span className="text-blue-500">✓</span>{f}
-                </li>
-              ))}
-            </ul>
-            <Link href="/demo" className="block text-center border border-gray-200 text-gray-700 font-medium py-3 rounded-xl hover:bg-gray-50 transition-colors">
-              Try free demo
-            </Link>
+      <section id="pricing" className="py-24">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="mb-16">
+            <p style={{ fontSize: 11, fontWeight: 600, color: '#B08D57', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 12 }}>Pricing</p>
+            <h2 style={{ fontSize: 36, fontWeight: 700, color: '#0B1F33', letterSpacing: '-0.8px' }}>Simple. No subscriptions.</h2>
           </div>
+          <div className="grid md:grid-cols-3 gap-6 max-w-4xl">
 
-          {/* Per exam */}
-          <div className="border-2 border-blue-700 rounded-2xl p-8 relative">
-            <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-blue-700 text-white text-xs font-medium px-3 py-1 rounded-full">
-              Most popular
+            <div style={{ border: '1px solid #E2E8F0', borderRadius: 12, padding: '28px 24px', backgroundColor: 'white' }}>
+              <p style={{ fontSize: 13, fontWeight: 600, color: '#0B1F33', marginBottom: 4 }}>Free Diagnostic</p>
+              <p style={{ fontSize: 13, color: '#94A3B8', marginBottom: 24 }}>Verify the product works</p>
+              <p style={{ fontSize: 36, fontWeight: 700, color: '#0B1F33', letterSpacing: '-1px', marginBottom: 24 }}>$0</p>
+              <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 28px 0' }} className="space-y-2">
+                {['10 questions','Instant score','Sample study references','No account required'].map(f => (
+                  <li key={f} style={{ fontSize: 13, color: '#64748B', display: 'flex', gap: 8, alignItems: 'center' }}>
+                    <span style={{ color: '#B08D57', fontWeight: 600 }}>✓</span>{f}
+                  </li>
+                ))}
+              </ul>
+              <Link href="/demo" style={{ display: 'block', textAlign: 'center', border: '1px solid #E2E8F0', color: '#0B1F33', fontSize: 13, fontWeight: 600, padding: '10px 0', borderRadius: 8 }} className="hover:bg-gray-50 transition-colors">
+                Start diagnostic
+              </Link>
             </div>
-            <h3 className="font-semibold text-gray-900 mb-1">Per exam</h3>
-            <p className="text-gray-400 text-sm mb-6">Pay as you go</p>
-            <div className="mb-8">
-              <span className="text-4xl font-bold text-gray-900">$9.99</span>
-              <span className="text-gray-400 text-sm ml-1">/ attempt</span>
+
+            <div style={{ border: '2px solid #0B1F33', borderRadius: 12, padding: '28px 24px', backgroundColor: 'white', position: 'relative' }}>
+              <div style={{ position: 'absolute', top: -12, left: '50%', transform: 'translateX(-50%)', backgroundColor: '#0B1F33', color: '#B08D57', fontSize: 11, fontWeight: 600, padding: '4px 12px', borderRadius: 20, letterSpacing: '0.06em', whiteSpace: 'nowrap' }}>
+                MOST POPULAR
+              </div>
+              <p style={{ fontSize: 13, fontWeight: 600, color: '#0B1F33', marginBottom: 4 }}>Per Exam</p>
+              <p style={{ fontSize: 13, color: '#94A3B8', marginBottom: 24 }}>Pay as you go</p>
+              <div style={{ marginBottom: 24 }}>
+                <span style={{ fontSize: 36, fontWeight: 700, color: '#0B1F33', letterSpacing: '-1px' }}>$9.99</span>
+                <span style={{ fontSize: 13, color: '#94A3B8', marginLeft: 4 }}>/ attempt</span>
+              </div>
+              <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 28px 0' }} className="space-y-2">
+                {['105 questions','Instant results','Full study guide','Exact page & Act references','Section performance breakdown'].map(f => (
+                  <li key={f} style={{ fontSize: 13, color: '#64748B', display: 'flex', gap: 8, alignItems: 'center' }}>
+                    <span style={{ color: '#B08D57', fontWeight: 600 }}>✓</span>{f}
+                  </li>
+                ))}
+              </ul>
+              <Link href="/signup" style={{ display: 'block', textAlign: 'center', backgroundColor: '#0B1F33', color: '#F7F9FC', fontSize: 13, fontWeight: 600, padding: '10px 0', borderRadius: 8 }} className="hover:opacity-90 transition-opacity">
+                Get started
+              </Link>
             </div>
-            <ul className="space-y-3 mb-8 text-sm text-gray-600">
-              {['105 questions','Instant results','Full study guide','Exact page & Act references','Section performance breakdown'].map(f => (
-                <li key={f} className="flex items-center gap-2">
-                  <span className="text-blue-500">✓</span>{f}
-                </li>
-              ))}
-            </ul>
-            <Link href="/signup" className="block text-center bg-blue-700 text-white font-medium py-3 rounded-xl hover:bg-blue-800 transition-colors">
-              Get started
-            </Link>
+
+            <div style={{ border: '1px solid #E2E8F0', borderRadius: 12, padding: '28px 24px', backgroundColor: 'white' }}>
+              <p style={{ fontSize: 13, fontWeight: 600, color: '#0B1F33', marginBottom: 4 }}>Full Prep Access</p>
+              <p style={{ fontSize: 13, color: '#94A3B8', marginBottom: 24 }}>Best value</p>
+              <div style={{ marginBottom: 24 }}>
+                <span style={{ fontSize: 36, fontWeight: 700, color: '#0B1F33', letterSpacing: '-1px' }}>$49.99</span>
+                <span style={{ fontSize: 13, color: '#94A3B8', marginLeft: 4 }}>one-time</span>
+              </div>
+              <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 28px 0' }} className="space-y-2">
+                {['Unlimited exam attempts','Everything in Per Exam','Progress tracking over time','Score trend analysis','Exam readiness score'].map(f => (
+                  <li key={f} style={{ fontSize: 13, color: '#64748B', display: 'flex', gap: 8, alignItems: 'center' }}>
+                    <span style={{ color: '#B08D57', fontWeight: 600 }}>✓</span>{f}
+                  </li>
+                ))}
+              </ul>
+              <Link href="/signup?plan=unlimited" style={{ display: 'block', textAlign: 'center', border: '1px solid #E2E8F0', color: '#0B1F33', fontSize: 13, fontWeight: 600, padding: '10px 0', borderRadius: 8 }} className="hover:bg-gray-50 transition-colors">
+                Get full access
+              </Link>
+            </div>
+
           </div>
-
-          {/* Unlimited */}
-          <div className="border border-gray-200 rounded-2xl p-8">
-            <h3 className="font-semibold text-gray-900 mb-1">Unlimited</h3>
-            <p className="text-gray-400 text-sm mb-6">Best value for serious prep</p>
-            <div className="mb-8">
-              <span className="text-4xl font-bold text-gray-900">$49.99</span>
-              <span className="text-gray-400 text-sm ml-1">one-time</span>
-            </div>
-            <ul className="space-y-3 mb-8 text-sm text-gray-600">
-              {['Unlimited exam attempts','Everything in Per exam','Progress tracking','Score trend over time','Exam readiness score'].map(f => (
-                <li key={f} className="flex items-center gap-2">
-                  <span className="text-blue-500">✓</span>{f}
-                </li>
-              ))}
-            </ul>
-            <Link href="/signup?plan=unlimited" className="block text-center border border-gray-200 text-gray-700 font-medium py-3 rounded-xl hover:bg-gray-50 transition-colors">
-              Get unlimited
-            </Link>
-          </div>
-
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="bg-blue-700 py-20">
+      {/* Final CTA */}
+      <section style={{ backgroundColor: '#0B1F33' }} className="py-20">
         <div className="max-w-3xl mx-auto px-6 text-center">
-          <h2 className="text-3xl font-bold text-white mb-4">
-            Ready to find out if you&apos;re exam-ready?
+          <h2 style={{ fontSize: 36, fontWeight: 700, color: '#F7F9FC', letterSpacing: '-0.8px', marginBottom: 16 }}>
+            Know before you go.
           </h2>
-          <p className="text-blue-200 text-lg mb-8">
-            Try 10 free questions right now. No account, no credit card.
+          <p style={{ fontSize: 16, color: 'rgba(247,249,252,0.55)', marginBottom: 36, lineHeight: 1.7 }}>
+            The UBC Sauder licensing exam gives you two attempts.<br />
+            Most candidates who fail wish they had practised more deliberately.<br />
+            StrataReady is the deliberate practice.
           </p>
-          <Link
-            href="/demo"
-            className="inline-block bg-white text-blue-700 font-semibold text-lg px-8 py-4 rounded-xl hover:bg-blue-50 transition-colors"
-          >
-            Start free demo →
+          <Link href="/demo" style={{ display: 'inline-block', backgroundColor: '#B08D57', color: '#0B1F33', fontSize: 15, fontWeight: 600, padding: '14px 32px', borderRadius: 8, letterSpacing: '-0.2px' }} className="hover:opacity-90 transition-opacity">
+            Start Free Diagnostic Exam →
           </Link>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-gray-100 py-10">
-        <div className="max-w-5xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2">
-            <div className="w-6 h-6 bg-blue-700 rounded flex items-center justify-center">
-              <span className="text-white text-xs font-bold">SR</span>
+      <footer style={{ borderTop: '1px solid #E2E8F0', backgroundColor: '#F7F9FC' }}>
+        <div className="max-w-6xl mx-auto px-6 py-8 flex flex-col md:flex-row items-center justify-between gap-4">
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+            <div style={{ width: 24, height: 24, backgroundColor: '#0B1F33', borderRadius: 4, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <span style={{ color: '#B08D57', fontSize: 10, fontWeight: 700 }}>SR</span>
             </div>
-            <span className="text-sm font-medium text-gray-700">StrataReady</span>
+            <span style={{ fontSize: 13, fontWeight: 600, color: '#0B1F33' }}>StrataReady</span>
           </div>
-          <p className="text-sm text-gray-400 text-center">
-            BC Strata Management Licensing Exam Preparation. Not affiliated with UBC Sauder School of Business.
+          <p style={{ fontSize: 12, color: '#94A3B8', textAlign: 'center' }}>
+            BC Strata Management Licensing Exam Preparation · Not affiliated with UBC Sauder School of Business or BCFSA
           </p>
-          <div className="flex gap-6 text-sm text-gray-400">
-            <Link href="/privacy" className="hover:text-gray-600">Privacy</Link>
-            <Link href="/terms" className="hover:text-gray-600">Terms</Link>
+          <div className="flex gap-6">
+            <Link href="/privacy" style={{ fontSize: 12, color: '#94A3B8' }} className="hover:text-gray-600">Privacy</Link>
+            <Link href="/terms" style={{ fontSize: 12, color: '#94A3B8' }} className="hover:text-gray-600">Terms</Link>
           </div>
         </div>
       </footer>
