@@ -46,7 +46,7 @@ function elapsed(start: string, end: string | null) {
   return `${mins}m ${secs}s`
 }
 
-export default function ResultsPage({ params }: { params: { id: string } }) {
+export default function ResultsPage({ params }: { params: Promise<{ id: string }> }) {
   const router = useRouter()
   const [attempt, setAttempt] = useState<Attempt | null>(null)
   const [answers, setAnswers] = useState<Answer[]>([])
@@ -58,7 +58,8 @@ export default function ResultsPage({ params }: { params: { id: string } }) {
   useEffect(() => {
     async function load() {
       try {
-        const res = await fetch(`/api/results/${params.id}`)
+        const { id } = await params
+        const res = await fetch(`/api/results/${id}`)
         const data = await res.json()
         if (data.error) { setError(data.error); setLoading(false); return }
         setAttempt(data.attempt)
