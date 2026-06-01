@@ -10,9 +10,7 @@ export async function GET(request: Request) {
 
   const { data: docs, error } = await adminClient
     .from('kb_documents')
-    .select('id, file_name, doc_type, lesson_number, act_name, page_count, processed, created_at')
-    .order('doc_type', { ascending: true })
-
+    .select('id, file_name, file_path, doc_type, lesson_number, act_name, page_count, processed, created_at')    .order('doc_type', { ascending: true })
   if (error) {
     return Response.json({ error: error.message }, { status: 500 })
   }
