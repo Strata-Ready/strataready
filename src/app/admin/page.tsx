@@ -76,9 +76,10 @@ export default function AdminPage() {
           <p className="text-sm text-gray-500 mb-6">Knowledge Base Management</p>
           <input
             type="password"
-            placeholder="Admin key"
-            value={key}
-            onChange={e => setKey(e.target.value)}
+           // Dynamic import to avoid ESM issues
+            const pdfParseModule = await import('pdf-parse')
+            const pdfParse = pdfParseModule.default ?? pdfParseModule
+            const pdfData = await (pdfParse as any)(buffer)
             onKeyDown={e => e.key === 'Enter' && authenticate()}
             className="w-full border border-gray-300 rounded-lg px-4 py-2 mb-3 text-sm"
           />
