@@ -39,7 +39,7 @@ export default function Home() {
           backgroundImage: 'url(/hero-building.jpg)',
           backgroundSize: 'cover',
           backgroundPosition: 'center top',
-          opacity: 0.25,
+          opacity: 0.45,
         }} />
         <div style={{
           position: 'absolute', inset: 0,
@@ -145,7 +145,7 @@ export default function Home() {
                 Every answer is traceable.
               </h2>
               <p style={{ fontSize: 16, color: 'rgba(247,249,252,0.6)', lineHeight: 1.7, marginBottom: 24 }}>
-                Every question is sourced directly from BC&apos;s official strata management licensing course materials and authoritative regulatory sources. When you get something wrong, you see exactly where to find the correct answer — no guesswork, no generic advice.
+                Every question is sourced directly from BC&apos;s strata management licensing materials and authoritative regulatory sources. When you get something wrong, you see exactly where to find the correct answer — no guesswork, no generic advice.
               </p>
               <ul style={{ listStyle: 'none', padding: 0, margin: 0 }} className="space-y-3">
                 {[
@@ -188,8 +188,8 @@ export default function Home() {
                       <span style={{ fontSize: 12, color: '#64748B' }}>Strata Property Act — Repair and maintenance</span>
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                      <span style={{ fontFamily: 'monospace', fontSize: 12, backgroundColor: '#E2E8F0', padding: '2px 8px', borderRadius: 4, color: '#0B1F33', fontWeight: 600 }}>Official Course Materials</span>
-                      <span style={{ fontSize: 12, color: '#64748B' }}>BC Strata Management Licensing Program</span>
+                      <span style={{ fontFamily: 'monospace', fontSize: 12, backgroundColor: '#E2E8F0', padding: '2px 8px', borderRadius: 4, color: '#0B1F33', fontWeight: 600 }}>Course Materials</span>
+                      <span style={{ fontSize: 12, color: '#64748B' }}>References from BC Strata Management Licensing source materials</span>
                     </div>
                   </div>
                 </div>
