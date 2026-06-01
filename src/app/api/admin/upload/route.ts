@@ -63,7 +63,6 @@ export async function POST(request: Request) {
   }
 
   try {
-    // Download PDF from Supabase Storage
     const { data: fileData, error: downloadError } = await adminClient.storage
       .from('knowledge-base')
       .download(filePath)
@@ -72,21 +71,18 @@ export async function POST(request: Request) {
       return Response.json({ error: `Download failed: ${downloadError?.message}` }, { status: 500 })
     }
 
-    // Extract text using pdf-parse (fast, milliseconds)
     const arrayBuffer = await fileData.arrayBuffer()
     const buffer = Buffer.from(arrayBuffer)
-    
-    // Dynamic import to avoid ESM issues
-    const pdfParse = (await import('pdf-parse')).default
+
+    const pdfParseModule = await import('pdf-parse')
+    const pdfParse = (pdfParseModule as any).default ?? pdfParseModule
     const pdfData = await pdfParse(buffer)
     const extractedText = pdfData.text
     const pageCount = pdfData.numpages
 
-    // Detect metadata from filename
     const fileName = filePath.split('/').pop() || filePath
     const { docType, lessonNumber, chapterNumber, actName } = detectFileInfo(fileName)
 
-    // Save to kb_documents
     const { error: dbError } = await adminClient
       .from('kb_documents')
       .upsert({
