@@ -112,7 +112,7 @@ export default function Home() {
               {
                 num: '01',
                 title: 'Practice under real exam conditions',
-                desc: '105 multiple choice questions across all relevant sections. Timed. The same format as the BC Strata Management licensing examination — so there are no surprises on exam day.',
+                desc: '105 multiple choice questions across all all relevant exam topics. Timed. The same format as the BC Strata Management licensing examination — so there are no surprises on exam day.',
               },
               {
                 num: '02',

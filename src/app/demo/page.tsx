@@ -221,7 +221,7 @@ export default function DemoPage() {
             <div style={{ backgroundColor: passed ? '#F0FDF4' : '#FFF7ED', border: `1px solid ${passed ? '#BBF7D0' : '#FED7AA'}`, borderRadius: 8, padding: '14px 16px' }}>
               <p style={{ fontSize: 14, color: passed ? '#166534' : '#9A3412', lineHeight: 1.6 }}>
                 {passed
-                  ? 'Strong result on this diagnostic. The full exam covers all 21 sections in depth — this is a sample of what to expect.'
+                  ? 'Strong result on this diagnostic. The full exam covers all relevant exam material in depth — this is a sample of what to expect.'
                   : 'This diagnostic covers 10 of 21 sections. The full exam requires 70% to pass. Use the study references below to identify exactly what to review.'}
               </p>
             </div>
@@ -279,7 +279,7 @@ export default function DemoPage() {
               Ready for the full exam?
             </h2>
             <p style={{ fontSize: 15, color: 'rgba(247,249,252,0.6)', marginBottom: 24, lineHeight: 1.7 }}>
-              The full exam covers all 21 sections with 105 questions.<br />Every wrong answer includes exact source references.
+              The full exam covers all relevant exam material with 105 questions.<br />Every wrong answer includes exact source references.
             </p>
             <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
               <Link href="/signup" style={{ backgroundColor: '#B08D57', color: '#0B1F33', fontSize: 14, fontWeight: 600, padding: '12px 24px', borderRadius: 8, textDecoration: 'none' }}>
