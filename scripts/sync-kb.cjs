@@ -86,8 +86,18 @@ async function main() {
     const { data } = await supabase.storage.from('knowledge-base').list(folder)
     if (data) allFiles.push(...data.filter(f=>f.name!=='.emptyFolderPlaceholder').map(f=>`${folder}/${f.name}`))
   }
-  console.log(`Found ${allFiles.length} files\n`)
-  for (const f of allFiles) await processFile(f)
+  console.log(`Found ${allFiles.length} files in bucket`)
+
+  // Get already processed files from DB
+  const { data: existing } = await supabase.from('kb_documents').select('file_path')
+  const processedPaths = new Set((existing || []).map(d => d.file_path))
+  
+  const toProcess = allFiles.filter(f => !processedPaths.has(f))
+  console.log(`${processedPaths.size} already processed, ${toProcess.length} remaining\n`)
+
+  if (toProcess.length === 0) { console.log('All files already processed.'); return }
+
+  for (const f of toProcess) await processFile(f)
   console.log('\nDone.')
 }
 
