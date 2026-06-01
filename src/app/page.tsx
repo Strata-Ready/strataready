@@ -103,7 +103,7 @@ export default function Home() {
         <div className="max-w-6xl mx-auto px-6">
           <div className="mb-16">
             <p style={{ fontSize: 11, fontWeight: 600, color: '#B08D57', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 12 }}>Process</p>
-            <h2 style={{ fontSize: 36, fontWeight: 700, color: '#0B1F33', letterSpacing: '-0.8px', maxWidth: 480 }}>
+            <h2 style={{ fontSize: 48, fontWeight: 700, color: '#0B1F33', letterSpacing: '-0.8px', maxWidth: 480 }}>
               Verify your readiness before your first attempt.
             </h2>
           </div>
@@ -141,7 +141,7 @@ export default function Home() {
           <div className="grid md:grid-cols-2 gap-16 items-center">
             <div>
               <p style={{ fontSize: 11, fontWeight: 600, color: '#B08D57', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 12 }}>Why StrataReady</p>
-              <h2 style={{ fontSize: 36, fontWeight: 700, color: '#F7F9FC', letterSpacing: '-0.8px', marginBottom: 20 }}>
+              <h2 style={{ fontSize: 48, fontWeight: 700, color: '#F7F9FC', letterSpacing: '-0.8px', marginBottom: 20 }}>
                 Every answer is traceable.
               </h2>
               <p style={{ fontSize: 16, color: 'rgba(247,249,252,0.6)', lineHeight: 1.7, marginBottom: 24 }}>
@@ -204,10 +204,10 @@ export default function Home() {
         <div className="max-w-6xl mx-auto px-6">
           <div className="mb-16">
             <p style={{ fontSize: 11, fontWeight: 600, color: '#B08D57', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 12 }}>Pricing</p>
-            <h2 style={{ fontSize: 36, fontWeight: 700, color: '#0B1F33', letterSpacing: '-0.8px' }}>Simple. No subscriptions.</h2>
+            <h2 style={{ fontSize: 48, fontWeight: 700, color: '#0B1F33', letterSpacing: '-0.8px' }}>Simple. No subscriptions.</h2>
             <p style={{ fontSize: 16, color: '#64748B', marginTop: 8 }}>Less than the cost of a single exam attempt. A fraction of the cost of failing one.</p>
           </div>
-          <div className="grid md:grid-cols-3 gap-6 max-w-4xl">
+          <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
 
             <div style={{ border: '1px solid #E2E8F0', borderRadius: 12, padding: '28px 24px', backgroundColor: 'white' }}>
               <p style={{ fontSize: 13, fontWeight: 600, color: '#0B1F33', marginBottom: 4 }}>Free Diagnostic</p>
@@ -278,7 +278,7 @@ export default function Home() {
           backgroundSize: 'cover', backgroundPosition: 'center', opacity: 0.08,
         }} />
         <div className="max-w-3xl mx-auto px-6 text-center relative" style={{ zIndex: 1 }}>
-          <h2 style={{ fontSize: 36, fontWeight: 700, color: '#F7F9FC', letterSpacing: '-0.8px', marginBottom: 16 }}>
+          <h2 style={{ fontSize: 48, fontWeight: 700, color: '#F7F9FC', letterSpacing: '-0.8px', marginBottom: 16 }}>
             Know before you go.
           </h2>
           <p style={{ fontSize: 16, color: 'rgba(247,249,252,0.55)', marginBottom: 36, lineHeight: 1.8 }}>
