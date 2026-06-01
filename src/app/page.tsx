@@ -18,6 +18,7 @@ export default function Home() {
             <a href="#citations" style={{ color: 'rgba(247,249,252,0.6)', fontSize: 14 }} className="hidden md:block hover:text-white transition-colors">Why StrataReady</a>
             <a href="#pricing" style={{ color: 'rgba(247,249,252,0.6)', fontSize: 14 }} className="hidden md:block hover:text-white transition-colors">Pricing</a>
             <Link href="/login" style={{ color: 'rgba(247,249,252,0.6)', fontSize: 14 }} className="hover:text-white transition-colors">Sign in</Link>
+            <Link href="/signup" style={{ color: 'rgba(247,249,252,0.6)', fontSize: 14, border: '1px solid rgba(247,249,252,0.2)', padding: '7px 16px', borderRadius: 6 }} className="hidden md:block hover:text-white transition-colors">Get started</Link>
             <Link href="/demo" style={{ backgroundColor: '#B08D57', color: '#0B1F33', fontSize: 13, fontWeight: 600, padding: '8px 18px', borderRadius: 6, letterSpacing: '0.01em' }} className="hover:opacity-90 transition-opacity">
               Free Diagnostic
             </Link>
@@ -132,6 +133,16 @@ export default function Home() {
               </div>
             ))}
           </div>
+        </div>
+
+        {/* CTA row after how-it-works */}
+        <div className="max-w-6xl mx-auto px-6 pb-16" style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
+          <Link href="/signup" style={{ backgroundColor: '#0B1F33', color: '#F7F9FC', fontSize: 14, fontWeight: 600, padding: '12px 24px', borderRadius: 8, textDecoration: 'none' }}>
+            Get started →
+          </Link>
+          <Link href="/demo" style={{ backgroundColor: 'transparent', color: '#64748B', fontSize: 14, padding: '12px 24px', borderRadius: 8, textDecoration: 'none', border: '1px solid #E2E8F0' }}>
+            Try free diagnostic first
+          </Link>
         </div>
       </section>
 

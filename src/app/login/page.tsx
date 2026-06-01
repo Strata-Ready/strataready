@@ -37,7 +37,7 @@ export default function LoginPage() {
           <span style={{ color: '#F7F9FC', fontSize: 15, fontWeight: 600 }}>StrataReady</span>
         </Link>
         <Link href="/signup" style={{ color: 'rgba(247,249,252,0.6)', fontSize: 14, textDecoration: 'none' }}>
-          New here? Create account
+          No account? Create one →
         </Link>
       </nav>
 
@@ -52,25 +52,17 @@ export default function LoginPage() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
               <div>
                 <label style={{ fontSize: 13, fontWeight: 500, color: '#0B1F33', display: 'block', marginBottom: 6 }}>Email address</label>
-                <input
-                  type="email"
-                  value={email}
-                  onChange={e => setEmail(e.target.value)}
+                <input type="email" value={email} onChange={e => setEmail(e.target.value)}
                   onKeyDown={e => e.key === 'Enter' && handleLogin()}
                   placeholder="jane@example.com"
-                  style={{ width: '100%', border: '1.5px solid #E2E8F0', borderRadius: 8, padding: '10px 14px', fontSize: 14, color: '#0B1F33', outline: 'none', boxSizing: 'border-box' }}
-                />
+                  style={{ width: '100%', border: '1.5px solid #E2E8F0', borderRadius: 8, padding: '10px 14px', fontSize: 14, color: '#0B1F33', outline: 'none', boxSizing: 'border-box' }} />
               </div>
               <div>
                 <label style={{ fontSize: 13, fontWeight: 500, color: '#0B1F33', display: 'block', marginBottom: 6 }}>Password</label>
-                <input
-                  type="password"
-                  value={password}
-                  onChange={e => setPassword(e.target.value)}
+                <input type="password" value={password} onChange={e => setPassword(e.target.value)}
                   onKeyDown={e => e.key === 'Enter' && handleLogin()}
                   placeholder="Your password"
-                  style={{ width: '100%', border: '1.5px solid #E2E8F0', borderRadius: 8, padding: '10px 14px', fontSize: 14, color: '#0B1F33', outline: 'none', boxSizing: 'border-box' }}
-                />
+                  style={{ width: '100%', border: '1.5px solid #E2E8F0', borderRadius: 8, padding: '10px 14px', fontSize: 14, color: '#0B1F33', outline: 'none', boxSizing: 'border-box' }} />
               </div>
 
               {error && (
@@ -79,18 +71,15 @@ export default function LoginPage() {
                 </div>
               )}
 
-              <button
-                onClick={handleLogin}
-                disabled={loading}
-                style={{
-                  backgroundColor: loading ? '#94A3B8' : '#0B1F33',
-                  color: '#F7F9FC', fontSize: 14, fontWeight: 600,
-                  padding: '12px', borderRadius: 8, border: 'none',
-                  cursor: loading ? 'not-allowed' : 'pointer',
-                }}
-              >
+              <button onClick={handleLogin} disabled={loading}
+                style={{ backgroundColor: loading ? '#94A3B8' : '#0B1F33', color: '#F7F9FC', fontSize: 14, fontWeight: 600, padding: '12px', borderRadius: 8, border: 'none', cursor: loading ? 'not-allowed' : 'pointer' }}>
                 {loading ? 'Signing in...' : 'Sign in'}
               </button>
+
+              <p style={{ fontSize: 13, color: '#64748B', textAlign: 'center' }}>
+                Don&apos;t have an account?{' '}
+                <Link href="/signup" style={{ color: '#0B1F33', fontWeight: 600 }}>Create one →</Link>
+              </p>
             </div>
           </div>
         </div>
