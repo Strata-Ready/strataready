@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { createClient } from '@/lib/supabase/client'
 
 type Question = {
   id: string
@@ -35,6 +36,11 @@ export default function ExamPage() {
   useEffect(() => {
     async function startExam() {
       try {
+        // Check auth first
+        const supabase = createClient()
+        const { data: { user } } = await supabase.auth.getUser()
+        if (!user) { router.push('/login'); return }
+
         const res = await fetch('/api/exam/start', { method: 'POST' })
         const data = await res.json()
         if (data.error) { setError(data.error); setLoading(false); return }
