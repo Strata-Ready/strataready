@@ -1,9 +1,6 @@
 import { adminClient } from '@/lib/supabase/admin'
-import Anthropic from '@anthropic-ai/sdk'
 
 export const maxDuration = 60
-
-const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY! })
 
 const CHAPTER_TO_LESSON: Record<number, number> = {
   1: 1, 2: 1, 3: 2, 4: 3, 5: 3, 6: 4, 7: 5, 8: 6, 9: 7, 10: 7,
@@ -61,7 +58,6 @@ export async function POST(request: Request) {
   }
 
   const { filePath } = await request.json()
-
   if (!filePath) {
     return Response.json({ error: 'filePath required' }, { status: 400 })
   }
@@ -76,39 +72,15 @@ export async function POST(request: Request) {
       return Response.json({ error: `Download failed: ${downloadError?.message}` }, { status: 500 })
     }
 
-    // Convert to base64 for Claude
+    // Extract text using pdf-parse (fast, milliseconds)
     const arrayBuffer = await fileData.arrayBuffer()
-    const base64 = Buffer.from(arrayBuffer).toString('base64')
-
-    // Use Claude to extract text from PDF
-    const response = await anthropic.messages.create({
-      model: 'claude-sonnet-4-20250514',
-      max_tokens: 8000,
-      messages: [
-        {
-          role: 'user',
-          content: [
-            {
-              type: 'document',
-              source: {
-                type: 'base64',
-                media_type: 'application/pdf',
-                data: base64,
-              },
-            },
-            {
-              type: 'text',
-              text: 'Extract all text from this document exactly as written. Preserve headings, section numbers, page numbers, and all content. Output only the extracted text with no commentary.',
-            },
-          ],
-        },
-      ],
-    })
-
-    const extractedText = response.content
-      .filter(b => b.type === 'text')
-      .map(b => (b as any).text)
-      .join('\n')
+    const buffer = Buffer.from(arrayBuffer)
+    
+    // Dynamic import to avoid ESM issues
+    const pdfParse = (await import('pdf-parse')).default
+    const pdfData = await pdfParse(buffer)
+    const extractedText = pdfData.text
+    const pageCount = pdfData.numpages
 
     // Detect metadata from filename
     const fileName = filePath.split('/').pop() || filePath
@@ -125,7 +97,7 @@ export async function POST(request: Request) {
         chapter_number: chapterNumber,
         act_name: actName,
         extracted_text: extractedText,
-        page_count: null,
+        page_count: pageCount,
         processed: true,
       }, { onConflict: 'file_path' })
 
@@ -136,6 +108,7 @@ export async function POST(request: Request) {
     return Response.json({
       ok: true,
       file: fileName,
+      pages: pageCount,
       docType,
       lessonNumber,
       chars: extractedText.length,
