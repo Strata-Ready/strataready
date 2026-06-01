@@ -126,7 +126,7 @@ export default function Home() {
               },
             ].map(item => (
               <div key={item.num}>
-                <p style={{ fontSize: 11, fontWeight: 600, color: '#B08D57', letterSpacing: '0.08em', marginBottom: 16 }}>{item.num}</p>
+                <p style={{ fontSize: 42, fontWeight: 700, color: '#B08D57', letterSpacing: '-1px', marginBottom: 16, lineHeight: 1 }}>{item.num}</p>
                 <h3 style={{ fontSize: 17, fontWeight: 600, color: '#0B1F33', letterSpacing: '-0.3px', marginBottom: 10 }}>{item.title}</h3>
                 <p style={{ fontSize: 14, color: '#64748B', lineHeight: 1.7 }}>{item.desc}</p>
               </div>
