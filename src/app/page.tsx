@@ -103,7 +103,7 @@ export default function Home() {
         <div className="max-w-6xl mx-auto px-6">
           <div className="mb-16">
             <p style={{ fontSize: 11, fontWeight: 600, color: '#B08D57', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 12 }}>Process</p>
-            <h2 style={{ fontSize: 48, fontWeight: 700, color: '#0B1F33', letterSpacing: '-0.8px', maxWidth: 480 }}>
+            <h2 style={{ fontSize: 48, fontWeight: 700, color: '#0B1F33', letterSpacing: '-1.25px', maxWidth: 480 }}>
               Verify your readiness before your first attempt.
             </h2>
           </div>
