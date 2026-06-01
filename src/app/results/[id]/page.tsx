@@ -3,7 +3,6 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { createClient } from '@/lib/supabase/client'
 
 type Answer = {
   id: string
@@ -53,27 +52,26 @@ export default function ResultsPage({ params }: { params: { id: string } }) {
   const [answers, setAnswers] = useState<Answer[]>([])
   const [sections, setSections] = useState<Section[]>([])
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState('')
   const [activeTab, setActiveTab] = useState<'summary' | 'review'>('summary')
 
   useEffect(() => {
     async function load() {
-      const supabase = createClient()
-      const { data: { user } } = await supabase.auth.getUser()
-      if (!user) { router.push('/login'); return }
-
-      const [attemptRes, answersRes, sectionsRes] = await Promise.all([
-        supabase.from('exam_attempts').select('*').eq('id', params.id).eq('user_id', user.id).single(),
-        supabase.from('attempt_answers').select('*, questions(section_id, question_text, option_a, option_b, option_c, option_d, correct_answer, explanation, act_reference, regulation_ref)').eq('attempt_id', params.id),
-        supabase.from('sections').select('id, number, title').order('number'),
-      ])
-
-      setAttempt(attemptRes.data)
-      setAnswers(answersRes.data || [])
-      setSections(sectionsRes.data || [])
-      setLoading(false)
+      try {
+        const res = await fetch(`/api/results/${params.id}`)
+        const data = await res.json()
+        if (data.error) { setError(data.error); setLoading(false); return }
+        setAttempt(data.attempt)
+        setAnswers(data.answers)
+        setSections(data.sections)
+        setLoading(false)
+      } catch (err) {
+        setError('Failed to load results.')
+        setLoading(false)
+      }
     }
     load()
-  }, [params.id, router])
+  }, [params.id])
 
   if (loading) {
     return (
@@ -83,10 +81,13 @@ export default function ResultsPage({ params }: { params: { id: string } }) {
     )
   }
 
-  if (!attempt) {
+  if (error || !attempt) {
     return (
       <div style={{ minHeight: '100vh', backgroundColor: '#F7F9FC', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <p style={{ color: '#991B1B', fontSize: 14 }}>Results not found.</p>
+        <div style={{ textAlign: 'center' }}>
+          <p style={{ color: '#991B1B', fontSize: 14, marginBottom: 16 }}>{error || 'Results not found.'}</p>
+          <Link href="/dashboard" style={{ backgroundColor: '#0B1F33', color: '#F7F9FC', padding: '10px 20px', borderRadius: 8, textDecoration: 'none', fontSize: 14 }}>Back to dashboard</Link>
+        </div>
       </div>
     )
   }
@@ -96,9 +97,7 @@ export default function ResultsPage({ params }: { params: { id: string } }) {
 
   // Section breakdown
   const sectionMap: Record<number, { title: string; correct: number; total: number }> = {}
-  for (const s of sections) {
-    sectionMap[s.id] = { title: s.title, correct: 0, total: 0 }
-  }
+  for (const s of sections) sectionMap[s.id] = { title: s.title, correct: 0, total: 0 }
   for (const a of answers) {
     const sid = a.questions?.section_id
     if (sid && sectionMap[sid]) {
@@ -106,7 +105,6 @@ export default function ResultsPage({ params }: { params: { id: string } }) {
       if (a.is_correct) sectionMap[sid].correct++
     }
   }
-
   const sectionBreakdown = Object.entries(sectionMap)
     .filter(([, v]) => v.total > 0)
     .map(([id, v]) => ({ ...v, sectionId: parseInt(id), pct: Math.round((v.correct / v.total) * 100) }))
@@ -120,8 +118,6 @@ export default function ResultsPage({ params }: { params: { id: string } }) {
 
   return (
     <div style={{ minHeight: '100vh', backgroundColor: '#F7F9FC' }}>
-
-      {/* Nav */}
       <nav style={{ backgroundColor: '#0B1F33', borderBottom: '1px solid rgba(255,255,255,0.08)', padding: '14px 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
           <div style={{ width: 28, height: 28, backgroundColor: '#B08D57', borderRadius: 6, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -139,26 +135,16 @@ export default function ResultsPage({ params }: { params: { id: string } }) {
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 24 }}>
             <div>
               <p style={{ fontSize: 11, fontWeight: 600, color: '#B08D57', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 6 }}>Exam Complete</p>
-              <h1 style={{ fontSize: 32, fontWeight: 800, color: '#0B1F33', letterSpacing: '-0.8px' }}>
-                {attempt.score}/{attempt.total_questions} correct
-              </h1>
-              <p style={{ fontSize: 13, color: '#64748B', marginTop: 4 }}>
-                Time: {elapsed(attempt.started_at, attempt.completed_at)}
-              </p>
+              <h1 style={{ fontSize: 32, fontWeight: 800, color: '#0B1F33', letterSpacing: '-0.8px' }}>{attempt.score}/{attempt.total_questions} correct</h1>
+              <p style={{ fontSize: 13, color: '#64748B', marginTop: 4 }}>Time: {elapsed(attempt.started_at, attempt.completed_at)}</p>
             </div>
-            <div style={{
-              width: 80, height: 80, borderRadius: '50%',
-              backgroundColor: passed ? '#DCFCE7' : '#FEE2E2',
-              display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
-            }}>
+            <div style={{ width: 80, height: 80, borderRadius: '50%', backgroundColor: passed ? '#DCFCE7' : '#FEE2E2', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
               <span style={{ fontSize: 24, fontWeight: 800, color: passed ? '#166534' : '#991B1B' }}>{pct}%</span>
             </div>
           </div>
-
-          {/* Score bar */}
           <div style={{ marginBottom: 16 }}>
             <div style={{ height: 8, backgroundColor: '#E2E8F0', borderRadius: 4, marginBottom: 6 }}>
-              <div style={{ height: 8, borderRadius: 4, width: `${pct}%`, backgroundColor: passed ? '#16A34A' : '#DC2626', transition: 'width 1s ease' }} />
+              <div style={{ height: 8, borderRadius: 4, width: `${pct}%`, backgroundColor: passed ? '#16A34A' : '#DC2626' }} />
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12, color: '#94A3B8' }}>
               <span>0%</span>
@@ -166,7 +152,6 @@ export default function ResultsPage({ params }: { params: { id: string } }) {
               <span>100%</span>
             </div>
           </div>
-
           <div style={{ backgroundColor: passed ? '#F0FDF4' : '#FFF7ED', border: `1px solid ${passed ? '#BBF7D0' : '#FED7AA'}`, borderRadius: 8, padding: '14px 16px' }}>
             <p style={{ fontSize: 14, color: passed ? '#166534' : '#9A3412', lineHeight: 1.6 }}>
               {passed
@@ -177,48 +162,31 @@ export default function ResultsPage({ params }: { params: { id: string } }) {
         </div>
 
         {/* Tabs */}
-        <div style={{ display: 'flex', gap: 0, marginBottom: 24, borderBottom: '1px solid #E2E8F0' }}>
+        <div style={{ display: 'flex', marginBottom: 24, borderBottom: '1px solid #E2E8F0' }}>
           {(['summary', 'review'] as const).map(tab => (
-            <button
-              key={tab}
-              onClick={() => setActiveTab(tab)}
-              style={{
-                padding: '10px 20px', fontSize: 14, fontWeight: 500, cursor: 'pointer',
-                border: 'none', backgroundColor: 'transparent', textTransform: 'capitalize',
-                color: activeTab === tab ? '#0B1F33' : '#94A3B8',
-                borderBottom: `2px solid ${activeTab === tab ? '#0B1F33' : 'transparent'}`,
-                marginBottom: -1,
-              }}
-            >
+            <button key={tab} onClick={() => setActiveTab(tab)} style={{ padding: '10px 20px', fontSize: 14, fontWeight: 500, cursor: 'pointer', border: 'none', backgroundColor: 'transparent', textTransform: 'capitalize', color: activeTab === tab ? '#0B1F33' : '#94A3B8', borderBottom: `2px solid ${activeTab === tab ? '#0B1F33' : 'transparent'}`, marginBottom: -1 }}>
               {tab === 'summary' ? 'Section Summary' : `Question Review (${answers.filter(a => !a.is_correct).length} incorrect)`}
             </button>
           ))}
         </div>
 
-        {/* Section summary */}
         {activeTab === 'summary' && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
             {sectionBreakdown.map(s => (
-              <div key={s.sectionId} style={{ backgroundColor: 'white', borderRadius: 10, border: '1px solid #E2E8F0', padding: '16px 20px', display: 'flex', alignItems: 'center', gap: 16 }}>
-                <div style={{ flex: 1 }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6 }}>
-                    <span style={{ fontSize: 13, fontWeight: 500, color: '#0B1F33' }}>{s.title}</span>
-                    <span style={{ fontSize: 13, fontWeight: 700, color: s.pct >= 70 ? '#166534' : s.pct >= 50 ? '#92400E' : '#991B1B' }}>{s.pct}%</span>
-                  </div>
-                  <div style={{ height: 6, backgroundColor: '#E2E8F0', borderRadius: 3 }}>
-                    <div style={{
-                      height: 6, borderRadius: 3, width: `${s.pct}%`,
-                      backgroundColor: s.pct >= 70 ? '#16A34A' : s.pct >= 50 ? '#D97706' : '#DC2626',
-                    }} />
-                  </div>
-                  <p style={{ fontSize: 12, color: '#94A3B8', marginTop: 4 }}>{s.correct}/{s.total} correct</p>
+              <div key={s.sectionId} style={{ backgroundColor: 'white', borderRadius: 10, border: '1px solid #E2E8F0', padding: '16px 20px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6 }}>
+                  <span style={{ fontSize: 13, fontWeight: 500, color: '#0B1F33' }}>{s.title}</span>
+                  <span style={{ fontSize: 13, fontWeight: 700, color: s.pct >= 70 ? '#166534' : s.pct >= 50 ? '#92400E' : '#991B1B' }}>{s.pct}%</span>
                 </div>
+                <div style={{ height: 6, backgroundColor: '#E2E8F0', borderRadius: 3 }}>
+                  <div style={{ height: 6, borderRadius: 3, width: `${s.pct}%`, backgroundColor: s.pct >= 70 ? '#16A34A' : s.pct >= 50 ? '#D97706' : '#DC2626' }} />
+                </div>
+                <p style={{ fontSize: 12, color: '#94A3B8', marginTop: 4 }}>{s.correct}/{s.total} correct</p>
               </div>
             ))}
           </div>
         )}
 
-        {/* Question review */}
         {activeTab === 'review' && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
             {answers.map((answer, i) => {
@@ -227,22 +195,14 @@ export default function ResultsPage({ params }: { params: { id: string } }) {
               const correct = answer.is_correct
               const selectedText = answer.selected_answer ? optionText(answer, answer.selected_answer) : 'Not answered'
               const correctText = optionText(answer, q.correct_answer)
-
               return (
                 <div key={answer.id} style={{ backgroundColor: 'white', borderRadius: 12, border: `1px solid ${correct ? '#BBF7D0' : '#FECACA'}`, overflow: 'hidden' }}>
                   <div style={{ padding: '14px 20px', borderBottom: `1px solid ${correct ? '#DCFCE7' : '#FEE2E2'}`, display: 'flex', alignItems: 'center', justifyContent: 'space-between', backgroundColor: correct ? '#F0FDF4' : '#FFF5F5' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                      <span style={{ fontSize: 12, fontWeight: 700, color: correct ? '#166534' : '#991B1B' }}>
-                        {correct ? '✓' : '✗'} Q{i + 1}
-                      </span>
-                    </div>
-                    <span style={{ fontSize: 12, fontWeight: 500, padding: '2px 8px', borderRadius: 4, backgroundColor: correct ? '#DCFCE7' : '#FEE2E2', color: correct ? '#166534' : '#991B1B' }}>
-                      {correct ? 'Correct' : 'Incorrect'}
-                    </span>
+                    <span style={{ fontSize: 12, fontWeight: 700, color: correct ? '#166534' : '#991B1B' }}>{correct ? '✓' : '✗'} Q{i + 1}</span>
+                    <span style={{ fontSize: 12, fontWeight: 500, padding: '2px 8px', borderRadius: 4, backgroundColor: correct ? '#DCFCE7' : '#FEE2E2', color: correct ? '#166534' : '#991B1B' }}>{correct ? 'Correct' : 'Incorrect'}</span>
                   </div>
                   <div style={{ padding: '16px 20px' }}>
                     <p style={{ fontSize: 13, color: '#2D3748', lineHeight: 1.65, marginBottom: 14 }}>{q.question_text}</p>
-
                     {!correct && (
                       <div style={{ display: 'flex', flexDirection: 'column', gap: 6, marginBottom: 14 }}>
                         <div style={{ fontSize: 13, color: '#991B1B', backgroundColor: '#FEE2E2', padding: '8px 12px', borderRadius: 6 }}>
@@ -253,27 +213,11 @@ export default function ResultsPage({ params }: { params: { id: string } }) {
                         </div>
                       </div>
                     )}
-
-                    <p style={{ fontSize: 13, color: '#64748B', lineHeight: 1.65, marginBottom: q.act_reference || q.regulation_ref ? 12 : 0 }}>
-                      {q.explanation}
-                    </p>
-
+                    <p style={{ fontSize: 13, color: '#64748B', lineHeight: 1.65, marginBottom: q.act_reference || q.regulation_ref ? 12 : 0 }}>{q.explanation}</p>
                     {(q.act_reference || q.regulation_ref) && (
                       <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginTop: 10 }}>
-                        {q.act_reference && (
-                          <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                            <span style={{ fontFamily: 'monospace', fontSize: 11, backgroundColor: '#E2E8F0', padding: '2px 8px', borderRadius: 4, color: '#0B1F33', fontWeight: 600 }}>
-                              {q.act_reference}
-                            </span>
-                          </div>
-                        )}
-                        {q.regulation_ref && (
-                          <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                            <span style={{ fontFamily: 'monospace', fontSize: 11, backgroundColor: '#E2E8F0', padding: '2px 8px', borderRadius: 4, color: '#0B1F33', fontWeight: 600 }}>
-                              {q.regulation_ref}
-                            </span>
-                          </div>
-                        )}
+                        {q.act_reference && <span style={{ fontFamily: 'monospace', fontSize: 11, backgroundColor: '#E2E8F0', padding: '2px 8px', borderRadius: 4, color: '#0B1F33', fontWeight: 600 }}>{q.act_reference}</span>}
+                        {q.regulation_ref && <span style={{ fontFamily: 'monospace', fontSize: 11, backgroundColor: '#E2E8F0', padding: '2px 8px', borderRadius: 4, color: '#0B1F33', fontWeight: 600 }}>{q.regulation_ref}</span>}
                       </div>
                     )}
                   </div>
@@ -283,14 +227,9 @@ export default function ResultsPage({ params }: { params: { id: string } }) {
           </div>
         )}
 
-        {/* Bottom CTA */}
         <div style={{ marginTop: 32, display: 'flex', gap: 12, justifyContent: 'center' }}>
-          <Link href="/dashboard" style={{ backgroundColor: '#0B1F33', color: '#F7F9FC', fontSize: 14, fontWeight: 600, padding: '12px 24px', borderRadius: 8, textDecoration: 'none' }}>
-            Back to dashboard
-          </Link>
-          <Link href="/exam" style={{ backgroundColor: '#B08D57', color: '#0B1F33', fontSize: 14, fontWeight: 600, padding: '12px 24px', borderRadius: 8, textDecoration: 'none' }}>
-            Take another exam →
-          </Link>
+          <Link href="/dashboard" style={{ backgroundColor: '#0B1F33', color: '#F7F9FC', fontSize: 14, fontWeight: 600, padding: '12px 24px', borderRadius: 8, textDecoration: 'none' }}>Back to dashboard</Link>
+          <Link href="/exam" style={{ backgroundColor: '#B08D57', color: '#0B1F33', fontSize: 14, fontWeight: 600, padding: '12px 24px', borderRadius: 8, textDecoration: 'none' }}>Take another exam →</Link>
         </div>
 
       </div>
