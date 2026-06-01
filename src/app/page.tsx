@@ -34,15 +34,13 @@ export default function Home() {
         display: 'flex',
         alignItems: 'center',
       }}>
-        {/* Background image */}
         <div style={{
           position: 'absolute', inset: 0,
           backgroundImage: 'url(/hero-building.jpg)',
           backgroundSize: 'cover',
           backgroundPosition: 'center top',
-          opacity: 0.22,
+          opacity: 0.25,
         }} />
-        {/* Gradient overlay */}
         <div style={{
           position: 'absolute', inset: 0,
           background: 'linear-gradient(90deg, rgba(11,31,51,0.97) 35%, rgba(11,31,51,0.55) 100%)',
@@ -58,7 +56,7 @@ export default function Home() {
               Two attempts.<br />Make the first<br />one count.
             </h1>
             <p style={{ fontSize: 18, color: 'rgba(247,249,252,0.65)', lineHeight: 1.7, marginBottom: 40, maxWidth: 480 }}>
-              Practice exams built exclusively from BC&apos;s official licensing course materials and authoritative regulatory sources. Every wrong answer tells you exactly what to study and where to find it.
+              Practice exams built exclusively from BC&apos;s official strata management licensing course materials and authoritative regulatory sources. Every wrong answer tells you exactly what to study and where to find it.
             </p>
             <div className="flex flex-col sm:flex-row items-start gap-4">
               <Link href="/demo" style={{ backgroundColor: '#B08D57', color: '#0B1F33', fontSize: 15, fontWeight: 600, padding: '14px 28px', borderRadius: 8, letterSpacing: '-0.2px', whiteSpace: 'nowrap' }} className="hover:opacity-90 transition-opacity">
@@ -72,14 +70,9 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Photo attribution */}
         <div style={{ position: 'absolute', bottom: 12, right: 16, zIndex: 2 }}>
-          <a
-            href="https://unsplash.com/photos/close-up-photography-of-curtain-wall-building-during-daytime-JONURCNG7fQ?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ fontSize: 10, color: 'rgba(247,249,252,0.25)', textDecoration: 'none' }}
-          >
+          <a href="https://unsplash.com/photos/JONURCNG7fQ" target="_blank" rel="noopener noreferrer"
+            style={{ fontSize: 10, color: 'rgba(247,249,252,0.2)', textDecoration: 'none' }}>
             Photo by Victor on Unsplash
           </a>
         </div>
@@ -94,7 +87,7 @@ export default function Home() {
               { value: '3 hrs', label: 'Exam duration' },
               { value: '70%', label: 'Required to pass' },
               { value: '2', label: 'Attempts permitted' },
-              { value: 'UBC', label: 'Sauder School of Business' },
+              { value: 'BC', label: 'Licensing examination' },
             ].map(item => (
               <div key={item.label} className="text-center">
                 <p style={{ fontSize: 20, fontWeight: 700, color: '#F7F9FC', letterSpacing: '-0.5px' }}>{item.value}</p>
@@ -119,7 +112,7 @@ export default function Home() {
               {
                 num: '01',
                 title: 'Practice under real exam conditions',
-                desc: '105 multiple choice questions across all 21 course sections. Timed. The same format as the UBC Sauder licensing examination — so there are no surprises on exam day.',
+                desc: '105 multiple choice questions across all 21 course sections. Timed. The same format as the BC Strata Management licensing examination — so there are no surprises on exam day.',
               },
               {
                 num: '02',
@@ -152,11 +145,11 @@ export default function Home() {
                 Every answer is traceable.
               </h2>
               <p style={{ fontSize: 16, color: 'rgba(247,249,252,0.6)', lineHeight: 1.7, marginBottom: 24 }}>
-                Every question is sourced directly from BC&apos;s official licensing course materials and authoritative regulatory sources. When you get something wrong, you see exactly where to find the correct answer — no guesswork, no generic advice.
+                Every question is sourced directly from BC&apos;s official strata management licensing course materials and authoritative regulatory sources. When you get something wrong, you see exactly where to find the correct answer — no guesswork, no generic advice.
               </p>
               <ul style={{ listStyle: 'none', padding: 0, margin: 0 }} className="space-y-3">
                 {[
-                  'Official UBC Sauder course material references',
+                  'Official licensing course material references',
                   'BC Strata Property Act section citations',
                   'Real Estate Services Act references',
                   'Applicable regulations and bylaws where relevant',
@@ -170,7 +163,6 @@ export default function Home() {
               </ul>
             </div>
 
-            {/* Citation card */}
             <div style={{ backgroundColor: '#F7F9FC', borderRadius: 12, overflow: 'hidden', boxShadow: '0 24px 64px rgba(0,0,0,0.4)' }}>
               <div style={{ padding: '16px 20px', borderBottom: '1px solid #E2E8F0', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                 <span style={{ fontSize: 12, fontWeight: 600, color: '#64748B', letterSpacing: '0.05em' }}>QUESTION 47 — RESULT</span>
@@ -197,7 +189,7 @@ export default function Home() {
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                       <span style={{ fontFamily: 'monospace', fontSize: 12, backgroundColor: '#E2E8F0', padding: '2px 8px', borderRadius: 4, color: '#0B1F33', fontWeight: 600 }}>Official Course Materials</span>
-                      <span style={{ fontSize: 12, color: '#64748B' }}>UBC Sauder Strata Management Program</span>
+                      <span style={{ fontSize: 12, color: '#64748B' }}>BC Strata Management Licensing Program</span>
                     </div>
                   </div>
                 </div>
@@ -290,7 +282,7 @@ export default function Home() {
             Know before you go.
           </h2>
           <p style={{ fontSize: 16, color: 'rgba(247,249,252,0.55)', marginBottom: 36, lineHeight: 1.8 }}>
-            The UBC Sauder licensing exam gives you two attempts.<br />
+            The BC Strata Management licensing exam gives you two attempts.<br />
             StrataReady tells you if you&apos;re ready — and exactly what to do if you&apos;re not.
           </p>
           <Link href="/demo" style={{ display: 'inline-block', backgroundColor: '#B08D57', color: '#0B1F33', fontSize: 15, fontWeight: 600, padding: '14px 32px', borderRadius: 8, letterSpacing: '-0.2px' }} className="hover:opacity-90 transition-opacity">
@@ -310,7 +302,7 @@ export default function Home() {
             <span style={{ fontSize: 13, fontWeight: 600, color: '#0B1F33' }}>StrataReady</span>
           </div>
           <p style={{ fontSize: 12, color: '#94A3B8', textAlign: 'center' }}>
-            BC Strata Management Licensing Exam Preparation · Not affiliated with UBC Sauder School of Business or BCFSA
+            BC Strata Management Licensing Exam Preparation · Not affiliated with the BC Financial Services Authority
           </p>
           <div className="flex gap-6">
             <Link href="/privacy" style={{ fontSize: 12, color: '#94A3B8' }} className="hover:text-gray-600">Privacy</Link>
@@ -318,17 +310,10 @@ export default function Home() {
           </div>
         </div>
         <div style={{ borderTop: '1px solid #E2E8F0', padding: '10px 0', textAlign: 'center' }}>
-          <a
-            href="https://unsplash.com/photos/close-up-photography-of-curtain-wall-building-during-daytime-JONURCNG7fQ?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ fontSize: 11, color: '#CBD5E1', textDecoration: 'none' }}
-          >
-            Photo by{' '}
-            <a href="https://unsplash.com/@victor_g?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText" target="_blank" rel="noopener noreferrer" style={{ color: '#94A3B8' }}>Victor</a>
-            {' '}on{' '}
-            <a href="https://unsplash.com" target="_blank" rel="noopener noreferrer" style={{ color: '#94A3B8' }}>Unsplash</a>
-          </a>
+          <span style={{ fontSize: 11, color: '#CBD5E1' }}>Photo by </span>
+          <a href="https://unsplash.com/@victor_g?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText" target="_blank" rel="noopener noreferrer" style={{ fontSize: 11, color: '#94A3B8' }}>Victor</a>
+          <span style={{ fontSize: 11, color: '#CBD5E1' }}> on </span>
+          <a href="https://unsplash.com/photos/JONURCNG7fQ?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText" target="_blank" rel="noopener noreferrer" style={{ fontSize: 11, color: '#94A3B8' }}>Unsplash</a>
         </div>
       </footer>
 
