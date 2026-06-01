@@ -72,7 +72,7 @@ export default function ResultsPage({ params }: { params: Promise<{ id: string }
       }
     }
     load()
-  }, [params.id])
+  }, [params])
 
   if (loading) {
     return (
