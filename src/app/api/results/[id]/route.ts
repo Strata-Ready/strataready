@@ -19,7 +19,7 @@ export async function GET(request: Request, { params }: { params: Promise<{ id: 
 
     const { data: answers } = await adminClient
       .from('attempt_answers')
-      .select('id, question_id, selected_answer, is_correct, questions(section_id, question_text, option_a, option_b, option_c, option_d, correct_answer, explanation, act_reference, regulation_ref)')
+      .select('id, question_id, selected_answer, is_correct, questions(section_id, question_text, option_a, option_b, option_c, option_d, correct_answer, explanation, distractor_explanations, act_reference, regulation_ref)')
       .eq('attempt_id', id)
 
     const { data: sections } = await adminClient

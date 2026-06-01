@@ -18,6 +18,7 @@ type Answer = {
     option_d: string
     correct_answer: string
     explanation: string
+    distractor_explanations: string | null
     act_reference: string | null
     regulation_ref: string | null
   }
@@ -214,7 +215,7 @@ export default function ResultsPage({ params }: { params: Promise<{ id: string }
                         </div>
                       </div>
                     )}
-                    <p style={{ fontSize: 13, color: '#64748B', lineHeight: 1.65, marginBottom: q.act_reference || q.regulation_ref ? 12 : 0 }}>{q.explanation}</p>
+                    <p style={{ fontSize: 13, color: '#64748B', lineHeight: 1.65, marginBottom: q.act_reference || q.regulation_ref ? 12 : 0 }}>{q.distractor_explanations || q.explanation}</p>
                     {(q.act_reference || q.regulation_ref) && (
                       <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginTop: 10 }}>
                         {q.act_reference && <span style={{ fontFamily: 'monospace', fontSize: 11, backgroundColor: '#E2E8F0', padding: '2px 8px', borderRadius: 4, color: '#0B1F33', fontWeight: 600 }}>{q.act_reference}</span>}
