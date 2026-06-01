@@ -150,9 +150,9 @@ export default function Home() {
               <ul style={{ listStyle: 'none', padding: 0, margin: 0 }} className="space-y-3">
                 {[
                   'References to official licensing material.',
-                  'BC Strata Property Act section citations',
-                  'Real Estate Services Act references',
-                  'Applicable regulations and bylaws where relevant',
+                  'BC Strata Property Act (BCSPA) — public legislation',
+                  'Real Estate Services Act (RESA) — public legislation',
+                  'BC Residential Tenancy Act (RTA) — public legislation',
                   'Specific study guidance for every wrong answer',
                 ].map(item => (
                   <li key={item} style={{ display: 'flex', alignItems: 'center', gap: 10, fontSize: 14, color: 'rgba(247,249,252,0.75)' }}>
@@ -188,8 +188,12 @@ export default function Home() {
                       <span style={{ fontSize: 12, color: '#64748B' }}>Strata Property Act — Repair and maintenance</span>
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                      <span style={{ fontFamily: 'monospace', fontSize: 12, backgroundColor: '#E2E8F0', padding: '2px 8px', borderRadius: 4, color: '#0B1F33', fontWeight: 600 }}>Licensing Information</span>
-                      <span style={{ fontSize: 12, color: '#64748B' }}>References from BC Strata Management Licensing materials</span>
+                      <span style={{ fontFamily: 'monospace', fontSize: 12, backgroundColor: '#E2E8F0', padding: '2px 8px', borderRadius: 4, color: '#0B1F33', fontWeight: 600 }}>RESA s.10</span>
+                      <span style={{ fontSize: 12, color: '#64748B' }}>Real Estate Services Act — BC Legislation</span>
+                    </div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                      <span style={{ fontFamily: 'monospace', fontSize: 12, backgroundColor: '#E2E8F0', padding: '2px 8px', borderRadius: 4, color: '#0B1F33', fontWeight: 600 }}>RTA s.24</span>
+                      <span style={{ fontSize: 12, color: '#64748B' }}>Residential Tenancy Act — BC Legislation</span>
                     </div>
                   </div>
                 </div>
