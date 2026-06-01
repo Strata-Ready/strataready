@@ -38,7 +38,7 @@ export default function Home() {
           position: 'absolute', inset: 0,
           backgroundImage: 'url(/hero-building.jpg)',
           backgroundSize: 'cover',
-          backgroundPosition: 'center top',
+          backgroundPosition: 'center bottom',
           opacity: 0.45,
         }} />
         <div style={{
@@ -149,7 +149,7 @@ export default function Home() {
               </p>
               <ul style={{ listStyle: 'none', padding: 0, margin: 0 }} className="space-y-3">
                 {[
-                  'Official licensing course material references',
+                  'References to official licensing material.',
                   'BC Strata Property Act section citations',
                   'Real Estate Services Act references',
                   'Applicable regulations and bylaws where relevant',
@@ -188,8 +188,8 @@ export default function Home() {
                       <span style={{ fontSize: 12, color: '#64748B' }}>Strata Property Act — Repair and maintenance</span>
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                      <span style={{ fontFamily: 'monospace', fontSize: 12, backgroundColor: '#E2E8F0', padding: '2px 8px', borderRadius: 4, color: '#0B1F33', fontWeight: 600 }}>Course Materials</span>
-                      <span style={{ fontSize: 12, color: '#64748B' }}>References from BC Strata Management Licensing source materials</span>
+                      <span style={{ fontFamily: 'monospace', fontSize: 12, backgroundColor: '#E2E8F0', padding: '2px 8px', borderRadius: 4, color: '#0B1F33', fontWeight: 600 }}>Licensing Information</span>
+                      <span style={{ fontSize: 12, color: '#64748B' }}>References from BC Strata Management Licensing materials</span>
                     </div>
                   </div>
                 </div>
