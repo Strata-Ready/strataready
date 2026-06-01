@@ -14,7 +14,11 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "StrataReady — BC Strata Management Exam Prep",
-  description: "Practice for the UBC Sauder BC Strata Management Licensing Exam. Instant results, exact study references, adaptive question bank.",
+  description: "Practice for the BC Strata Management Licensing Exam. Instant results, exact study references, and authoritative source citations for every wrong answer.",
+  icons: {
+    icon: "/favicon.png",
+    apple: "/favicon.png",
+  },
 };
 
 export default function RootLayout({
