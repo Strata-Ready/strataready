@@ -22,6 +22,7 @@ type Answer = {
     distractor_explanations: string | null
     act_reference: string | null
     regulation_ref: string | null
+    study_note: string | null
   }
 }
 
@@ -98,7 +99,6 @@ export default function ResultsPage({ params }: { params: Promise<{ id: string }
   const pct = Math.round((attempt.score / attempt.total_questions) * 100)
   const passed = pct >= 70
 
-  // Section breakdown
   const sectionMap: Record<number, { title: string; correct: number; total: number }> = {}
   for (const s of sections) sectionMap[s.id] = { title: s.title, correct: 0, total: 0 }
   for (const a of answers) {
@@ -131,7 +131,6 @@ export default function ResultsPage({ params }: { params: Promise<{ id: string }
 
       <div style={{ maxWidth: 800, margin: '0 auto', padding: '40px 24px' }}>
 
-        {/* Score card */}
         <div style={{ backgroundColor: 'white', borderRadius: 12, border: '1px solid #E2E8F0', padding: '32px', marginBottom: 24 }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 24 }}>
             <div>
@@ -162,7 +161,6 @@ export default function ResultsPage({ params }: { params: Promise<{ id: string }
           </div>
         </div>
 
-        {/* Tabs */}
         <div style={{ display: 'flex', marginBottom: 24, borderBottom: '1px solid #E2E8F0' }}>
           {(['summary', 'review'] as const).map(tab => (
             <button key={tab} onClick={() => setActiveTab(tab)} style={{ padding: '10px 20px', fontSize: 14, fontWeight: 500, cursor: 'pointer', border: 'none', backgroundColor: 'transparent', textTransform: 'capitalize', color: activeTab === tab ? '#0B1F33' : '#94A3B8', borderBottom: `2px solid ${activeTab === tab ? '#0B1F33' : 'transparent'}`, marginBottom: -1 }}>
@@ -214,7 +212,13 @@ export default function ResultsPage({ params }: { params: Promise<{ id: string }
                         </div>
                       </div>
                     )}
-                    <p style={{ fontSize: 13, color: '#64748B', lineHeight: 1.65, marginBottom: q.act_reference || q.regulation_ref ? 12 : 0 }}>{q.distractor_explanations || q.explanation}</p>
+                    <p style={{ fontSize: 13, color: '#64748B', lineHeight: 1.65, marginBottom: q.act_reference || q.regulation_ref || (!correct && q.study_note) ? 12 : 0 }}>{q.distractor_explanations || q.explanation}</p>
+                    {!correct && q.study_note && (
+                      <div style={{ backgroundColor: '#F8F6F1', border: '1px solid #E8E0CE', borderLeft: '3px solid #B08D57', borderRadius: 6, padding: '12px 14px', marginTop: 12 }}>
+                        <p style={{ fontSize: 11, fontWeight: 600, color: '#B08D57', letterSpacing: '0.06em', textTransform: 'uppercase', marginBottom: 6 }}>Study note</p>
+                        <p style={{ fontSize: 13, color: '#4A3728', lineHeight: 1.7 }}>{q.study_note}</p>
+                      </div>
+                    )}
                     {(q.act_reference || q.regulation_ref) && (
                       <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginTop: 10 }}>
                         {q.act_reference && <span style={{ fontFamily: 'monospace', fontSize: 11, backgroundColor: '#E2E8F0', padding: '2px 8px', borderRadius: 4, color: '#0B1F33', fontWeight: 600 }}>{q.act_reference}</span>}
