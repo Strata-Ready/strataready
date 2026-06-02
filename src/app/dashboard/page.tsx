@@ -116,8 +116,8 @@ function SkillsMap({ sections }: { sections: SectionPerf[] }) {
   const avgPct = Math.round(sections.reduce((sum, s) => sum + s.pct, 0) / sections.length)
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center' }}>
-      <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
+    <div style={{ width: '100%' }}>
+      <svg width="100%" viewBox={`0 0 ${size} ${size}`} style={{ display: 'block' }}>
         {segments.map(({ s, bgPath, fillPath, color, bgColor }) => (
           <g key={s.id}>
             <path d={bgPath} fill={bgColor} opacity="0.4" />
