@@ -16,13 +16,23 @@ export default function ResetPasswordPage() {
   const [ready, setReady] = useState(false)
 
   useEffect(() => {
-    // Supabase puts the session tokens in the URL hash after redirect
     const supabase = createClient()
-    supabase.auth.onAuthStateChange((event) => {
-      if (event === 'PASSWORD_RECOVERY') {
-        setReady(true)
-      }
-    })
+    // Handle PKCE code exchange (Supabase sends ?code= in URL)
+    const code = new URLSearchParams(window.location.search).get('code')
+    if (code) {
+      supabase.auth.exchangeCodeForSession(code).then(({ error }) => {
+        if (error) {
+          setError('This reset link is invalid or has expired. Please request a new one.')
+        } else {
+          setReady(true)
+        }
+      })
+    } else {
+      // Fallback: listen for PASSWORD_RECOVERY event (hash-based flow)
+      supabase.auth.onAuthStateChange((event) => {
+        if (event === 'PASSWORD_RECOVERY') setReady(true)
+      })
+    }
   }, [])
 
   async function handleReset() {
