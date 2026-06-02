@@ -1,37 +1,31 @@
 import { adminClient } from '@/lib/supabase/admin'
 import { createClient } from '@/lib/supabase/server'
 
-// Questions per section — weighted to match real exam emphasis
 const SECTION_WEIGHTS: Record<number, number> = {
-  1:  6,  // Law & RESA
-  2:  3,  // Ethics
-  3:  4,  // Land & Title
-  4:  5,  // Liability
-  5:  4,  // Tenancies
-  6:  6,  // Contracts
-  7:  6,  // Agency
-  8:  3,  // Disputes
-  9:  2,  // Strata Properties
-  10: 10, // Strata Act
-  11: 3,  // Sections
-  12: 8,  // Governance
-  13: 3,  // Privacy
-  14: 3,  // Construction
-  15: 2,  // Maintenance
-  16: 5,  // Risk & Insurance
-  17: 2,  // Local Government
-  18: 3,  // Accounting
-  19: 8,  // Operating Budget
-  20: 8,  // CRF & Depreciation
-  21: 3,  // Purchasing & Personnel
+  1:  6,  2:  3,  3:  4,  4:  5,  5:  4,
+  6:  6,  7:  6,  8:  3,  9:  2,  10: 10,
+  11: 3,  12: 8,  13: 3,  14: 3,  15: 2,
+  16: 5,  17: 2,  18: 3,  19: 8,  20: 8,  21: 3,
 }
-// Total: 100
 
 export async function POST() {
   try {
     const supabase = await createClient()
     const { data: { user } } = await supabase.auth.getUser()
     if (!user) return Response.json({ error: 'Unauthorized' }, { status: 401 })
+
+    // Block if user already has an in-progress attempt
+    const { data: existing } = await adminClient
+      .from('exam_attempts')
+      .select('id')
+      .eq('user_id', user.id)
+      .eq('status', 'in_progress')
+      .limit(1)
+      .single()
+
+    if (existing) {
+      return Response.json({ error: 'You already have an exam in progress. Please complete or resume it first.' }, { status: 409 })
+    }
 
     const { data: sections } = await adminClient
       .from('sections')
@@ -47,20 +41,17 @@ export async function POST() {
 
     for (const section of sections) {
       const count = SECTION_WEIGHTS[section.number] || 2
-
       const { data: questions } = await adminClient
         .from('questions')
         .select('id, section_id, question_text, option_a, option_b, option_c, option_d, correct_answer, explanation, act_reference, regulation_ref, difficulty')
         .eq('section_id', section.id)
         .eq('is_active', true)
-
       if (questions && questions.length > 0) {
         const shuffled = questions.sort(() => Math.random() - 0.5).slice(0, count)
         shuffled.forEach(q => { allQuestions.push(q); usedIds.add(q.id) })
       }
     }
 
-    // Top up to exactly 100 if needed
     if (allQuestions.length < 100) {
       const { data: extras } = await adminClient
         .from('questions')
@@ -71,7 +62,6 @@ export async function POST() {
       if (extras) extras.forEach(q => allQuestions.push(q))
     }
 
-    // Shuffle and take exactly 100
     const final = allQuestions.sort(() => Math.random() - 0.5).slice(0, 100)
 
     const { data: attempt, error: attemptError } = await adminClient
@@ -89,10 +79,7 @@ export async function POST() {
       return Response.json({ error: 'Failed to create attempt' }, { status: 500 })
     }
 
-    return Response.json({
-      attemptId: attempt.id,
-      questions: final,
-    })
+    return Response.json({ attemptId: attempt.id, questions: final })
 
   } catch (err: any) {
     return Response.json({ error: err.message }, { status: 500 })
