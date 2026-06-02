@@ -1,253 +1,221 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import Link from 'next/link'
+import Logo from '@/components/logo'
+
+type User = {
+  id: string
+  email: string
+  full_name: string | null
+  plan: string
+  created_at: string
+}
+
+type UserStats = {
+  exams: number
+  avgScore: number
+  bestScore: number
+  passRate: number
+  lastActive: string | null
+}
+
+type Platform = {
+  totalUsers: number
+  perExamUsers: number
+  unlimitedUsers: number
+  totalExams: number
+  avgScore: number
+  passRate: number
+  estimatedRevenue: number
+}
+
+function formatDate(d: string | null) {
+  if (!d) return '—'
+  return new Date(d).toLocaleDateString('en-CA', { month: 'short', day: 'numeric', year: 'numeric' })
+}
 
 export default function AdminPage() {
   const [key, setKey] = useState('')
-  const [authenticated, setAuthenticated] = useState(false)
-  const [authError, setAuthError] = useState('')
-  const [documents, setDocuments] = useState<any[]>([])
-  const [unprocessed, setUnprocessed] = useState<string[]>([])
-  const [bucketTotal, setBucketTotal] = useState(0)
-  const [loadingDocs, setLoadingDocs] = useState(false)
-  const [syncing, setSyncing] = useState(false)
-  const [syncProgress, setSyncProgress] = useState({ done: 0, total: 0, current: '' })
-  const [activeTab, setActiveTab] = useState<'sync' | 'documents'>('sync')
+  const [authed, setAuthed] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
+  const [users, setUsers] = useState<User[]>([])
+  const [userStats, setUserStats] = useState<Record<string, UserStats>>({})
+  const [platform, setPlatform] = useState<Platform | null>(null)
+  const [search, setSearch] = useState('')
+  const [sortBy, setSortBy] = useState<'created_at' | 'exams' | 'avgScore'>('created_at')
 
-  async function authenticate() {
-    const res = await fetch('/api/admin/auth', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ key }),
-    })
-    if (res.ok) {
-      setAuthenticated(true)
-      loadDocuments()
-    } else {
-      setAuthError('Invalid key')
-    }
-  }
-
-  async function loadDocuments() {
-    setLoadingDocs(true)
-    const res = await fetch(`/api/admin/documents?key=${key}`)
+  async function handleLogin() {
+    setLoading(true)
+    setError('')
+    const res = await fetch('/api/admin', { headers: { 'x-admin-key': key } })
     const data = await res.json()
-    setDocuments(data.documents || [])
-    setUnprocessed(data.unprocessed || [])
-    setBucketTotal(data.bucketTotal || 0)
-    setLoadingDocs(false)
+    if (data.error) { setError('Invalid admin key.'); setLoading(false); return }
+    setUsers(data.users)
+    setUserStats(data.userStats)
+    setPlatform(data.platform)
+    setAuthed(true)
+    setLoading(false)
+    sessionStorage.setItem('admin_key', key)
   }
 
-  async function syncAll() {
-    if (unprocessed.length === 0) return
-    setSyncing(true)
-    setSyncProgress({ done: 0, total: unprocessed.length, current: '' })
+  useEffect(() => {
+    const saved = sessionStorage.getItem('admin_key')
+    if (saved) { setKey(saved); }
+  }, [])
 
-    const batchSize = 5
-    let done = 0
-
-    for (let i = 0; i < unprocessed.length; i += batchSize) {
-      const batch = unprocessed.slice(i, i + batchSize)
-      setSyncProgress({ done, total: unprocessed.length, current: batch[0] })
-
-      await Promise.all(
-        batch.map(filePath =>
-          fetch(`/api/admin/upload?key=${key}`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ filePath }),
-          })
-        )
-      )
-
-      done += batch.length
-      setSyncProgress({ done, total: unprocessed.length, current: '' })
-    }
-
-    setSyncing(false)
-    loadDocuments()
-  }
-
-  if (!authenticated) {
+  if (!authed) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="bg-white p-8 rounded-lg shadow-sm border border-gray-200 w-full max-w-sm">
-          <h1 className="text-xl font-semibold text-gray-900 mb-2">StrataReady Admin</h1>
-          <p className="text-sm text-gray-500 mb-6">Knowledge Base Management</p>
-          <input
-            type="password"
-            placeholder="Admin key"
-            value={key}
-            onChange={e => setKey(e.target.value)}
-            onKeyDown={e => e.key === 'Enter' && authenticate()}
-            className="w-full border border-gray-300 rounded-lg px-4 py-2 mb-3 text-sm"
-          />
-          {authError && <p className="text-red-500 text-sm mb-3">{authError}</p>}
-          <button
-            onClick={authenticate}
-            className="w-full bg-blue-600 text-white py-2 rounded-lg text-sm font-medium hover:bg-blue-700"
-          >
-            Enter
-          </button>
+      <div style={{ minHeight: '100vh', backgroundColor: '#0B1F33', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24 }}>
+        <div style={{ width: '100%', maxWidth: 360 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 40, justifyContent: 'center' }}>
+            <Logo />
+            <span style={{ color: '#F7F9FC', fontSize: 16, fontWeight: 600 }}>StrataReady Admin</span>
+          </div>
+          <div style={{ backgroundColor: 'rgba(255,255,255,0.05)', borderRadius: 12, border: '1px solid rgba(255,255,255,0.1)', padding: 28 }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+              <input
+                type="password"
+                value={key}
+                onChange={e => setKey(e.target.value)}
+                onKeyDown={e => e.key === 'Enter' && handleLogin()}
+                placeholder="Admin key"
+                style={{ width: '100%', backgroundColor: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: 8, padding: '10px 14px', fontSize: 14, color: '#F7F9FC', outline: 'none', boxSizing: 'border-box' }}
+              />
+              {error && <p style={{ fontSize: 13, color: '#FCA5A5' }}>{error}</p>}
+              <button onClick={handleLogin} disabled={loading}
+                style={{ backgroundColor: '#B08D57', color: '#0B1F33', fontSize: 14, fontWeight: 600, padding: 12, borderRadius: 8, border: 'none', cursor: 'pointer' }}>
+                {loading ? 'Loading...' : 'Sign in'}
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     )
   }
 
-  const pendingCount = unprocessed.length
+  const filtered = users
+    .filter(u => !search || u.email.toLowerCase().includes(search.toLowerCase()) || (u.full_name || '').toLowerCase().includes(search.toLowerCase()))
+    .sort((a, b) => {
+      if (sortBy === 'created_at') return new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+      if (sortBy === 'exams') return (userStats[b.id]?.exams || 0) - (userStats[a.id]?.exams || 0)
+      if (sortBy === 'avgScore') return (userStats[b.id]?.avgScore || 0) - (userStats[a.id]?.avgScore || 0)
+      return 0
+    })
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="max-w-5xl mx-auto px-6 py-10">
-
-        <div className="flex items-center justify-between mb-8">
-          <div>
-            <h1 className="text-2xl font-bold text-gray-900">Knowledge Base Admin</h1>
-            <p className="text-sm text-gray-500 mt-1">
-              {bucketTotal} files in bucket · {documents.length} processed · {pendingCount} pending
-            </p>
-          </div>
-          <span className="text-sm text-green-600 font-medium">Authenticated</span>
+    <div style={{ minHeight: '100vh', backgroundColor: '#F7F9FC' }}>
+      <nav style={{ backgroundColor: '#0B1F33', padding: '14px 32px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+          <Logo />
+          <span style={{ color: '#F7F9FC', fontSize: 15, fontWeight: 600 }}>StrataReady</span>
+          <span style={{ fontSize: 11, color: '#B08D57', backgroundColor: 'rgba(176,141,87,0.15)', padding: '2px 8px', borderRadius: 20, fontWeight: 600, letterSpacing: '0.05em' }}>ADMIN</span>
         </div>
+        <button onClick={() => { setAuthed(false); sessionStorage.removeItem('admin_key') }}
+          style={{ fontSize: 13, color: 'rgba(247,249,252,0.4)', background: 'none', border: 'none', cursor: 'pointer' }}>
+          Sign out
+        </button>
+      </nav>
 
-        <div className="flex gap-4 mb-6 border-b border-gray-200">
-          {(['sync', 'documents'] as const).map(tab => (
-            <button
-              key={tab}
-              onClick={() => setActiveTab(tab)}
-              className={`pb-3 text-sm font-medium capitalize border-b-2 -mb-px transition-colors ${
-                activeTab === tab
-                  ? 'border-blue-600 text-blue-600'
-                  : 'border-transparent text-gray-500 hover:text-gray-700'
-              }`}
-            >
-              {tab}
-              {tab === 'sync' && pendingCount > 0 && (
-                <span className="ml-2 bg-amber-100 text-amber-700 text-xs px-2 py-0.5 rounded-full">
-                  {pendingCount}
-                </span>
-              )}
-            </button>
-          ))}
-        </div>
+      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '40px 32px' }}>
 
-        {activeTab === 'sync' && (
-          <div className="bg-white rounded-lg border border-gray-200 p-6">
-            <h2 className="text-lg font-semibold text-gray-900 mb-1">Sync Knowledge Base</h2>
-            <p className="text-sm text-gray-500 mb-6">
-              Extracts text from all unprocessed PDFs in the storage bucket and saves to the database. Processes 5 files at a time.
-            </p>
-
-            {pendingCount === 0 && !syncing ? (
-              <div className="bg-green-50 border border-green-200 rounded-lg p-4">
-                <p className="text-sm text-green-700 font-medium">All files are processed and ready.</p>
-              </div>
-            ) : (
-              <>
-                <div className="border border-gray-200 rounded-lg overflow-hidden mb-6">
-                  <table className="w-full text-sm">
-                    <thead className="bg-gray-50">
-                      <tr>
-                        <th className="text-left px-4 py-2 text-gray-600 font-medium">File</th>
-                        <th className="text-left px-4 py-2 text-gray-600 font-medium">Status</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {unprocessed.map((f, i) => (
-                        <tr key={i} className="border-t border-gray-100">
-                          <td className="px-4 py-2 font-mono text-xs text-gray-700">{f}</td>
-                          <td className="px-4 py-2">
-                            {syncing && syncProgress.current === f ? (
-                              <span className="text-blue-600 text-xs">Processing...</span>
-                            ) : (
-                              <span className="text-amber-600 text-xs">Pending</span>
-                            )}
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
+        {/* Platform stats */}
+        {platform && (
+          <>
+            <h1 style={{ fontSize: 24, fontWeight: 800, color: '#0B1F33', letterSpacing: '-0.5px', marginBottom: 24 }}>Platform Overview</h1>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16, marginBottom: 16 }}>
+              {[
+                { label: 'Total users', value: platform.totalUsers },
+                { label: 'Total exams', value: platform.totalExams },
+                { label: 'Avg score', value: `${platform.avgScore}%` },
+                { label: 'Pass rate', value: `${platform.passRate}%` },
+              ].map(s => (
+                <div key={s.label} style={{ backgroundColor: 'white', borderRadius: 12, border: '1px solid #E2E8F0', padding: '20px 24px' }}>
+                  <p style={{ fontSize: 11, fontWeight: 600, color: '#94A3B8', letterSpacing: '0.06em', textTransform: 'uppercase', marginBottom: 8 }}>{s.label}</p>
+                  <p style={{ fontSize: 28, fontWeight: 800, color: '#0B1F33', letterSpacing: '-0.5px' }}>{s.value}</p>
                 </div>
-
-                {syncing && (
-                  <div className="mb-4">
-                    <div className="flex justify-between text-sm text-gray-600 mb-1">
-                      <span>{syncProgress.current || 'Processing...'}</span>
-                      <span>{syncProgress.done}/{syncProgress.total}</span>
-                    </div>
-                    <div className="w-full bg-gray-200 rounded-full h-2">
-                      <div
-                        className="bg-blue-600 h-2 rounded-full transition-all"
-                        style={{ width: `${syncProgress.total > 0 ? (syncProgress.done / syncProgress.total) * 100 : 0}%` }}
-                      />
-                    </div>
-                  </div>
-                )}
-
-                <button
-                  onClick={syncAll}
-                  disabled={syncing}
-                  className="bg-blue-600 text-white px-6 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  {syncing
-                    ? `Processing ${syncProgress.done} of ${syncProgress.total}...`
-                    : `Process ${pendingCount} files`}
-                </button>
-              </>
-            )}
-          </div>
-        )}
-
-        {activeTab === 'documents' && (
-          <div className="bg-white rounded-lg border border-gray-200 p-6">
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="text-lg font-semibold text-gray-900">Processed Documents</h2>
-              <button onClick={loadDocuments} className="text-sm text-blue-600 hover:underline">
-                Refresh
-              </button>
+              ))}
             </div>
-
-            {loadingDocs ? (
-              <p className="text-sm text-gray-500">Loading...</p>
-            ) : documents.length === 0 ? (
-              <p className="text-sm text-gray-500">No documents processed yet. Go to Sync tab.</p>
-            ) : (
-              <table className="w-full text-sm">
-                <thead>
-                  <tr className="border-b border-gray-200">
-                    <th className="text-left py-2 text-gray-600 font-medium">File</th>
-                    <th className="text-left py-2 text-gray-600 font-medium">Type</th>
-                    <th className="text-left py-2 text-gray-600 font-medium">Lesson</th>
-                    <th className="text-left py-2 text-gray-600 font-medium">Pages</th>
-                    <th className="text-left py-2 text-gray-600 font-medium">Status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {documents.map((doc: any) => (
-                    <tr key={doc.id} className="border-b border-gray-100">
-                      <td className="py-2 font-mono text-xs text-gray-900">{doc.file_name}</td>
-                      <td className="py-2 text-gray-600">{doc.doc_type}</td>
-                      <td className="py-2 text-gray-600">
-                        {doc.lesson_number ? `Lesson ${doc.lesson_number}` : doc.act_name || '—'}
-                      </td>
-                      <td className="py-2 text-gray-600">{doc.page_count || '—'}</td>
-                      <td className="py-2">
-                        <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${
-                          doc.processed
-                            ? 'bg-green-100 text-green-700'
-                            : 'bg-yellow-100 text-yellow-700'
-                        }`}>
-                          {doc.processed ? 'Ready' : 'Pending'}
-                        </span>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            )}
-          </div>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16, marginBottom: 40 }}>
+              {[
+                { label: 'Per exam users', value: platform.perExamUsers, sub: `× $9.99 = $${(platform.perExamUsers * 9.99).toFixed(2)}` },
+                { label: 'Full prep users', value: platform.unlimitedUsers, sub: `× $49.99 = $${(platform.unlimitedUsers * 49.99).toFixed(2)}` },
+                { label: 'Estimated revenue', value: `$${platform.estimatedRevenue.toFixed(2)}`, sub: 'CAD (minimum — excl. repeat purchases)', highlight: true },
+              ].map(s => (
+                <div key={s.label} style={{ backgroundColor: s.highlight ? '#0B1F33' : 'white', borderRadius: 12, border: `1px solid ${s.highlight ? 'transparent' : '#E2E8F0'}`, padding: '20px 24px' }}>
+                  <p style={{ fontSize: 11, fontWeight: 600, color: s.highlight ? 'rgba(247,249,252,0.5)' : '#94A3B8', letterSpacing: '0.06em', textTransform: 'uppercase', marginBottom: 8 }}>{s.label}</p>
+                  <p style={{ fontSize: 28, fontWeight: 800, color: s.highlight ? '#B08D57' : '#0B1F33', letterSpacing: '-0.5px', marginBottom: 4 }}>{s.value}</p>
+                  <p style={{ fontSize: 11, color: s.highlight ? 'rgba(247,249,252,0.4)' : '#CBD5E1' }}>{s.sub}</p>
+                </div>
+              ))}
+            </div>
+          </>
         )}
 
+        {/* Users table */}
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16 }}>
+          <h2 style={{ fontSize: 18, fontWeight: 700, color: '#0B1F33' }}>Users ({filtered.length})</h2>
+          <div style={{ display: 'flex', gap: 10 }}>
+            <input
+              type="text"
+              value={search}
+              onChange={e => setSearch(e.target.value)}
+              placeholder="Search by name or email..."
+              style={{ border: '1.5px solid #E2E8F0', borderRadius: 8, padding: '8px 12px', fontSize: 13, color: '#0B1F33', outline: 'none', width: 240 }}
+            />
+            <select value={sortBy} onChange={e => setSortBy(e.target.value as any)}
+              style={{ border: '1.5px solid #E2E8F0', borderRadius: 8, padding: '8px 12px', fontSize: 13, color: '#0B1F33', outline: 'none', backgroundColor: 'white' }}>
+              <option value="created_at">Sort: Newest</option>
+              <option value="exams">Sort: Most exams</option>
+              <option value="avgScore">Sort: Best score</option>
+            </select>
+          </div>
+        </div>
+
+        <div style={{ backgroundColor: 'white', borderRadius: 16, border: '1px solid #E2E8F0', overflow: 'hidden' }}>
+          <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+            <thead>
+              <tr style={{ backgroundColor: '#F8FAFC' }}>
+                {['User', 'Plan', 'Joined', 'Exams', 'Avg score', 'Pass rate', 'Last active', ''].map(h => (
+                  <th key={h} style={{ padding: '10px 20px', textAlign: 'left', fontSize: 11, fontWeight: 600, color: '#94A3B8', letterSpacing: '0.05em', textTransform: 'uppercase', whiteSpace: 'nowrap' }}>{h}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {filtered.map(user => {
+                const stats = userStats[user.id] || { exams: 0, avgScore: 0, bestScore: 0, passRate: 0, lastActive: null }
+                return (
+                  <tr key={user.id} style={{ borderTop: '1px solid #F1F5F9' }}>
+                    <td style={{ padding: '14px 20px' }}>
+                      <p style={{ fontSize: 13, fontWeight: 600, color: '#0B1F33', marginBottom: 2 }}>{user.full_name || '—'}</p>
+                      <p style={{ fontSize: 12, color: '#94A3B8' }}>{user.email}</p>
+                    </td>
+                    <td style={{ padding: '14px 20px' }}>
+                      <span style={{ fontSize: 11, fontWeight: 600, padding: '2px 8px', borderRadius: 20, backgroundColor: user.plan === 'unlimited' ? '#DCFCE7' : '#F0F4F8', color: user.plan === 'unlimited' ? '#166534' : '#64748B' }}>
+                        {user.plan === 'unlimited' ? 'Full prep' : 'Per exam'}
+                      </span>
+                    </td>
+                    <td style={{ padding: '14px 20px', fontSize: 13, color: '#64748B', whiteSpace: 'nowrap' }}>{formatDate(user.created_at)}</td>
+                    <td style={{ padding: '14px 20px', fontSize: 13, fontWeight: 600, color: '#0B1F33' }}>{stats.exams}</td>
+                    <td style={{ padding: '14px 20px', fontSize: 13, fontWeight: 600, color: stats.avgScore >= 70 ? '#166534' : stats.avgScore >= 50 ? '#92400E' : stats.exams === 0 ? '#94A3B8' : '#991B1B' }}>
+                      {stats.exams > 0 ? `${stats.avgScore}%` : '—'}
+                    </td>
+                    <td style={{ padding: '14px 20px', fontSize: 13, color: '#64748B' }}>
+                      {stats.exams > 0 ? `${stats.passRate}%` : '—'}
+                    </td>
+                    <td style={{ padding: '14px 20px', fontSize: 13, color: '#94A3B8', whiteSpace: 'nowrap' }}>{formatDate(stats.lastActive)}</td>
+                    <td style={{ padding: '14px 20px' }}>
+                      <Link href={`/admin/user/${user.id}`} style={{ fontSize: 12, color: '#B08D57', fontWeight: 600, textDecoration: 'none', whiteSpace: 'nowrap' }}>
+                        View →
+                      </Link>
+                    </td>
+                  </tr>
+                )
+              })}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   )
