@@ -55,7 +55,6 @@ function SkillsMap({ sections }: { sections: SectionPerf[] }) {
         <text x={cx} y={cy - 4} textAnchor="middle" fontSize="8" fill="#94A3B8" fontWeight="500">avg</text>
         <text x={cx} y={cy + 10} textAnchor="middle" fontSize="14" fill="#0B1F33" fontWeight="800">{avgPct}%</text>
         {segments.map(({ s, lx, ly, anchor, color }, i) => {
-          const n = segments.length
           const yOffset = (i === 0 || i === n - 1) ? (i === 0 ? -8 : 8) : 0
           return (
             <g key={`label-${s.id}`}>
@@ -74,6 +73,69 @@ function SkillsMap({ sections }: { sections: SectionPerf[] }) {
           )
         })}
       </svg>
+    </div>
+  )
+}
+
+const TIER1_SECTIONS = [10, 12, 19, 20]
+
+function ExamReadiness({ attempts, sectionPerf }: { attempts: Attempt[], sectionPerf: SectionPerf[] }) {
+  if (attempts.length === 0) return null
+  const avgScore = attempts.reduce((sum, a) => sum + ((a.score || 0) / (a.total_questions || 100) * 100), 0) / attempts.length
+  const tier1 = sectionPerf.filter(s => TIER1_SECTIONS.includes(s.id))
+  const tier1Score = tier1.length > 0 ? tier1.reduce((sum, s) => sum + s.pct, 0) / tier1.length : avgScore
+  const examBonus = Math.min(attempts.length / 5, 1) * 100
+  let trendScore = 50
+  if (attempts.length >= 2) {
+    const sorted = [...attempts].sort((a, b) => new Date(a.started_at).getTime() - new Date(b.started_at).getTime())
+    const recent = (sorted[sorted.length - 1].score || 0) / (sorted[sorted.length - 1].total_questions || 100) * 100
+    const prev = (sorted[sorted.length - 2].score || 0) / (sorted[sorted.length - 2].total_questions || 100) * 100
+    trendScore = recent > prev ? 75 : recent < prev ? 25 : 50
+  }
+  const sorted = [...attempts].sort((a, b) => new Date(b.started_at).getTime() - new Date(a.started_at).getTime())
+  const recentAvg = sorted.slice(0, 3).reduce((sum, a) => sum + ((a.score || 0) / (a.total_questions || 100) * 100), 0) / Math.min(attempts.length, 3)
+  const readiness = Math.round(avgScore * 0.30 + tier1Score * 0.25 + examBonus * 0.15 + trendScore * 0.10 + recentAvg * 0.20)
+  const capped = Math.min(readiness, 95)
+  const label = capped >= 80 ? 'Exam Ready' : capped >= 65 ? 'Nearly Ready' : capped >= 45 ? 'In Progress' : 'Early Stage'
+  const color = capped >= 80 ? '#16A34A' : capped >= 65 ? '#B08D57' : capped >= 45 ? '#D97706' : '#DC2626'
+  const message = capped >= 80 ? 'Scores suggest well prepared.' : capped >= 65 ? 'Close — focus on weak sections.' : capped >= 45 ? 'In progress — more exams needed.' : 'Early stage.'
+  const circumference = 2 * Math.PI * 44
+  const dash = (capped / 100) * circumference
+  return (
+    <div style={{ backgroundColor: 'white', borderRadius: 16, border: '1px solid #E2E8F0', padding: '20px', display: 'flex', flexDirection: 'column', gap: 16 }}>
+      <div>
+        <h2 style={{ fontSize: 15, fontWeight: 700, color: '#0B1F33', marginBottom: 4 }}>Exam Readiness</h2>
+        <p style={{ fontSize: 12, color: '#94A3B8' }}>Based on scores, trends & coverage</p>
+      </div>
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <div style={{ position: 'relative', width: 120, height: 120 }}>
+          <svg width="120" height="120" viewBox="0 0 120 120">
+            <circle cx="60" cy="60" r="44" fill="none" stroke="#F1F5F9" strokeWidth="10" />
+            <circle cx="60" cy="60" r="44" fill="none" stroke={color} strokeWidth="10"
+              strokeDasharray={`${dash} ${circumference}`} strokeLinecap="round" transform="rotate(-90 60 60)" />
+          </svg>
+          <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+            <span style={{ fontSize: 22, fontWeight: 800, color: '#0B1F33', letterSpacing: '-1px' }}>{capped}%</span>
+          </div>
+        </div>
+      </div>
+      <div style={{ textAlign: 'center' }}>
+        <span style={{ fontSize: 12, fontWeight: 700, color, backgroundColor: `${color}18`, padding: '3px 10px', borderRadius: 20 }}>{label}</span>
+        <p style={{ fontSize: 12, color: '#64748B', lineHeight: 1.6, marginTop: 10 }}>{message}</p>
+      </div>
+      <div style={{ borderTop: '1px solid #F1F5F9', paddingTop: 12, display: 'flex', flexDirection: 'column', gap: 6 }}>
+        {[
+          { label: 'Avg score', value: `${Math.round(avgScore)}%` },
+          { label: 'Recent scores', value: `${Math.round(recentAvg)}%` },
+          { label: 'Core sections', value: `${Math.round(tier1Score)}%` },
+          { label: 'Exams taken', value: attempts.length },
+        ].map(item => (
+          <div key={item.label} style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12 }}>
+            <span style={{ color: '#94A3B8' }}>{item.label}</span>
+            <span style={{ color: '#0B1F33', fontWeight: 600 }}>{item.value}</span>
+          </div>
+        ))}
+      </div>
     </div>
   )
 }
@@ -144,20 +206,16 @@ export default function AdminUserPage({ params }: { params: Promise<{ id: string
         <div style={{ backgroundColor: 'white', borderRadius: 16, border: '1px solid #E2E8F0', padding: '28px', marginBottom: 24 }}>
           <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between' }}>
             <div>
-              <h1 style={{ fontSize: 24, fontWeight: 800, color: '#0B1F33', letterSpacing: '-0.5px', marginBottom: 4 }}>
-                {user.full_name || 'No name'}
-              </h1>
+              <h1 style={{ fontSize: 24, fontWeight: 800, color: '#0B1F33', letterSpacing: '-0.5px', marginBottom: 4 }}>{user.full_name || 'No name'}</h1>
               <p style={{ fontSize: 14, color: '#64748B', marginBottom: 12 }}>{user.email}</p>
-              <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+              <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', alignItems: 'center' }}>
                 <span style={{ fontSize: 11, fontWeight: 600, padding: '3px 10px', borderRadius: 20, backgroundColor: user.plan === 'unlimited' ? '#DCFCE7' : '#F0F4F8', color: user.plan === 'unlimited' ? '#166534' : '#64748B' }}>
                   {user.plan === 'unlimited' ? 'Full Prep Access' : 'Per Exam'}
                 </span>
-                <span style={{ fontSize: 11, color: '#94A3B8', padding: '3px 0' }}>Joined {formatDate(user.created_at)}</span>
+                <span style={{ fontSize: 11, color: '#94A3B8' }}>Joined {formatDate(user.created_at)}</span>
                 {user.stripe_customer_id && (
                   <a href={`https://dashboard.stripe.com/customers/${user.stripe_customer_id}`} target="_blank" rel="noopener noreferrer"
-                    style={{ fontSize: 11, color: '#B08D57', fontWeight: 600, textDecoration: 'none' }}>
-                    Stripe ↗
-                  </a>
+                    style={{ fontSize: 11, color: '#B08D57', fontWeight: 600, textDecoration: 'none' }}>Stripe ↗</a>
                 )}
               </div>
             </div>
@@ -183,14 +241,15 @@ export default function AdminUserPage({ params }: { params: Promise<{ id: string
           </div>
         ) : (
           <>
-            {/* Skills map */}
-            {sectionPerf.length > 0 && (
-              <div style={{ backgroundColor: 'white', borderRadius: 16, border: '1px solid #E2E8F0', padding: '20px', marginBottom: 24 }}>
+            {/* Skills map + Readiness */}
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 280px', gap: 16, marginBottom: 24 }}>
+              <div style={{ backgroundColor: 'white', borderRadius: 16, border: '1px solid #E2E8F0', padding: '20px' }}>
                 <h2 style={{ fontSize: 15, fontWeight: 700, color: '#0B1F33', marginBottom: 4 }}>Skills Map</h2>
                 <p style={{ fontSize: 12, color: '#94A3B8', marginBottom: 12 }}>Green = 70%+ · Amber = 50–69% · Red = below 50%</p>
                 <SkillsMap sections={sectionPerf} />
               </div>
-            )}
+              <ExamReadiness attempts={completedAttempts} sectionPerf={sectionPerf} />
+            </div>
 
             {/* Exam history */}
             <div style={{ backgroundColor: 'white', borderRadius: 16, border: '1px solid #E2E8F0', overflow: 'hidden' }}>

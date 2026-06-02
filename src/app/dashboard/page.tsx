@@ -112,7 +112,7 @@ function SkillsMap({ sections }: { sections: SectionPerf[] }) {
     return { s, bgPath, fillPath, color, bgColor, lx, ly, midAngle, anchor }
   })
 
-  const avgPct = Math.round(sections.reduce((sum, s) => sum + s.pct, 0) / sections.length)
+  const avgPct = sections.length > 0 ? Math.round(sections.reduce((sum, s) => sum + s.pct, 0) / sections.length) : 0
 
   return (
     <div style={{ display: 'flex', justifyContent: 'center', padding: '8px 0' }}>
@@ -131,8 +131,17 @@ function SkillsMap({ sections }: { sections: SectionPerf[] }) {
           const yOffset = (i === 0 || i === n - 1) ? (i === 0 ? -8 : 8) : 0
           return (
             <g key={`label-${s.id}`}>
-              <text x={lx} y={ly - 3 + yOffset} textAnchor={anchor} fontSize="8" fill="#0B1F33" fontWeight="600">{s.title}</text>
-              <text x={lx} y={ly + 7 + yOffset} textAnchor={anchor} fontSize="8" fill={color} fontWeight="700">{s.pct}%</text>
+              {s.title.includes(' & ') ? (() => {
+                const [before, after] = s.title.split(' & ')
+                return (<>
+                  <text x={lx} y={ly - 7 + yOffset} textAnchor={anchor} fontSize="8" fill="#0B1F33" fontWeight="600">{before} &amp;</text>
+                  <text x={lx} y={ly + 3 + yOffset} textAnchor={anchor} fontSize="8" fill="#0B1F33" fontWeight="600">{after}</text>
+                  <text x={lx} y={ly + 13 + yOffset} textAnchor={anchor} fontSize="8" fill={color} fontWeight="700">{s.pct}%</text>
+                </>)
+              })() : (<>
+                <text x={lx} y={ly - 3 + yOffset} textAnchor={anchor} fontSize="8" fill="#0B1F33" fontWeight="600">{s.title}</text>
+                <text x={lx} y={ly + 7 + yOffset} textAnchor={anchor} fontSize="8" fill={color} fontWeight="700">{s.pct}%</text>
+              </>)}
             </g>
           )
         })}
