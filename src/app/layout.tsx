@@ -60,8 +60,8 @@ export const metadata: Metadata = {
     images: ["/og-image.png"],
   },
   icons: {
-    icon: "/favicon.png",
-    apple: "/favicon.png",
+    icon: "/favicon-2.png",
+    apple: "/favicon-2.png",
   },
   robots: {
     index: true,
