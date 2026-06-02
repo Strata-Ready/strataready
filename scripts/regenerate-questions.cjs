@@ -94,7 +94,7 @@ Return ONLY the JSON array. No preamble, no markdown, no explanation.`
 
   const response = await anthropic.messages.create({
     model: 'claude-sonnet-4-6',
-    max_tokens: 8000,
+    max_tokens: 16000,
     messages: [{ role: 'user', content: prompt }],
   })
 
@@ -119,7 +119,21 @@ async function main() {
     process.stdout.write(`Section ${section.number}: ${section.title}... `)
 
     try {
-      const questions = await generateQuestions(section.id)
+      let questions = null
+      let attempts = 0
+      while (!questions && attempts < 3) {
+        attempts++
+        try {
+          questions = await generateQuestions(section.id)
+        } catch (err) {
+          if (attempts < 3) {
+            process.stdout.write(`retry ${attempts}... `)
+            await new Promise(r => setTimeout(r, 2000))
+          } else {
+            throw err
+          }
+        }
+      }
 
       // Deactivate existing questions
       await supabase.from('questions').update({ is_active: false }).eq('section_id', section.id)
