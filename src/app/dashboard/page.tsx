@@ -146,10 +146,10 @@ const TIER1_SECTIONS = [10, 12, 19, 20] // Strata Act, Governance, Operating Bud
 function ExamReadiness({ attempts, sectionPerf }: { attempts: Attempt[], sectionPerf: SectionPerf[] }) {
   if (attempts.length === 0) return null
 
-  // Factor 1: average score (40% weight)
+  // Factor 1: average score (30% weight)
   const avgScore = attempts.reduce((sum, a) => sum + ((a.score || 0) / (a.total_questions || 100) * 100), 0) / attempts.length
 
-  // Factor 2: weighted score on tier 1 sections (30% weight)
+  // Factor 2: weighted score on tier 1 sections (25% weight)
   const tier1 = sectionPerf.filter(s => TIER1_SECTIONS.includes(s.id))
   const tier1Score = tier1.length > 0
     ? tier1.reduce((sum, s) => sum + s.pct, 0) / tier1.length
@@ -158,7 +158,7 @@ function ExamReadiness({ attempts, sectionPerf }: { attempts: Attempt[], section
   // Factor 3: exam count — more exams = more ready (15% weight, caps at 5 exams)
   const examBonus = Math.min(attempts.length / 5, 1) * 100
 
-  // Factor 4: score trend — improving scores = more ready (15% weight)
+  // Factor 4: score trend — improving scores = more ready (10% weight)
   let trendScore = 50
   if (attempts.length >= 2) {
     const sorted = [...attempts].sort((a, b) => new Date(a.started_at).getTime() - new Date(b.started_at).getTime())
@@ -167,8 +167,13 @@ function ExamReadiness({ attempts, sectionPerf }: { attempts: Attempt[], section
     trendScore = recent > prev ? 75 : recent < prev ? 25 : 50
   }
 
-  const readiness = Math.round(avgScore * 0.4 + tier1Score * 0.3 + examBonus * 0.15 + trendScore * 0.15)
-  const capped = Math.min(readiness, 95) // never show 100% — always room to improve
+  // Factor 5: recent scores avg (last 3 exams) (20% weight)
+  const sorted = [...attempts].sort((a, b) => new Date(b.started_at).getTime() - new Date(a.started_at).getTime())
+  const recentAttempts = sorted.slice(0, 3)
+  const recentAvg = recentAttempts.reduce((sum, a) => sum + ((a.score || 0) / (a.total_questions || 100) * 100), 0) / recentAttempts.length
+
+  const readiness = Math.round(avgScore * 0.30 + tier1Score * 0.25 + examBonus * 0.15 + trendScore * 0.10 + recentAvg * 0.20)
+  const capped = Math.min(readiness, 95)
 
   const label = capped >= 80 ? 'Exam Ready' : capped >= 65 ? 'Nearly Ready' : capped >= 45 ? 'In Progress' : 'Early Stage'
   const color = capped >= 80 ? '#16A34A' : capped >= 65 ? '#B08D57' : capped >= 45 ? '#D97706' : '#DC2626'
@@ -184,25 +189,26 @@ function ExamReadiness({ attempts, sectionPerf }: { attempts: Attempt[], section
   const dash = (capped / 100) * circumference
 
   return (
-    <div style={{ backgroundColor: 'white', borderRadius: 16, border: '1px solid #E2E8F0', padding: '20px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 16 }}>
+    <div style={{ backgroundColor: 'white', borderRadius: 16, border: '1px solid #E2E8F0', padding: '20px', display: 'flex', flexDirection: 'column', gap: 16 }}>
       <div>
-        <h2 style={{ fontSize: 15, fontWeight: 700, color: '#0B1F33', marginBottom: 4, textAlign: 'center' }}>Exam Readiness</h2>
-        <p style={{ fontSize: 12, color: '#94A3B8', textAlign: 'center' }}>Based on scores, trend & coverage</p>
+        <h2 style={{ fontSize: 15, fontWeight: 700, color: '#0B1F33', marginBottom: 4 }}>Exam Readiness</h2>
+        <p style={{ fontSize: 12, color: '#94A3B8' }}>Based on scores, trends & coverage</p>
       </div>
 
       {/* Gauge */}
-      <div style={{ position: 'relative', width: 120, height: 120 }}>
-        <svg width="120" height="120" viewBox="0 0 120 120">
-          <circle cx="60" cy="60" r="44" fill="none" stroke="#F1F5F9" strokeWidth="10" />
-          <circle cx="60" cy="60" r="44" fill="none" stroke={color} strokeWidth="10"
-            strokeDasharray={`${dash} ${circumference}`}
-            strokeLinecap="round"
-            transform="rotate(-90 60 60)"
-            style={{ transition: 'stroke-dasharray 0.6s ease' }}
-          />
-        </svg>
-        <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-          <span style={{ fontSize: 22, fontWeight: 800, color: '#0B1F33', letterSpacing: '-1px' }}>{capped}%</span>
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <div style={{ position: 'relative', width: 120, height: 120 }}>
+          <svg width="120" height="120" viewBox="0 0 120 120">
+            <circle cx="60" cy="60" r="44" fill="none" stroke="#F1F5F9" strokeWidth="10" />
+            <circle cx="60" cy="60" r="44" fill="none" stroke={color} strokeWidth="10"
+              strokeDasharray={`${dash} ${circumference}`}
+              strokeLinecap="round"
+              transform="rotate(-90 60 60)"
+            />
+          </svg>
+          <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+            <span style={{ fontSize: 22, fontWeight: 800, color: '#0B1F33', letterSpacing: '-1px' }}>{capped}%</span>
+          </div>
         </div>
       </div>
 
@@ -211,9 +217,10 @@ function ExamReadiness({ attempts, sectionPerf }: { attempts: Attempt[], section
         <p style={{ fontSize: 12, color: '#64748B', lineHeight: 1.6, marginTop: 10 }}>{message}</p>
       </div>
 
-      <div style={{ width: '100%', borderTop: '1px solid #F1F5F9', paddingTop: 12, display: 'flex', flexDirection: 'column', gap: 6 }}>
+      <div style={{ borderTop: '1px solid #F1F5F9', paddingTop: 12, display: 'flex', flexDirection: 'column', gap: 6 }}>
         {[
           { label: 'Avg score', value: `${Math.round(avgScore)}%` },
+          { label: 'Recent scores', value: `${Math.round(recentAvg)}%` },
           { label: 'Core sections', value: `${Math.round(tier1Score)}%` },
           { label: 'Exams taken', value: attempts.length },
         ].map(item => (
