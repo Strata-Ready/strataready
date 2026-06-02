@@ -38,7 +38,7 @@ export async function POST(request: Request) {
       payment_method_types: ['card'],
       line_items: [{ price: priceId, quantity: 1 }],
       mode: 'payment',
-      success_url: `${process.env.NEXT_PUBLIC_SITE_URL}/dashboard?payment=success`,
+      success_url: `${process.env.NEXT_PUBLIC_SITE_URL}/exam?paid=true`,
       cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL}/dashboard`,
       metadata: { userId, plan },
     })

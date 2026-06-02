@@ -36,10 +36,15 @@ export default function ExamPage() {
   useEffect(() => {
     async function startExam() {
       try {
-        // Check auth first
         const supabase = createClient()
         const { data: { user } } = await supabase.auth.getUser()
         if (!user) { router.push('/login'); return }
+
+        // If coming from Stripe checkout, wait for webhook to update plan
+        const params = new URLSearchParams(window.location.search)
+        if (params.get('paid') === 'true') {
+          await new Promise(r => setTimeout(r, 2000))
+        }
 
         const res = await fetch('/api/exam/start', { method: 'POST' })
         const data = await res.json()
