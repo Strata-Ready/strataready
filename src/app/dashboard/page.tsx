@@ -140,8 +140,6 @@ function SkillsMap({ sections }: { sections: SectionPerf[] }) {
   )
 }
 
-}
-
 // Tier 1 sections (highest weight) — used for weighted score calculation
 const TIER1_SECTIONS = [10, 12, 19, 20] // Strata Act, Governance, Operating Budget, CRF
 
