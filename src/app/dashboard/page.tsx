@@ -125,13 +125,106 @@ function SkillsMap({ sections }: { sections: SectionPerf[] }) {
         <circle cx={cx} cy={cy} r={innerR - 2} fill="white" />
         <text x={cx} y={cy - 4} textAnchor="middle" fontSize="8" fill="#94A3B8" fontWeight="500">avg</text>
         <text x={cx} y={cy + 10} textAnchor="middle" fontSize="14" fill="#0B1F33" fontWeight="800">{avgPct}%</text>
-        {segments.map(({ s, lx, ly, anchor, color }) => (
-          <g key={`label-${s.id}`}>
-            <text x={lx} y={ly - 3} textAnchor={anchor} fontSize="8" fill="#0B1F33" fontWeight="600">{s.title}</text>
-            <text x={lx} y={ly + 7} textAnchor={anchor} fontSize="8" fill={color} fontWeight="700">{s.pct}%</text>
-          </g>
-        ))}
+        {segments.map(({ s, lx, ly, anchor, color }, i) => {
+          // Offset first and last labels vertically to avoid overlap
+          const yOffset = (i === 0 || i === n - 1) ? (i === 0 ? -8 : 8) : 0
+          return (
+            <g key={`label-${s.id}`}>
+              <text x={lx} y={ly - 3 + yOffset} textAnchor={anchor} fontSize="8" fill="#0B1F33" fontWeight="600">{s.title}</text>
+              <text x={lx} y={ly + 7 + yOffset} textAnchor={anchor} fontSize="8" fill={color} fontWeight="700">{s.pct}%</text>
+            </g>
+          )
+        })}
       </svg>
+    </div>
+  )
+}
+
+}
+
+// Tier 1 sections (highest weight) — used for weighted score calculation
+const TIER1_SECTIONS = [10, 12, 19, 20] // Strata Act, Governance, Operating Budget, CRF
+
+function ExamReadiness({ attempts, sectionPerf }: { attempts: Attempt[], sectionPerf: SectionPerf[] }) {
+  if (attempts.length === 0) return null
+
+  // Factor 1: average score (40% weight)
+  const avgScore = attempts.reduce((sum, a) => sum + ((a.score || 0) / (a.total_questions || 100) * 100), 0) / attempts.length
+
+  // Factor 2: weighted score on tier 1 sections (30% weight)
+  const tier1 = sectionPerf.filter(s => TIER1_SECTIONS.includes(s.id))
+  const tier1Score = tier1.length > 0
+    ? tier1.reduce((sum, s) => sum + s.pct, 0) / tier1.length
+    : avgScore
+
+  // Factor 3: exam count — more exams = more ready (15% weight, caps at 5 exams)
+  const examBonus = Math.min(attempts.length / 5, 1) * 100
+
+  // Factor 4: score trend — improving scores = more ready (15% weight)
+  let trendScore = 50
+  if (attempts.length >= 2) {
+    const sorted = [...attempts].sort((a, b) => new Date(a.started_at).getTime() - new Date(b.started_at).getTime())
+    const recent = (sorted[sorted.length - 1].score || 0) / (sorted[sorted.length - 1].total_questions || 100) * 100
+    const prev = (sorted[sorted.length - 2].score || 0) / (sorted[sorted.length - 2].total_questions || 100) * 100
+    trendScore = recent > prev ? 75 : recent < prev ? 25 : 50
+  }
+
+  const readiness = Math.round(avgScore * 0.4 + tier1Score * 0.3 + examBonus * 0.15 + trendScore * 0.15)
+  const capped = Math.min(readiness, 95) // never show 100% — always room to improve
+
+  const label = capped >= 80 ? 'Exam Ready' : capped >= 65 ? 'Nearly Ready' : capped >= 45 ? 'In Progress' : 'Early Stage'
+  const color = capped >= 80 ? '#16A34A' : capped >= 65 ? '#B08D57' : capped >= 45 ? '#D97706' : '#DC2626'
+  const message = capped >= 80
+    ? 'Your scores suggest you are well prepared. Take one more timed exam to confirm.'
+    : capped >= 65
+    ? 'You\'re close. Focus on your weak sections and take another exam.'
+    : capped >= 45
+    ? 'Keep going. More practice exams will build your confidence and score.'
+    : 'You\'re just getting started. Work through your focus areas and re-test.'
+
+  const circumference = 2 * Math.PI * 44
+  const dash = (capped / 100) * circumference
+
+  return (
+    <div style={{ backgroundColor: 'white', borderRadius: 16, border: '1px solid #E2E8F0', padding: '20px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 16 }}>
+      <div>
+        <h2 style={{ fontSize: 15, fontWeight: 700, color: '#0B1F33', marginBottom: 4, textAlign: 'center' }}>Exam Readiness</h2>
+        <p style={{ fontSize: 12, color: '#94A3B8', textAlign: 'center' }}>Based on scores, trend & coverage</p>
+      </div>
+
+      {/* Gauge */}
+      <div style={{ position: 'relative', width: 120, height: 120 }}>
+        <svg width="120" height="120" viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r="44" fill="none" stroke="#F1F5F9" strokeWidth="10" />
+          <circle cx="60" cy="60" r="44" fill="none" stroke={color} strokeWidth="10"
+            strokeDasharray={`${dash} ${circumference}`}
+            strokeLinecap="round"
+            transform="rotate(-90 60 60)"
+            style={{ transition: 'stroke-dasharray 0.6s ease' }}
+          />
+        </svg>
+        <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+          <span style={{ fontSize: 22, fontWeight: 800, color: '#0B1F33', letterSpacing: '-1px' }}>{capped}%</span>
+        </div>
+      </div>
+
+      <div style={{ textAlign: 'center' }}>
+        <span style={{ fontSize: 12, fontWeight: 700, color, backgroundColor: `${color}18`, padding: '3px 10px', borderRadius: 20 }}>{label}</span>
+        <p style={{ fontSize: 12, color: '#64748B', lineHeight: 1.6, marginTop: 10 }}>{message}</p>
+      </div>
+
+      <div style={{ width: '100%', borderTop: '1px solid #F1F5F9', paddingTop: 12, display: 'flex', flexDirection: 'column', gap: 6 }}>
+        {[
+          { label: 'Avg score', value: `${Math.round(avgScore)}%` },
+          { label: 'Core sections', value: `${Math.round(tier1Score)}%` },
+          { label: 'Exams taken', value: attempts.length },
+        ].map(item => (
+          <div key={item.label} style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12 }}>
+            <span style={{ color: '#94A3B8' }}>{item.label}</span>
+            <span style={{ color: '#0B1F33', fontWeight: 600 }}>{item.value}</span>
+          </div>
+        ))}
+      </div>
     </div>
   )
 }
@@ -263,8 +356,8 @@ export default function DashboardPage() {
                 ↩ Resume exam
               </Link>
             )}
-            <button onClick={handleStartExam} style={{ backgroundColor: '#0B1F33', color: '#F7F9FC', fontSize: 13, fontWeight: 600, padding: '10px 24px', borderRadius: 8, border: 'none', cursor: 'pointer' }}>
-              {completedAttempts.length === 0 ? 'Start first exam →' : 'New exam →'}
+            <button onClick={handleStartExam} style={{ backgroundColor: '#B08D57', color: 'white', fontSize: 13, fontWeight: 600, padding: '10px 24px', borderRadius: 8, border: 'none', cursor: 'pointer' }}>
+              {completedAttempts.length === 0 ? 'Start Exam →' : 'Start Exam →'}
             </button>
           </div>
         </div>
@@ -298,13 +391,16 @@ export default function DashboardPage() {
               ))}
             </div>
 
-            {/* Skills map */}
-            <div style={{ backgroundColor: 'white', borderRadius: 16, border: '1px solid #E2E8F0', padding: '20px', marginBottom: 24 }}>
-              <div style={{ marginBottom: 12 }}>
-                <h2 style={{ fontSize: 15, fontWeight: 700, color: '#0B1F33', marginBottom: 4 }}>Skills Map</h2>
-                <p style={{ fontSize: 13, color: '#94A3B8' }}>Performance across all exam sections. Green = 70%+ · Amber = 50–69% · Red = below 50%</p>
+            {/* Skills map + Readiness side by side */}
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 280px', gap: 16, marginBottom: 24 }}>
+              <div style={{ backgroundColor: 'white', borderRadius: 16, border: '1px solid #E2E8F0', padding: '20px' }}>
+                <div style={{ marginBottom: 12 }}>
+                  <h2 style={{ fontSize: 15, fontWeight: 700, color: '#0B1F33', marginBottom: 4 }}>Skills Map</h2>
+                  <p style={{ fontSize: 12, color: '#94A3B8' }}>Simple average of all section scores. Green = 70%+ · Amber = 50–69% · Red = below 50%</p>
+                </div>
+                <SkillsMap sections={sectionPerf} />
               </div>
-              <SkillsMap sections={sectionPerf} />
+              <ExamReadiness attempts={completedAttempts} sectionPerf={sectionPerf} />
             </div>
 
             {/* Focus areas */}
@@ -312,7 +408,7 @@ export default function DashboardPage() {
               <div style={{ backgroundColor: 'white', borderRadius: 16, border: '1px solid #E2E8F0', padding: '28px', marginBottom: 24 }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 20 }}>
                   <div style={{ width: 8, height: 8, backgroundColor: '#DC2626', borderRadius: '50%' }} />
-                  <h2 style={{ fontSize: 15, fontWeight: 700, color: '#0B1F33' }}>Focus areas</h2>
+                  <h2 style={{ fontSize: 15, fontWeight: 700, color: '#0B1F33' }}>Focus Areas</h2>
                   <span style={{ fontSize: 12, color: '#94A3B8', marginLeft: 'auto' }}>Sections below 70% — review before your next exam</span>
                 </div>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 20 }}>
