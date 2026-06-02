@@ -9,6 +9,7 @@ import { createClient } from '@/lib/supabase/client'
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!)
 
 const CARD_STYLE = {
+  hidePostalCode: true,
   style: {
     base: {
       fontSize: '14px',
@@ -38,50 +39,57 @@ function SignupForm() {
     setLoading(true)
     setError('')
 
-    try {
-      // Step 1: Tokenise card client-side — no charge, nothing created
-      const cardElement = elements.getElement(CardElement)
-      if (!cardElement) throw new Error('Card element not found')
+    const cardElement = elements.getElement(CardElement)
+    if (!cardElement) { setError('Card element not found.'); setLoading(false); return }
 
-      const { error: pmError, paymentMethod } = await stripe.createPaymentMethod({
-        type: 'card',
-        card: cardElement,
-        billing_details: { name, email },
+    try {
+      // Step 1: Get a payment intent client secret from server (no customer, no account yet)
+      const intentRes = await fetch('/api/signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'create_intent', plan }),
+      })
+      const { clientSecret, error: intentError } = await intentRes.json()
+      if (intentError) throw new Error(intentError)
+
+      // Step 2: Confirm payment client-side — this is the charge
+      // If card is declined, nothing has been created anywhere
+      const { error: confirmError, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
+        payment_method: {
+          card: cardElement,
+          billing_details: { name, email },
+        },
       })
 
-      if (pmError) throw new Error(pmError.message)
-      if (!paymentMethod) throw new Error('Could not read card details')
+      if (confirmError) throw new Error(confirmError.message)
+      if (paymentIntent?.status !== 'succeeded') throw new Error('Payment failed. Please try again.')
 
-      // Step 2: Send everything to server
-      // Server charges card, then creates Stripe customer, then creates Supabase account
-      // If payment fails → nothing is created anywhere
-      const res = await fetch('/api/signup', {
+      // Step 3: Payment succeeded — create Stripe customer + Supabase account
+      const signupRes = await fetch('/api/signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          action: 'create_account',
           name,
           email,
           password,
           plan,
-          paymentMethodId: paymentMethod.id,
+          paymentIntentId: paymentIntent.id,
         }),
       })
 
-      const data = await res.json()
-      if (data.error) throw new Error(data.error)
+      const signupData = await signupRes.json()
+      if (signupData.error) throw new Error(signupData.error)
 
-      // Step 3: Sign in and go to dashboard
+      // Step 4: Sign in and go to dashboard
       const supabase = createClient()
-      const { error: signInError } = await supabase.auth.signInWithPassword({ email, password })
-      if (signInError) {
-        window.location.href = '/login'
-        return
-      }
+      await supabase.auth.signInWithPassword({ email, password })
       window.location.href = '/dashboard'
 
     } catch (err: any) {
       setError(err.message || 'Something went wrong. Please try again.')
       setLoading(false)
+      cardElement.clear()
     }
   }
 
