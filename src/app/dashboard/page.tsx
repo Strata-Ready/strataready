@@ -69,12 +69,12 @@ function formatDate(d: string) {
 function SkillsMap({ sections }: { sections: SectionPerf[] }) {
   if (sections.length === 0) return null
 
-  const size = 560
+  const size = 420
   const cx = size / 2
   const cy = size / 2
-  const outerR = 180
-  const innerR = 64
-  const pad = 100 // padding for labels
+  const outerR = 140
+  const innerR = 50
+  const pad = 80
   const n = sections.length
   const gap = 0.02
 
@@ -83,7 +83,7 @@ function SkillsMap({ sections }: { sections: SectionPerf[] }) {
     const endAngle = ((i + 1) / n) * 2 * Math.PI - Math.PI / 2 - gap / 2
     const midAngle = (startAngle + endAngle) / 2
     const fillR = innerR + (outerR - innerR) * (s.pct / 100)
-    const labelR = outerR + 28
+    const labelR = outerR + 22
 
     const color = s.pct >= 70 ? '#16A34A' : s.pct >= 50 ? '#D97706' : '#DC2626'
     const bgColor = s.pct >= 70 ? '#DCFCE7' : s.pct >= 50 ? '#FEF3C7' : '#FEE2E2'
@@ -292,8 +292,8 @@ export default function DashboardPage() {
             </div>
 
             {/* Skills map */}
-            <div style={{ backgroundColor: 'white', borderRadius: 16, border: '1px solid #E2E8F0', padding: '28px', marginBottom: 24 }}>
-              <div style={{ marginBottom: 20 }}>
+            <div style={{ backgroundColor: 'white', borderRadius: 16, border: '1px solid #E2E8F0', padding: '20px', marginBottom: 24 }}>
+              <div style={{ marginBottom: 12 }}>
                 <h2 style={{ fontSize: 15, fontWeight: 700, color: '#0B1F33', marginBottom: 4 }}>Skills Map</h2>
                 <p style={{ fontSize: 13, color: '#94A3B8' }}>Performance across all exam sections. Green = 70%+ · Amber = 50–69% · Red = below 50%</p>
               </div>
