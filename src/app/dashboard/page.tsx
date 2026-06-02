@@ -290,57 +290,6 @@ export default function DashboardPage() {
               ))}
             </div>
 
-            {/* Study tips */}
-            <div style={{ backgroundColor: '#0B1F33', borderRadius: 16, padding: '28px', marginBottom: 24 }}>
-              <div style={{ marginBottom: 20 }}>
-                <p style={{ fontSize: 11, fontWeight: 600, color: '#B08D57', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 6 }}>Exam Strategy</p>
-                <h2 style={{ fontSize: 16, fontWeight: 700, color: '#F7F9FC' }}>Tips for passing on your first attempt</h2>
-              </div>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 20 }}>
-                {[
-                  {
-                    title: 'Master high-weight topics',
-                    tips: [
-                      'Over 50% of questions focus on the Strata Property Act, regulations, and bylaws.',
-                      'Memorize the strict rules governing the Operating Fund vs. the Contingency Reserve Fund.',
-                      'Know exactly when a ¾ vote, majority vote, or unanimous vote is required.',
-                      'Understand negligence, occupier\'s liability, and contract enforcement.',
-                    ]
-                  },
-                  {
-                    title: 'Deconstruct the exam',
-                    tips: [
-                      '180 minutes for 100 questions — that\'s 1.8 minutes per question. Pace yourself.',
-                      'Mark tough questions and move on immediately. Secure easy points first.',
-                      'Watch for distractor answers that look correct but violate a specific legal clause.',
-                      'Read option D first to prevent jumping to a premature conclusion at option A.',
-                    ]
-                  },
-                  {
-                    title: 'Optimize your study',
-                    tips: [
-                      'Complete every assignment — don\'t just read the textbook.',
-                      'Use flashcards for legal timelines, notice periods, and financial deadlines.',
-                      'Take at least two full-length practice exams without looking at your notes.',
-                      'Spend double the time analyzing wrong answers versus right ones.',
-                    ]
-                  },
-                ].map(group => (
-                  <div key={group.title}>
-                    <p style={{ fontSize: 12, fontWeight: 700, color: '#B08D57', marginBottom: 12 }}>{group.title}</p>
-                    <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 8 }}>
-                      {group.tips.map((tip, i) => (
-                        <li key={i} style={{ display: 'flex', gap: 8, fontSize: 12, color: 'rgba(247,249,252,0.65)', lineHeight: 1.6 }}>
-                          <span style={{ color: '#B08D57', flexShrink: 0, marginTop: 1 }}>·</span>
-                          {tip}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
-              </div>
-            </div>
-
             {/* Skills map */}
             <div style={{ backgroundColor: 'white', borderRadius: 16, border: '1px solid #E2E8F0', padding: '28px', marginBottom: 24 }}>
               <div style={{ marginBottom: 20 }}>

@@ -1,13 +1,38 @@
 import { adminClient } from '@/lib/supabase/admin'
 import { createClient } from '@/lib/supabase/server'
 
+// Questions per section — weighted to match real exam emphasis
+const SECTION_WEIGHTS: Record<number, number> = {
+  1:  6,  // Law & RESA
+  2:  3,  // Ethics
+  3:  4,  // Land & Title
+  4:  5,  // Liability
+  5:  4,  // Tenancies
+  6:  6,  // Contracts
+  7:  6,  // Agency
+  8:  3,  // Disputes
+  9:  2,  // Strata Properties
+  10: 10, // Strata Act
+  11: 4,  // Sections
+  12: 8,  // Governance
+  13: 3,  // Privacy
+  14: 3,  // Construction
+  15: 2,  // Maintenance
+  16: 5,  // Risk & Insurance
+  17: 2,  // Local Government
+  18: 3,  // Accounting
+  19: 7,  // Operating Budget
+  20: 7,  // CRF & Depreciation
+  21: 2,  // Purchasing & Personnel
+}
+// Total: 105
+
 export async function POST() {
   try {
     const supabase = await createClient()
     const { data: { user } } = await supabase.auth.getUser()
     if (!user) return Response.json({ error: 'Unauthorized' }, { status: 401 })
 
-    // Get all sections
     const { data: sections } = await adminClient
       .from('sections')
       .select('id, number')
@@ -17,10 +42,11 @@ export async function POST() {
       return Response.json({ error: 'No sections found' }, { status: 500 })
     }
 
-    // Pick 5 random questions per section
     const allQuestions: any[] = []
 
     for (const section of sections) {
+      const count = SECTION_WEIGHTS[section.number] || 2
+
       const { data: questions } = await adminClient
         .from('questions')
         .select('id, section_id, question_text, option_a, option_b, option_c, option_d, correct_answer, explanation, act_reference, regulation_ref, difficulty')
@@ -28,8 +54,7 @@ export async function POST() {
         .eq('is_active', true)
 
       if (questions && questions.length > 0) {
-        // Shuffle and take 5
-        const shuffled = questions.sort(() => Math.random() - 0.5).slice(0, 5)
+        const shuffled = questions.sort(() => Math.random() - 0.5).slice(0, count)
         allQuestions.push(...shuffled)
       }
     }
@@ -37,7 +62,6 @@ export async function POST() {
     // Shuffle the full question list
     const shuffledAll = allQuestions.sort(() => Math.random() - 0.5)
 
-    // Create exam attempt
     const { data: attempt, error: attemptError } = await adminClient
       .from('exam_attempts')
       .insert({
