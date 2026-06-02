@@ -69,11 +69,11 @@ function formatDate(d: string) {
 function SkillsMap({ sections }: { sections: SectionPerf[] }) {
   if (sections.length === 0) return null
 
-  const size = 560
+  const size = 680
   const cx = size / 2
   const cy = size / 2
-  const outerR = 210
-  const innerR = 64
+  const outerR = 240
+  const innerR = 72
   const n = sections.length
   const gap = 0.02
 
@@ -82,7 +82,7 @@ function SkillsMap({ sections }: { sections: SectionPerf[] }) {
     const endAngle = ((i + 1) / n) * 2 * Math.PI - Math.PI / 2 - gap / 2
     const midAngle = (startAngle + endAngle) / 2
     const fillR = innerR + (outerR - innerR) * (s.pct / 100)
-    const labelR = outerR + 30
+    const labelR = outerR + 38
 
     const color = s.pct >= 70 ? '#16A34A' : s.pct >= 50 ? '#D97706' : '#DC2626'
     const bgColor = s.pct >= 70 ? '#DCFCE7' : s.pct >= 50 ? '#FEF3C7' : '#FEE2E2'
