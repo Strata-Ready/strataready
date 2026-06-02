@@ -86,6 +86,7 @@ Return a JSON array of exactly 20 questions. Each question must have:
   "option_d": "...",
   "correct_answer": "A" | "B" | "C" | "D",
   "explanation": "Option (X) is correct because [reason]. Option (A) is incorrect because [reason]. Option (B) is incorrect because [reason]..." etc.,
+  "study_note": "A 2-3 sentence plain-language summary of the key concept or rule being tested, written as a teaching note. Should help the reader understand the underlying principle without quoting the legislation verbatim. E.g. 'Under RESA, BCFSA has broad disciplinary powers over licensees. The maximum penalty for an individual licensee is $250,000, which is significantly higher than most people expect...'",
   "act_reference": "The specific Act, section or regulation this question is based on — e.g. 'Strata Property Act, s.35' or 'Real Estate Services Act, Part 4' or 'PIPA, s.7'",
   "difficulty": 2 | 3 (2 = moderate, 3 = hard)
 }
@@ -150,6 +151,7 @@ async function main() {
         explanation: q.explanation,
         distractor_explanations: q.explanation,
         act_reference: q.act_reference || null,
+        study_note: q.study_note || null,
         difficulty: q.difficulty || 2,
         is_active: true,
       }))
