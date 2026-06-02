@@ -128,19 +128,19 @@ function SkillsMap({ sections }: { sections: SectionPerf[] }) {
         <text x={cx} y={cy + 10} textAnchor="middle" fontSize="14" fill="#0B1F33" fontWeight="800">{avgPct}%</text>
         {segments.map(({ s, lx, ly, anchor, color }, i) => {
           // Offset first and last labels vertically to avoid overlap
-          const yOffset = (i === 0 || i === n - 1) ? (i === 0 ? -8 : 8) : 0
+          const yOffset = 0
           return (
             <g key={`label-${s.id}`}>
               {s.title.includes(' & ') ? (() => {
                 const [before, after] = s.title.split(' & ')
                 return (<>
-                  <text x={lx} y={ly - 7 + yOffset} textAnchor={anchor} fontSize="8" fill="#0B1F33" fontWeight="600">{before} &amp;</text>
-                  <text x={lx} y={ly + 3 + yOffset} textAnchor={anchor} fontSize="8" fill="#0B1F33" fontWeight="600">{after}</text>
-                  <text x={lx} y={ly + 13 + yOffset} textAnchor={anchor} fontSize="8" fill={color} fontWeight="700">{s.pct}%</text>
+                  <text x={lx} y={ly - 7 + yOffset} textAnchor={anchor} fontSize="10" fill="#0B1F33" fontWeight="600">{before} &amp;</text>
+                  <text x={lx} y={ly + 3 + yOffset} textAnchor={anchor} fontSize="10" fill="#0B1F33" fontWeight="600">{after}</text>
+                  <text x={lx} y={ly + 13 + yOffset} textAnchor={anchor} fontSize="10" fill={color} fontWeight="700">{s.pct}%</text>
                 </>)
               })() : (<>
-                <text x={lx} y={ly - 3 + yOffset} textAnchor={anchor} fontSize="8" fill="#0B1F33" fontWeight="600">{s.title}</text>
-                <text x={lx} y={ly + 7 + yOffset} textAnchor={anchor} fontSize="8" fill={color} fontWeight="700">{s.pct}%</text>
+                <text x={lx} y={ly - 3 + yOffset} textAnchor={anchor} fontSize="10" fill="#0B1F33" fontWeight="600">{s.title}</text>
+                <text x={lx} y={ly + 7 + yOffset} textAnchor={anchor} fontSize="10" fill={color} fontWeight="700">{s.pct}%</text>
               </>)}
             </g>
           )
