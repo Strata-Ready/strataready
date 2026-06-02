@@ -4,7 +4,8 @@ dotenv.config({ path: '.env.local' })
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
-  process.env.SUPABASE_SERVICE_ROLE_KEY
+  process.env.SUPABASE_SERVICE_ROLE_KEY,
+  { auth: { autoRefreshToken: false, persistSession: false } }
 )
 
 const USER_ID = 'af418069-7860-4a5a-9862-9a925e77bc1a'
@@ -32,6 +33,19 @@ async function runExam(examNum, correctPct) {
     }
   }
 
+  // Top up to exactly 100 if needed
+  if (allQuestions.length < 100) {
+    const { data: extras } = await supabase
+      .from('questions')
+      .select('id, section_id, correct_answer')
+      .eq('is_active', true)
+      .not('id', 'in', `(${allQuestions.map(q => q.id).join(',')})`)
+      .limit(100 - allQuestions.length)
+    if (extras) allQuestions.push(...extras)
+  }
+
+  const finalQuestions = allQuestions.slice(0, 100).sort(() => Math.random() - 0.5)
+
   const startedAt = new Date(Date.now() - Math.random() * 5 * 24 * 60 * 60 * 1000)
   const completedAt = new Date(startedAt.getTime() + (90 + Math.random() * 60) * 60 * 1000)
 
@@ -40,11 +54,11 @@ async function runExam(examNum, correctPct) {
     started_at: startedAt.toISOString(),
     completed_at: completedAt.toISOString(),
     status: 'completed',
-    total_questions: allQuestions.length,
+    total_questions: finalQuestions.length,
   }).select().single()
 
   const options = ['A', 'B', 'C', 'D']
-  const answerRows = allQuestions.map(q => {
+  const answerRows = finalQuestions.map(q => {
     const correct = Math.random() < correctPct
     const selected = correct ? q.correct_answer : options.filter(o => o !== q.correct_answer)[Math.floor(Math.random() * 3)]
     return {

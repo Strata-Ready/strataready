@@ -30,11 +30,13 @@ function SignupForm() {
   const [plan, setPlan] = useState<'per_exam' | 'unlimited'>('per_exam')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const [acceptedTerms, setAcceptedTerms] = useState(false)
 
   async function handleSubmit() {
     if (!stripe || !elements) return
     if (!name || !email || !password) { setError('Please fill in all fields.'); return }
     if (password.length < 8) { setError('Password must be at least 8 characters.'); return }
+    if (!acceptedTerms) { setError('Please accept the Terms of Use to continue.'); return }
 
     setLoading(true)
     setError('')
@@ -153,6 +155,22 @@ function SignupForm() {
             </p>
           </div>
 
+          <div style={{ display: 'flex', alignItems: 'flex-start', gap: 10 }}>
+            <input
+              type="checkbox"
+              id="terms"
+              checked={acceptedTerms}
+              onChange={e => setAcceptedTerms(e.target.checked)}
+              style={{ marginTop: 2, cursor: 'pointer', flexShrink: 0 }}
+            />
+            <label htmlFor="terms" style={{ fontSize: 12, color: '#64748B', lineHeight: 1.6, cursor: 'pointer' }}>
+              I have read and agree to the{' '}
+              <a href="/terms" target="_blank" rel="noopener noreferrer" style={{ color: '#0B1F33', fontWeight: 600 }}>Terms of Use</a>
+              {' '}and{' '}
+              <a href="/privacy" target="_blank" rel="noopener noreferrer" style={{ color: '#0B1F33', fontWeight: 600 }}>Privacy Policy</a>
+            </label>
+          </div>
+
           {error && (
             <div style={{ backgroundColor: '#FEE2E2', border: '1px solid #FECACA', borderRadius: 8, padding: '10px 14px' }}>
               <p style={{ fontSize: 13, color: '#991B1B' }}>{error}</p>
@@ -164,11 +182,7 @@ function SignupForm() {
             {loading ? 'Processing...' : `Create account & pay ${plan === 'per_exam' ? '$9.99' : '$49.99'}`}
           </button>
 
-          <p style={{ fontSize: 12, color: '#94A3B8', textAlign: 'center', lineHeight: 1.6 }}>
-            By creating an account you agree to our{' '}
-            <Link href="/terms" style={{ color: '#64748B' }}>Terms</Link> and{' '}
-            <Link href="/privacy" style={{ color: '#64748B' }}>Privacy Policy</Link>.
-          </p>
+
 
         </div>
       </div>
