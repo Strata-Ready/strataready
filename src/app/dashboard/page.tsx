@@ -42,7 +42,29 @@ function formatDate(d: string) {
   return new Date(d).toLocaleDateString('en-CA', { month: 'short', day: 'numeric', year: 'numeric' })
 }
 
-function SkillsMap({ sections }: { sections: SectionPerf[] }) {
+const SECTION_LEGISLATION: Record<number, { label: string; url: string }[]> = {
+  1:  [{ label: 'Real Estate Services Act', url: 'https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/04042_01' }, { label: 'BCFSA Licensing', url: 'https://www.bcfsa.ca/industry-resources/real-estate-professional-resources/licensing' }],
+  2:  [{ label: 'RESA — Professional Conduct', url: 'https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/04042_01' }, { label: 'BCFSA Code of Ethics', url: 'https://www.bcfsa.ca/industry-resources/real-estate-professional-resources/rules-and-guidelines' }],
+  3:  [{ label: 'Strata Property Act', url: 'https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/98043_01' }, { label: 'Land Title Act', url: 'https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/96250_00' }],
+  4:  [{ label: 'Real Estate Services Act', url: 'https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/04042_01' }, { label: 'Real Estate Services Rules', url: 'https://www.bcfsa.ca/industry-resources/real-estate-professional-resources/rules-and-guidelines' }],
+  5:  [{ label: 'Residential Tenancy Act', url: 'https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/02078_01' }, { label: 'RTB Policy Guidelines', url: 'https://www2.gov.bc.ca/gov/content/housing-tenancy/residential-tenancies/solving-problems/dispute-resolution/legislation-policy' }],
+  6:  [{ label: 'Strata Property Act', url: 'https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/98043_01' }],
+  7:  [{ label: 'Strata Property Act', url: 'https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/98043_01' }, { label: 'Real Estate Services Act', url: 'https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/04042_01' }],
+  8:  [{ label: 'Strata Property Act', url: 'https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/98043_01' }],
+  9:  [{ label: 'Strata Property Act — Special Levies', url: 'https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/98043_01' }],
+  10: [{ label: 'Strata Property Act — Definitions', url: 'https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/98043_01' }, { label: 'Strata Property Regulation', url: 'https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/43_2000' }],
+  11: [{ label: 'Strata Property Act — Sections', url: 'https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/98043_01' }],
+  12: [{ label: 'Strata Property Act — Meetings', url: 'https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/98043_01' }, { label: 'BC Strata Meetings Guide', url: 'https://www2.gov.bc.ca/gov/content/housing-tenancy/strata-housing/operating-a-strata/strata-meetings' }],
+  13: [{ label: 'Personal Information Protection Act (PIPA)', url: 'https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/03063_01' }, { label: 'OIPC Privacy Guidelines', url: 'https://www.oipc.bc.ca/guidance-documents/1891' }],
+  14: [{ label: 'Strata Property Act', url: 'https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/98043_01' }],
+  15: [{ label: 'Strata Property Act', url: 'https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/98043_01' }],
+  16: [{ label: 'Strata Property Act — Bylaws', url: 'https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/98043_01' }, { label: 'Standard Bylaws', url: 'https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/98043_01' }],
+  17: [{ label: 'Strata Property Act', url: 'https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/98043_01' }],
+  18: [{ label: 'Strata Property Act — Finance', url: 'https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/98043_01' }, { label: 'Strata Property Regulation', url: 'https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/43_2000' }],
+  19: [{ label: 'Strata Property Act s.99 — Strata Fees', url: 'https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/98043_01' }, { label: 'Strata Property Regulation', url: 'https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/43_2000' }],
+  20: [{ label: 'Strata Property Act — CRF', url: 'https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/98043_01' }, { label: 'Strata Property Regulation', url: 'https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/43_2000' }],
+  21: [{ label: 'Real Estate Services Act', url: 'https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/04042_01' }, { label: 'CHOA Resources', url: 'https://choa.bc.ca/resources/strata-property-act/' }],
+}
   if (sections.length === 0) return null
 
   const size = 420
@@ -320,17 +342,27 @@ export default function DashboardPage() {
                       <h2 style={{ fontSize: 14, fontWeight: 700, color: '#0B1F33' }}>Focus areas</h2>
                       <span style={{ fontSize: 11, color: '#94A3B8', marginLeft: 'auto' }}>below 70%</span>
                     </div>
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
                       {weakSections.map(s => (
                         <div key={s.id}>
                           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 4 }}>
                             <span style={{ fontSize: 13, color: '#2D3748', fontWeight: 500 }}>{s.title}</span>
                             <span style={{ fontSize: 12, fontWeight: 700, color: s.pct < 50 ? '#DC2626' : '#D97706' }}>{s.pct}%</span>
                           </div>
-                          <div style={{ height: 5, backgroundColor: '#F1F5F9', borderRadius: 3 }}>
+                          <div style={{ height: 5, backgroundColor: '#F1F5F9', borderRadius: 3, marginBottom: 6 }}>
                             <div style={{ height: 5, borderRadius: 3, width: `${s.pct}%`, backgroundColor: s.pct < 50 ? '#DC2626' : '#D97706' }} />
                           </div>
-                          <p style={{ fontSize: 11, color: '#94A3B8', marginTop: 3 }}>{s.correct}/{s.total} correct · Review this section before your next exam</p>
+                          <p style={{ fontSize: 11, color: '#94A3B8', marginBottom: 4 }}>{s.correct}/{s.total} correct</p>
+                          {SECTION_LEGISLATION[s.id] && (
+                            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+                              {SECTION_LEGISLATION[s.id].map(leg => (
+                                <a key={leg.url} href={leg.url} target="_blank" rel="noopener noreferrer"
+                                  style={{ fontSize: 11, color: '#0B1F33', backgroundColor: '#F0F4F8', padding: '2px 8px', borderRadius: 4, textDecoration: 'none', fontWeight: 500, border: '1px solid #E2E8F0' }}>
+                                  {leg.label} ↗
+                                </a>
+                              ))}
+                            </div>
+                          )}
                         </div>
                       ))}
                     </div>
