@@ -1,4 +1,11 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
+
+export const metadata: Metadata = {
+  title: 'Terms of Use',
+  description: 'StrataReady terms of use. Read our policies on payments, refunds, and exam results.',
+  alternates: { canonical: '/terms' },
+}
 
 export default function TermsPage() {
   return (
