@@ -42,62 +42,102 @@ function formatDate(d: string) {
   return new Date(d).toLocaleDateString('en-CA', { month: 'short', day: 'numeric', year: 'numeric' })
 }
 
-function RadarChart({ sections }: { sections: SectionPerf[] }) {
+function SkillsMap({ sections }: { sections: SectionPerf[] }) {
   if (sections.length === 0) return null
-  const size = 280
+
+  const size = 420
   const cx = size / 2
   const cy = size / 2
-  const r = 110
+  const outerR = 160
+  const innerR = 48
   const n = sections.length
+  const gap = 0.02 // gap between segments in radians
 
-  const points = sections.map((s, i) => {
-    const angle = (i / n) * 2 * Math.PI - Math.PI / 2
-    const pct = s.pct / 100
-    return {
-      x: cx + r * pct * Math.cos(angle),
-      y: cy + r * pct * Math.sin(angle),
-      gx: cx + r * Math.cos(angle),
-      gy: cy + r * Math.sin(angle),
-      lx: cx + (r + 20) * Math.cos(angle),
-      ly: cy + (r + 20) * Math.sin(angle),
-      section: s,
-    }
+  const segments = sections.map((s, i) => {
+    const startAngle = (i / n) * 2 * Math.PI - Math.PI / 2 + gap / 2
+    const endAngle = ((i + 1) / n) * 2 * Math.PI - Math.PI / 2 - gap / 2
+    const midAngle = (startAngle + endAngle) / 2
+    const fillR = innerR + (outerR - innerR) * (s.pct / 100)
+    const labelR = outerR + 22
+
+    const color = s.pct >= 70 ? '#16A34A' : s.pct >= 50 ? '#D97706' : '#DC2626'
+    const bgColor = s.pct >= 70 ? '#DCFCE7' : s.pct >= 50 ? '#FEF3C7' : '#FEE2E2'
+
+    // Outer arc path (background)
+    const bgX1 = cx + outerR * Math.cos(startAngle)
+    const bgY1 = cy + outerR * Math.sin(startAngle)
+    const bgX2 = cx + outerR * Math.cos(endAngle)
+    const bgY2 = cy + outerR * Math.sin(endAngle)
+    const bgI1 = cx + innerR * Math.cos(startAngle)
+    const bgI2 = cy + innerR * Math.sin(startAngle)
+    const bgI3 = cx + innerR * Math.cos(endAngle)
+    const bgI4 = cy + innerR * Math.sin(endAngle)
+    const large = endAngle - startAngle > Math.PI ? 1 : 0
+
+    const bgPath = `M ${bgI1} ${bgI2} L ${bgX1} ${bgY1} A ${outerR} ${outerR} 0 ${large} 1 ${bgX2} ${bgY2} L ${bgI3} ${bgI4} A ${innerR} ${innerR} 0 ${large} 0 ${bgI1} ${bgI2} Z`
+
+    // Fill arc path (data)
+    const fX1 = cx + fillR * Math.cos(startAngle)
+    const fY1 = cy + fillR * Math.sin(startAngle)
+    const fX2 = cx + fillR * Math.cos(endAngle)
+    const fY2 = cy + fillR * Math.sin(endAngle)
+    const fillPath = `M ${bgI1} ${bgI2} L ${fX1} ${fY1} A ${fillR} ${fillR} 0 ${large} 1 ${fX2} ${fY2} L ${bgI3} ${bgI4} A ${innerR} ${innerR} 0 ${large} 0 ${bgI1} ${bgI2} Z`
+
+    // Label position
+    const lx = cx + labelR * Math.cos(midAngle)
+    const ly = cy + labelR * Math.sin(midAngle)
+
+    // Short title (first 2 words max)
+    const words = s.title.split(' ')
+    const shortTitle = words.length > 3 ? words.slice(0, 2).join(' ') + '…' : s.title
+
+    return { s, bgPath, fillPath, color, bgColor, lx, ly, midAngle, shortTitle }
   })
 
-  const gridLevels = [0.25, 0.5, 0.75, 1.0]
-
-  const gridPolygon = (level: number) =>
-    sections.map((_, i) => {
-      const angle = (i / n) * 2 * Math.PI - Math.PI / 2
-      return `${cx + r * level * Math.cos(angle)},${cy + r * level * Math.sin(angle)}`
-    }).join(' ')
-
-  const dataPolygon = points.map(p => `${p.x},${p.y}`).join(' ')
-
   return (
-    <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
-      {/* Grid */}
-      {gridLevels.map(level => (
-        <polygon key={level} points={gridPolygon(level)}
-          fill="none" stroke="#E2E8F0" strokeWidth="1" />
-      ))}
-      {/* Axes */}
-      {points.map((p, i) => (
-        <line key={i} x1={cx} y1={cy} x2={p.gx} y2={p.gy} stroke="#E2E8F0" strokeWidth="1" />
-      ))}
-      {/* Pass mark ring (70%) */}
-      <polygon points={gridPolygon(0.7)} fill="none" stroke="#B08D57" strokeWidth="1.5" strokeDasharray="4 3" opacity="0.5" />
-      {/* Data */}
-      <polygon points={dataPolygon}
-        fill="rgba(11,31,51,0.08)" stroke="#0B1F33" strokeWidth="2" />
-      {points.map((p, i) => (
-        <circle key={i} cx={p.x} cy={p.y} r="4"
-          fill={p.section.pct >= 70 ? '#16A34A' : p.section.pct >= 50 ? '#D97706' : '#DC2626'}
-          stroke="white" strokeWidth="1.5" />
-      ))}
-      {/* 70% label */}
-      <text x={cx + r * 0.7 + 4} y={cy - 4} fontSize="9" fill="#B08D57" opacity="0.7">70%</text>
-    </svg>
+    <div style={{ position: 'relative', width: size, height: size }}>
+      <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
+        {segments.map(({ s, bgPath, fillPath, color, bgColor }) => (
+          <g key={s.id}>
+            <path d={bgPath} fill={bgColor} opacity="0.4" />
+            <path d={fillPath} fill={color} opacity="0.85" />
+          </g>
+        ))}
+        {/* Center */}
+        <circle cx={cx} cy={cy} r={innerR - 2} fill="white" />
+        <text x={cx} y={cy - 6} textAnchor="middle" fontSize="11" fill="#94A3B8" fontWeight="500">avg</text>
+        <text x={cx} y={cy + 14} textAnchor="middle" fontSize="20" fill="#0B1F33" fontWeight="800">
+          {sections.length > 0 ? Math.round(sections.reduce((s, v) => s + v.pct, 0) / sections.length) : 0}%
+        </text>
+
+        {/* Labels */}
+        {segments.map(({ s, lx, ly, midAngle, shortTitle, color }) => {
+          const anchor = Math.cos(midAngle) > 0.1 ? 'start' : Math.cos(midAngle) < -0.1 ? 'end' : 'middle'
+          return (
+            <g key={`label-${s.id}`}>
+              <text
+                x={lx} y={ly - 5}
+                textAnchor={anchor}
+                fontSize="9.5"
+                fill="#0B1F33"
+                fontWeight="600"
+              >
+                {shortTitle}
+              </text>
+              <text
+                x={lx} y={ly + 8}
+                textAnchor={anchor}
+                fontSize="9"
+                fill={color}
+                fontWeight="700"
+              >
+                {s.pct}%
+              </text>
+            </g>
+          )
+        })}
+      </svg>
+    </div>
   )
 }
 
@@ -256,7 +296,7 @@ export default function DashboardPage() {
             </div>
 
             {/* Main content grid */}
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.6fr', gap: 24, marginBottom: 24 }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: 24, marginBottom: 24 }}>
 
               {/* Skills map */}
               <div style={{ backgroundColor: 'white', borderRadius: 16, border: '1px solid #E2E8F0', padding: '24px' }}>
@@ -265,7 +305,7 @@ export default function DashboardPage() {
                   <p style={{ fontSize: 12, color: '#94A3B8' }}>Performance across all exam sections. Dashed line = 70% pass mark.</p>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'center' }}>
-                  <RadarChart sections={sectionPerf} />
+                  <SkillsMap sections={sectionPerf} />
                 </div>
               </div>
 
