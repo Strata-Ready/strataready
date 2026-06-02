@@ -69,11 +69,12 @@ function formatDate(d: string) {
 function SkillsMap({ sections }: { sections: SectionPerf[] }) {
   if (sections.length === 0) return null
 
-  const size = 680
+  const size = 560
   const cx = size / 2
   const cy = size / 2
-  const outerR = 240
-  const innerR = 72
+  const outerR = 180
+  const innerR = 64
+  const pad = 100 // padding for labels
   const n = sections.length
   const gap = 0.02
 
@@ -82,7 +83,7 @@ function SkillsMap({ sections }: { sections: SectionPerf[] }) {
     const endAngle = ((i + 1) / n) * 2 * Math.PI - Math.PI / 2 - gap / 2
     const midAngle = (startAngle + endAngle) / 2
     const fillR = innerR + (outerR - innerR) * (s.pct / 100)
-    const labelR = outerR + 38
+    const labelR = outerR + 28
 
     const color = s.pct >= 70 ? '#16A34A' : s.pct >= 50 ? '#D97706' : '#DC2626'
     const bgColor = s.pct >= 70 ? '#DCFCE7' : s.pct >= 50 ? '#FEF3C7' : '#FEE2E2'
@@ -117,7 +118,7 @@ function SkillsMap({ sections }: { sections: SectionPerf[] }) {
 
   return (
     <div style={{ width: '100%' }}>
-      <svg width="100%" viewBox={`0 0 ${size} ${size}`} style={{ display: 'block' }}>
+      <svg width="100%" viewBox={`${-pad} ${-pad} ${size + pad * 2} ${size + pad * 2}`} style={{ display: 'block' }}>
         {segments.map(({ s, bgPath, fillPath, color, bgColor }) => (
           <g key={s.id}>
             <path d={bgPath} fill={bgColor} opacity="0.4" />
