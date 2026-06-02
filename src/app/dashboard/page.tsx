@@ -69,12 +69,12 @@ function formatDate(d: string) {
 function SkillsMap({ sections }: { sections: SectionPerf[] }) {
   if (sections.length === 0) return null
 
-  const size = 420
+  const size = 340
   const cx = size / 2
   const cy = size / 2
-  const outerR = 140
-  const innerR = 50
-  const pad = 80
+  const outerR = 120
+  const innerR = 40
+  const pad = 60
   const n = sections.length
   const gap = 0.02
 
@@ -83,7 +83,7 @@ function SkillsMap({ sections }: { sections: SectionPerf[] }) {
     const endAngle = ((i + 1) / n) * 2 * Math.PI - Math.PI / 2 - gap / 2
     const midAngle = (startAngle + endAngle) / 2
     const fillR = innerR + (outerR - innerR) * (s.pct / 100)
-    const labelR = outerR + 22
+    const labelR = outerR + 16
 
     const color = s.pct >= 70 ? '#16A34A' : s.pct >= 50 ? '#D97706' : '#DC2626'
     const bgColor = s.pct >= 70 ? '#DCFCE7' : s.pct >= 50 ? '#FEF3C7' : '#FEE2E2'
@@ -126,14 +126,14 @@ function SkillsMap({ sections }: { sections: SectionPerf[] }) {
           </g>
         ))}
         <circle cx={cx} cy={cy} r={innerR - 2} fill="white" />
-        <text x={cx} y={cy - 8} textAnchor="middle" fontSize="13" fill="#94A3B8" fontWeight="500">avg</text>
-        <text x={cx} y={cy + 18} textAnchor="middle" fontSize="26" fill="#0B1F33" fontWeight="800">{avgPct}%</text>
+        <text x={cx} y={cy - 5} textAnchor="middle" fontSize="9" fill="#94A3B8" fontWeight="500">avg</text>
+        <text x={cx} y={cy + 12} textAnchor="middle" fontSize="16" fill="#0B1F33" fontWeight="800">{avgPct}%</text>
         {segments.map(({ s, lx, ly, midAngle, shortTitle, color }) => {
           const anchor = Math.cos(midAngle) > 0.1 ? 'start' : Math.cos(midAngle) < -0.1 ? 'end' : 'middle'
           return (
             <g key={`label-${s.id}`}>
-              <text x={lx} y={ly - 5} textAnchor={anchor} fontSize="11" fill="#0B1F33" fontWeight="600">{shortTitle}</text>
-              <text x={lx} y={ly + 10} textAnchor={anchor} fontSize="11" fill={color} fontWeight="700">{s.pct}%</text>
+              <text x={lx} y={ly - 4} textAnchor={anchor} fontSize="8" fill="#0B1F33" fontWeight="600">{shortTitle}</text>
+              <text x={lx} y={ly + 8} textAnchor={anchor} fontSize="8" fill={color} fontWeight="700">{s.pct}%</text>
             </g>
           )
         })}
