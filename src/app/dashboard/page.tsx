@@ -106,7 +106,7 @@ function SkillsMap({ sections }: { sections: SectionPerf[] }) {
 
     const lx = cx + labelR * Math.cos(midAngle)
     const ly = cy + labelR * Math.sin(midAngle)
-    const anchor = Math.cos(midAngle) > 0.15 ? 'start' : Math.cos(midAngle) < -0.15 ? 'end' : 'middle'
+    const anchor: 'start' | 'end' | 'middle' = Math.cos(midAngle) > 0.15 ? 'start' : Math.cos(midAngle) < -0.15 ? 'end' : 'middle'
 
     return { s, bgPath, fillPath, color, bgColor, lx, ly, midAngle, anchor }
   })
