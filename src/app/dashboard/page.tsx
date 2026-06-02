@@ -117,50 +117,15 @@ export default function DashboardPage() {
       const { data: { user: authUser } } = await supabase.auth.getUser()
       if (!authUser) { router.push('/login'); return }
 
-      const [profileRes, attemptsRes, sectionsRes] = await Promise.all([
+      const [profileRes, attemptsRes, perfRes] = await Promise.all([
         supabase.from('users').select('id, email, full_name, plan').eq('id', authUser.id).single(),
         supabase.from('exam_attempts').select('*').eq('user_id', authUser.id).order('started_at', { ascending: false }),
-        supabase.from('sections').select('id, number, title').order('number'),
+        fetch('/api/section-perf').then(r => r.json()),
       ])
-
-      const completedAttemptIds = (attemptsRes.data || [])
-        .filter(a => a.status === 'completed')
-        .map(a => a.id)
-
-      let perfMap: Record<number, { title: string; correct: number; total: number }> = {}
-      for (const s of sectionsRes.data || []) {
-        perfMap[s.id] = { title: s.title, correct: 0, total: 0 }
-      }
-
-      if (completedAttemptIds.length > 0) {
-        const { data: answers } = await supabase
-          .from('attempt_answers')
-          .select('is_correct, questions(section_id)')
-          .in('attempt_id', completedAttemptIds)
-
-        for (const a of answers || []) {
-          const sid = (a.questions as any)?.section_id
-          if (sid && perfMap[sid]) {
-            perfMap[sid].total++
-            if (a.is_correct) perfMap[sid].correct++
-          }
-        }
-      }
-
-      const perf: SectionPerf[] = Object.entries(perfMap)
-        .filter(([, v]) => v.total > 0)
-        .map(([id, v]) => ({
-          id: parseInt(id),
-          title: v.title,
-          correct: v.correct,
-          total: v.total,
-          pct: Math.round((v.correct / v.total) * 100),
-        }))
-        .sort((a, b) => a.id - b.id)
 
       setProfile(profileRes.data)
       setAttempts(attemptsRes.data || [])
-      setSectionPerf(perf)
+      setSectionPerf(perfRes.sectionPerf || [])
       setLoading(false)
     }
     load()
