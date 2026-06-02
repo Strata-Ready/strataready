@@ -183,13 +183,20 @@ export default function DashboardPage() {
   async function handlePayForExam(plan: 'per_exam' | 'unlimited') {
     if (!profile) return
     setPaying(true)
-    const res = await fetch('/api/checkout', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ plan, userId: profile.id, email: profile.email }),
-    })
-    const { url } = await res.json()
-    window.location.href = url
+    try {
+      const res = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ plan, userId: profile.id, email: profile.email }),
+      })
+      const data = await res.json()
+      if (data.error) { alert(data.error); setPaying(false); return }
+      if (!data.url) { alert('Could not create checkout session. Please try again.'); setPaying(false); return }
+      window.location.href = data.url
+    } catch (err: any) {
+      alert(err.message || 'Something went wrong.')
+      setPaying(false)
+    }
   }
 
   async function handleSignOut() {
