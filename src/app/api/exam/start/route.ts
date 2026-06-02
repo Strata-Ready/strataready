@@ -43,6 +43,7 @@ export async function POST() {
     }
 
     const allQuestions: any[] = []
+    const usedIds = new Set<string>()
 
     for (const section of sections) {
       const count = SECTION_WEIGHTS[section.number] || 2
@@ -55,12 +56,23 @@ export async function POST() {
 
       if (questions && questions.length > 0) {
         const shuffled = questions.sort(() => Math.random() - 0.5).slice(0, count)
-        allQuestions.push(...shuffled)
+        shuffled.forEach(q => { allQuestions.push(q); usedIds.add(q.id) })
       }
     }
 
-    // Shuffle the full question list
-    const shuffledAll = allQuestions.sort(() => Math.random() - 0.5)
+    // Top up to exactly 100 if needed
+    if (allQuestions.length < 100) {
+      const { data: extras } = await adminClient
+        .from('questions')
+        .select('id, section_id, question_text, option_a, option_b, option_c, option_d, correct_answer, explanation, act_reference, regulation_ref, difficulty')
+        .eq('is_active', true)
+        .not('id', 'in', `(${Array.from(usedIds).join(',')})`)
+        .limit(100 - allQuestions.length)
+      if (extras) extras.forEach(q => allQuestions.push(q))
+    }
+
+    // Shuffle and take exactly 100
+    const final = allQuestions.sort(() => Math.random() - 0.5).slice(0, 100)
 
     const { data: attempt, error: attemptError } = await adminClient
       .from('exam_attempts')
@@ -68,7 +80,7 @@ export async function POST() {
         user_id: user.id,
         started_at: new Date().toISOString(),
         status: 'in_progress',
-        total_questions: shuffledAll.length,
+        total_questions: final.length,
       })
       .select()
       .single()
@@ -79,7 +91,7 @@ export async function POST() {
 
     return Response.json({
       attemptId: attempt.id,
-      questions: shuffledAll,
+      questions: final,
     })
 
   } catch (err: any) {
