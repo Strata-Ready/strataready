@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
+import Logo from '@/components/logo'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 
@@ -111,7 +112,7 @@ function SkillsMap({ sections }: { sections: SectionPerf[] }) {
     return { s, bgPath, fillPath, color, bgColor, lx, ly, midAngle, anchor }
   })
 
-  const avgPct = sections.length > 0 ? Math.round(sections.reduce((sum, s) => sum + s.pct, 0) / sections.length) : 0
+  const avgPct = Math.round(sections.reduce((sum, s) => sum + s.pct, 0) / sections.length)
 
   return (
     <div style={{ display: 'flex', justifyContent: 'center', padding: '8px 0' }}>
@@ -130,21 +131,8 @@ function SkillsMap({ sections }: { sections: SectionPerf[] }) {
           const yOffset = (i === 0 || i === n - 1) ? (i === 0 ? -8 : 8) : 0
           return (
             <g key={`label-${s.id}`}>
-              {s.title.includes(' & ') ? (() => {
-                const [before, after] = s.title.split(' & ')
-                return (
-                  <>
-                    <text x={lx} y={ly - 7 + yOffset} textAnchor={anchor} fontSize="8" fill="#0B1F33" fontWeight="600">{before} &amp;</text>
-                    <text x={lx} y={ly + 3 + yOffset} textAnchor={anchor} fontSize="8" fill="#0B1F33" fontWeight="600">{after}</text>
-                    <text x={lx} y={ly + 13 + yOffset} textAnchor={anchor} fontSize="8" fill={color} fontWeight="700">{s.pct}%</text>
-                  </>
-                )
-              })() : (
-                <>
-                  <text x={lx} y={ly - 3 + yOffset} textAnchor={anchor} fontSize="8" fill="#0B1F33" fontWeight="600">{s.title}</text>
-                  <text x={lx} y={ly + 7 + yOffset} textAnchor={anchor} fontSize="8" fill={color} fontWeight="700">{s.pct}%</text>
-                </>
-              )}
+              <text x={lx} y={ly - 3 + yOffset} textAnchor={anchor} fontSize="8" fill="#0B1F33" fontWeight="600">{s.title}</text>
+              <text x={lx} y={ly + 7 + yOffset} textAnchor={anchor} fontSize="8" fill={color} fontWeight="700">{s.pct}%</text>
             </g>
           )
         })}
@@ -342,7 +330,7 @@ export default function DashboardPage() {
 
       <nav style={{ backgroundColor: '#0B1F33', borderBottom: '1px solid rgba(255,255,255,0.06)', padding: '14px 32px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-          <img src="/favicon.png" alt="StrataReady" style={{ width: 28, height: 28, borderRadius: 6 }} />
+          <Logo />
           <span style={{ color: '#F7F9FC', fontSize: 15, fontWeight: 600 }}>StrataReady</span>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>

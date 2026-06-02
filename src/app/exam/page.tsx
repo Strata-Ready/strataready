@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
+import Logo from '@/components/logo'
 import { createClient } from '@/lib/supabase/client'
 
 type Question = {
@@ -126,7 +127,7 @@ export default function ExamPage() {
       {/* Header */}
       <div style={{ backgroundColor: '#0B1F33', borderBottom: '1px solid rgba(255,255,255,0.08)', padding: '14px 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexShrink: 0 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          <img src="/favicon.png" alt="StrataReady" style={{ width: 28, height: 28, borderRadius: 6 }} />
+          <Logo />
           <span style={{ color: '#F7F9FC', fontSize: 15, fontWeight: 600 }}>StrataReady</span>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
@@ -157,7 +158,7 @@ export default function ExamPage() {
           <div style={{ fontSize: 18, fontWeight: 600, color: '#0B1F33', lineHeight: 1.6, marginBottom: 28, letterSpacing: '-0.2px' }}>
             {(() => {
               // Detect inline lettered sub-list in question text: "... A. foo B. bar C. baz ..."
-              const subListMatch = q.question_text.match(/^(.*?)\s+(A\.\s.+)$/s)
+              const subListMatch = q.question_text.match(/^([\s\S]*?)\s+(A\.\s[\s\S]+)$/)
               if (subListMatch) {
                 const stem = subListMatch[1].trim()
                 const listPart = subListMatch[2]

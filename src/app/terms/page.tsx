@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import Logo from '@/components/logo'
 
 export const metadata: Metadata = {
   title: 'Terms of Use',
@@ -12,7 +13,7 @@ export default function TermsPage() {
     <div style={{ minHeight: '100vh', backgroundColor: '#F7F9FC' }}>
       <nav style={{ backgroundColor: '#0B1F33', padding: '16px 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: 8, textDecoration: 'none' }}>
-          <img src="/favicon.png" alt="StrataReady" style={{ width: 28, height: 28, borderRadius: 6 }} />
+          <Logo />
           <span style={{ color: '#F7F9FC', fontSize: 15, fontWeight: 600 }}>StrataReady</span>
         </Link>
       </nav>
