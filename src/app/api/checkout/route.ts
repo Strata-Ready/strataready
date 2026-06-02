@@ -15,7 +15,7 @@ export async function POST(request: Request) {
       ? process.env.STRIPE_PRICE_FULL_PREP!
       : process.env.STRIPE_PRICE_PER_EXAM!
 
-    // Create or retrieve Stripe customer
+    // Get or create Stripe customer
     const { data: user } = await adminClient
       .from('users')
       .select('stripe_customer_id')
@@ -25,7 +25,10 @@ export async function POST(request: Request) {
     let customerId = user?.stripe_customer_id
 
     if (!customerId) {
-      const customer = await stripe.customers.create({ email, metadata: { supabase_id: userId } })
+      const customer = await stripe.customers.create({
+        email,
+        metadata: { supabase_id: userId },
+      })
       customerId = customer.id
       await adminClient.from('users').update({ stripe_customer_id: customerId }).eq('id', userId)
     }
@@ -36,7 +39,7 @@ export async function POST(request: Request) {
       line_items: [{ price: priceId, quantity: 1 }],
       mode: 'payment',
       success_url: `${process.env.NEXT_PUBLIC_SITE_URL}/dashboard?payment=success`,
-      cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL}/signup`,
+      cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL}/dashboard`,
       metadata: { userId, plan },
     })
 

@@ -69,12 +69,11 @@ function formatDate(d: string) {
 function SkillsMap({ sections }: { sections: SectionPerf[] }) {
   if (sections.length === 0) return null
 
-  const size = 340
+  const size = 300
   const cx = size / 2
   const cy = size / 2
-  const outerR = 120
-  const innerR = 40
-  const pad = 60
+  const outerR = 100
+  const innerR = 34
   const n = sections.length
   const gap = 0.02
 
@@ -83,7 +82,7 @@ function SkillsMap({ sections }: { sections: SectionPerf[] }) {
     const endAngle = ((i + 1) / n) * 2 * Math.PI - Math.PI / 2 - gap / 2
     const midAngle = (startAngle + endAngle) / 2
     const fillR = innerR + (outerR - innerR) * (s.pct / 100)
-    const labelR = outerR + 16
+    const labelR = outerR + 14
 
     const color = s.pct >= 70 ? '#16A34A' : s.pct >= 50 ? '#D97706' : '#DC2626'
     const bgColor = s.pct >= 70 ? '#DCFCE7' : s.pct >= 50 ? '#FEF3C7' : '#FEE2E2'
@@ -99,7 +98,6 @@ function SkillsMap({ sections }: { sections: SectionPerf[] }) {
     const bgI4 = cy + innerR * Math.sin(endAngle)
 
     const bgPath = `M ${bgI1} ${bgI2} L ${bgX1} ${bgY1} A ${outerR} ${outerR} 0 ${large} 1 ${bgX2} ${bgY2} L ${bgI3} ${bgI4} A ${innerR} ${innerR} 0 ${large} 0 ${bgI1} ${bgI2} Z`
-
     const fX1 = cx + fillR * Math.cos(startAngle)
     const fY1 = cy + fillR * Math.sin(startAngle)
     const fX2 = cx + fillR * Math.cos(endAngle)
@@ -108,17 +106,16 @@ function SkillsMap({ sections }: { sections: SectionPerf[] }) {
 
     const lx = cx + labelR * Math.cos(midAngle)
     const ly = cy + labelR * Math.sin(midAngle)
-    const words = s.title.split(' ')
-    const shortTitle = words.length > 3 ? words.slice(0, 2).join(' ') + '…' : s.title
+    const anchor = Math.cos(midAngle) > 0.15 ? 'start' : Math.cos(midAngle) < -0.15 ? 'end' : 'middle'
 
-    return { s, bgPath, fillPath, color, bgColor, lx, ly, midAngle, shortTitle }
+    return { s, bgPath, fillPath, color, bgColor, lx, ly, midAngle, anchor }
   })
 
   const avgPct = Math.round(sections.reduce((sum, s) => sum + s.pct, 0) / sections.length)
 
   return (
-    <div style={{ width: '100%' }}>
-      <svg width="100%" viewBox={`${-pad} ${-pad} ${size + pad * 2} ${size + pad * 2}`} style={{ display: 'block' }}>
+    <div style={{ display: 'flex', justifyContent: 'center', padding: '8px 0' }}>
+      <svg width={size} height={size} style={{ overflow: 'visible' }}>
         {segments.map(({ s, bgPath, fillPath, color, bgColor }) => (
           <g key={s.id}>
             <path d={bgPath} fill={bgColor} opacity="0.4" />
@@ -126,17 +123,14 @@ function SkillsMap({ sections }: { sections: SectionPerf[] }) {
           </g>
         ))}
         <circle cx={cx} cy={cy} r={innerR - 2} fill="white" />
-        <text x={cx} y={cy - 5} textAnchor="middle" fontSize="9" fill="#94A3B8" fontWeight="500">avg</text>
-        <text x={cx} y={cy + 12} textAnchor="middle" fontSize="16" fill="#0B1F33" fontWeight="800">{avgPct}%</text>
-        {segments.map(({ s, lx, ly, midAngle, shortTitle, color }) => {
-          const anchor = Math.cos(midAngle) > 0.1 ? 'start' : Math.cos(midAngle) < -0.1 ? 'end' : 'middle'
-          return (
-            <g key={`label-${s.id}`}>
-              <text x={lx} y={ly - 4} textAnchor={anchor} fontSize="8" fill="#0B1F33" fontWeight="600">{shortTitle}</text>
-              <text x={lx} y={ly + 8} textAnchor={anchor} fontSize="8" fill={color} fontWeight="700">{s.pct}%</text>
-            </g>
-          )
-        })}
+        <text x={cx} y={cy - 4} textAnchor="middle" fontSize="8" fill="#94A3B8" fontWeight="500">avg</text>
+        <text x={cx} y={cy + 10} textAnchor="middle" fontSize="14" fill="#0B1F33" fontWeight="800">{avgPct}%</text>
+        {segments.map(({ s, lx, ly, anchor, color }) => (
+          <g key={`label-${s.id}`}>
+            <text x={lx} y={ly - 3} textAnchor={anchor} fontSize="8" fill="#0B1F33" fontWeight="600">{s.title}</text>
+            <text x={lx} y={ly + 7} textAnchor={anchor} fontSize="8" fill={color} fontWeight="700">{s.pct}%</text>
+          </g>
+        ))}
       </svg>
     </div>
   )
@@ -173,20 +167,26 @@ export default function DashboardPage() {
 
   async function handleStartExam() {
     if (!profile) return
-    if (profile.plan === 'per_exam') {
-      const completed = attempts.filter(a => a.status === 'completed')
-      if (completed.length > 0) { setShowPayModal(true); return }
+    if (profile.plan === 'unlimited') {
+      router.push('/exam')
+      return
+    }
+    // per_exam: only block if they have a completed attempt
+    const completed = attempts.filter(a => a.status === 'completed')
+    if (completed.length > 0) {
+      setShowPayModal(true)
+      return
     }
     router.push('/exam')
   }
 
-  async function handlePayForExam(upgrade: boolean) {
+  async function handlePayForExam(plan: 'per_exam' | 'unlimited') {
     if (!profile) return
     setPaying(true)
     const res = await fetch('/api/checkout', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ plan: upgrade ? 'unlimited' : 'per_exam', userId: profile.id, email: profile.email }),
+      body: JSON.stringify({ plan, userId: profile.id, email: profile.email }),
     })
     const { url } = await res.json()
     window.location.href = url
@@ -411,7 +411,7 @@ export default function DashboardPage() {
                   <p style={{ fontSize: 14, fontWeight: 600, color: '#F7F9FC', marginBottom: 2 }}>Upgrade to Full Prep Access</p>
                   <p style={{ fontSize: 13, color: 'rgba(247,249,252,0.5)' }}>Unlimited exams for $49.99 — one-time payment.</p>
                 </div>
-                <button onClick={() => handlePayForExam(true)} style={{ backgroundColor: '#B08D57', color: '#0B1F33', fontSize: 13, fontWeight: 700, padding: '10px 20px', borderRadius: 8, border: 'none', cursor: 'pointer', whiteSpace: 'nowrap' }}>
+                <button onClick={() => handlePayForExam('unlimited')} style={{ backgroundColor: '#B08D57', color: '#0B1F33', fontSize: 13, fontWeight: 700, padding: '10px 20px', borderRadius: 8, border: 'none', cursor: 'pointer', whiteSpace: 'nowrap' }}>
                   Upgrade — $49.99
                 </button>
               </div>
@@ -428,11 +428,11 @@ export default function DashboardPage() {
               You&apos;ve used your exam attempt. Purchase another or upgrade to Full Prep Access for unlimited exams.
             </p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-              <button onClick={() => handlePayForExam(true)} disabled={paying}
+              <button onClick={() => handlePayForExam('unlimited')} disabled={paying}
                 style={{ backgroundColor: '#0B1F33', color: '#F7F9FC', fontSize: 14, fontWeight: 600, padding: '13px', borderRadius: 10, border: 'none', cursor: 'pointer' }}>
                 Full Prep Access — $49.99
               </button>
-              <button onClick={() => handlePayForExam(false)} disabled={paying}
+              <button onClick={() => handlePayForExam('per_exam')} disabled={paying}
                 style={{ backgroundColor: 'white', color: '#0B1F33', fontSize: 14, fontWeight: 500, padding: '13px', borderRadius: 10, border: '1.5px solid #E2E8F0', cursor: 'pointer' }}>
                 Pay $9.99 for one more exam
               </button>
