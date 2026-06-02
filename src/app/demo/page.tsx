@@ -65,7 +65,6 @@ const DEMO_QUESTIONS = [
     act_reference: 'Strata Property Act, s. 99',
   },
 ]
-]
 
 type Answer = 'A' | 'B' | 'C' | 'D'
 type Answers = Record<number, Answer>
