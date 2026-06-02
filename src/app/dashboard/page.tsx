@@ -67,11 +67,11 @@ const SECTION_LEGISLATION: Record<number, { label: string; url: string }[]> = {
 }
   if (sections.length === 0) return null
 
-  const size = 420
+  const size = 560
   const cx = size / 2
   const cy = size / 2
-  const outerR = 160
-  const innerR = 48
+  const outerR = 210
+  const innerR = 64
   const n = sections.length
   const gap = 0.02 // gap between segments in radians
 
@@ -80,7 +80,7 @@ const SECTION_LEGISLATION: Record<number, { label: string; url: string }[]> = {
     const endAngle = ((i + 1) / n) * 2 * Math.PI - Math.PI / 2 - gap / 2
     const midAngle = (startAngle + endAngle) / 2
     const fillR = innerR + (outerR - innerR) * (s.pct / 100)
-    const labelR = outerR + 22
+    const labelR = outerR + 30
 
     const color = s.pct >= 70 ? '#16A34A' : s.pct >= 50 ? '#D97706' : '#DC2626'
     const bgColor = s.pct >= 70 ? '#DCFCE7' : s.pct >= 50 ? '#FEF3C7' : '#FEE2E2'
@@ -127,8 +127,8 @@ const SECTION_LEGISLATION: Record<number, { label: string; url: string }[]> = {
         ))}
         {/* Center */}
         <circle cx={cx} cy={cy} r={innerR - 2} fill="white" />
-        <text x={cx} y={cy - 6} textAnchor="middle" fontSize="11" fill="#94A3B8" fontWeight="500">avg</text>
-        <text x={cx} y={cy + 14} textAnchor="middle" fontSize="20" fill="#0B1F33" fontWeight="800">
+        <text x={cx} y={cy - 8} textAnchor="middle" fontSize="13" fill="#94A3B8" fontWeight="500">avg</text>
+        <text x={cx} y={cy + 18} textAnchor="middle" fontSize="26" fill="#0B1F33" fontWeight="800">
           {sections.length > 0 ? Math.round(sections.reduce((s, v) => s + v.pct, 0) / sections.length) : 0}%
         </text>
 
@@ -140,16 +140,16 @@ const SECTION_LEGISLATION: Record<number, { label: string; url: string }[]> = {
               <text
                 x={lx} y={ly - 5}
                 textAnchor={anchor}
-                fontSize="9.5"
+                fontSize="11"
                 fill="#0B1F33"
                 fontWeight="600"
               >
                 {shortTitle}
               </text>
               <text
-                x={lx} y={ly + 8}
+                x={lx} y={ly + 10}
                 textAnchor={anchor}
-                fontSize="9"
+                fontSize="11"
                 fill={color}
                 fontWeight="700"
               >
@@ -318,7 +318,7 @@ export default function DashboardPage() {
             </div>
 
             {/* Main content grid */}
-            <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: 24, marginBottom: 24 }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 24, marginBottom: 24 }}>
 
               {/* Skills map */}
               <div style={{ backgroundColor: 'white', borderRadius: 16, border: '1px solid #E2E8F0', padding: '24px' }}>
@@ -342,7 +342,7 @@ export default function DashboardPage() {
                       <h2 style={{ fontSize: 14, fontWeight: 700, color: '#0B1F33' }}>Focus areas</h2>
                       <span style={{ fontSize: 11, color: '#94A3B8', marginLeft: 'auto' }}>below 70%</span>
                     </div>
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 16 }}>
                       {weakSections.map(s => (
                         <div key={s.id}>
                           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 4 }}>
