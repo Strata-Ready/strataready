@@ -126,9 +126,7 @@ export default function ExamPage() {
       {/* Header */}
       <div style={{ backgroundColor: '#0B1F33', borderBottom: '1px solid rgba(255,255,255,0.08)', padding: '14px 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexShrink: 0 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          <div style={{ width: 28, height: 28, backgroundColor: '#B08D57', borderRadius: 6, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <span style={{ color: '#0B1F33', fontSize: 11, fontWeight: 700 }}>SR</span>
-          </div>
+          <img src="/favicon.png" alt="StrataReady" style={{ width: 28, height: 28, borderRadius: 6 }} />
           <span style={{ color: '#F7F9FC', fontSize: 15, fontWeight: 600 }}>StrataReady</span>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
@@ -164,6 +162,13 @@ export default function ExamPage() {
           <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 32 }}>
             {options.map(opt => {
               const isSelected = answers[q.id] === opt.key
+              // Detect inline sub-lists: "A. ... B. ... C. ..." pattern
+              const subListPattern = /\b([A-D])\.\s/g
+              const subMatches = opt.text.match(subListPattern)
+              const isSubList = subMatches && subMatches.length >= 2
+              const subItems = isSubList
+                ? opt.text.split(/(?=\b[A-D]\.\s)/).filter(Boolean)
+                : null
               return (
                 <button
                   key={opt.key}
@@ -187,7 +192,15 @@ export default function ExamPage() {
                       : <span style={{ fontSize: 11, fontWeight: 600, color: '#94A3B8' }}>{opt.key}</span>
                     }
                   </div>
-                  <span style={{ fontSize: 14, color: '#2D3748', lineHeight: 1.55 }}>{opt.text}</span>
+                  {isSubList && subItems ? (
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+                      {subItems.map((item, idx) => (
+                        <span key={idx} style={{ fontSize: 14, color: '#2D3748', lineHeight: 1.55 }}>{item.trim()}</span>
+                      ))}
+                    </div>
+                  ) : (
+                    <span style={{ fontSize: 14, color: '#2D3748', lineHeight: 1.55 }}>{opt.text}</span>
+                  )}
                 </button>
               )
             })}

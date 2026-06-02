@@ -111,7 +111,7 @@ function SkillsMap({ sections }: { sections: SectionPerf[] }) {
     return { s, bgPath, fillPath, color, bgColor, lx, ly, midAngle, anchor }
   })
 
-  const avgPct = Math.round(sections.reduce((sum, s) => sum + s.pct, 0) / sections.length)
+  const avgPct = sections.length > 0 ? Math.round(sections.reduce((sum, s) => sum + s.pct, 0) / sections.length) : 0
 
   return (
     <div style={{ display: 'flex', justifyContent: 'center', padding: '8px 0' }}>
@@ -130,8 +130,21 @@ function SkillsMap({ sections }: { sections: SectionPerf[] }) {
           const yOffset = (i === 0 || i === n - 1) ? (i === 0 ? -8 : 8) : 0
           return (
             <g key={`label-${s.id}`}>
-              <text x={lx} y={ly - 3 + yOffset} textAnchor={anchor} fontSize="8" fill="#0B1F33" fontWeight="600">{s.title}</text>
-              <text x={lx} y={ly + 7 + yOffset} textAnchor={anchor} fontSize="8" fill={color} fontWeight="700">{s.pct}%</text>
+              {s.title.includes(' & ') ? (() => {
+                const [before, after] = s.title.split(' & ')
+                return (
+                  <>
+                    <text x={lx} y={ly - 7 + yOffset} textAnchor={anchor} fontSize="8" fill="#0B1F33" fontWeight="600">{before} &amp;</text>
+                    <text x={lx} y={ly + 3 + yOffset} textAnchor={anchor} fontSize="8" fill="#0B1F33" fontWeight="600">{after}</text>
+                    <text x={lx} y={ly + 13 + yOffset} textAnchor={anchor} fontSize="8" fill={color} fontWeight="700">{s.pct}%</text>
+                  </>
+                )
+              })() : (
+                <>
+                  <text x={lx} y={ly - 3 + yOffset} textAnchor={anchor} fontSize="8" fill="#0B1F33" fontWeight="600">{s.title}</text>
+                  <text x={lx} y={ly + 7 + yOffset} textAnchor={anchor} fontSize="8" fill={color} fontWeight="700">{s.pct}%</text>
+                </>
+              )}
             </g>
           )
         })}
@@ -329,9 +342,7 @@ export default function DashboardPage() {
 
       <nav style={{ backgroundColor: '#0B1F33', borderBottom: '1px solid rgba(255,255,255,0.06)', padding: '14px 32px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-          <div style={{ width: 28, height: 28, backgroundColor: '#B08D57', borderRadius: 6, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <span style={{ color: '#0B1F33', fontSize: 11, fontWeight: 700 }}>SR</span>
-          </div>
+          <img src="/favicon.png" alt="StrataReady" style={{ width: 28, height: 28, borderRadius: 6 }} />
           <span style={{ color: '#F7F9FC', fontSize: 15, fontWeight: 600 }}>StrataReady</span>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>

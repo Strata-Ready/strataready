@@ -21,12 +21,7 @@ export default async function Image() {
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 40 }}>
-          <div style={{
-            width: 56, height: 56, backgroundColor: '#B08D57', borderRadius: 12,
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-          }}>
-            <span style={{ color: '#0B1F33', fontSize: 22, fontWeight: 700 }}>SR</span>
-          </div>
+          <img src="https://strataready.ca/favicon.png" alt="StrataReady" style={{ width: 56, height: 56, borderRadius: 12 }} />
           <span style={{ color: '#F7F9FC', fontSize: 28, fontWeight: 600 }}>StrataReady</span>
         </div>
         <div style={{ fontSize: 64, fontWeight: 800, color: '#F7F9FC', lineHeight: 1.1, marginBottom: 24, letterSpacing: '-2px' }}>

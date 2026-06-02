@@ -122,9 +122,7 @@ export default function ResultsPage({ params }: { params: Promise<{ id: string }
     <div style={{ minHeight: '100vh', backgroundColor: '#F7F9FC' }}>
       <nav style={{ backgroundColor: '#0B1F33', borderBottom: '1px solid rgba(255,255,255,0.08)', padding: '14px 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          <div style={{ width: 28, height: 28, backgroundColor: '#B08D57', borderRadius: 6, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <span style={{ color: '#0B1F33', fontSize: 11, fontWeight: 700 }}>SR</span>
-          </div>
+          <img src="/favicon.png" alt="StrataReady" style={{ width: 28, height: 28, borderRadius: 6 }} />
           <span style={{ color: '#F7F9FC', fontSize: 15, fontWeight: 600 }}>StrataReady</span>
         </div>
         <Link href="/dashboard" style={{ fontSize: 13, color: 'rgba(247,249,252,0.6)', textDecoration: 'none' }}>← Dashboard</Link>
