@@ -38,68 +38,48 @@ function SignupForm() {
     setLoading(true)
     setError('')
 
-    let userId: string | null = null
-
     try {
-      // 1. Create Supabase account
-      const supabase = createClient()
-      const { data, error: signupError } = await supabase.auth.signUp({
-        email,
-        password,
-        options: { data: { full_name: name } }
-      })
-      if (signupError) throw new Error(signupError.message)
-      if (!data.user) throw new Error('Account creation failed')
-      userId = data.user.id
-
-      // 2. Create users table record
-      await supabase.from('users').upsert({
-        id: userId,
-        email: email.toLowerCase(),
-        full_name: name,
-        plan: 'per_exam',
-      }, { onConflict: 'id' })
-
-      // 3. Create Stripe payment intent
-      const intentRes = await fetch('/api/payment-intent', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ plan, userId, email }),
-      })
-      const { clientSecret, error: intentError } = await intentRes.json()
-      if (intentError) throw new Error(intentError)
-
-      // 4. Confirm card payment
+      // Step 1: Tokenise card client-side — no charge, nothing created
       const cardElement = elements.getElement(CardElement)
       if (!cardElement) throw new Error('Card element not found')
 
-      const { error: stripeError, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
-        payment_method: {
-          card: cardElement,
-          billing_details: { name, email },
-        },
+      const { error: pmError, paymentMethod } = await stripe.createPaymentMethod({
+        type: 'card',
+        card: cardElement,
+        billing_details: { name, email },
       })
 
-      if (stripeError) throw new Error(stripeError.message)
-      if (paymentIntent?.status !== 'succeeded') throw new Error('Payment failed')
+      if (pmError) throw new Error(pmError.message)
+      if (!paymentMethod) throw new Error('Could not read card details')
 
-      // 5. Update plan
-      await fetch('/api/activate', {
+      // Step 2: Send everything to server
+      // Server charges card, then creates Stripe customer, then creates Supabase account
+      // If payment fails → nothing is created anywhere
+      const res = await fetch('/api/signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ userId, plan }),
+        body: JSON.stringify({
+          name,
+          email,
+          password,
+          plan,
+          paymentMethodId: paymentMethod.id,
+        }),
       })
 
-      // 6. Sign in and redirect
-      await supabase.auth.signInWithPassword({ email, password })
+      const data = await res.json()
+      if (data.error) throw new Error(data.error)
+
+      // Step 3: Sign in and go to dashboard
+      const supabase = createClient()
+      const { error: signInError } = await supabase.auth.signInWithPassword({ email, password })
+      if (signInError) {
+        window.location.href = '/login'
+        return
+      }
       window.location.href = '/dashboard'
 
     } catch (err: any) {
-      // If payment failed, clean up the Supabase account
-      if (userId) {
-        const supabase = createClient()
-        await supabase.auth.signOut()
-      }
       setError(err.message || 'Something went wrong. Please try again.')
       setLoading(false)
     }
@@ -113,7 +93,6 @@ function SignupForm() {
         <p style={{ fontSize: 14, color: '#64748B' }}>Create your account and pay in one step.</p>
       </div>
 
-      {/* Plan selector */}
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 24 }}>
         {[
           { key: 'per_exam' as const, name: 'Per Exam', price: '$9.99', desc: 'One exam attempt' },
@@ -136,7 +115,6 @@ function SignupForm() {
       <div style={{ backgroundColor: 'white', borderRadius: 12, border: '1px solid #E2E8F0', padding: '28px' }}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
 
-          {/* Account fields */}
           <p style={{ fontSize: 12, fontWeight: 600, color: '#94A3B8', letterSpacing: '0.06em', textTransform: 'uppercase' }}>Your account</p>
 
           <div>
@@ -157,15 +135,13 @@ function SignupForm() {
               style={{ width: '100%', border: '1.5px solid #E2E8F0', borderRadius: 8, padding: '10px 14px', fontSize: 14, color: '#0B1F33', outline: 'none', boxSizing: 'border-box' }} />
           </div>
 
-          {/* Divider */}
           <div style={{ borderTop: '1px solid #E2E8F0', paddingTop: 16 }}>
             <p style={{ fontSize: 12, fontWeight: 600, color: '#94A3B8', letterSpacing: '0.06em', textTransform: 'uppercase', marginBottom: 16 }}>Payment</p>
-
             <div style={{ border: '1.5px solid #E2E8F0', borderRadius: 8, padding: '12px 14px', backgroundColor: '#FAFAFA' }}>
               <CardElement options={CARD_STYLE} />
             </div>
             <p style={{ fontSize: 11, color: '#94A3B8', marginTop: 6 }}>
-              Your card is processed securely by Stripe. StrataReady never sees your card details.
+              Processed securely by Stripe. StrataReady never sees your card details.
             </p>
           </div>
 
@@ -206,7 +182,6 @@ export default function SignupPage() {
           Already have an account? Sign in
         </Link>
       </nav>
-
       <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '48px 24px' }}>
         <Elements stripe={stripePromise}>
           <SignupForm />
