@@ -154,21 +154,33 @@ export default function ExamPage() {
           <p style={{ fontSize: 11, fontWeight: 600, color: '#B08D57', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 10 }}>
             Question {current + 1} of {questions.length}
           </p>
-          <h2 style={{ fontSize: 18, fontWeight: 600, color: '#0B1F33', lineHeight: 1.6, marginBottom: 28, letterSpacing: '-0.2px' }}>
-            {q.question_text}
-          </h2>
+          <div style={{ fontSize: 18, fontWeight: 600, color: '#0B1F33', lineHeight: 1.6, marginBottom: 28, letterSpacing: '-0.2px' }}>
+            {(() => {
+              // Detect inline lettered sub-list in question text: "... A. foo B. bar C. baz ..."
+              const subListMatch = q.question_text.match(/^(.*?)\s+(A\.\s.+)$/s)
+              if (subListMatch) {
+                const stem = subListMatch[1].trim()
+                const listPart = subListMatch[2]
+                const items = listPart.split(/(?=\b[A-D]\.\s)/).filter(Boolean)
+                return (
+                  <>
+                    <span>{stem}</span>
+                    <div style={{ marginTop: 12, display: 'flex', flexDirection: 'column', gap: 6 }}>
+                      {items.map((item, idx) => (
+                        <div key={idx} style={{ fontSize: 15, fontWeight: 400, paddingLeft: 8, borderLeft: '2px solid #E2E8F0', lineHeight: 1.5 }}>{item.trim()}</div>
+                      ))}
+                    </div>
+                  </>
+                )
+              }
+              return <span>{q.question_text}</span>
+            })()}
+          </div>
 
           {/* Options */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 32 }}>
             {options.map(opt => {
               const isSelected = answers[q.id] === opt.key
-              // Detect inline sub-lists: "A. ... B. ... C. ..." pattern
-              const subListPattern = /\b([A-D])\.\s/g
-              const subMatches = opt.text.match(subListPattern)
-              const isSubList = subMatches && subMatches.length >= 2
-              const subItems = isSubList
-                ? opt.text.split(/(?=\b[A-D]\.\s)/).filter(Boolean)
-                : null
               return (
                 <button
                   key={opt.key}
@@ -192,15 +204,7 @@ export default function ExamPage() {
                       : <span style={{ fontSize: 11, fontWeight: 600, color: '#94A3B8' }}>{opt.key}</span>
                     }
                   </div>
-                  {isSubList && subItems ? (
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-                      {subItems.map((item, idx) => (
-                        <span key={idx} style={{ fontSize: 14, color: '#2D3748', lineHeight: 1.55 }}>{item.trim()}</span>
-                      ))}
-                    </div>
-                  ) : (
-                    <span style={{ fontSize: 14, color: '#2D3748', lineHeight: 1.55 }}>{opt.text}</span>
-                  )}
+                  <span style={{ fontSize: 14, color: '#2D3748', lineHeight: 1.55 }}>{opt.text}</span>
                 </button>
               )
             })}

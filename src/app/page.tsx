@@ -20,9 +20,7 @@ export default function Home() {
       <nav style={{ backgroundColor: 'rgba(11,31,51,0.95)', borderBottom: '1px solid rgba(255,255,255,0.08)', position: 'sticky', top: 0, zIndex: 50, backdropFilter: 'blur(8px)' }}>
         <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div style={{ width: 32, height: 32, backgroundColor: '#B08D57', borderRadius: 6, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <span style={{ color: '#0B1F33', fontSize: 12, fontWeight: 700, letterSpacing: '-0.5px' }}>SR</span>
-            </div>
+            <img src="/favicon.png" alt="StrataReady" style={{ width: 32, height: 32, borderRadius: 6 }} />
             <span style={{ color: '#F7F9FC', fontSize: 16, fontWeight: 600, letterSpacing: '-0.3px' }}>StrataReady</span>
           </div>
           <div className="flex items-center gap-8">
@@ -396,9 +394,7 @@ export default function Home() {
       <footer style={{ borderTop: '1px solid #E2E8F0', backgroundColor: '#F7F9FC' }}>
         <div className="max-w-6xl mx-auto px-6 py-8 flex flex-col md:flex-row items-center justify-between gap-4">
           <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-            <div style={{ width: 24, height: 24, backgroundColor: '#0B1F33', borderRadius: 4, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <span style={{ color: '#B08D57', fontSize: 10, fontWeight: 700 }}>SR</span>
-            </div>
+            <img src="/favicon.png" alt="StrataReady" style={{ width: 24, height: 24, borderRadius: 4 }} />
             <span style={{ fontSize: 13, fontWeight: 600, color: '#0B1F33' }}>StrataReady</span>
           </div>
           <p style={{ fontSize: 12, color: '#94A3B8', textAlign: 'center' }}>
