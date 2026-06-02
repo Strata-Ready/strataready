@@ -69,11 +69,11 @@ function formatDate(d: string) {
 function SkillsMap({ sections }: { sections: SectionPerf[] }) {
   if (sections.length === 0) return null
 
-  const size = 375
+  const size = 470
   const cx = size / 2
   const cy = size / 2
-  const outerR = 125
-  const innerR = 42
+  const outerR = 156
+  const innerR = 52
   const n = sections.length
   const gap = 0.02
 
