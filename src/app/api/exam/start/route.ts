@@ -4,13 +4,13 @@ import { createClient } from '@/lib/supabase/server'
 // Questions per section — weighted to match real exam emphasis
 const SECTION_WEIGHTS: Record<number, number> = {
   1:  6,  // Law & RESA
-  2:  2,  // Ethics
+  2:  3,  // Ethics
   3:  4,  // Land & Title
-  4:  4,  // Liability
-  5:  3,  // Tenancies
+  4:  5,  // Liability
+  5:  4,  // Tenancies
   6:  6,  // Contracts
   7:  6,  // Agency
-  8:  2,  // Disputes
+  8:  3,  // Disputes
   9:  2,  // Strata Properties
   10: 10, // Strata Act
   11: 3,  // Sections
@@ -21,9 +21,9 @@ const SECTION_WEIGHTS: Record<number, number> = {
   16: 5,  // Risk & Insurance
   17: 2,  // Local Government
   18: 3,  // Accounting
-  19: 7,  // Operating Budget
-  20: 7,  // CRF & Depreciation
-  21: 2,  // Purchasing & Personnel
+  19: 8,  // Operating Budget
+  20: 8,  // CRF & Depreciation
+  21: 3,  // Purchasing & Personnel
 }
 // Total: 100
 
