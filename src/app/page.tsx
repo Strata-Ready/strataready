@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import Logo from '@/components/logo'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -21,7 +20,9 @@ export default function Home() {
       <nav style={{ backgroundColor: 'rgba(11,31,51,0.95)', borderBottom: '1px solid rgba(255,255,255,0.08)', position: 'sticky', top: 0, zIndex: 50, backdropFilter: 'blur(8px)' }}>
         <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <Logo size={32} />
+            <div style={{ width: 32, height: 32, backgroundColor: '#B08D57', borderRadius: 6, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <span style={{ color: '#0B1F33', fontSize: 12, fontWeight: 700, letterSpacing: '-0.5px' }}>SR</span>
+            </div>
             <span style={{ color: '#F7F9FC', fontSize: 16, fontWeight: 600, letterSpacing: '-0.3px' }}>StrataReady</span>
           </div>
           <div className="flex items-center gap-8">
@@ -172,7 +173,7 @@ export default function Home() {
             </div>
 
             <div style={{ backgroundColor: '#F7F9FC', borderRadius: 12, overflow: 'hidden', boxShadow: '0 24px 64px rgba(0,0,0,0.4)' }}>
-              <div style={{ padding: '16px 20px', borderBottom: '1px solid #E2E8F0', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+              <div style={{ padding: '16px 20px', borderBottom: '1px solid #E2E8F0', display: 'flex', alignItems: 'center', justifyContent: 'space-between', backgroundColor: '#FFF5F5' }}>
                 <span style={{ fontSize: 12, fontWeight: 600, color: '#64748B', letterSpacing: '0.05em' }}>QUESTION 47 — RESULT</span>
                 <span style={{ fontSize: 12, backgroundColor: '#FEE2E2', color: '#991B1B', padding: '3px 8px', borderRadius: 4, fontWeight: 500 }}>Incorrect</span>
               </div>
@@ -181,16 +182,22 @@ export default function Home() {
                   Which of the following best describes the strata corporation&apos;s duty to repair and maintain common property under the <em>Strata Property Act</em>?
                 </p>
                 <div style={{ backgroundColor: '#FEE2E2', border: '1px solid #FECACA', borderRadius: 6, padding: '10px 12px', marginBottom: 8 }}>
-                  <p style={{ fontSize: 12, color: '#991B1B' }}><strong>Your answer:</strong> The strata corporation may delegate all repair responsibilities to individual owners by bylaw.</p>
+                  <p style={{ fontSize: 12, color: '#991B1B' }}><strong>Your answer (A):</strong> The strata corporation may delegate all repair responsibilities to individual owners by bylaw.</p>
                 </div>
-                <div style={{ backgroundColor: '#DCFCE7', border: '1px solid #BBF7D0', borderRadius: 6, padding: '10px 12px', marginBottom: 16 }}>
-                  <p style={{ fontSize: 12, color: '#166534' }}><strong>Correct answer:</strong> The strata corporation must repair and maintain common property and common assets.</p>
+                <div style={{ backgroundColor: '#DCFCE7', border: '1px solid #BBF7D0', borderRadius: 6, padding: '10px 12px', marginBottom: 14 }}>
+                  <p style={{ fontSize: 12, color: '#166534' }}><strong>Correct answer (C):</strong> The strata corporation must repair and maintain common property and common assets.</p>
                 </div>
-                <div style={{ backgroundColor: '#F8FAFC', borderRadius: 6, padding: '12px', borderLeft: '3px solid #B08D57' }}>
-                  <p style={{ fontSize: 11, fontWeight: 600, color: '#B08D57', marginBottom: 4, letterSpacing: '0.05em' }}>SOURCE REFERENCE</p>
-                  <p style={{ fontSize: 12, color: '#475569', lineHeight: 1.6 }}>
-                    Strata Property Act, s.72 — the duty to repair and maintain common property cannot be transferred to individual owners by bylaw.
+                <p style={{ fontSize: 12, color: '#64748B', lineHeight: 1.65, marginBottom: 12 }}>
+                  Option (A) is incorrect because bylaws cannot override the statutory duty to repair — the SPA imposes this obligation directly on the strata corporation. Option (B) confuses repair obligations with insurance obligations. Option (D) incorrectly limits the duty to structural elements only.
+                </p>
+                <div style={{ backgroundColor: '#F8F6F1', border: '1px solid #E8E0CE', borderLeft: '3px solid #B08D57', borderRadius: 6, padding: '12px 14px', marginBottom: 12 }}>
+                  <p style={{ fontSize: 11, fontWeight: 600, color: '#B08D57', marginBottom: 6, letterSpacing: '0.06em', textTransform: 'uppercase' }}>Study note</p>
+                  <p style={{ fontSize: 12, color: '#4A3728', lineHeight: 1.7 }}>
+                    The duty to repair and maintain common property is one of the strata corporation&apos;s core non-delegable obligations. Unlike many other strata functions, this duty cannot be shifted to owners by bylaw — it runs with the corporation regardless of what the bylaws say.
                   </p>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                  <span style={{ fontFamily: 'monospace', fontSize: 11, backgroundColor: '#E2E8F0', padding: '2px 8px', borderRadius: 4, color: '#0B1F33', fontWeight: 600 }}>Strata Property Act, s.72</span>
                 </div>
               </div>
             </div>
@@ -395,7 +402,9 @@ export default function Home() {
       <footer style={{ borderTop: '1px solid #E2E8F0', backgroundColor: '#F7F9FC' }}>
         <div className="max-w-6xl mx-auto px-6 py-8 flex flex-col md:flex-row items-center justify-between gap-4">
           <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-            <Logo size={24} />
+            <div style={{ width: 24, height: 24, backgroundColor: '#0B1F33', borderRadius: 4, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <span style={{ color: '#B08D57', fontSize: 10, fontWeight: 700 }}>SR</span>
+            </div>
             <span style={{ fontSize: 13, fontWeight: 600, color: '#0B1F33' }}>StrataReady</span>
           </div>
           <p style={{ fontSize: 12, color: '#94A3B8', textAlign: 'center' }}>
