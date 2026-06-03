@@ -72,6 +72,7 @@ ANSWER FORMAT:
 - Distractors must be plausible but wrong for a specific legal reason
 - Use BC-specific names: use common BC names (Mike, Sarah, Dave, Linda, Chen, Patel, etc.)
 - Reference specific BC legislation: Strata Property Act, RESA, PIPA, RTA, etc.
+- Do NOT reference specific court case names or citations (e.g. "Ocean Harvesters v. Quinlan"). Test the legal principle, not the case name. If a scenario is based on a legal concept from case law, present the facts and ask the user to identify the correct principle.
 - Include specific section numbers occasionally (e.g., "under s.35 of the Strata Property Act")
 
 SOURCE MATERIAL for this section:
