@@ -193,11 +193,11 @@ export default function ExamPage() {
             {(() => {
               // Split question into: stem, A/B/C/D items, optional closing question
               const nlIndex = q.question_text.indexOf('\nA. ')
-              const inlineIndex = q.question_text.search(/[:\.]\s+A\.\s/)
+              const inlineIndex = q.question_text.search(/[:.?] +A\. /)
               const splitIndex = nlIndex > -1 ? nlIndex : inlineIndex
               const isNewline = nlIndex > -1
               if (splitIndex > -1) {
-                const inlineMatch = q.question_text.slice(splitIndex).match(/[:\.] +/)
+                const inlineMatch = q.question_text.slice(splitIndex).match(/[:?\.] +/)
                 const stem = q.question_text.slice(0, isNewline ? splitIndex : splitIndex + (inlineMatch ? inlineMatch[0].length : 2)).trim()
                 const listPart = isNewline
                   ? q.question_text.slice(splitIndex + 1)
