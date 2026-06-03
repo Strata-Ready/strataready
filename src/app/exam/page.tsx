@@ -197,7 +197,8 @@ export default function ExamPage() {
               const splitIndex = nlIndex > -1 ? nlIndex : inlineIndex
               const isNewline = nlIndex > -1
               if (splitIndex > -1) {
-                const stem = q.question_text.slice(0, isNewline ? splitIndex : splitIndex + q.question_text.slice(splitIndex).match(/[:\.]\s+/)[0].length).trim()
+                const inlineMatch = q.question_text.slice(splitIndex).match(/[:\.] +/)
+                const stem = q.question_text.slice(0, isNewline ? splitIndex : splitIndex + (inlineMatch ? inlineMatch[0].length : 2)).trim()
                 const listPart = isNewline
                   ? q.question_text.slice(splitIndex + 1)
                   : q.question_text.slice(splitIndex).replace(/^[:\.]+\s+/, '')
