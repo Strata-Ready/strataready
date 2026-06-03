@@ -53,7 +53,7 @@ export default function Home() {
               Two attempts.<br />Make the first<br />one count.
             </h1>
             <p style={{ fontSize: 18, color: 'rgba(247,249,252,0.65)', lineHeight: 1.7, marginBottom: 12, maxWidth: 520 }}>
-              Practice with realistic BC strata management licensing exams designed around the UBC Sauder curriculum. Identify weak areas, study with source-cited explanations, and verify your readiness before writing the real exam.
+              Practice with realistic BC strata management licensing exam questions. Identify weak areas, study with source-cited explanations, and verify your readiness before writing the real exam.
             </p>
             <p style={{ fontSize: 15, color: 'rgba(247,249,252,0.4)', lineHeight: 1.6, marginBottom: 40, maxWidth: 520 }}>
               100 questions · 3 hours · 70% required to pass.
@@ -158,7 +158,6 @@ export default function Home() {
               <p style={{ fontSize: 15, color: 'rgba(247,249,252,0.5)', lineHeight: 1.7, marginBottom: 24 }}>Students can verify answers against:</p>
               <ul style={{ listStyle: 'none', padding: 0, margin: 0 }} className="space-y-3">
                 {[
-                  'Official UBC Sauder licensing course materials',
                   'Strata Property Act and Regulation',
                   'Real Estate Services Act (RESA)',
                   'Personal Information Protection Act (PIPA)',
