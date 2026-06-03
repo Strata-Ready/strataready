@@ -193,10 +193,17 @@ export default function ExamPage() {
             {(() => {
               // Split question into: stem, A/B/C/D items, optional closing question
               const nlIndex = q.question_text.indexOf('\nA. ')
-              if (nlIndex > -1) {
-                const stem = q.question_text.slice(0, nlIndex).trim()
-                const listPart = q.question_text.slice(nlIndex + 1)
-                const items = listPart.split(/\n(?=[A-D]\.\s)/).map(s => s.trim()).filter(Boolean)
+              const inlineIndex = q.question_text.search(/[:\.]\s+A\.\s/)
+              const splitIndex = nlIndex > -1 ? nlIndex : inlineIndex
+              const isNewline = nlIndex > -1
+              if (splitIndex > -1) {
+                const stem = q.question_text.slice(0, isNewline ? splitIndex : splitIndex + q.question_text.slice(splitIndex).match(/[:\.]\s+/)[0].length).trim()
+                const listPart = isNewline
+                  ? q.question_text.slice(splitIndex + 1)
+                  : q.question_text.slice(splitIndex).replace(/^[:\.]+\s+/, '')
+                const items = isNewline
+                  ? listPart.split(/\n(?=[A-D]\.\s)/).map(s => s.trim()).filter(Boolean)
+                  : listPart.split(/(?<=\.\s{0,2})(?=[B-D]\.\s)/).map(s => s.trim()).filter(Boolean)
                 const lastItem = items[items.length - 1]
                 const closingMatch = lastItem.match(/^([A-D]\..+?)\s{2,}(.+)$/) ||
                                      lastItem.match(/^([A-D]\..+?\.)(\s+Which .+|\s+What .+|\s+Under .+)$/)
