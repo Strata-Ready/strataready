@@ -71,6 +71,7 @@ export async function POST() {
         started_at: new Date().toISOString(),
         status: 'in_progress',
         total_questions: final.length,
+        question_ids: final.map((q: any) => q.id),
       })
       .select()
       .single()
