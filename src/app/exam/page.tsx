@@ -157,18 +157,37 @@ export default function ExamPage() {
           </p>
           <div style={{ fontSize: 18, fontWeight: 600, color: '#0B1F33', lineHeight: 1.6, marginBottom: 28, letterSpacing: '-0.2px' }}>
             {(() => {
-              // Detect inline lettered sub-list in question text: "... A. foo B. bar C. baz ..."
-              const subListMatch = q.question_text.match(/^([\s\S]*?)\n(A\.\s[\s\S]+)$/)
-              if (subListMatch) {
-                const stem = subListMatch[1].trim()
-                const listPart = subListMatch[2]
-                const items = listPart.split(/(?=\n[A-D]\.\s)/).filter(Boolean)
+              // Split question into: stem, A/B/C/D items, optional closing question
+              const parts = q.question_text.split(/s+(A.s)/)
+              if (parts.length > 1) {
+                const stem = parts[0].trim()
+                const rest = 'A. ' + parts.slice(1).join('A. ')
+                const items = rest.split(/(?=[B-D].s)/).map(s => s.trim()).filter(Boolean)
+                // Last item may contain a closing question after the final statement
+                const lastItem = items[items.length - 1]
+                const closingMatch = lastItem.match(/^([A-D]..+?)s{2,}(.+)$/) ||
+                                     lastItem.match(/^([A-D]..+?.)(s+Which .+|s+What .+|s+Under .+)$/)
+                if (closingMatch) {
+                  items[items.length - 1] = closingMatch[1].trim()
+                  const closing = closingMatch[2].trim()
+                  return (
+                    <>
+                      <span>{stem}</span>
+                      <div style={{ marginTop: 12, marginBottom: 12, display: 'flex', flexDirection: 'column', gap: 6 }}>
+                        {items.map((item, idx) => (
+                          <div key={idx} style={{ fontSize: 15, fontWeight: 400, paddingLeft: 8, borderLeft: '2px solid #E2E8F0', lineHeight: 1.5 }}>{item}</div>
+                        ))}
+                      </div>
+                      <span>{closing}</span>
+                    </>
+                  )
+                }
                 return (
                   <>
                     <span>{stem}</span>
                     <div style={{ marginTop: 12, display: 'flex', flexDirection: 'column', gap: 6 }}>
                       {items.map((item, idx) => (
-                        <div key={idx} style={{ fontSize: 15, fontWeight: 400, paddingLeft: 8, borderLeft: '2px solid #E2E8F0', lineHeight: 1.5 }}>{item.trim()}</div>
+                        <div key={idx} style={{ fontSize: 15, fontWeight: 400, paddingLeft: 8, borderLeft: '2px solid #E2E8F0', lineHeight: 1.5 }}>{item}</div>
                       ))}
                     </div>
                   </>
