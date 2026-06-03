@@ -54,7 +54,12 @@ export default function ExamPage() {
           setQuestions(resumeData.questions)
           setAttemptId(resumeData.attemptId)
           attemptIdRef.current = resumeData.attemptId
-          if (resumeData.answers) setAnswers(resumeData.answers)
+          if (resumeData.answers) {
+            setAnswers(resumeData.answers)
+            // Resume at first unanswered question
+            const firstUnanswered = resumeData.questions.findIndex((q: any) => !resumeData.answers[q.id])
+            if (firstUnanswered > 0) setCurrent(firstUnanswered)
+          }
           setLoading(false)
           return
         }
