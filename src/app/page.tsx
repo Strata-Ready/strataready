@@ -116,7 +116,7 @@ export default function Home() {
               {
                 num: '02',
                 title: 'Receive your score instantly',
-                desc: 'No waiting. Your score appears the moment you submit. Every wrong answer is shown alongside the correct answer and a clear explanation of why — including the specific legislation or course material that applies.',
+                desc: 'No waiting. Your score appears the moment you submit. Every wrong answer is shown alongside the correct answer and a clear explanation of why — including the specific legislation that applies.',
               },
               {
                 num: '03',
@@ -153,7 +153,7 @@ export default function Home() {
                 Every Answer Includes a Source Citation
               </h2>
               <p style={{ fontSize: 16, color: 'rgba(247,249,252,0.6)', lineHeight: 1.7, marginBottom: 24 }}>
-                Every explanation links back to the relevant course material, legislation, or reference source. Instead of simply showing the correct answer, StrataReady shows where the answer comes from and why it is correct.
+                Every explanation links back to the relevant legislation and regulatory sources. Instead of simply showing the correct answer, StrataReady shows where the answer comes from and why it is correct.
               </p>
               <p style={{ fontSize: 15, color: 'rgba(247,249,252,0.5)', lineHeight: 1.7, marginBottom: 24 }}>Students can verify answers against:</p>
               <ul style={{ listStyle: 'none', padding: 0, margin: 0 }} className="space-y-3">
@@ -343,7 +343,7 @@ export default function Home() {
               },
               {
                 q: 'Is the Strata Management Licensing Exam difficult?',
-                a: 'Many students find the breadth of material challenging. The exam covers legislation, governance, accounting, contracts, budgeting, agency law, and strata operations across 20+ subject areas. Candidates who take multiple timed practice exams consistently perform better than those who only read course materials.',
+                a: 'Many students find the breadth of material challenging. The exam covers legislation, governance, accounting, contracts, budgeting, agency law, and strata operations across 20+ subject areas. Candidates who take multiple timed practice exams consistently perform better than those who study from other sources alone.',
               },
               {
                 q: 'How should I prepare for the exam?',
@@ -351,7 +351,7 @@ export default function Home() {
               },
               {
                 q: 'Are StrataReady questions based on BC legislation?',
-                a: 'Yes. Every question is sourced from BC strata management licensing course materials and authoritative regulatory sources including the Strata Property Act, RESA, PIPA, and the Residential Tenancy Act. Every explanation includes a source citation.',
+                a: 'Yes. Every question is sourced from authoritative BC regulatory sources including the Strata Property Act, RESA, PIPA, and the Residential Tenancy Act. Every explanation includes a source citation.',
               },
               {
                 q: 'Is StrataReady affiliated with UBC Sauder or the BCFSA?',
