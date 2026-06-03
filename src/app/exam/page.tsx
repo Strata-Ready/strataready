@@ -47,6 +47,16 @@ export default function ExamPage() {
           await new Promise(r => setTimeout(r, 2000))
         }
 
+        // Check for existing in-progress attempt first
+        const resumeRes = await fetch('/api/exam/resume', { method: 'GET' })
+        const resumeData = await resumeRes.json()
+        if (resumeData.attemptId) {
+          setQuestions(resumeData.questions)
+          setAttemptId(resumeData.attemptId)
+          setLoading(false)
+          return
+        }
+
         const res = await fetch('/api/exam/start', { method: 'POST' })
         const data = await res.json()
         if (data.error) { setError(data.error); setLoading(false); return }
