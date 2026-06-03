@@ -1,8 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import Link from 'next/link'
 import Logo from '@/components/logo'
+import Link from 'next/link'
 
 const DEMO_QUESTIONS = [
   {
@@ -15,6 +15,8 @@ const DEMO_QUESTIONS = [
     option_d: 'Breach of civility',
     correct_answer: 'C',
     explanation: 'Conduct unbecoming a licensee is conduct that is contrary to the interests of the public, undermines public confidence, or brings the real estate industry into disrepute. This goes above and beyond technical compliance with legislation and the Rules. Professional misconduct is concerned with technical compliance.',
+    distractor_explanations: 'Option (A) is incorrect because professional misconduct relates to technical breaches of legislation and the Rules, not broader professionalism. Option (B) is incorrect — "lapse of character" is not a defined category under RESA. Option (D) is incorrect — "breach of civility" is not a defined term under RESA.',
+    study_note: 'RESA creates two distinct misconduct categories. Professional misconduct is about breaking specific rules. Conduct unbecoming sets a higher bar — it captures behaviour that damages the profession\'s reputation or public trust even when no specific rule has been broken.',
     act_reference: 'RESA s.35',
   },
   {
@@ -27,6 +29,8 @@ const DEMO_QUESTIONS = [
     option_d: 'Within 14 days of the strata council\'s written request',
     correct_answer: 'B',
     explanation: 'Section 43(2)(c) of the Real Estate Services Rules requires that the service agreement must be entered into before the brokerage provides any of the services to the strata corporation.',
+    distractor_explanations: 'Option (A) is incorrect — there is no 30-day grace period. Option (C) is incorrect — the AGM timing is irrelevant to the service agreement requirement. Option (D) is incorrect — the 14-day period does not appear in the Rules.',
+    study_note: 'The written service agreement requirement is strict — no services at all can be provided before the agreement is signed. This protects both parties by establishing the scope, fees, and terms before any work begins.',
     act_reference: 'Real Estate Services Rules, s. 43(2)(c)',
   },
   {
@@ -39,6 +43,8 @@ const DEMO_QUESTIONS = [
     option_d: 'Land held in the name of or on behalf of a strata corporation that is not shown on the strata plan',
     correct_answer: 'B',
     explanation: 'The SPA defines "common property" as that part of the land and buildings shown on a strata plan that is not part of a strata lot, and pipes, wires, cables, chutes, ducts and other facilities in certain locations. Option A describes "common assets," Option C describes "limited common property," and Option D is part of the definition of "common assets."',
+    distractor_explanations: 'Option (A) describes common assets — moveable property owned by the strata corporation. Option (C) describes limited common property — common property designated for exclusive use by specific owners. Option (D) describes land held as common assets, not common property.',
+    study_note: 'The SPA has four related but distinct concepts: common property (land/buildings on the strata plan not in a strata lot), common assets (personal property owned by the corporation), limited common property (common property for exclusive use), and strata lots. Keeping these definitions clear is essential for the exam.',
     act_reference: 'Strata Property Act, s. 1',
   },
   {
@@ -51,6 +57,8 @@ const DEMO_QUESTIONS = [
     option_d: 'The date on which all strata lots have been conveyed, or nine months after the date of the first conveyance of a strata lot to a purchaser',
     correct_answer: 'B',
     explanation: 'Section 16 of the SPA requires the developer to hold the first AGM during the six-week period beginning on the earlier of: (a) the date on which 50% plus one of the strata lots have been conveyed to purchasers, or (b) the date that is nine months after the date of the first conveyance of a strata lot to a purchaser.',
+    distractor_explanations: 'Option (A) uses incorrect thresholds — 25% and six months do not appear in s.16. Option (C) uses twelve months instead of nine. Option (D) incorrectly requires all lots to be conveyed, which could indefinitely delay the first AGM.',
+    study_note: 'The first AGM trigger dates are a favourite exam topic. Remember: majority (50%+1) conveyed, OR nine months after first conveyance — whichever comes first. The six-week window then begins from that earlier date.',
     act_reference: 'Strata Property Act, s. 16',
   },
   {
@@ -63,6 +71,8 @@ const DEMO_QUESTIONS = [
     option_d: '$3,500.00',
     correct_answer: 'B',
     explanation: 'Using the formula under section 99 of the Act: (unit entitlement of strata lot / total unit entitlement) x total contribution = (105/5,335) x $193,433 = $3,807.02 per annum.',
+    distractor_explanations: 'Option (A) uses an incorrect divisor. Option (C) incorrectly divides by the number of units rather than total unit entitlement. Option (D) is a round number with no formula basis.',
+    study_note: 'Strata fee calculations always use unit entitlement, not number of units. The formula is: (lot\'s unit entitlement ÷ total unit entitlement) × total budget. Memorize this — calculation questions appear on nearly every exam.',
     act_reference: 'Strata Property Act, s. 99',
   },
 ]
@@ -197,13 +207,20 @@ export default function DemoPage() {
                         </div>
                       </div>
                     )}
-                    <p style={{ fontSize: 13, color: '#64748B', lineHeight: 1.6, marginBottom: dq.act_reference ? 10 : 0 }}>{dq.explanation}</p>
+                    <p style={{ fontSize: 13, color: '#64748B', lineHeight: 1.65, marginBottom: 12 }}>
+                      {!correct && dq.distractor_explanations ? dq.distractor_explanations : dq.explanation}
+                    </p>
+                    {!correct && dq.study_note && (
+                      <div style={{ backgroundColor: '#F8F6F1', border: '1px solid #E8E0CE', borderLeft: '3px solid #B08D57', borderRadius: 6, padding: '12px 14px', marginBottom: 12 }}>
+                        <p style={{ fontSize: 11, fontWeight: 600, color: '#B08D57', letterSpacing: '0.06em', textTransform: 'uppercase', marginBottom: 6 }}>Study note</p>
+                        <p style={{ fontSize: 13, color: '#4A3728', lineHeight: 1.7 }}>{dq.study_note}</p>
+                      </div>
+                    )}
                     {dq.act_reference && (
                       <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginTop: 8 }}>
                         <span style={{ fontFamily: 'monospace', fontSize: 11, backgroundColor: '#E2E8F0', padding: '2px 8px', borderRadius: 4, color: '#0B1F33', fontWeight: 600 }}>
                           {dq.act_reference}
                         </span>
-                        <span style={{ fontSize: 12, color: '#94A3B8' }}>BC Legislation</span>
                       </div>
                     )}
                   </div>
