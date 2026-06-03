@@ -192,11 +192,11 @@ export default function ExamPage() {
           <div style={{ fontSize: 18, fontWeight: 600, color: '#0B1F33', lineHeight: 1.6, marginBottom: 28, letterSpacing: '-0.2px' }}>
             {(() => {
               // Split question into: stem, A/B/C/D items, optional closing question
-              const parts = q.question_text.split(/\n(A\.\s)/)
-              if (parts.length > 1) {
-                const stem = parts[0].trim()
-                const rest = 'A. ' + parts.slice(1).join('A. ')
-                const items = rest.split(/(?=\n[B-D]\.\s)|(?=\b[B-D]\.\s)/).map(s => s.trim()).filter(Boolean)
+              const nlIndex = q.question_text.indexOf('\nA. ')
+              if (nlIndex > -1) {
+                const stem = q.question_text.slice(0, nlIndex).trim()
+                const listPart = q.question_text.slice(nlIndex + 1)
+                const items = listPart.split(/\n(?=[A-D]\.\s)/).map(s => s.trim()).filter(Boolean)
                 const lastItem = items[items.length - 1]
                 const closingMatch = lastItem.match(/^([A-D]\..+?)\s{2,}(.+)$/) ||
                                      lastItem.match(/^([A-D]\..+?\.)(\s+Which .+|\s+What .+|\s+Under .+)$/)
