@@ -158,11 +158,11 @@ export default function ExamPage() {
           <div style={{ fontSize: 18, fontWeight: 600, color: '#0B1F33', lineHeight: 1.6, marginBottom: 28, letterSpacing: '-0.2px' }}>
             {(() => {
               // Detect inline lettered sub-list in question text: "... A. foo B. bar C. baz ..."
-              const subListMatch = q.question_text.match(/^([\s\S]*?)\s+(A\.\s[\s\S]+)$/)
+              const subListMatch = q.question_text.match(/^([\s\S]*?)\n(A\.\s[\s\S]+)$/)
               if (subListMatch) {
                 const stem = subListMatch[1].trim()
                 const listPart = subListMatch[2]
-                const items = listPart.split(/(?=\b[A-D]\.\s)/).filter(Boolean)
+                const items = listPart.split(/(?=\n[A-D]\.\s)/).filter(Boolean)
                 return (
                   <>
                     <span>{stem}</span>
