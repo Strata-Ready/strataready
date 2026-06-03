@@ -69,7 +69,16 @@ ANSWER FORMAT:
 - Always exactly 4 options: A, B, C, D
 - Sometimes options are combinations of statements (e.g., "A and B only", "A, C, and D only")
 - One correct answer only
-- Distractors must be plausible but wrong for a specific legal reason
+- Distractors must be sophisticated and challenging — model them on real exam style:
+  - Each wrong answer should be plausible enough that a student who hasn't studied carefully would choose it
+  - Wrong answers should be wrong for a SPECIFIC technical or legal reason, not obviously wrong
+  - Use these distractor techniques:
+    * Almost-correct: right concept, wrong detail (e.g. wrong threshold, wrong timeframe, wrong vote type)
+    * Reversal: describes the opposite of the correct rule
+    * Related-but-wrong: correct in a different context or under a different section of the Act
+    * Overly broad or overly narrow: correct concept but wrong scope
+  - Never use obviously silly or irrelevant distractors
+  - The correct answer should not be identifiable by process of elimination — all options should seem defensible to an unprepared student
 - Use BC-specific names: use common BC names (Mike, Sarah, Dave, Linda, Chen, Patel, etc.)
 - Reference specific BC legislation: Strata Property Act, RESA, PIPA, RTA, etc.
 - Ensure the scenario facts directly support the question being asked. The facts and the question must be logically consistent — do not set up a scenario about topic X and then ask about topic Y.
