@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import Logo from '@/components/logo'
 import { createClient } from '@/lib/supabase/client'
@@ -33,6 +33,7 @@ export default function ExamPage() {
   const [error, setError] = useState('')
   const [showSubmitConfirm, setShowSubmitConfirm] = useState(false)
   const [startTime] = useState(Date.now())
+  const attemptIdRef = useRef<string | null>(null)
 
   useEffect(() => {
     async function startExam() {
@@ -41,7 +42,6 @@ export default function ExamPage() {
         const { data: { user } } = await supabase.auth.getUser()
         if (!user) { router.push('/login'); return }
 
-        // If coming from Stripe checkout, wait for webhook to update plan
         const params = new URLSearchParams(window.location.search)
         if (params.get('paid') === 'true') {
           await new Promise(r => setTimeout(r, 2000))
@@ -50,9 +50,11 @@ export default function ExamPage() {
         // Check for existing in-progress attempt first
         const resumeRes = await fetch('/api/exam/resume', { method: 'GET' })
         const resumeData = await resumeRes.json()
-        if (resumeData.attemptId) {
+        if (resumeData.attemptId && resumeData.questions?.length > 0) {
           setQuestions(resumeData.questions)
           setAttemptId(resumeData.attemptId)
+          attemptIdRef.current = resumeData.attemptId
+          if (resumeData.answers) setAnswers(resumeData.answers)
           setLoading(false)
           return
         }
@@ -62,6 +64,7 @@ export default function ExamPage() {
         if (data.error) { setError(data.error); setLoading(false); return }
         setQuestions(data.questions)
         setAttemptId(data.attemptId)
+        attemptIdRef.current = data.attemptId
         setLoading(false)
       } catch (err) {
         setError('Failed to load exam. Please try again.')
@@ -71,23 +74,39 @@ export default function ExamPage() {
     startExam()
   }, [])
 
+  async function saveAnswer(questionId: string, selectedAnswer: string, correctAnswer: string) {
+    const aid = attemptIdRef.current
+    if (!aid) return
+    try {
+      await fetch('/api/exam/answer', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          attemptId: aid,
+          questionId,
+          selectedAnswer,
+          correctAnswer,
+        }),
+      })
+    } catch (err) {
+      // Silent fail — answer is still in local state
+      console.error('Auto-save failed', err)
+    }
+  }
+
+  function handleSelectAnswer(questionId: string, optionKey: string, correctAnswer: string) {
+    setAnswers(prev => ({ ...prev, [questionId]: optionKey }))
+    saveAnswer(questionId, optionKey, correctAnswer)
+  }
+
   async function handleSubmit() {
     if (!attemptId) return
     setSubmitting(true)
-
-    const answerPayload = questions.map(q => ({
-      questionId: q.id,
-      selectedAnswer: answers[q.id] || null,
-      correctAnswer: q.correct_answer,
-      isCorrect: answers[q.id] === q.correct_answer,
-      sectionId: q.section_id,
-    }))
-
     try {
       const res = await fetch('/api/exam/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ attemptId, answers: answerPayload }),
+        body: JSON.stringify({ attemptId }),
       })
       const data = await res.json()
       if (data.error) { setError(data.error); setSubmitting(false); return }
@@ -168,15 +187,14 @@ export default function ExamPage() {
           <div style={{ fontSize: 18, fontWeight: 600, color: '#0B1F33', lineHeight: 1.6, marginBottom: 28, letterSpacing: '-0.2px' }}>
             {(() => {
               // Split question into: stem, A/B/C/D items, optional closing question
-              const parts = q.question_text.split(/s+(A.s)/)
+              const parts = q.question_text.split(/\s+(A\.\s)/)
               if (parts.length > 1) {
                 const stem = parts[0].trim()
                 const rest = 'A. ' + parts.slice(1).join('A. ')
-                const items = rest.split(/(?=[B-D].s)/).map(s => s.trim()).filter(Boolean)
-                // Last item may contain a closing question after the final statement
+                const items = rest.split(/(?=\b[B-D]\.\s)/).map(s => s.trim()).filter(Boolean)
                 const lastItem = items[items.length - 1]
-                const closingMatch = lastItem.match(/^([A-D]..+?)s{2,}(.+)$/) ||
-                                     lastItem.match(/^([A-D]..+?.)(s+Which .+|s+What .+|s+Under .+)$/)
+                const closingMatch = lastItem.match(/^([A-D]\..+?)\s{2,}(.+)$/) ||
+                                     lastItem.match(/^([A-D]\..+?\.)(\s+Which .+|\s+What .+|\s+Under .+)$/)
                 if (closingMatch) {
                   items[items.length - 1] = closingMatch[1].trim()
                   const closing = closingMatch[2].trim()
@@ -214,7 +232,7 @@ export default function ExamPage() {
               return (
                 <button
                   key={opt.key}
-                  onClick={() => setAnswers(prev => ({ ...prev, [q.id]: opt.key }))}
+                  onClick={() => handleSelectAnswer(q.id, opt.key, q.correct_answer)}
                   style={{
                     display: 'flex', alignItems: 'flex-start', gap: 14,
                     padding: '14px 18px', borderRadius: 10, textAlign: 'left', cursor: 'pointer',
