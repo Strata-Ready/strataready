@@ -30,7 +30,7 @@ async function getKBContent(sectionId) {
 async function generateQuestions(sectionId) {
   const { section, text } = await getKBContent(sectionId)
 
-  const prompt = `You are writing multiple choice exam questions for the BC Strata Management Licensing Exam administered by UBC Sauder School of Business.
+  const prompt = `You are writing multiple choice exam questions for the BC Strata Management Licensing Exam.
 
 You must write exactly 20 questions for the section: "${section.title}"
 
@@ -86,7 +86,7 @@ Return a JSON array of exactly 20 questions. Each question must have:
   "option_d": "...",
   "correct_answer": "A" | "B" | "C" | "D",
   "explanation": "Option (X) is correct because [reason]. Option (A) is incorrect because [reason]. Option (B) is incorrect because [reason]..." etc.,
-  "study_note": "A 2-3 sentence plain-language summary of the key concept or rule being tested, written as a teaching note. Should help the reader understand the underlying principle without quoting the legislation verbatim. E.g. 'Under RESA, BCFSA has broad disciplinary powers over licensees. The maximum penalty for an individual licensee is $250,000, which is significantly higher than most people expect...'",
+  "study_note": "A 2-3 sentence plain-language summary of the key concept or rule being tested, written as a teaching note. Should help the reader understand the underlying principle without quoting the legislation verbatim. Do NOT reference chapter names or numbers — refer only to the concepts and legislation itself. E.g. 'Under RESA, BCFSA has broad disciplinary powers over licensees. The maximum penalty for an individual licensee is $250,000, which is significantly higher than most people expect...'",
   "act_reference": "The specific Act, section or regulation this question is based on — e.g. 'Strata Property Act, s.35' or 'Real Estate Services Act, Part 4' or 'PIPA, s.7'",
   "difficulty": 2 | 3 (2 = moderate, 3 = hard)
 }
