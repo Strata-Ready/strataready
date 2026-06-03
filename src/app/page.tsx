@@ -343,7 +343,7 @@ export default function Home() {
               },
               {
                 q: 'Is the Strata Management Licensing Exam difficult?',
-                a: 'Many students find the breadth of material challenging. The exam covers legislation, governance, accounting, contracts, budgeting, agency law, and strata operations across 21 subject areas. Candidates who take multiple timed practice exams consistently perform better than those who only read course materials.',
+                a: 'Many students find the breadth of material challenging. The exam covers legislation, governance, accounting, contracts, budgeting, agency law, and strata operations across 20+ subject areas. Candidates who take multiple timed practice exams consistently perform better than those who only read course materials.',
               },
               {
                 q: 'How should I prepare for the exam?',
