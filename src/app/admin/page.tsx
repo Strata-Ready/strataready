@@ -139,7 +139,7 @@ export default function AdminPage() {
             </div>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16, marginBottom: 40 }}>
               {[
-                { label: 'Per exam users', value: platform.perExamUsers, sub: `× $9.99 = $${(platform.perExamUsers * 9.99).toFixed(2)}` },
+                { label: 'Per exam users', value: platform.perExamUsers, sub: `× $19.99 = $${(platform.perExamUsers * 9.99).toFixed(2)}` },
                 { label: 'Full prep users', value: platform.unlimitedUsers, sub: `× $49.99 = $${(platform.unlimitedUsers * 49.99).toFixed(2)}` },
                 { label: 'Estimated revenue', value: `$${platform.estimatedRevenue.toFixed(2)}`, sub: 'CAD (minimum — excl. repeat purchases)', highlight: true },
               ].map(s => (
