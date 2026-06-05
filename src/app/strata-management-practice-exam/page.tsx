@@ -118,10 +118,10 @@ export default function StrataManagementPracticeExamPage() {
       <section className="py-20" style={{ backgroundColor: '#F7F9FC' }}>
         <div className="max-w-3xl mx-auto px-6">
           <p style={{ fontSize: 11, fontWeight: 600, color: '#B08D57', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 12 }}>Pricing</p>
-          <h2 style={{ fontSize: 36, fontWeight: 700, color: '#0B1F33', letterSpacing: '-0.8px', marginBottom: 32 }}>Start for $9.99</h2>
+          <h2 style={{ fontSize: 36, fontWeight: 700, color: '#0B1F33', letterSpacing: '-0.8px', marginBottom: 32 }}>Start for $19.99</h2>
           <div className="grid md:grid-cols-2 gap-6">
             {[
-              { name: 'Per Exam', price: '$9.99 CAD', desc: 'One full practice exam with instant results, distractor explanations, and source citations.', cta: 'Buy one exam' },
+              { name: 'Per Exam', price: '$19.99 CAD', desc: 'One full practice exam with instant results, distractor explanations, and source citations.', cta: 'Buy one exam' },
               { name: 'Full Prep Access', price: '$49.99 CAD', desc: 'Unlimited practice exams, skills map, readiness meter, and study notes. Best value for candidates who want to be sure.', cta: 'Get full access', highlight: true },
             ].map(plan => (
               <div key={plan.name} style={{ backgroundColor: plan.highlight ? '#0B1F33' : 'white', border: `1px solid ${plan.highlight ? 'transparent' : '#E2E8F0'}`, borderRadius: 12, padding: '28px 24px' }}>

@@ -151,7 +151,7 @@ export default function BCStrataManagementExamPage() {
           <p style={{ fontSize: 16, color: '#475569', marginBottom: 40 }}>One exam or unlimited access — your choice.</p>
           <div className="grid md:grid-cols-2 gap-6 max-w-2xl mx-auto">
             {[
-              { name: 'Per Exam', price: '$9.99', desc: 'One full 100-question exam attempt with instant results, full explanations, and source citations.', cta: 'Get started' },
+              { name: 'Per Exam', price: '$19.99', desc: 'One full 100-question exam attempt with instant results, full explanations, and source citations.', cta: 'Get started' },
               { name: 'Full Prep Access', price: '$49.99', desc: 'Unlimited exam attempts, progress tracking, skills map, readiness meter, and study notes on every missed question.', cta: 'Get full access', highlight: true },
             ].map(plan => (
               <div key={plan.name} style={{ backgroundColor: plan.highlight ? '#0B1F33' : '#F8FAFC', border: `1px solid ${plan.highlight ? 'transparent' : '#E2E8F0'}`, borderRadius: 12, padding: '28px 24px', textAlign: 'left' }}>

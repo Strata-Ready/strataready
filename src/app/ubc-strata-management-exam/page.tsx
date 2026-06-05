@@ -103,7 +103,7 @@ export default function UBCStrataManagementExamPage() {
           <h2 style={{ fontSize: 36, fontWeight: 700, color: '#0B1F33', letterSpacing: '-0.8px', marginBottom: 32 }}>Simple pricing</h2>
           <div className="grid md:grid-cols-2 gap-6 text-left">
             {[
-              { name: 'Per Exam', price: '$9.99 CAD', desc: 'One full practice exam with instant results, distractor explanations, and source citations.', cta: 'Get started' },
+              { name: 'Per Exam', price: '$19.99 CAD', desc: 'One full practice exam with instant results, distractor explanations, and source citations.', cta: 'Get started' },
               { name: 'Full Prep Access', price: '$49.99 CAD', desc: 'Unlimited exams, skills map, readiness meter, and study notes. Recommended for serious candidates.', cta: 'Get full access', highlight: true },
             ].map(plan => (
               <div key={plan.name} style={{ backgroundColor: plan.highlight ? '#0B1F33' : '#F8FAFC', border: `1px solid ${plan.highlight ? 'transparent' : '#E2E8F0'}`, borderRadius: 12, padding: '24px' }}>

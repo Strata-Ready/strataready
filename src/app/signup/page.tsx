@@ -106,7 +106,7 @@ function SignupForm() {
 
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 24 }}>
         {[
-          { key: 'per_exam' as const, name: 'Per Exam', price: '$9.99', desc: 'One exam attempt' },
+          { key: 'per_exam' as const, name: 'Per Exam', price: '$19.99', desc: 'One exam attempt' },
           { key: 'unlimited' as const, name: 'Full Prep Access', price: '$49.99', desc: 'Unlimited attempts' },
         ].map(p => (
           <button key={p.key} onClick={() => setPlan(p.key)} style={{
@@ -180,7 +180,7 @@ function SignupForm() {
 
           <button onClick={handleSubmit} disabled={loading || !stripe}
             style={{ backgroundColor: loading ? '#94A3B8' : '#0B1F33', color: '#F7F9FC', fontSize: 14, fontWeight: 600, padding: '13px', borderRadius: 8, border: 'none', cursor: loading ? 'not-allowed' : 'pointer' }}>
-            {loading ? 'Processing...' : `Create account & pay ${plan === 'per_exam' ? '$9.99' : '$49.99'}`}
+            {loading ? 'Processing...' : `Create account & pay ${plan === 'per_exam' ? '$19.99' : '$49.99'}`}
           </button>
 
 

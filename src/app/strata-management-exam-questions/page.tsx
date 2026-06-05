@@ -120,7 +120,7 @@ export default function StrataManagementExamQuestionsPage() {
           <h2 style={{ fontSize: 36, fontWeight: 700, color: '#0B1F33', letterSpacing: '-0.8px', marginBottom: 32 }}>Start with a free diagnostic</h2>
           <div className="grid md:grid-cols-2 gap-6">
             {[
-              { name: 'Per Exam', price: '$9.99 CAD', desc: 'One full 100-question exam with instant results and full explanations.', cta: 'Buy one exam' },
+              { name: 'Per Exam', price: '$19.99 CAD', desc: 'One full 100-question exam with instant results and full explanations.', cta: 'Buy one exam' },
               { name: 'Full Prep Access', price: '$49.99 CAD', desc: 'Unlimited exams, skills map, readiness meter, and study notes.', cta: 'Get full access', highlight: true },
             ].map(plan => (
               <div key={plan.name} style={{ backgroundColor: plan.highlight ? '#0B1F33' : '#F8FAFC', border: `1px solid ${plan.highlight ? 'transparent' : '#E2E8F0'}`, borderRadius: 12, padding: '24px', textAlign: 'left' }}>

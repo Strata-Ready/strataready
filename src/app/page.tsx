@@ -281,7 +281,7 @@ export default function Home() {
               <p style={{ fontSize: 13, fontWeight: 600, color: '#0B1F33', marginBottom: 4 }}>Per Exam</p>
               <p style={{ fontSize: 13, color: '#94A3B8', marginBottom: 24 }}>Pay as you go</p>
               <div style={{ marginBottom: 24 }}>
-                <span style={{ fontSize: 36, fontWeight: 700, color: '#0B1F33', letterSpacing: '-1px' }}>$9.99</span>
+                <span style={{ fontSize: 36, fontWeight: 700, color: '#0B1F33', letterSpacing: '-1px' }}>$19.99</span>
                 <span style={{ fontSize: 13, color: '#94A3B8', marginLeft: 4 }}>/ attempt</span>
               </div>
               <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 28px 0' }} className="space-y-2">
@@ -358,7 +358,7 @@ export default function Home() {
               },
               {
                 q: 'What is the difference between the Per Exam and Full Prep Access plans?',
-                a: 'Per Exam ($9.99) gives you one full 100-question practice exam with complete results and source citations. Full Prep Access ($49.99 one-time) gives you unlimited attempts plus progress tracking, score trends, and an exam readiness score across all your attempts.',
+                a: 'Per Exam ($19.99) gives you one full 100-question practice exam with complete results and source citations. Full Prep Access ($49.99 one-time) gives you unlimited attempts plus progress tracking, score trends, and an exam readiness score across all your attempts.',
               },
               {
                 q: 'Can I take a free practice exam before purchasing?',

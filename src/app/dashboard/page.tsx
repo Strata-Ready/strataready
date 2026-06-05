@@ -550,7 +550,7 @@ export default function DashboardPage() {
               </button>
               <button onClick={() => handlePayForExam('per_exam')} disabled={paying}
                 style={{ backgroundColor: 'white', color: '#0B1F33', fontSize: 14, fontWeight: 500, padding: '13px', borderRadius: 10, border: '1.5px solid #E2E8F0', cursor: 'pointer' }}>
-                Pay $9.99 for one more exam
+                Pay $19.99 for one more exam
               </button>
               <button onClick={() => setShowPayModal(false)}
                 style={{ backgroundColor: 'transparent', color: '#94A3B8', fontSize: 13, padding: '10px', borderRadius: 8, border: 'none', cursor: 'pointer' }}>
