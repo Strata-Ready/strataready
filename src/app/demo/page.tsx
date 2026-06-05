@@ -239,7 +239,7 @@ export default function DemoPage() {
             </p>
             <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
               <Link href="/signup" style={{ backgroundColor: '#B08D57', color: '#0B1F33', fontSize: 14, fontWeight: 600, padding: '12px 24px', borderRadius: 8, textDecoration: 'none' }}>
-                Create account — $9.99 per exam
+                Create account — $19.99 per exam
               </Link>
               <Link href="/signup?plan=unlimited" style={{ backgroundColor: 'transparent', color: '#F7F9FC', fontSize: 14, fontWeight: 500, padding: '12px 24px', borderRadius: 8, textDecoration: 'none', border: '1px solid rgba(247,249,252,0.2)' }}>
                 Full Prep Access — $49.99
