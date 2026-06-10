@@ -170,7 +170,7 @@ export default function ExamPage() {
           </span>
           <button
             onClick={() => setShowSubmitConfirm(true)}
-            style={{ backgroundColor: '#00a79d', color: '#0B1F33', fontSize: 13, fontWeight: 600, padding: '8px 16px', borderRadius: 6, border: 'none', cursor: 'pointer' }}
+            style={{ backgroundColor: '#00a79d', color: '#ffffff', fontSize: 13, fontWeight: 600, padding: '8px 16px', borderRadius: 6, border: 'none', cursor: 'pointer' }}
           >
             Submit exam
           </button>
@@ -301,7 +301,7 @@ export default function ExamPage() {
                 onClick={() => setShowSubmitConfirm(true)}
                 style={{
                   fontSize: 14, fontWeight: 600, padding: '10px 24px', borderRadius: 8,
-                  border: 'none', backgroundColor: '#00a79d', color: '#0B1F33', cursor: 'pointer',
+                  border: 'none', backgroundColor: '#00a79d', color: '#ffffff', cursor: 'pointer',
                 }}
               >
                 Review & Submit

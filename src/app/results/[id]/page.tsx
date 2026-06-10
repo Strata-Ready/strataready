@@ -239,7 +239,7 @@ export default function ResultsPage({ params }: { params: Promise<{ id: string }
 
         <div style={{ marginTop: 32, display: 'flex', gap: 12, justifyContent: 'center' }}>
           <Link href="/dashboard" style={{ backgroundColor: '#0B1F33', color: '#F7F9FC', fontSize: 14, fontWeight: 600, padding: '12px 24px', borderRadius: 8, textDecoration: 'none' }}>Back to dashboard</Link>
-          <Link href="/exam" style={{ backgroundColor: '#00a79d', color: '#0B1F33', fontSize: 14, fontWeight: 600, padding: '12px 24px', borderRadius: 8, textDecoration: 'none' }}>Take another exam →</Link>
+          <Link href="/exam" style={{ backgroundColor: '#00a79d', color: '#ffffff', fontSize: 14, fontWeight: 600, padding: '12px 24px', borderRadius: 8, textDecoration: 'none' }}>Take another exam →</Link>
         </div>
 
       </div>

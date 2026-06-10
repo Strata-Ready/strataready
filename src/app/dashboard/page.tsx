@@ -527,7 +527,7 @@ export default function DashboardPage() {
                   <p style={{ fontSize: 14, fontWeight: 600, color: '#F7F9FC', marginBottom: 2 }}>Upgrade to Full Prep Access</p>
                   <p style={{ fontSize: 13, color: 'rgba(247,249,252,0.5)' }}>Unlimited exams for $49.99 — one-time payment.</p>
                 </div>
-                <button onClick={() => handlePayForExam('unlimited')} style={{ backgroundColor: '#00a79d', color: '#0B1F33', fontSize: 13, fontWeight: 700, padding: '10px 20px', borderRadius: 8, border: 'none', cursor: 'pointer', whiteSpace: 'nowrap' }}>
+                <button onClick={() => handlePayForExam('unlimited')} style={{ backgroundColor: '#00a79d', color: '#ffffff', fontSize: 13, fontWeight: 700, padding: '10px 20px', borderRadius: 8, border: 'none', cursor: 'pointer', whiteSpace: 'nowrap' }}>
                   Upgrade — $49.99
                 </button>
               </div>

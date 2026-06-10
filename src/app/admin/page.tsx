@@ -85,7 +85,7 @@ export default function AdminPage() {
               />
               {error && <p style={{ fontSize: 13, color: '#FCA5A5' }}>{error}</p>}
               <button onClick={handleLogin} disabled={loading}
-                style={{ backgroundColor: '#00a79d', color: '#0B1F33', fontSize: 14, fontWeight: 600, padding: 12, borderRadius: 8, border: 'none', cursor: 'pointer' }}>
+                style={{ backgroundColor: '#00a79d', color: '#ffffff', fontSize: 14, fontWeight: 600, padding: 12, borderRadius: 8, border: 'none', cursor: 'pointer' }}>
                 {loading ? 'Loading...' : 'Sign in'}
               </button>
             </div>

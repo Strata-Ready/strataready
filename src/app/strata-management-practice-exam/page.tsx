@@ -26,7 +26,7 @@ export default function StrataManagementPracticeExamPage() {
           </Link>
           <div className="flex items-center gap-6">
             <Link href="/login" style={{ color: 'rgba(247,249,252,0.6)', fontSize: 14, textDecoration: 'none' }}>Sign in</Link>
-            <Link href="/demo" style={{ backgroundColor: '#00a79d', color: '#0B1F33', fontSize: 13, fontWeight: 600, padding: '8px 18px', borderRadius: 6, textDecoration: 'none' }}>
+            <Link href="/demo" style={{ backgroundColor: '#00a79d', color: '#ffffff', fontSize: 13, fontWeight: 600, padding: '8px 18px', borderRadius: 6, textDecoration: 'none' }}>
               Free Diagnostic
             </Link>
           </div>
@@ -49,7 +49,7 @@ export default function StrataManagementPracticeExamPage() {
               Most candidates who fail the BC Strata Management Licensing Exam didn't practice enough under real conditions. StrataReady simulates the real exam — 100 questions, 3 hours, instant results.
             </p>
             <div className="flex flex-col sm:flex-row items-start gap-4">
-              <Link href="/demo" style={{ backgroundColor: '#00a79d', color: '#0B1F33', fontSize: 15, fontWeight: 600, padding: '14px 28px', borderRadius: 8, textDecoration: 'none' }}>
+              <Link href="/demo" style={{ backgroundColor: '#00a79d', color: '#ffffff', fontSize: 15, fontWeight: 600, padding: '14px 28px', borderRadius: 8, textDecoration: 'none' }}>
                 Try a Free Diagnostic →
               </Link>
               <Link href="/signup" style={{ color: 'rgba(247,249,252,0.6)', fontSize: 14, textDecoration: 'none', borderBottom: '1px solid rgba(247,249,252,0.2)', paddingBottom: 1, marginTop: 14 }}>
@@ -128,7 +128,7 @@ export default function StrataManagementPracticeExamPage() {
                 <p style={{ fontSize: 13, fontWeight: 600, color: plan.highlight ? '#00a79d' : '#94A3B8', marginBottom: 8 }}>{plan.name}</p>
                 <p style={{ fontSize: 28, fontWeight: 800, color: plan.highlight ? '#F7F9FC' : '#0B1F33', letterSpacing: '-0.8px', marginBottom: 12 }}>{plan.price}</p>
                 <p style={{ fontSize: 14, color: plan.highlight ? 'rgba(247,249,252,0.6)' : '#64748B', lineHeight: 1.6, marginBottom: 24 }}>{plan.desc}</p>
-                <Link href="/signup" style={{ display: 'block', textAlign: 'center', backgroundColor: plan.highlight ? '#00a79d' : '#0B1F33', color: plan.highlight ? '#0B1F33' : '#F7F9FC', fontSize: 14, fontWeight: 600, padding: '11px', borderRadius: 8, textDecoration: 'none' }}>
+                <Link href="/signup" style={{ display: 'block', textAlign: 'center', backgroundColor: plan.highlight ? '#00a79d' : '#0B1F33', color: plan.highlight ? '#ffffff' : '#F7F9FC', fontSize: 14, fontWeight: 600, padding: '11px', borderRadius: 8, textDecoration: 'none' }}>
                   {plan.cta}
                 </Link>
               </div>
@@ -142,7 +142,7 @@ export default function StrataManagementPracticeExamPage() {
         <div className="max-w-3xl mx-auto px-6 py-20 text-center relative" style={{ zIndex: 1 }}>
           <h2 style={{ fontSize: 40, fontWeight: 700, color: '#F7F9FC', letterSpacing: '-1px', marginBottom: 16 }}>Try before you buy</h2>
           <p style={{ fontSize: 16, color: 'rgba(247,249,252,0.6)', marginBottom: 32 }}>5 free diagnostic questions with instant results. No account required.</p>
-          <Link href="/demo" style={{ backgroundColor: '#00a79d', color: '#0B1F33', fontSize: 15, fontWeight: 600, padding: '14px 32px', borderRadius: 8, textDecoration: 'none' }}>
+          <Link href="/demo" style={{ backgroundColor: '#00a79d', color: '#ffffff', fontSize: 15, fontWeight: 600, padding: '14px 32px', borderRadius: 8, textDecoration: 'none' }}>
             Start Free Diagnostic →
           </Link>
         </div>

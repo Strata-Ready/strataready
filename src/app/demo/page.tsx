@@ -238,7 +238,7 @@ export default function DemoPage() {
               The full exam covers all relevant exam material with 105 questions.<br />Every wrong answer includes exact source references.
             </p>
             <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
-              <Link href="/signup" style={{ backgroundColor: '#00a79d', color: '#0B1F33', fontSize: 14, fontWeight: 600, padding: '12px 24px', borderRadius: 8, textDecoration: 'none' }}>
+              <Link href="/signup" style={{ backgroundColor: '#00a79d', color: '#ffffff', fontSize: 14, fontWeight: 600, padding: '12px 24px', borderRadius: 8, textDecoration: 'none' }}>
                 Create account — $19.99 per exam
               </Link>
               <Link href="/signup?plan=unlimited" style={{ backgroundColor: 'transparent', color: '#F7F9FC', fontSize: 14, fontWeight: 500, padding: '12px 24px', borderRadius: 8, textDecoration: 'none', border: '1px solid rgba(247,249,252,0.2)' }}>

@@ -31,7 +31,7 @@ export default function Home() {
             <a href="#pricing" style={{ color: 'rgba(247,249,252,0.6)', fontSize: 14 }} className="hidden md:block hover:text-white transition-colors">Pricing</a>
             <Link href="/login" style={{ color: 'rgba(247,249,252,0.6)', fontSize: 14 }} className="hover:text-white transition-colors">Sign in</Link>
             <Link href="/signup" style={{ color: 'rgba(247,249,252,0.6)', fontSize: 14, border: '1px solid rgba(247,249,252,0.2)', padding: '7px 16px', borderRadius: 6 }} className="hidden md:block hover:text-white transition-colors">Get started</Link>
-            <Link href="/demo" style={{ backgroundColor: '#00a79d', color: '#0B1F33', fontSize: 13, fontWeight: 600, padding: '8px 18px', borderRadius: 6, letterSpacing: '0.01em' }} className="hover:opacity-90 transition-opacity">
+            <Link href="/demo" style={{ backgroundColor: '#00a79d', color: '#ffffff', fontSize: 13, fontWeight: 600, padding: '8px 18px', borderRadius: 6, letterSpacing: '0.01em' }} className="hover:opacity-90 transition-opacity">
               Free Diagnostic
             </Link>
           </div>
@@ -58,7 +58,7 @@ export default function Home() {
               100 questions · 3 hours · 70% required to pass.
             </p>
             <div className="flex flex-col sm:flex-row items-start gap-4">
-              <Link href="/demo" style={{ backgroundColor: '#00a79d', color: '#0B1F33', fontSize: 15, fontWeight: 600, padding: '14px 28px', borderRadius: 8, letterSpacing: '-0.2px', whiteSpace: 'nowrap' }} className="hover:opacity-90 transition-opacity">
+              <Link href="/demo" style={{ backgroundColor: '#00a79d', color: '#ffffff', fontSize: 15, fontWeight: 600, padding: '14px 28px', borderRadius: 8, letterSpacing: '-0.2px', whiteSpace: 'nowrap' }} className="hover:opacity-90 transition-opacity">
                 Start Free Diagnostic Exam →
               </Link>
               <a href="#how-it-works" style={{ color: 'rgba(247,249,252,0.6)', fontSize: 14, borderBottom: '1px solid rgba(247,249,252,0.2)', paddingBottom: 1, marginTop: 14 }} className="hover:text-white transition-colors">
@@ -389,7 +389,7 @@ export default function Home() {
               <span key={f}>✓ {f}</span>
             ))}
           </div>
-          <Link href="/demo" style={{ display: 'inline-block', backgroundColor: '#00a79d', color: '#0B1F33', fontSize: 15, fontWeight: 600, padding: '14px 32px', borderRadius: 8, letterSpacing: '-0.2px' }} className="hover:opacity-90 transition-opacity">
+          <Link href="/demo" style={{ display: 'inline-block', backgroundColor: '#00a79d', color: '#ffffff', fontSize: 15, fontWeight: 600, padding: '14px 32px', borderRadius: 8, letterSpacing: '-0.2px' }} className="hover:opacity-90 transition-opacity">
             Start Free Diagnostic Exam →
           </Link>
           <p style={{ color: 'rgba(247,249,252,0.3)', fontSize: 13, marginTop: 16 }}>No account required · 5 questions · Instant results</p>
