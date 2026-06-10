@@ -139,7 +139,7 @@ export default function ResultsPage({ params }: { params: Promise<{ id: string }
         <div style={{ backgroundColor: 'white', borderRadius: 12, border: '1px solid #E2E8F0', padding: '32px', marginBottom: 24 }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 24 }}>
             <div>
-              <p style={{ fontSize: 11, fontWeight: 600, color: '#B08D57', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 6 }}>Exam Complete</p>
+              <p style={{ fontSize: 11, fontWeight: 600, color: '#00a79d', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 6 }}>Exam Complete</p>
               <h1 style={{ fontSize: 32, fontWeight: 800, color: '#0B1F33', letterSpacing: '-0.8px' }}>{attempt.score}/{attempt.total_questions} correct</h1>
               <p style={{ fontSize: 13, color: '#64748B', marginTop: 4 }}>Time: {elapsed(attempt.started_at, attempt.completed_at)}</p>
             </div>
@@ -219,8 +219,8 @@ export default function ResultsPage({ params }: { params: Promise<{ id: string }
                     )}
                     <p style={{ fontSize: 13, color: '#64748B', lineHeight: 1.65, marginBottom: q.act_reference || q.regulation_ref || (!correct && q.study_note) ? 12 : 0 }}>{q.distractor_explanations || q.explanation}</p>
                     {!correct && q.study_note && (
-                      <div style={{ backgroundColor: '#F8F6F1', border: '1px solid #E8E0CE', borderLeft: '3px solid #B08D57', borderRadius: 6, padding: '12px 14px', marginTop: 12 }}>
-                        <p style={{ fontSize: 11, fontWeight: 600, color: '#B08D57', letterSpacing: '0.06em', textTransform: 'uppercase', marginBottom: 6 }}>Study note</p>
+                      <div style={{ backgroundColor: '#F8F6F1', border: '1px solid #E8E0CE', borderLeft: '3px solid #00a79d', borderRadius: 6, padding: '12px 14px', marginTop: 12 }}>
+                        <p style={{ fontSize: 11, fontWeight: 600, color: '#00a79d', letterSpacing: '0.06em', textTransform: 'uppercase', marginBottom: 6 }}>Study note</p>
                         <p style={{ fontSize: 13, color: '#4A3728', lineHeight: 1.7 }}>{q.study_note}</p>
                       </div>
                     )}
@@ -239,7 +239,7 @@ export default function ResultsPage({ params }: { params: Promise<{ id: string }
 
         <div style={{ marginTop: 32, display: 'flex', gap: 12, justifyContent: 'center' }}>
           <Link href="/dashboard" style={{ backgroundColor: '#0B1F33', color: '#F7F9FC', fontSize: 14, fontWeight: 600, padding: '12px 24px', borderRadius: 8, textDecoration: 'none' }}>Back to dashboard</Link>
-          <Link href="/exam" style={{ backgroundColor: '#B08D57', color: '#0B1F33', fontSize: 14, fontWeight: 600, padding: '12px 24px', borderRadius: 8, textDecoration: 'none' }}>Take another exam →</Link>
+          <Link href="/exam" style={{ backgroundColor: '#00a79d', color: '#0B1F33', fontSize: 14, fontWeight: 600, padding: '12px 24px', borderRadius: 8, textDecoration: 'none' }}>Take another exam →</Link>
         </div>
 
       </div>

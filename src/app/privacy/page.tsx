@@ -19,7 +19,7 @@ export default function PrivacyPage() {
       </nav>
 
       <div style={{ maxWidth: 720, margin: '0 auto', padding: '64px 24px' }}>
-        <p style={{ fontSize: 11, fontWeight: 600, color: '#B08D57', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 12 }}>Legal</p>
+        <p style={{ fontSize: 11, fontWeight: 600, color: '#00a79d', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 12 }}>Legal</p>
         <h1 style={{ fontSize: 36, fontWeight: 800, color: '#0B1F33', letterSpacing: '-0.8px', marginBottom: 8 }}>Privacy Policy</h1>
         <p style={{ fontSize: 14, color: '#94A3B8', marginBottom: 48 }}>Last updated June 1, 2026</p>
 

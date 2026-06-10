@@ -186,7 +186,7 @@ function ExamReadiness({ attempts, sectionPerf }: { attempts: Attempt[], section
   const capped = Math.min(readiness, 95)
 
   const label = capped >= 80 ? 'Exam Ready' : capped >= 65 ? 'Nearly Ready' : capped >= 45 ? 'In Progress' : 'Early Stage'
-  const color = capped >= 80 ? '#16A34A' : capped >= 65 ? '#B08D57' : capped >= 45 ? '#D97706' : '#DC2626'
+  const color = capped >= 80 ? '#16A34A' : capped >= 65 ? '#00a79d' : capped >= 45 ? '#D97706' : '#DC2626'
   const message = capped >= 80
     ? 'Your scores suggest you are well prepared. Take one more timed exam to confirm.'
     : capped >= 65
@@ -344,7 +344,7 @@ export default function DashboardPage() {
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
           <span style={{ fontSize: 13, color: 'rgba(247,249,252,0.5)' }}>{profile?.email}</span>
-          <span style={{ fontSize: 11, color: '#B08D57', backgroundColor: 'rgba(176,141,87,0.15)', padding: '3px 10px', borderRadius: 20, fontWeight: 600, letterSpacing: '0.04em' }}>
+          <span style={{ fontSize: 11, color: '#00a79d', backgroundColor: 'rgba(176,141,87,0.15)', padding: '3px 10px', borderRadius: 20, fontWeight: 600, letterSpacing: '0.04em' }}>
             {profile?.plan === 'unlimited' ? 'Full Prep Access' : 'Per Exam'}
           </span>
           <button onClick={handleSignOut} style={{ fontSize: 13, color: 'rgba(247,249,252,0.4)', background: 'none', border: 'none', cursor: 'pointer' }}>Sign out</button>
@@ -369,7 +369,7 @@ export default function DashboardPage() {
                 ↩ Resume exam
               </Link>
             )}
-            <button onClick={handleStartExam} style={{ backgroundColor: '#B08D57', color: 'white', fontSize: 13, fontWeight: 600, padding: '10px 24px', borderRadius: 8, border: 'none', cursor: 'pointer' }}>
+            <button onClick={handleStartExam} style={{ backgroundColor: '#00a79d', color: 'white', fontSize: 13, fontWeight: 600, padding: '10px 24px', borderRadius: 8, border: 'none', cursor: 'pointer' }}>
               {completedAttempts.length === 0 ? 'Start Exam →' : 'Start Exam →'}
             </button>
           </div>
@@ -512,7 +512,7 @@ export default function DashboardPage() {
                         </td>
                         <td style={{ padding: '14px 28px', fontSize: 13, color: '#94A3B8' }}>{elapsed(attempt.started_at, attempt.completed_at)}</td>
                         <td style={{ padding: '14px 28px' }}>
-                          <Link href={`/results/${attempt.id}`} style={{ fontSize: 13, color: '#B08D57', fontWeight: 600, textDecoration: 'none' }}>Review →</Link>
+                          <Link href={`/results/${attempt.id}`} style={{ fontSize: 13, color: '#00a79d', fontWeight: 600, textDecoration: 'none' }}>Review →</Link>
                         </td>
                       </tr>
                     )
@@ -527,7 +527,7 @@ export default function DashboardPage() {
                   <p style={{ fontSize: 14, fontWeight: 600, color: '#F7F9FC', marginBottom: 2 }}>Upgrade to Full Prep Access</p>
                   <p style={{ fontSize: 13, color: 'rgba(247,249,252,0.5)' }}>Unlimited exams for $49.99 — one-time payment.</p>
                 </div>
-                <button onClick={() => handlePayForExam('unlimited')} style={{ backgroundColor: '#B08D57', color: '#0B1F33', fontSize: 13, fontWeight: 700, padding: '10px 20px', borderRadius: 8, border: 'none', cursor: 'pointer', whiteSpace: 'nowrap' }}>
+                <button onClick={() => handlePayForExam('unlimited')} style={{ backgroundColor: '#00a79d', color: '#0B1F33', fontSize: 13, fontWeight: 700, padding: '10px 20px', borderRadius: 8, border: 'none', cursor: 'pointer', whiteSpace: 'nowrap' }}>
                   Upgrade — $49.99
                 </button>
               </div>

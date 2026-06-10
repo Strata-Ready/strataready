@@ -170,7 +170,7 @@ export default function ExamPage() {
           </span>
           <button
             onClick={() => setShowSubmitConfirm(true)}
-            style={{ backgroundColor: '#B08D57', color: '#0B1F33', fontSize: 13, fontWeight: 600, padding: '8px 16px', borderRadius: 6, border: 'none', cursor: 'pointer' }}
+            style={{ backgroundColor: '#00a79d', color: '#0B1F33', fontSize: 13, fontWeight: 600, padding: '8px 16px', borderRadius: 6, border: 'none', cursor: 'pointer' }}
           >
             Submit exam
           </button>
@@ -179,14 +179,14 @@ export default function ExamPage() {
 
       {/* Progress bar */}
       <div style={{ height: 3, backgroundColor: '#E2E8F0', flexShrink: 0 }}>
-        <div style={{ height: 3, backgroundColor: '#B08D57', width: `${((current + 1) / questions.length) * 100}%`, transition: 'width 0.2s ease' }} />
+        <div style={{ height: 3, backgroundColor: '#00a79d', width: `${((current + 1) / questions.length) * 100}%`, transition: 'width 0.2s ease' }} />
       </div>
 
       <div style={{ flex: 1, display: 'flex', maxWidth: 1100, margin: '0 auto', width: '100%', padding: '32px 24px', gap: 32 }}>
 
         {/* Question panel */}
         <div style={{ flex: 1 }}>
-          <p style={{ fontSize: 11, fontWeight: 600, color: '#B08D57', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 10 }}>
+          <p style={{ fontSize: 11, fontWeight: 600, color: '#00a79d', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 10 }}>
             Question {current + 1} of {questions.length}
           </p>
           <div style={{ fontSize: 18, fontWeight: 600, color: '#0B1F33', lineHeight: 1.6, marginBottom: 28, letterSpacing: '-0.2px' }}>
@@ -301,7 +301,7 @@ export default function ExamPage() {
                 onClick={() => setShowSubmitConfirm(true)}
                 style={{
                   fontSize: 14, fontWeight: 600, padding: '10px 24px', borderRadius: 8,
-                  border: 'none', backgroundColor: '#B08D57', color: '#0B1F33', cursor: 'pointer',
+                  border: 'none', backgroundColor: '#00a79d', color: '#0B1F33', cursor: 'pointer',
                 }}
               >
                 Review & Submit

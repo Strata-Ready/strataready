@@ -26,7 +26,7 @@ export default function StrataManagementExamQuestionsPage() {
           </Link>
           <div className="flex items-center gap-6">
             <Link href="/login" style={{ color: 'rgba(247,249,252,0.6)', fontSize: 14, textDecoration: 'none' }}>Sign in</Link>
-            <Link href="/demo" style={{ backgroundColor: '#B08D57', color: '#0B1F33', fontSize: 13, fontWeight: 600, padding: '8px 18px', borderRadius: 6, textDecoration: 'none' }}>
+            <Link href="/demo" style={{ backgroundColor: '#00a79d', color: '#0B1F33', fontSize: 13, fontWeight: 600, padding: '8px 18px', borderRadius: 6, textDecoration: 'none' }}>
               Free Diagnostic
             </Link>
           </div>
@@ -39,8 +39,8 @@ export default function StrataManagementExamQuestionsPage() {
         <div className="max-w-6xl mx-auto px-6 py-20 relative" style={{ zIndex: 1, width: '100%' }}>
           <div className="max-w-2xl">
             <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, backgroundColor: 'rgba(176,141,87,0.15)', border: '1px solid rgba(176,141,87,0.3)', borderRadius: 4, padding: '5px 12px', marginBottom: 24 }}>
-              <div style={{ width: 6, height: 6, backgroundColor: '#B08D57', borderRadius: '50%' }} />
-              <span style={{ color: '#B08D57', fontSize: 12, fontWeight: 500, letterSpacing: '0.08em', textTransform: 'uppercase' }}>Exam Questions</span>
+              <div style={{ width: 6, height: 6, backgroundColor: '#00a79d', borderRadius: '50%' }} />
+              <span style={{ color: '#00a79d', fontSize: 12, fontWeight: 500, letterSpacing: '0.08em', textTransform: 'uppercase' }}>Exam Questions</span>
             </div>
             <h1 style={{ fontSize: 48, fontWeight: 700, color: '#F7F9FC', lineHeight: 1.1, letterSpacing: '-1.2px', marginBottom: 20 }}>
               420 strata management exam questions. Every answer explained.
@@ -49,7 +49,7 @@ export default function StrataManagementExamQuestionsPage() {
               Scenario-based questions drawn from BC legislation, delivered in timed 100-question exams. Not just right answers — full distractor explanations and study notes on every question you miss.
             </p>
             <div className="flex flex-col sm:flex-row items-start gap-4">
-              <Link href="/demo" style={{ backgroundColor: '#B08D57', color: '#0B1F33', fontSize: 15, fontWeight: 600, padding: '14px 28px', borderRadius: 8, textDecoration: 'none' }}>
+              <Link href="/demo" style={{ backgroundColor: '#00a79d', color: '#0B1F33', fontSize: 15, fontWeight: 600, padding: '14px 28px', borderRadius: 8, textDecoration: 'none' }}>
                 Try 5 Free Questions →
               </Link>
               <Link href="/signup" style={{ color: 'rgba(247,249,252,0.6)', fontSize: 14, textDecoration: 'none', borderBottom: '1px solid rgba(247,249,252,0.2)', paddingBottom: 1, marginTop: 14 }}>
@@ -62,7 +62,7 @@ export default function StrataManagementExamQuestionsPage() {
 
       <section className="py-20" style={{ backgroundColor: '#F7F9FC' }}>
         <div className="max-w-3xl mx-auto px-6">
-          <p style={{ fontSize: 11, fontWeight: 600, color: '#B08D57', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 12 }}>The Questions</p>
+          <p style={{ fontSize: 11, fontWeight: 600, color: '#00a79d', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 12 }}>The Questions</p>
           <h2 style={{ fontSize: 36, fontWeight: 700, color: '#0B1F33', letterSpacing: '-0.8px', marginBottom: 20 }}>What makes a good exam question?</h2>
           <div style={{ fontSize: 16, color: '#475569', lineHeight: 1.8, display: 'flex', flexDirection: 'column', gap: 16 }}>
             <p>The BC Strata Management Licensing Exam uses scenario-based questions — not definitions, not fill-in-the-blank, not true/false. Every question presents a real situation involving named characters, a specific strata corporation, and a problem that needs to be solved using BC legislation.</p>
@@ -75,7 +75,7 @@ export default function StrataManagementExamQuestionsPage() {
 
       <section className="py-20" style={{ backgroundColor: 'white' }}>
         <div className="max-w-3xl mx-auto px-6">
-          <p style={{ fontSize: 11, fontWeight: 600, color: '#B08D57', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 12 }}>Topic Coverage</p>
+          <p style={{ fontSize: 11, fontWeight: 600, color: '#00a79d', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 12 }}>Topic Coverage</p>
           <h2 style={{ fontSize: 36, fontWeight: 700, color: '#0B1F33', letterSpacing: '-0.8px', marginBottom: 20 }}>20 questions per section. 21 sections.</h2>
           <p style={{ fontSize: 16, color: '#475569', lineHeight: 1.8, marginBottom: 32 }}>StrataReady has 20 active questions for each of the 21 exam subject areas. Each practice exam draws from all sections, weighted to reflect the real exam.</p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -104,7 +104,7 @@ export default function StrataManagementExamQuestionsPage() {
 
       <section className="py-20" style={{ backgroundColor: '#F7F9FC' }}>
         <div className="max-w-3xl mx-auto px-6">
-          <p style={{ fontSize: 11, fontWeight: 600, color: '#B08D57', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 12 }}>After the Exam</p>
+          <p style={{ fontSize: 11, fontWeight: 600, color: '#00a79d', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 12 }}>After the Exam</p>
           <h2 style={{ fontSize: 36, fontWeight: 700, color: '#0B1F33', letterSpacing: '-0.8px', marginBottom: 20 }}>Results that actually help you improve</h2>
           <div style={{ fontSize: 16, color: '#475569', lineHeight: 1.8, display: 'flex', flexDirection: 'column', gap: 16 }}>
             <p>The moment you submit your practice exam, you get a full breakdown. Your score, the pass threshold, and how you performed in each of the 21 sections. A section summary shows every area sorted from weakest to strongest.</p>
@@ -124,16 +124,16 @@ export default function StrataManagementExamQuestionsPage() {
               { name: 'Full Prep Access', price: '$49.99 CAD', desc: 'Unlimited exams, skills map, readiness meter, and study notes.', cta: 'Get full access', highlight: true },
             ].map(plan => (
               <div key={plan.name} style={{ backgroundColor: plan.highlight ? '#0B1F33' : '#F8FAFC', border: `1px solid ${plan.highlight ? 'transparent' : '#E2E8F0'}`, borderRadius: 12, padding: '24px', textAlign: 'left' }}>
-                <p style={{ fontSize: 13, fontWeight: 600, color: plan.highlight ? '#B08D57' : '#94A3B8', marginBottom: 8 }}>{plan.name}</p>
+                <p style={{ fontSize: 13, fontWeight: 600, color: plan.highlight ? '#00a79d' : '#94A3B8', marginBottom: 8 }}>{plan.name}</p>
                 <p style={{ fontSize: 26, fontWeight: 800, color: plan.highlight ? '#F7F9FC' : '#0B1F33', letterSpacing: '-0.8px', marginBottom: 12 }}>{plan.price}</p>
                 <p style={{ fontSize: 14, color: plan.highlight ? 'rgba(247,249,252,0.6)' : '#64748B', lineHeight: 1.6, marginBottom: 20 }}>{plan.desc}</p>
-                <Link href="/signup" style={{ display: 'block', textAlign: 'center', backgroundColor: plan.highlight ? '#B08D57' : '#0B1F33', color: plan.highlight ? '#0B1F33' : '#F7F9FC', fontSize: 14, fontWeight: 600, padding: '11px', borderRadius: 8, textDecoration: 'none' }}>
+                <Link href="/signup" style={{ display: 'block', textAlign: 'center', backgroundColor: plan.highlight ? '#00a79d' : '#0B1F33', color: plan.highlight ? '#0B1F33' : '#F7F9FC', fontSize: 14, fontWeight: 600, padding: '11px', borderRadius: 8, textDecoration: 'none' }}>
                   {plan.cta}
                 </Link>
               </div>
             ))}
           </div>
-          <p style={{ fontSize: 13, color: '#94A3B8', marginTop: 24 }}>Or try 5 free questions first — <Link href="/demo" style={{ color: '#B08D57', textDecoration: 'none', fontWeight: 600 }}>Start free diagnostic →</Link></p>
+          <p style={{ fontSize: 13, color: '#94A3B8', marginTop: 24 }}>Or try 5 free questions first — <Link href="/demo" style={{ color: '#00a79d', textDecoration: 'none', fontWeight: 600 }}>Start free diagnostic →</Link></p>
         </div>
       </section>
 

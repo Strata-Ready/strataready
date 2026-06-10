@@ -26,7 +26,7 @@ export default function BCStrataManagementExamPage() {
           </Link>
           <div className="flex items-center gap-6">
             <Link href="/login" style={{ color: 'rgba(247,249,252,0.6)', fontSize: 14, textDecoration: 'none' }}>Sign in</Link>
-            <Link href="/demo" style={{ backgroundColor: '#B08D57', color: '#0B1F33', fontSize: 13, fontWeight: 600, padding: '8px 18px', borderRadius: 6, textDecoration: 'none' }}>
+            <Link href="/demo" style={{ backgroundColor: '#00a79d', color: '#0B1F33', fontSize: 13, fontWeight: 600, padding: '8px 18px', borderRadius: 6, textDecoration: 'none' }}>
               Free Diagnostic
             </Link>
           </div>
@@ -40,8 +40,8 @@ export default function BCStrataManagementExamPage() {
         <div className="max-w-6xl mx-auto px-6 py-20 relative" style={{ zIndex: 1, width: '100%' }}>
           <div className="max-w-2xl">
             <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, backgroundColor: 'rgba(176,141,87,0.15)', border: '1px solid rgba(176,141,87,0.3)', borderRadius: 4, padding: '5px 12px', marginBottom: 24 }}>
-              <div style={{ width: 6, height: 6, backgroundColor: '#B08D57', borderRadius: '50%' }} />
-              <span style={{ color: '#B08D57', fontSize: 12, fontWeight: 500, letterSpacing: '0.08em', textTransform: 'uppercase' }}>BC Strata Management Exam</span>
+              <div style={{ width: 6, height: 6, backgroundColor: '#00a79d', borderRadius: '50%' }} />
+              <span style={{ color: '#00a79d', fontSize: 12, fontWeight: 500, letterSpacing: '0.08em', textTransform: 'uppercase' }}>BC Strata Management Exam</span>
             </div>
             <h1 style={{ fontSize: 48, fontWeight: 700, color: '#F7F9FC', lineHeight: 1.1, letterSpacing: '-1.2px', marginBottom: 20 }}>
               The BC Strata Management Exam is tough.<br />StrataReady prepares you for it.
@@ -50,7 +50,7 @@ export default function BCStrataManagementExamPage() {
               420 scenario-based practice questions built from the actual BC legislation. Instant results. Source citations on every explanation. Know before you go.
             </p>
             <div className="flex flex-col sm:flex-row items-start gap-4">
-              <Link href="/demo" style={{ backgroundColor: '#B08D57', color: '#0B1F33', fontSize: 15, fontWeight: 600, padding: '14px 28px', borderRadius: 8, textDecoration: 'none' }}>
+              <Link href="/demo" style={{ backgroundColor: '#00a79d', color: '#0B1F33', fontSize: 15, fontWeight: 600, padding: '14px 28px', borderRadius: 8, textDecoration: 'none' }}>
                 Start Free Diagnostic →
               </Link>
               <Link href="/signup" style={{ color: 'rgba(247,249,252,0.6)', fontSize: 14, textDecoration: 'none', borderBottom: '1px solid rgba(247,249,252,0.2)', paddingBottom: 1, marginTop: 14 }}>
@@ -85,7 +85,7 @@ export default function BCStrataManagementExamPage() {
       {/* About the exam */}
       <section className="py-20" style={{ backgroundColor: '#F7F9FC' }}>
         <div className="max-w-3xl mx-auto px-6">
-          <p style={{ fontSize: 11, fontWeight: 600, color: '#B08D57', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 12 }}>About the Exam</p>
+          <p style={{ fontSize: 11, fontWeight: 600, color: '#00a79d', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 12 }}>About the Exam</p>
           <h2 style={{ fontSize: 36, fontWeight: 700, color: '#0B1F33', letterSpacing: '-0.8px', marginBottom: 20 }}>What is the BC Strata Management Licensing Exam?</h2>
           <div style={{ fontSize: 16, color: '#475569', lineHeight: 1.8, display: 'flex', flexDirection: 'column', gap: 16 }}>
             <p>The BC Strata Management Licensing Exam is required for anyone who wants to work as a licensed strata manager in British Columbia. It is administered by the BC Financial Services Authority (BCFSA) and tests candidates on their knowledge of BC strata legislation, governance, financial management, and professional obligations under RESA.</p>
@@ -100,7 +100,7 @@ export default function BCStrataManagementExamPage() {
       <section className="py-20" style={{ backgroundColor: 'white' }}>
         <div className="max-w-6xl mx-auto px-6">
           <div className="max-w-3xl mx-auto">
-            <p style={{ fontSize: 11, fontWeight: 600, color: '#B08D57', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 12 }}>What We Cover</p>
+            <p style={{ fontSize: 11, fontWeight: 600, color: '#00a79d', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 12 }}>What We Cover</p>
             <h2 style={{ fontSize: 36, fontWeight: 700, color: '#0B1F33', letterSpacing: '-0.8px', marginBottom: 20 }}>420 questions across every exam topic</h2>
             <p style={{ fontSize: 16, color: '#475569', lineHeight: 1.8, marginBottom: 32 }}>StrataReady covers all subject areas tested on the BC Strata Management Licensing Exam. Every question is sourced from authoritative BC legislation and weighted to reflect the actual exam emphasis.</p>
           </div>
@@ -122,7 +122,7 @@ export default function BCStrataManagementExamPage() {
       {/* How StrataReady works */}
       <section className="py-20" style={{ backgroundColor: '#F7F9FC' }}>
         <div className="max-w-3xl mx-auto px-6">
-          <p style={{ fontSize: 11, fontWeight: 600, color: '#B08D57', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 12 }}>How It Works</p>
+          <p style={{ fontSize: 11, fontWeight: 600, color: '#00a79d', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 12 }}>How It Works</p>
           <h2 style={{ fontSize: 36, fontWeight: 700, color: '#0B1F33', letterSpacing: '-0.8px', marginBottom: 32 }}>More than a practice test</h2>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
             {[
@@ -132,7 +132,7 @@ export default function BCStrataManagementExamPage() {
               { title: 'Skills map and readiness meter', body: 'Your dashboard tracks performance across all 21 subject areas, showing where you\'re strong and where you need work. The exam readiness meter gives you an honest assessment of how prepared you are.' },
             ].map((item, i) => (
               <div key={i} style={{ display: 'flex', gap: 20 }}>
-                <div style={{ width: 32, height: 32, borderRadius: '50%', backgroundColor: '#0B1F33', color: '#B08D57', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 13, fontWeight: 700, flexShrink: 0, marginTop: 2 }}>{i + 1}</div>
+                <div style={{ width: 32, height: 32, borderRadius: '50%', backgroundColor: '#0B1F33', color: '#00a79d', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 13, fontWeight: 700, flexShrink: 0, marginTop: 2 }}>{i + 1}</div>
                 <div>
                   <h3 style={{ fontSize: 17, fontWeight: 600, color: '#0B1F33', marginBottom: 6 }}>{item.title}</h3>
                   <p style={{ fontSize: 15, color: '#475569', lineHeight: 1.7 }}>{item.body}</p>
@@ -146,7 +146,7 @@ export default function BCStrataManagementExamPage() {
       {/* Pricing */}
       <section className="py-20" style={{ backgroundColor: 'white' }}>
         <div className="max-w-3xl mx-auto px-6 text-center">
-          <p style={{ fontSize: 11, fontWeight: 600, color: '#B08D57', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 12 }}>Pricing</p>
+          <p style={{ fontSize: 11, fontWeight: 600, color: '#00a79d', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 12 }}>Pricing</p>
           <h2 style={{ fontSize: 36, fontWeight: 700, color: '#0B1F33', letterSpacing: '-0.8px', marginBottom: 12 }}>Simple, affordable pricing</h2>
           <p style={{ fontSize: 16, color: '#475569', marginBottom: 40 }}>One exam or unlimited access — your choice.</p>
           <div className="grid md:grid-cols-2 gap-6 max-w-2xl mx-auto">
@@ -155,10 +155,10 @@ export default function BCStrataManagementExamPage() {
               { name: 'Full Prep Access', price: '$49.99', desc: 'Unlimited exam attempts, progress tracking, skills map, readiness meter, and study notes on every missed question.', cta: 'Get full access', highlight: true },
             ].map(plan => (
               <div key={plan.name} style={{ backgroundColor: plan.highlight ? '#0B1F33' : '#F8FAFC', border: `1px solid ${plan.highlight ? 'transparent' : '#E2E8F0'}`, borderRadius: 12, padding: '28px 24px', textAlign: 'left' }}>
-                <p style={{ fontSize: 13, fontWeight: 600, color: plan.highlight ? '#B08D57' : '#94A3B8', marginBottom: 8 }}>{plan.name}</p>
+                <p style={{ fontSize: 13, fontWeight: 600, color: plan.highlight ? '#00a79d' : '#94A3B8', marginBottom: 8 }}>{plan.name}</p>
                 <p style={{ fontSize: 32, fontWeight: 800, color: plan.highlight ? '#F7F9FC' : '#0B1F33', letterSpacing: '-0.8px', marginBottom: 12 }}>{plan.price} <span style={{ fontSize: 14, fontWeight: 400 }}>CAD</span></p>
                 <p style={{ fontSize: 14, color: plan.highlight ? 'rgba(247,249,252,0.6)' : '#64748B', lineHeight: 1.6, marginBottom: 24 }}>{plan.desc}</p>
-                <Link href="/signup" style={{ display: 'block', textAlign: 'center', backgroundColor: plan.highlight ? '#B08D57' : '#0B1F33', color: plan.highlight ? '#0B1F33' : '#F7F9FC', fontSize: 14, fontWeight: 600, padding: '11px', borderRadius: 8, textDecoration: 'none' }}>
+                <Link href="/signup" style={{ display: 'block', textAlign: 'center', backgroundColor: plan.highlight ? '#00a79d' : '#0B1F33', color: plan.highlight ? '#0B1F33' : '#F7F9FC', fontSize: 14, fontWeight: 600, padding: '11px', borderRadius: 8, textDecoration: 'none' }}>
                   {plan.cta}
                 </Link>
               </div>
@@ -173,7 +173,7 @@ export default function BCStrataManagementExamPage() {
         <div className="max-w-3xl mx-auto px-6 py-20 text-center relative" style={{ zIndex: 1 }}>
           <h2 style={{ fontSize: 40, fontWeight: 700, color: '#F7F9FC', letterSpacing: '-1px', marginBottom: 16 }}>Start with a free diagnostic</h2>
           <p style={{ fontSize: 16, color: 'rgba(247,249,252,0.6)', marginBottom: 32 }}>5 questions. No account required. Instant results with full explanations.</p>
-          <Link href="/demo" style={{ backgroundColor: '#B08D57', color: '#0B1F33', fontSize: 15, fontWeight: 600, padding: '14px 32px', borderRadius: 8, textDecoration: 'none' }}>
+          <Link href="/demo" style={{ backgroundColor: '#00a79d', color: '#0B1F33', fontSize: 15, fontWeight: 600, padding: '14px 32px', borderRadius: 8, textDecoration: 'none' }}>
             Start Free Diagnostic Exam →
           </Link>
         </div>

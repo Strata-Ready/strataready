@@ -85,7 +85,7 @@ export default function AdminPage() {
               />
               {error && <p style={{ fontSize: 13, color: '#FCA5A5' }}>{error}</p>}
               <button onClick={handleLogin} disabled={loading}
-                style={{ backgroundColor: '#B08D57', color: '#0B1F33', fontSize: 14, fontWeight: 600, padding: 12, borderRadius: 8, border: 'none', cursor: 'pointer' }}>
+                style={{ backgroundColor: '#00a79d', color: '#0B1F33', fontSize: 14, fontWeight: 600, padding: 12, borderRadius: 8, border: 'none', cursor: 'pointer' }}>
                 {loading ? 'Loading...' : 'Sign in'}
               </button>
             </div>
@@ -110,7 +110,7 @@ export default function AdminPage() {
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
           <Logo />
           <span style={{ color: '#F7F9FC', fontSize: 15, fontWeight: 600 }}>StrataReady</span>
-          <span style={{ fontSize: 11, color: '#B08D57', backgroundColor: 'rgba(176,141,87,0.15)', padding: '2px 8px', borderRadius: 20, fontWeight: 600, letterSpacing: '0.05em' }}>ADMIN</span>
+          <span style={{ fontSize: 11, color: '#00a79d', backgroundColor: 'rgba(176,141,87,0.15)', padding: '2px 8px', borderRadius: 20, fontWeight: 600, letterSpacing: '0.05em' }}>ADMIN</span>
         </div>
         <button onClick={() => { setAuthed(false); sessionStorage.removeItem('admin_key') }}
           style={{ fontSize: 13, color: 'rgba(247,249,252,0.4)', background: 'none', border: 'none', cursor: 'pointer' }}>
@@ -145,7 +145,7 @@ export default function AdminPage() {
               ].map(s => (
                 <div key={s.label} style={{ backgroundColor: s.highlight ? '#0B1F33' : 'white', borderRadius: 12, border: `1px solid ${s.highlight ? 'transparent' : '#E2E8F0'}`, padding: '20px 24px' }}>
                   <p style={{ fontSize: 11, fontWeight: 600, color: s.highlight ? 'rgba(247,249,252,0.5)' : '#94A3B8', letterSpacing: '0.06em', textTransform: 'uppercase', marginBottom: 8 }}>{s.label}</p>
-                  <p style={{ fontSize: 28, fontWeight: 800, color: s.highlight ? '#B08D57' : '#0B1F33', letterSpacing: '-0.5px', marginBottom: 4 }}>{s.value}</p>
+                  <p style={{ fontSize: 28, fontWeight: 800, color: s.highlight ? '#00a79d' : '#0B1F33', letterSpacing: '-0.5px', marginBottom: 4 }}>{s.value}</p>
                   <p style={{ fontSize: 11, color: s.highlight ? 'rgba(247,249,252,0.4)' : '#CBD5E1' }}>{s.sub}</p>
                 </div>
               ))}
@@ -206,7 +206,7 @@ export default function AdminPage() {
                     </td>
                     <td style={{ padding: '14px 20px', fontSize: 13, color: '#94A3B8', whiteSpace: 'nowrap' }}>{formatDate(stats.lastActive)}</td>
                     <td style={{ padding: '14px 20px' }}>
-                      <Link href={`/admin/user/${user.id}`} style={{ fontSize: 12, color: '#B08D57', fontWeight: 600, textDecoration: 'none', whiteSpace: 'nowrap' }}>
+                      <Link href={`/admin/user/${user.id}`} style={{ fontSize: 12, color: '#00a79d', fontWeight: 600, textDecoration: 'none', whiteSpace: 'nowrap' }}>
                         View →
                       </Link>
                     </td>

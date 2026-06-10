@@ -152,7 +152,7 @@ export default function DemoPage() {
           <div style={{ backgroundColor: 'white', borderRadius: 12, border: '1px solid #E2E8F0', padding: '32px', marginBottom: 32 }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 24 }}>
               <div>
-                <p style={{ fontSize: 12, fontWeight: 600, color: '#B08D57', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 6 }}>Diagnostic Complete</p>
+                <p style={{ fontSize: 12, fontWeight: 600, color: '#00a79d', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 6 }}>Diagnostic Complete</p>
                 <h1 style={{ fontSize: 32, fontWeight: 800, color: '#0B1F33', letterSpacing: '-0.8px' }}>
                   {score}/{DEMO_QUESTIONS.length} correct
                 </h1>
@@ -211,8 +211,8 @@ export default function DemoPage() {
                       {!correct && dq.distractor_explanations ? dq.distractor_explanations : dq.explanation}
                     </p>
                     {!correct && dq.study_note && (
-                      <div style={{ backgroundColor: '#F8F6F1', border: '1px solid #E8E0CE', borderLeft: '3px solid #B08D57', borderRadius: 6, padding: '12px 14px', marginBottom: 12 }}>
-                        <p style={{ fontSize: 11, fontWeight: 600, color: '#B08D57', letterSpacing: '0.06em', textTransform: 'uppercase', marginBottom: 6 }}>Study note</p>
+                      <div style={{ backgroundColor: '#F8F6F1', border: '1px solid #E8E0CE', borderLeft: '3px solid #00a79d', borderRadius: 6, padding: '12px 14px', marginBottom: 12 }}>
+                        <p style={{ fontSize: 11, fontWeight: 600, color: '#00a79d', letterSpacing: '0.06em', textTransform: 'uppercase', marginBottom: 6 }}>Study note</p>
                         <p style={{ fontSize: 13, color: '#4A3728', lineHeight: 1.7 }}>{dq.study_note}</p>
                       </div>
                     )}
@@ -238,7 +238,7 @@ export default function DemoPage() {
               The full exam covers all relevant exam material with 105 questions.<br />Every wrong answer includes exact source references.
             </p>
             <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
-              <Link href="/signup" style={{ backgroundColor: '#B08D57', color: '#0B1F33', fontSize: 14, fontWeight: 600, padding: '12px 24px', borderRadius: 8, textDecoration: 'none' }}>
+              <Link href="/signup" style={{ backgroundColor: '#00a79d', color: '#0B1F33', fontSize: 14, fontWeight: 600, padding: '12px 24px', borderRadius: 8, textDecoration: 'none' }}>
                 Create account — $19.99 per exam
               </Link>
               <Link href="/signup?plan=unlimited" style={{ backgroundColor: 'transparent', color: '#F7F9FC', fontSize: 14, fontWeight: 500, padding: '12px 24px', borderRadius: 8, textDecoration: 'none', border: '1px solid rgba(247,249,252,0.2)' }}>
@@ -265,13 +265,13 @@ export default function DemoPage() {
 
       {/* Progress bar */}
       <div style={{ height: 3, backgroundColor: '#E2E8F0' }}>
-        <div style={{ height: 3, backgroundColor: '#B08D57', width: `${((current + 1) / DEMO_QUESTIONS.length) * 100}%`, transition: 'width 0.3s ease' }} />
+        <div style={{ height: 3, backgroundColor: '#00a79d', width: `${((current + 1) / DEMO_QUESTIONS.length) * 100}%`, transition: 'width 0.3s ease' }} />
       </div>
 
       <div style={{ maxWidth: 680, margin: '0 auto', padding: '48px 24px' }}>
 
         {/* Section label */}
-        <p style={{ fontSize: 11, fontWeight: 600, color: '#B08D57', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 12 }}>
+        <p style={{ fontSize: 11, fontWeight: 600, color: '#00a79d', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 12 }}>
           {q.section}
         </p>
 

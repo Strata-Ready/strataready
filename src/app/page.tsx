@@ -31,7 +31,7 @@ export default function Home() {
             <a href="#pricing" style={{ color: 'rgba(247,249,252,0.6)', fontSize: 14 }} className="hidden md:block hover:text-white transition-colors">Pricing</a>
             <Link href="/login" style={{ color: 'rgba(247,249,252,0.6)', fontSize: 14 }} className="hover:text-white transition-colors">Sign in</Link>
             <Link href="/signup" style={{ color: 'rgba(247,249,252,0.6)', fontSize: 14, border: '1px solid rgba(247,249,252,0.2)', padding: '7px 16px', borderRadius: 6 }} className="hidden md:block hover:text-white transition-colors">Get started</Link>
-            <Link href="/demo" style={{ backgroundColor: '#B08D57', color: '#0B1F33', fontSize: 13, fontWeight: 600, padding: '8px 18px', borderRadius: 6, letterSpacing: '0.01em' }} className="hover:opacity-90 transition-opacity">
+            <Link href="/demo" style={{ backgroundColor: '#00a79d', color: '#0B1F33', fontSize: 13, fontWeight: 600, padding: '8px 18px', borderRadius: 6, letterSpacing: '0.01em' }} className="hover:opacity-90 transition-opacity">
               Free Diagnostic
             </Link>
           </div>
@@ -45,8 +45,8 @@ export default function Home() {
         <div className="max-w-6xl mx-auto px-6 py-24 relative" style={{ zIndex: 1, width: '100%' }}>
           <div className="max-w-2xl">
             <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, backgroundColor: 'rgba(176,141,87,0.15)', border: '1px solid rgba(176,141,87,0.3)', borderRadius: 4, padding: '5px 12px', marginBottom: 32 }}>
-              <div style={{ width: 6, height: 6, backgroundColor: '#B08D57', borderRadius: '50%' }}></div>
-              <span style={{ color: '#B08D57', fontSize: 12, fontWeight: 500, letterSpacing: '0.08em', textTransform: 'uppercase' }}>BC Strata Management Exam Prep</span>
+              <div style={{ width: 6, height: 6, backgroundColor: '#00a79d', borderRadius: '50%' }}></div>
+              <span style={{ color: '#00a79d', fontSize: 12, fontWeight: 500, letterSpacing: '0.08em', textTransform: 'uppercase' }}>BC Strata Management Exam Prep</span>
             </div>
             <h1 style={{ fontSize: 56, fontWeight: 700, color: '#F7F9FC', lineHeight: 1.05, letterSpacing: '-1.5px', marginBottom: 24 }}>
               Two attempts.<br />Make the first<br />one count.
@@ -58,7 +58,7 @@ export default function Home() {
               100 questions · 3 hours · 70% required to pass.
             </p>
             <div className="flex flex-col sm:flex-row items-start gap-4">
-              <Link href="/demo" style={{ backgroundColor: '#B08D57', color: '#0B1F33', fontSize: 15, fontWeight: 600, padding: '14px 28px', borderRadius: 8, letterSpacing: '-0.2px', whiteSpace: 'nowrap' }} className="hover:opacity-90 transition-opacity">
+              <Link href="/demo" style={{ backgroundColor: '#00a79d', color: '#0B1F33', fontSize: 15, fontWeight: 600, padding: '14px 28px', borderRadius: 8, letterSpacing: '-0.2px', whiteSpace: 'nowrap' }} className="hover:opacity-90 transition-opacity">
                 Start Free Diagnostic Exam →
               </Link>
               <a href="#how-it-works" style={{ color: 'rgba(247,249,252,0.6)', fontSize: 14, borderBottom: '1px solid rgba(247,249,252,0.2)', paddingBottom: 1, marginTop: 14 }} className="hover:text-white transition-colors">
@@ -97,7 +97,7 @@ export default function Home() {
       <section id="how-it-works" className="py-24" style={{ backgroundColor: '#F7F9FC' }}>
         <div className="max-w-6xl mx-auto px-6">
           <div className="mb-16">
-            <p style={{ fontSize: 11, fontWeight: 600, color: '#B08D57', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 12 }}>The Exam</p>
+            <p style={{ fontSize: 11, fontWeight: 600, color: '#00a79d', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 12 }}>The Exam</p>
             <h2 style={{ fontSize: 48, fontWeight: 700, color: '#0B1F33', letterSpacing: '-0.8px', maxWidth: 640, marginBottom: 16 }}>
               What the BC Strata Management Licensing Exam Looks Like
             </h2>
@@ -124,7 +124,7 @@ export default function Home() {
               },
             ].map(item => (
               <div key={item.num}>
-                <p style={{ fontSize: 42, fontWeight: 700, color: '#B08D57', letterSpacing: '-1px', marginBottom: 16, lineHeight: 1 }}>{item.num}</p>
+                <p style={{ fontSize: 42, fontWeight: 700, color: '#00a79d', letterSpacing: '-1px', marginBottom: 16, lineHeight: 1 }}>{item.num}</p>
                 <h3 style={{ fontSize: 17, fontWeight: 600, color: '#0B1F33', letterSpacing: '-0.3px', marginBottom: 10 }}>{item.title}</h3>
                 <p style={{ fontSize: 14, color: '#64748B', lineHeight: 1.7 }}>{item.desc}</p>
               </div>
@@ -147,7 +147,7 @@ export default function Home() {
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid md:grid-cols-2 gap-16 items-center">
             <div>
-              <p style={{ fontSize: 11, fontWeight: 600, color: '#B08D57', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 12 }}>Why StrataReady</p>
+              <p style={{ fontSize: 11, fontWeight: 600, color: '#00a79d', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 12 }}>Why StrataReady</p>
               <h2 style={{ fontSize: 48, fontWeight: 700, color: '#F7F9FC', letterSpacing: '-0.8px', marginBottom: 20 }}>
                 Every Answer Includes a Source Citation
               </h2>
@@ -163,7 +163,7 @@ export default function Home() {
                   'BC Financial Services Authority regulatory guidance',
                 ].map(item => (
                   <li key={item} style={{ display: 'flex', alignItems: 'center', gap: 10, fontSize: 14, color: 'rgba(247,249,252,0.75)' }}>
-                    <div style={{ width: 4, height: 4, backgroundColor: '#B08D57', borderRadius: '50%', flexShrink: 0 }}></div>
+                    <div style={{ width: 4, height: 4, backgroundColor: '#00a79d', borderRadius: '50%', flexShrink: 0 }}></div>
                     {item}
                   </li>
                 ))}
@@ -188,8 +188,8 @@ export default function Home() {
                 <p style={{ fontSize: 12, color: '#64748B', lineHeight: 1.65, marginBottom: 12 }}>
                   Option (A) is incorrect because bylaws cannot override the statutory duty to repair — the SPA imposes this obligation directly on the strata corporation. Option (B) confuses repair obligations with insurance obligations. Option (D) incorrectly limits the duty to structural elements only.
                 </p>
-                <div style={{ backgroundColor: '#F8F6F1', border: '1px solid #E8E0CE', borderLeft: '3px solid #B08D57', borderRadius: 6, padding: '12px 14px', marginBottom: 12 }}>
-                  <p style={{ fontSize: 11, fontWeight: 600, color: '#B08D57', marginBottom: 6, letterSpacing: '0.06em', textTransform: 'uppercase' }}>Study note</p>
+                <div style={{ backgroundColor: '#F8F6F1', border: '1px solid #E8E0CE', borderLeft: '3px solid #00a79d', borderRadius: 6, padding: '12px 14px', marginBottom: 12 }}>
+                  <p style={{ fontSize: 11, fontWeight: 600, color: '#00a79d', marginBottom: 6, letterSpacing: '0.06em', textTransform: 'uppercase' }}>Study note</p>
                   <p style={{ fontSize: 12, color: '#4A3728', lineHeight: 1.7 }}>
                     The duty to repair and maintain common property is one of the strata corporation&apos;s core non-delegable obligations. Unlike many other strata functions, this duty cannot be shifted to owners by bylaw — it runs with the corporation regardless of what the bylaws say.
                   </p>
@@ -207,7 +207,7 @@ export default function Home() {
       <section id="topics" className="py-24" style={{ backgroundColor: '#F7F9FC' }}>
         <div className="max-w-6xl mx-auto px-6">
           <div className="mb-12">
-            <p style={{ fontSize: 11, fontWeight: 600, color: '#B08D57', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 12 }}>Curriculum</p>
+            <p style={{ fontSize: 11, fontWeight: 600, color: '#00a79d', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 12 }}>Curriculum</p>
             <h2 style={{ fontSize: 48, fontWeight: 700, color: '#0B1F33', letterSpacing: '-0.8px', marginBottom: 16 }}>
               Coverage Across All Major Licensing Topics
             </h2>
@@ -252,7 +252,7 @@ export default function Home() {
       <section id="pricing" className="py-24" style={{ backgroundColor: 'white' }}>
         <div className="max-w-6xl mx-auto px-6">
           <div className="mb-16">
-            <p style={{ fontSize: 11, fontWeight: 600, color: '#B08D57', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 12 }}>Pricing</p>
+            <p style={{ fontSize: 11, fontWeight: 600, color: '#00a79d', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 12 }}>Pricing</p>
             <h2 style={{ fontSize: 48, fontWeight: 700, color: '#0B1F33', letterSpacing: '-0.8px' }}>Simple. No subscriptions.</h2>
             <p style={{ fontSize: 16, color: '#64748B', marginTop: 8 }}>Less than the cost of a single exam attempt. A fraction of the cost of failing one.</p>
           </div>
@@ -265,7 +265,7 @@ export default function Home() {
               <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 28px 0' }} className="space-y-2">
                 {['5 sample questions', 'Instant score', 'Sample study references', 'No account required'].map(f => (
                   <li key={f} style={{ fontSize: 13, color: '#64748B', display: 'flex', gap: 8, alignItems: 'center' }}>
-                    <span style={{ color: '#B08D57', fontWeight: 600 }}>✓</span>{f}
+                    <span style={{ color: '#00a79d', fontWeight: 600 }}>✓</span>{f}
                   </li>
                 ))}
               </ul>
@@ -275,7 +275,7 @@ export default function Home() {
             </div>
 
             <div style={{ border: '2px solid #0B1F33', borderRadius: 12, padding: '28px 24px', backgroundColor: 'white', position: 'relative' }}>
-              <div style={{ position: 'absolute', top: -12, left: '50%', transform: 'translateX(-50%)', backgroundColor: '#0B1F33', color: '#B08D57', fontSize: 11, fontWeight: 600, padding: '4px 12px', borderRadius: 20, letterSpacing: '0.06em', whiteSpace: 'nowrap' }}>
+              <div style={{ position: 'absolute', top: -12, left: '50%', transform: 'translateX(-50%)', backgroundColor: '#0B1F33', color: '#00a79d', fontSize: 11, fontWeight: 600, padding: '4px 12px', borderRadius: 20, letterSpacing: '0.06em', whiteSpace: 'nowrap' }}>
                 MOST POPULAR
               </div>
               <p style={{ fontSize: 13, fontWeight: 600, color: '#0B1F33', marginBottom: 4 }}>Per Exam</p>
@@ -287,7 +287,7 @@ export default function Home() {
               <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 28px 0' }} className="space-y-2">
                 {['100 questions', 'Instant results', 'Full study guide', 'Source citations for every answer', 'Section performance breakdown'].map(f => (
                   <li key={f} style={{ fontSize: 13, color: '#64748B', display: 'flex', gap: 8, alignItems: 'center' }}>
-                    <span style={{ color: '#B08D57', fontWeight: 600 }}>✓</span>{f}
+                    <span style={{ color: '#00a79d', fontWeight: 600 }}>✓</span>{f}
                   </li>
                 ))}
               </ul>
@@ -306,7 +306,7 @@ export default function Home() {
               <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 28px 0' }} className="space-y-2">
                 {['Unlimited exam attempts', 'Everything in Per Exam', 'Progress tracking over time', 'Score trend analysis', 'Exam readiness score'].map(f => (
                   <li key={f} style={{ fontSize: 13, color: '#64748B', display: 'flex', gap: 8, alignItems: 'center' }}>
-                    <span style={{ color: '#B08D57', fontWeight: 600 }}>✓</span>{f}
+                    <span style={{ color: '#00a79d', fontWeight: 600 }}>✓</span>{f}
                   </li>
                 ))}
               </ul>
@@ -323,7 +323,7 @@ export default function Home() {
       <section id="faq" className="py-24" style={{ backgroundColor: '#F7F9FC' }}>
         <div className="max-w-3xl mx-auto px-6">
           <div className="mb-12">
-            <p style={{ fontSize: 11, fontWeight: 600, color: '#B08D57', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 12 }}>FAQ</p>
+            <p style={{ fontSize: 11, fontWeight: 600, color: '#00a79d', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 12 }}>FAQ</p>
             <h2 style={{ fontSize: 48, fontWeight: 700, color: '#0B1F33', letterSpacing: '-0.8px' }}>Common Questions</h2>
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
@@ -389,7 +389,7 @@ export default function Home() {
               <span key={f}>✓ {f}</span>
             ))}
           </div>
-          <Link href="/demo" style={{ display: 'inline-block', backgroundColor: '#B08D57', color: '#0B1F33', fontSize: 15, fontWeight: 600, padding: '14px 32px', borderRadius: 8, letterSpacing: '-0.2px' }} className="hover:opacity-90 transition-opacity">
+          <Link href="/demo" style={{ display: 'inline-block', backgroundColor: '#00a79d', color: '#0B1F33', fontSize: 15, fontWeight: 600, padding: '14px 32px', borderRadius: 8, letterSpacing: '-0.2px' }} className="hover:opacity-90 transition-opacity">
             Start Free Diagnostic Exam →
           </Link>
           <p style={{ color: 'rgba(247,249,252,0.3)', fontSize: 13, marginTop: 16 }}>No account required · 5 questions · Instant results</p>

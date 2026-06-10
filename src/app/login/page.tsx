@@ -43,7 +43,7 @@ export default function LoginPage() {
       <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '48px 24px' }}>
         <div style={{ width: '100%', maxWidth: 400 }}>
           <div style={{ marginBottom: 32 }}>
-            <p style={{ fontSize: 11, fontWeight: 600, color: '#B08D57', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 8 }}>Welcome back</p>
+            <p style={{ fontSize: 11, fontWeight: 600, color: '#00a79d', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 8 }}>Welcome back</p>
             <h1 style={{ fontSize: 28, fontWeight: 800, color: '#0B1F33', letterSpacing: '-0.8px' }}>Sign in to StrataReady</h1>
           </div>
 
@@ -59,7 +59,7 @@ export default function LoginPage() {
               <div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6 }}>
                   <label style={{ fontSize: 13, fontWeight: 500, color: '#0B1F33' }}>Password</label>
-                  <Link href="/forgot-password" style={{ fontSize: 12, color: '#B08D57', textDecoration: 'none' }}>Forgot password?</Link>
+                  <Link href="/forgot-password" style={{ fontSize: 12, color: '#00a79d', textDecoration: 'none' }}>Forgot password?</Link>
                 </div>
                 <input type="password" value={password} onChange={e => setPassword(e.target.value)}
                   onKeyDown={e => e.key === 'Enter' && handleLogin()}

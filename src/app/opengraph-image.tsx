@@ -35,7 +35,7 @@ export default async function Image() {
           {['100 questions', 'Weighted sections', 'Source citations', 'Distractor explanations'].map(tag => (
             <div key={tag} style={{
               backgroundColor: 'rgba(176,141,87,0.15)', border: '1px solid rgba(176,141,87,0.3)',
-              borderRadius: 8, padding: '8px 16px', fontSize: 16, color: '#B08D57', fontWeight: 500,
+              borderRadius: 8, padding: '8px 16px', fontSize: 16, color: '#00a79d', fontWeight: 500,
             }}>
               {tag}
             </div>

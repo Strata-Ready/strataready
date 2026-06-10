@@ -97,7 +97,7 @@ function ExamReadiness({ attempts, sectionPerf }: { attempts: Attempt[], section
   const readiness = Math.round(avgScore * 0.30 + tier1Score * 0.25 + examBonus * 0.15 + trendScore * 0.10 + recentAvg * 0.20)
   const capped = Math.min(readiness, 95)
   const label = capped >= 80 ? 'Exam Ready' : capped >= 65 ? 'Nearly Ready' : capped >= 45 ? 'In Progress' : 'Early Stage'
-  const color = capped >= 80 ? '#16A34A' : capped >= 65 ? '#B08D57' : capped >= 45 ? '#D97706' : '#DC2626'
+  const color = capped >= 80 ? '#16A34A' : capped >= 65 ? '#00a79d' : capped >= 45 ? '#D97706' : '#DC2626'
   const message = capped >= 80 ? 'Scores suggest well prepared.' : capped >= 65 ? 'Close — focus on weak sections.' : capped >= 45 ? 'In progress — more exams needed.' : 'Early stage.'
   const circumference = 2 * Math.PI * 44
   const dash = (capped / 100) * circumference
@@ -173,7 +173,7 @@ export default function AdminUserPage({ params }: { params: Promise<{ id: string
     <div style={{ minHeight: '100vh', backgroundColor: '#F7F9FC', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
       <div style={{ textAlign: 'center' }}>
         <p style={{ color: '#991B1B', fontSize: 14, marginBottom: 16 }}>{error || 'User not found.'}</p>
-        <Link href="/admin" style={{ color: '#B08D57', fontSize: 14, fontWeight: 600, textDecoration: 'none' }}>← Back to admin</Link>
+        <Link href="/admin" style={{ color: '#00a79d', fontSize: 14, fontWeight: 600, textDecoration: 'none' }}>← Back to admin</Link>
       </div>
     </div>
   )
@@ -195,7 +195,7 @@ export default function AdminUserPage({ params }: { params: Promise<{ id: string
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
           <Logo />
           <span style={{ color: '#F7F9FC', fontSize: 15, fontWeight: 600 }}>StrataReady</span>
-          <span style={{ fontSize: 11, color: '#B08D57', backgroundColor: 'rgba(176,141,87,0.15)', padding: '2px 8px', borderRadius: 20, fontWeight: 600, letterSpacing: '0.05em' }}>ADMIN</span>
+          <span style={{ fontSize: 11, color: '#00a79d', backgroundColor: 'rgba(176,141,87,0.15)', padding: '2px 8px', borderRadius: 20, fontWeight: 600, letterSpacing: '0.05em' }}>ADMIN</span>
         </div>
         <Link href="/admin" style={{ fontSize: 13, color: 'rgba(247,249,252,0.6)', textDecoration: 'none' }}>← All users</Link>
       </nav>
@@ -215,7 +215,7 @@ export default function AdminUserPage({ params }: { params: Promise<{ id: string
                 <span style={{ fontSize: 11, color: '#94A3B8' }}>Joined {formatDate(user.created_at)}</span>
                 {user.stripe_customer_id && (
                   <a href={`https://dashboard.stripe.com/customers/${user.stripe_customer_id}`} target="_blank" rel="noopener noreferrer"
-                    style={{ fontSize: 11, color: '#B08D57', fontWeight: 600, textDecoration: 'none' }}>Stripe ↗</a>
+                    style={{ fontSize: 11, color: '#00a79d', fontWeight: 600, textDecoration: 'none' }}>Stripe ↗</a>
                 )}
               </div>
             </div>
@@ -286,7 +286,7 @@ export default function AdminUserPage({ params }: { params: Promise<{ id: string
                         </td>
                         <td style={{ padding: '14px 28px', fontSize: 13, color: '#94A3B8' }}>{elapsed(attempt.started_at, attempt.completed_at)}</td>
                         <td style={{ padding: '14px 28px' }}>
-                          <Link href={`/results/${attempt.id}?admin=1`} style={{ fontSize: 13, color: '#B08D57', fontWeight: 600, textDecoration: 'none' }}>Review →</Link>
+                          <Link href={`/results/${attempt.id}?admin=1`} style={{ fontSize: 13, color: '#00a79d', fontWeight: 600, textDecoration: 'none' }}>Review →</Link>
                         </td>
                       </tr>
                     )

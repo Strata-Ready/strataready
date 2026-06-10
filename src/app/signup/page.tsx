@@ -99,7 +99,7 @@ function SignupForm() {
   return (
     <div style={{ width: '100%', maxWidth: 480 }}>
       <div style={{ marginBottom: 32 }}>
-        <p style={{ fontSize: 11, fontWeight: 600, color: '#B08D57', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 8 }}>Create Account</p>
+        <p style={{ fontSize: 11, fontWeight: 600, color: '#00a79d', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 8 }}>Create Account</p>
         <h1 style={{ fontSize: 28, fontWeight: 800, color: '#0B1F33', letterSpacing: '-0.8px', marginBottom: 8 }}>Start your exam prep</h1>
         <p style={{ fontSize: 14, color: '#64748B' }}>Create your account and pay in one step.</p>
       </div>
@@ -118,7 +118,7 @@ function SignupForm() {
             <p style={{ fontSize: 13, fontWeight: 600, color: '#0B1F33', marginBottom: 2 }}>{p.name}</p>
             <p style={{ fontSize: 20, fontWeight: 800, color: '#0B1F33', letterSpacing: '-0.5px', marginBottom: 2 }}>{p.price}</p>
             <p style={{ fontSize: 12, color: '#64748B' }}>{p.desc}</p>
-            {p.key === 'unlimited' && <p style={{ fontSize: 11, color: '#B08D57', fontWeight: 600, marginTop: 4 }}>Best value</p>}
+            {p.key === 'unlimited' && <p style={{ fontSize: 11, color: '#00a79d', fontWeight: 600, marginTop: 4 }}>Best value</p>}
           </button>
         ))}
       </div>

@@ -26,7 +26,7 @@ export default function StrataPropertyActPracticeQuestionsPage() {
           </Link>
           <div className="flex items-center gap-6">
             <Link href="/login" style={{ color: 'rgba(247,249,252,0.6)', fontSize: 14, textDecoration: 'none' }}>Sign in</Link>
-            <Link href="/demo" style={{ backgroundColor: '#B08D57', color: '#0B1F33', fontSize: 13, fontWeight: 600, padding: '8px 18px', borderRadius: 6, textDecoration: 'none' }}>
+            <Link href="/demo" style={{ backgroundColor: '#00a79d', color: '#0B1F33', fontSize: 13, fontWeight: 600, padding: '8px 18px', borderRadius: 6, textDecoration: 'none' }}>
               Free Diagnostic
             </Link>
           </div>
@@ -39,8 +39,8 @@ export default function StrataPropertyActPracticeQuestionsPage() {
         <div className="max-w-6xl mx-auto px-6 py-20 relative" style={{ zIndex: 1, width: '100%' }}>
           <div className="max-w-2xl">
             <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, backgroundColor: 'rgba(176,141,87,0.15)', border: '1px solid rgba(176,141,87,0.3)', borderRadius: 4, padding: '5px 12px', marginBottom: 24 }}>
-              <div style={{ width: 6, height: 6, backgroundColor: '#B08D57', borderRadius: '50%' }} />
-              <span style={{ color: '#B08D57', fontSize: 12, fontWeight: 500, letterSpacing: '0.08em', textTransform: 'uppercase' }}>Strata Property Act</span>
+              <div style={{ width: 6, height: 6, backgroundColor: '#00a79d', borderRadius: '50%' }} />
+              <span style={{ color: '#00a79d', fontSize: 12, fontWeight: 500, letterSpacing: '0.08em', textTransform: 'uppercase' }}>Strata Property Act</span>
             </div>
             <h1 style={{ fontSize: 48, fontWeight: 700, color: '#F7F9FC', lineHeight: 1.1, letterSpacing: '-1.2px', marginBottom: 20 }}>
               Strata Property Act practice questions. Current. Sourced. Explained.
@@ -49,7 +49,7 @@ export default function StrataPropertyActPracticeQuestionsPage() {
               The SPA is the foundation of the BC Strata Management Licensing Exam. StrataReady's questions are drawn directly from the Act and its Regulation, updated for 2024 amendments, and explained with full source citations.
             </p>
             <div className="flex flex-col sm:flex-row items-start gap-4">
-              <Link href="/demo" style={{ backgroundColor: '#B08D57', color: '#0B1F33', fontSize: 15, fontWeight: 600, padding: '14px 28px', borderRadius: 8, textDecoration: 'none' }}>
+              <Link href="/demo" style={{ backgroundColor: '#00a79d', color: '#0B1F33', fontSize: 15, fontWeight: 600, padding: '14px 28px', borderRadius: 8, textDecoration: 'none' }}>
                 Try Free Questions →
               </Link>
               <Link href="/signup" style={{ color: 'rgba(247,249,252,0.6)', fontSize: 14, textDecoration: 'none', borderBottom: '1px solid rgba(247,249,252,0.2)', paddingBottom: 1, marginTop: 14 }}>
@@ -62,7 +62,7 @@ export default function StrataPropertyActPracticeQuestionsPage() {
 
       <section className="py-20" style={{ backgroundColor: '#F7F9FC' }}>
         <div className="max-w-3xl mx-auto px-6">
-          <p style={{ fontSize: 11, fontWeight: 600, color: '#B08D57', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 12 }}>The Act</p>
+          <p style={{ fontSize: 11, fontWeight: 600, color: '#00a79d', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 12 }}>The Act</p>
           <h2 style={{ fontSize: 36, fontWeight: 700, color: '#0B1F33', letterSpacing: '-0.8px', marginBottom: 20 }}>Why the Strata Property Act is central to the exam</h2>
           <div style={{ fontSize: 16, color: '#475569', lineHeight: 1.8, display: 'flex', flexDirection: 'column', gap: 16 }}>
             <p>The Strata Property Act is the primary legislation governing strata corporations in British Columbia. It covers everything from the creation of a strata plan to the rights and obligations of owners, the powers and duties of strata councils, meeting procedures, bylaw enforcement, financial management, and dispute resolution.</p>
@@ -75,7 +75,7 @@ export default function StrataPropertyActPracticeQuestionsPage() {
 
       <section className="py-20" style={{ backgroundColor: 'white' }}>
         <div className="max-w-3xl mx-auto px-6">
-          <p style={{ fontSize: 11, fontWeight: 600, color: '#B08D57', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 12 }}>Key SPA Topics</p>
+          <p style={{ fontSize: 11, fontWeight: 600, color: '#00a79d', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 12 }}>Key SPA Topics</p>
           <h2 style={{ fontSize: 36, fontWeight: 700, color: '#0B1F33', letterSpacing: '-0.8px', marginBottom: 20 }}>What the SPA covers — and what the exam tests</h2>
           <div className="grid md:grid-cols-2 gap-4">
             {[
@@ -101,7 +101,7 @@ export default function StrataPropertyActPracticeQuestionsPage() {
 
       <section className="py-20" style={{ backgroundColor: '#F7F9FC' }}>
         <div className="max-w-3xl mx-auto px-6">
-          <p style={{ fontSize: 11, fontWeight: 600, color: '#B08D57', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 12 }}>2024 Amendments</p>
+          <p style={{ fontSize: 11, fontWeight: 600, color: '#00a79d', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 12 }}>2024 Amendments</p>
           <h2 style={{ fontSize: 36, fontWeight: 700, color: '#0B1F33', letterSpacing: '-0.8px', marginBottom: 20 }}>Current legislation. Not outdated course notes.</h2>
           <div style={{ fontSize: 16, color: '#475569', lineHeight: 1.8, display: 'flex', flexDirection: 'column', gap: 16 }}>
             <p>The SPA has changed significantly in recent years. Study materials that haven't been updated will contain incorrect information — and incorrect information on a practice exam creates false confidence going into the real thing.</p>
@@ -127,16 +127,16 @@ export default function StrataPropertyActPracticeQuestionsPage() {
               { name: 'Full Prep Access', price: '$49.99 CAD', desc: 'Unlimited exams, skills map, readiness meter, and study notes on every missed question.', cta: 'Get full access', highlight: true },
             ].map(plan => (
               <div key={plan.name} style={{ backgroundColor: plan.highlight ? '#0B1F33' : '#F8FAFC', border: `1px solid ${plan.highlight ? 'transparent' : '#E2E8F0'}`, borderRadius: 12, padding: '24px' }}>
-                <p style={{ fontSize: 13, fontWeight: 600, color: plan.highlight ? '#B08D57' : '#94A3B8', marginBottom: 8 }}>{plan.name}</p>
+                <p style={{ fontSize: 13, fontWeight: 600, color: plan.highlight ? '#00a79d' : '#94A3B8', marginBottom: 8 }}>{plan.name}</p>
                 <p style={{ fontSize: 26, fontWeight: 800, color: plan.highlight ? '#F7F9FC' : '#0B1F33', letterSpacing: '-0.8px', marginBottom: 12 }}>{plan.price}</p>
                 <p style={{ fontSize: 14, color: plan.highlight ? 'rgba(247,249,252,0.6)' : '#64748B', lineHeight: 1.6, marginBottom: 20 }}>{plan.desc}</p>
-                <Link href="/signup" style={{ display: 'block', textAlign: 'center', backgroundColor: plan.highlight ? '#B08D57' : '#0B1F33', color: plan.highlight ? '#0B1F33' : '#F7F9FC', fontSize: 14, fontWeight: 600, padding: '11px', borderRadius: 8, textDecoration: 'none' }}>
+                <Link href="/signup" style={{ display: 'block', textAlign: 'center', backgroundColor: plan.highlight ? '#00a79d' : '#0B1F33', color: plan.highlight ? '#0B1F33' : '#F7F9FC', fontSize: 14, fontWeight: 600, padding: '11px', borderRadius: 8, textDecoration: 'none' }}>
                   {plan.cta}
                 </Link>
               </div>
             ))}
           </div>
-          <p style={{ fontSize: 13, color: '#94A3B8', marginTop: 24 }}>Or try 5 free questions first — <Link href="/demo" style={{ color: '#B08D57', textDecoration: 'none', fontWeight: 600 }}>Start free diagnostic →</Link></p>
+          <p style={{ fontSize: 13, color: '#94A3B8', marginTop: 24 }}>Or try 5 free questions first — <Link href="/demo" style={{ color: '#00a79d', textDecoration: 'none', fontWeight: 600 }}>Start free diagnostic →</Link></p>
         </div>
       </section>
 
