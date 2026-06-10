@@ -286,7 +286,7 @@ export default function AdminUserPage({ params }: { params: Promise<{ id: string
                         </td>
                         <td style={{ padding: '14px 28px', fontSize: 13, color: '#94A3B8' }}>{elapsed(attempt.started_at, attempt.completed_at)}</td>
                         <td style={{ padding: '14px 28px' }}>
-                          <Link href={`/results/${attempt.id}`} style={{ fontSize: 13, color: '#B08D57', fontWeight: 600, textDecoration: 'none' }}>Review →</Link>
+                          <Link href={`/results/${attempt.id}?admin=1`} style={{ fontSize: 13, color: '#B08D57', fontWeight: 600, textDecoration: 'none' }}>Review →</Link>
                         </td>
                       </tr>
                     )
