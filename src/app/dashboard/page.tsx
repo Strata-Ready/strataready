@@ -85,8 +85,8 @@ function SkillsMap({ sections }: { sections: SectionPerf[] }) {
     const fillR = innerR + (outerR - innerR) * (s.pct / 100)
     const labelR = outerR + 14
 
-    const color = s.pct >= 70 ? '#16A34A' : s.pct >= 50 ? '#D97706' : '#DC2626'
-    const bgColor = s.pct >= 70 ? '#DCFCE7' : s.pct >= 50 ? '#FEF3C7' : '#FEE2E2'
+    const color = s.pct >= 70 ? '#00a79d' : s.pct >= 50 ? '#d67229' : '#c22934'
+    const bgColor = s.pct >= 70 ? '#e6f7f6' : s.pct >= 50 ? '#fdf0e6' : '#fce8e9'
     const large = endAngle - startAngle > Math.PI ? 1 : 0
 
     const bgX1 = cx + outerR * Math.cos(startAngle)
@@ -186,7 +186,7 @@ function ExamReadiness({ attempts, sectionPerf }: { attempts: Attempt[], section
   const capped = Math.min(readiness, 95)
 
   const label = capped >= 80 ? 'Exam Ready' : capped >= 65 ? 'Nearly Ready' : capped >= 45 ? 'In Progress' : 'Early Stage'
-  const color = capped >= 80 ? '#16A34A' : capped >= 65 ? '#00a79d' : capped >= 45 ? '#D97706' : '#DC2626'
+  const color = capped >= 80 ? '#00a79d' : capped >= 65 ? '#00a79d' : capped >= 45 ? '#d67229' : '#c22934'
   const message = capped >= 80
     ? 'Your scores suggest you are well prepared. Take one more timed exam to confirm.'
     : capped >= 65
@@ -365,7 +365,7 @@ export default function DashboardPage() {
           </div>
           <div style={{ display: 'flex', gap: 10 }}>
             {inProgressAttempt && (
-              <Link href="/exam" style={{ backgroundColor: '#FEF3C7', color: '#92400E', fontSize: 13, fontWeight: 600, padding: '10px 20px', borderRadius: 8, textDecoration: 'none', border: '1px solid #FDE68A' }}>
+              <Link href="/exam" style={{ backgroundColor: '#fdf0e6', color: '#a35520', fontSize: 13, fontWeight: 600, padding: '10px 20px', borderRadius: 8, textDecoration: 'none', border: '1px solid #FDE68A' }}>
                 ↩ Resume exam
               </Link>
             )}
@@ -420,19 +420,19 @@ export default function DashboardPage() {
             {weakSections.length > 0 && (
               <div style={{ backgroundColor: 'white', borderRadius: 16, border: '1px solid #E2E8F0', padding: '28px', marginBottom: 24 }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 20 }}>
-                  <div style={{ width: 8, height: 8, backgroundColor: '#DC2626', borderRadius: '50%' }} />
+                  <div style={{ width: 8, height: 8, backgroundColor: '#c22934', borderRadius: '50%' }} />
                   <h2 style={{ fontSize: 15, fontWeight: 700, color: '#0B1F33' }}>Focus Areas</h2>
                   <span style={{ fontSize: 12, color: '#94A3B8', marginLeft: 'auto' }}>Sections below 70% — review before your next exam</span>
                 </div>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 20 }}>
                   {weakSections.map(s => (
-                    <div key={s.id} style={{ borderLeft: `3px solid ${s.pct < 50 ? '#DC2626' : '#D97706'}`, paddingLeft: 14 }}>
+                    <div key={s.id} style={{ borderLeft: `3px solid ${s.pct < 50 ? '#c22934' : '#d67229'}`, paddingLeft: 14 }}>
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6 }}>
                         <span style={{ fontSize: 13, color: '#0B1F33', fontWeight: 600 }}>{s.title}</span>
-                        <span style={{ fontSize: 13, fontWeight: 700, color: s.pct < 50 ? '#DC2626' : '#D97706' }}>{s.pct}%</span>
+                        <span style={{ fontSize: 13, fontWeight: 700, color: s.pct < 50 ? '#c22934' : '#d67229' }}>{s.pct}%</span>
                       </div>
                       <div style={{ height: 4, backgroundColor: '#F1F5F9', borderRadius: 2, marginBottom: 8 }}>
-                        <div style={{ height: 4, borderRadius: 2, width: `${s.pct}%`, backgroundColor: s.pct < 50 ? '#DC2626' : '#D97706' }} />
+                        <div style={{ height: 4, borderRadius: 2, width: `${s.pct}%`, backgroundColor: s.pct < 50 ? '#c22934' : '#d67229' }} />
                       </div>
                       <p style={{ fontSize: 11, color: '#94A3B8', marginBottom: 8 }}>{s.correct}/{s.total} correct</p>
                       {SECTION_LEGISLATION[s.id] && (
@@ -455,14 +455,14 @@ export default function DashboardPage() {
             {strongSections.length > 0 && (
               <div style={{ backgroundColor: 'white', borderRadius: 16, border: '1px solid #E2E8F0', padding: '28px', marginBottom: 24 }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 16 }}>
-                  <div style={{ width: 8, height: 8, backgroundColor: '#16A34A', borderRadius: '50%' }} />
+                  <div style={{ width: 8, height: 8, backgroundColor: '#00a79d', borderRadius: '50%' }} />
                   <h2 style={{ fontSize: 15, fontWeight: 700, color: '#0B1F33' }}>Strong areas</h2>
                 </div>
                 <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
                   {strongSections.map(s => (
                     <div key={s.id} style={{ backgroundColor: '#F0FDF4', border: '1px solid #BBF7D0', borderRadius: 8, padding: '8px 14px', display: 'flex', alignItems: 'center', gap: 8 }}>
-                      <span style={{ fontSize: 13, color: '#166534', fontWeight: 500 }}>{s.title}</span>
-                      <span style={{ fontSize: 12, fontWeight: 700, color: '#16A34A' }}>{s.pct}%</span>
+                      <span style={{ fontSize: 13, color: '#007a72', fontWeight: 500 }}>{s.title}</span>
+                      <span style={{ fontSize: 12, fontWeight: 700, color: '#00a79d' }}>{s.pct}%</span>
                     </div>
                   ))}
                 </div>
@@ -477,7 +477,7 @@ export default function DashboardPage() {
                   {completedAttempts.slice().reverse().map(a => {
                     const pct = Math.round((a.score || 0) / (a.total_questions || 105) * 100)
                     return (
-                      <div key={a.id} style={{ width: 10, borderRadius: 2, height: `${Math.max(pct / 100 * 28, 3)}px`, backgroundColor: pct >= 70 ? '#16A34A' : pct >= 50 ? '#D97706' : '#DC2626', opacity: 0.7 }} />
+                      <div key={a.id} style={{ width: 10, borderRadius: 2, height: `${Math.max(pct / 100 * 28, 3)}px`, backgroundColor: pct >= 70 ? '#00a79d' : pct >= 50 ? '#d67229' : '#c22934', opacity: 0.7 }} />
                     )
                   })}
                 </div>
@@ -500,13 +500,13 @@ export default function DashboardPage() {
                         <td style={{ padding: '14px 28px' }}>
                           <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                             <div style={{ width: 80, height: 4, backgroundColor: '#E2E8F0', borderRadius: 2 }}>
-                              <div style={{ height: 4, borderRadius: 2, width: `${pct}%`, backgroundColor: passed ? '#16A34A' : '#DC2626' }} />
+                              <div style={{ height: 4, borderRadius: 2, width: `${pct}%`, backgroundColor: passed ? '#00a79d' : '#c22934' }} />
                             </div>
                             <span style={{ fontSize: 13, fontWeight: 700, color: '#0B1F33' }}>{pct}%</span>
                           </div>
                         </td>
                         <td style={{ padding: '14px 28px' }}>
-                          <span style={{ fontSize: 12, fontWeight: 500, padding: '3px 10px', borderRadius: 20, backgroundColor: passed ? '#DCFCE7' : '#FEE2E2', color: passed ? '#166534' : '#991B1B' }}>
+                          <span style={{ fontSize: 12, fontWeight: 500, padding: '3px 10px', borderRadius: 20, backgroundColor: passed ? '#e6f7f6' : '#fce8e9', color: passed ? '#007a72' : '#8f1e22' }}>
                             {passed ? 'Pass' : 'Fail'}
                           </span>
                         </td>
