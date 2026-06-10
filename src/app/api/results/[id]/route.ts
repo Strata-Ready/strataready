@@ -8,12 +8,18 @@ export async function GET(request: Request, { params }: { params: Promise<{ id: 
     const { data: { user } } = await supabase.auth.getUser()
     if (!user) return Response.json({ error: 'Unauthorized' }, { status: 401 })
 
-    const { data: attempt } = await adminClient
+    // Allow admin to view any attempt
+    const adminKey = request.headers.get('x-admin-key')
+    const isAdmin = adminKey && adminKey === process.env.ADMIN_KEY
+
+    const attemptQuery = adminClient
       .from('exam_attempts')
       .select('id, started_at, completed_at, score, total_questions, passed')
       .eq('id', id)
-      .eq('user_id', user.id)
-      .single()
+
+    if (!isAdmin) attemptQuery.eq('user_id', user.id)
+
+    const { data: attempt } = await attemptQuery.single()
 
     if (!attempt) return Response.json({ error: 'Results not found' }, { status: 404 })
 

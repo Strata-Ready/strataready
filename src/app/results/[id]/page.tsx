@@ -62,7 +62,12 @@ export default function ResultsPage({ params }: { params: Promise<{ id: string }
     async function load() {
       try {
         const { id } = await params
-        const res = await fetch(`/api/results/${id}`)
+        const adminKey = sessionStorage.getItem('admin_key')
+        const params = new URLSearchParams(window.location.search)
+        const isAdmin = params.get('admin') === '1' && adminKey
+        const res = await fetch(`/api/results/${id}`, {
+          headers: isAdmin ? { 'x-admin-key': adminKey } : {}
+        })
         const data = await res.json()
         if (data.error) { setError(data.error); setLoading(false); return }
         setAttempt(data.attempt)
@@ -161,7 +166,7 @@ export default function ResultsPage({ params }: { params: Promise<{ id: string }
           </div>
         </div>
 
-        <div style={{ display: 'flex', marginBottom: 24, borderBottom: '1px solid #E2E8F0' }}>
+        <div style={{ display: 'flex', marginBottom: 24, borderBottom: '1px solid #E2E8F0', position: 'sticky', top: 0, backgroundColor: '#F7F9FC', zIndex: 10, paddingTop: 8 }}>
           {(['summary', 'review'] as const).map(tab => (
             <button key={tab} onClick={() => setActiveTab(tab)} style={{ padding: '10px 20px', fontSize: 14, fontWeight: 500, cursor: 'pointer', border: 'none', backgroundColor: 'transparent', textTransform: 'capitalize', color: activeTab === tab ? '#0B1F33' : '#94A3B8', borderBottom: `2px solid ${activeTab === tab ? '#0B1F33' : 'transparent'}`, marginBottom: -1 }}>
               {tab === 'summary' ? 'Section Summary' : `Question Review (${answers.filter(a => !a.is_correct).length} incorrect)`}
