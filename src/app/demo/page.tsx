@@ -87,10 +87,10 @@ function ScoreBar({ score, total }: { score: number; total: number }) {
     <div style={{ marginBottom: 32 }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 8 }}>
         <span style={{ fontSize: 14, color: '#64748B' }}>{score} of {total} correct</span>
-        <span style={{ fontSize: 14, fontWeight: 600, color: passed ? '#166534' : '#991B1B' }}>{pct}%</span>
+        <span style={{ fontSize: 14, fontWeight: 600, color: passed ? '#007a72' : '#8f1e22' }}>{pct}%</span>
       </div>
       <div style={{ height: 8, backgroundColor: '#E2E8F0', borderRadius: 4 }}>
-        <div style={{ height: 8, borderRadius: 4, width: `${pct}%`, backgroundColor: passed ? '#16A34A' : '#DC2626', transition: 'width 1s ease' }} />
+        <div style={{ height: 8, borderRadius: 4, width: `${pct}%`, backgroundColor: passed ? '#00a79d' : '#c22934', transition: 'width 1s ease' }} />
       </div>
     </div>
   )
@@ -159,16 +159,16 @@ export default function DemoPage() {
               </div>
               <div style={{
                 width: 72, height: 72, borderRadius: '50%',
-                backgroundColor: passed ? '#DCFCE7' : '#FEE2E2',
+                backgroundColor: passed ? '#e6f7f6' : '#fce8e9',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 flexDirection: 'column'
               }}>
-                <span style={{ fontSize: 22, fontWeight: 800, color: passed ? '#166534' : '#991B1B' }}>{pct}%</span>
+                <span style={{ fontSize: 22, fontWeight: 800, color: passed ? '#007a72' : '#8f1e22' }}>{pct}%</span>
               </div>
             </div>
             <ScoreBar score={score} total={DEMO_QUESTIONS.length} />
-            <div style={{ backgroundColor: passed ? '#F0FDF4' : '#FFF7ED', border: `1px solid ${passed ? '#BBF7D0' : '#FED7AA'}`, borderRadius: 8, padding: '14px 16px' }}>
-              <p style={{ fontSize: 14, color: passed ? '#166534' : '#9A3412', lineHeight: 1.6 }}>
+            <div style={{ backgroundColor: passed ? '#edfaf9' : '#fff3ea', border: `1px solid ${passed ? '#b3e8e5' : '#FED7AA'}`, borderRadius: 8, padding: '14px 16px' }}>
+              <p style={{ fontSize: 14, color: passed ? '#007a72' : '#9A3412', lineHeight: 1.6 }}>
                 {passed
                   ? 'Strong result on this diagnostic. The full exam covers all relevant exam material in depth — this is a sample of what to expect.'
                   : 'This diagnostic covers 10 of 21 sections. The full exam requires 70% to pass. Use the study references below to identify exactly what to review.'}
@@ -183,15 +183,15 @@ export default function DemoPage() {
               const userAnswer = answers[dq.id]
               const correct = userAnswer === dq.correct_answer
               return (
-                <div key={dq.id} style={{ backgroundColor: 'white', borderRadius: 12, border: `1px solid ${correct ? '#BBF7D0' : '#FECACA'}`, overflow: 'hidden' }}>
-                  <div style={{ padding: '16px 20px', borderBottom: `1px solid ${correct ? '#DCFCE7' : '#FEE2E2'}`, display: 'flex', alignItems: 'center', justifyContent: 'space-between', backgroundColor: correct ? '#F0FDF4' : '#FFF5F5' }}>
+                <div key={dq.id} style={{ backgroundColor: 'white', borderRadius: 12, border: `1px solid ${correct ? '#b3e8e5' : '#f2b0b3'}`, overflow: 'hidden' }}>
+                  <div style={{ padding: '16px 20px', borderBottom: `1px solid ${correct ? '#e6f7f6' : '#fce8e9'}`, display: 'flex', alignItems: 'center', justifyContent: 'space-between', backgroundColor: correct ? '#edfaf9' : '#fff0f0' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                      <span style={{ fontSize: 12, fontWeight: 600, color: correct ? '#166534' : '#991B1B' }}>
+                      <span style={{ fontSize: 12, fontWeight: 600, color: correct ? '#007a72' : '#8f1e22' }}>
                         {correct ? '✓' : '✗'} Q{i + 1}
                       </span>
                       <span style={{ fontSize: 12, color: '#64748B' }}>{dq.section}</span>
                     </div>
-                    <span style={{ fontSize: 12, fontWeight: 500, color: correct ? '#166534' : '#991B1B', backgroundColor: correct ? '#DCFCE7' : '#FEE2E2', padding: '2px 8px', borderRadius: 4 }}>
+                    <span style={{ fontSize: 12, fontWeight: 500, color: correct ? '#007a72' : '#8f1e22', backgroundColor: correct ? '#e6f7f6' : '#fce8e9', padding: '2px 8px', borderRadius: 4 }}>
                       {correct ? 'Correct' : 'Incorrect'}
                     </span>
                   </div>
@@ -199,10 +199,10 @@ export default function DemoPage() {
                     <p style={{ fontSize: 13, color: '#2D3748', lineHeight: 1.6, marginBottom: 12 }}>{dq.question_text}</p>
                     {!correct && (
                       <div style={{ display: 'flex', flexDirection: 'column', gap: 6, marginBottom: 12 }}>
-                        <div style={{ fontSize: 13, color: '#991B1B', backgroundColor: '#FEE2E2', padding: '8px 12px', borderRadius: 6 }}>
+                        <div style={{ fontSize: 13, color: '#8f1e22', backgroundColor: '#fce8e9', padding: '8px 12px', borderRadius: 6 }}>
                           <strong>Your answer ({userAnswer}):</strong> {dq[`option_${userAnswer?.toLowerCase()}` as keyof typeof dq] as string}
                         </div>
-                        <div style={{ fontSize: 13, color: '#166534', backgroundColor: '#DCFCE7', padding: '8px 12px', borderRadius: 6 }}>
+                        <div style={{ fontSize: 13, color: '#007a72', backgroundColor: '#e6f7f6', padding: '8px 12px', borderRadius: 6 }}>
                           <strong>Correct answer ({dq.correct_answer}):</strong> {dq[`option_${dq.correct_answer.toLowerCase()}` as keyof typeof dq] as string}
                         </div>
                       </div>

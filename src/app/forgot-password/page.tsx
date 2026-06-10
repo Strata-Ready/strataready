@@ -50,7 +50,7 @@ export default function ForgotPasswordPage() {
           <div style={{ backgroundColor: 'white', borderRadius: 12, border: '1px solid #E2E8F0', padding: '28px' }}>
             {sent ? (
               <div style={{ textAlign: 'center' }}>
-                <div style={{ width: 48, height: 48, backgroundColor: '#F0FDF4', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px', fontSize: 22 }}>✓</div>
+                <div style={{ width: 48, height: 48, backgroundColor: '#edfaf9', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px', fontSize: 22 }}>✓</div>
                 <h2 style={{ fontSize: 16, fontWeight: 700, color: '#0B1F33', marginBottom: 8 }}>Check your inbox</h2>
                 <p style={{ fontSize: 13, color: '#64748B', lineHeight: 1.6, marginBottom: 24 }}>
                   We sent a password reset link to <strong>{email}</strong>. It expires in 1 hour.
@@ -75,8 +75,8 @@ export default function ForgotPasswordPage() {
                 </div>
 
                 {error && (
-                  <div style={{ backgroundColor: '#FEE2E2', border: '1px solid #FECACA', borderRadius: 8, padding: '10px 14px' }}>
-                    <p style={{ fontSize: 13, color: '#991B1B' }}>{error}</p>
+                  <div style={{ backgroundColor: '#fce8e9', border: '1px solid #f2b0b3', borderRadius: 8, padding: '10px 14px' }}>
+                    <p style={{ fontSize: 13, color: '#8f1e22' }}>{error}</p>
                   </div>
                 )}
 

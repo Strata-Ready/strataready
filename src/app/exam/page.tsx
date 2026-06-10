@@ -136,7 +136,7 @@ export default function ExamPage() {
     return (
       <div style={{ minHeight: '100vh', backgroundColor: '#F7F9FC', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <div style={{ textAlign: 'center' }}>
-          <p style={{ color: '#991B1B', fontSize: 15, marginBottom: 16 }}>{error}</p>
+          <p style={{ color: '#8f1e22', fontSize: 15, marginBottom: 16 }}>{error}</p>
           <button onClick={() => router.push('/dashboard')} style={{ backgroundColor: '#0B1F33', color: '#F7F9FC', padding: '10px 20px', borderRadius: 8, border: 'none', cursor: 'pointer', fontSize: 14 }}>
             Back to dashboard
           </button>
@@ -324,8 +324,8 @@ export default function ExamPage() {
                   style={{
                     width: 34, height: 34, borderRadius: 6, fontSize: 12, fontWeight: 600,
                     border: isCurrent ? '2px solid #0B1F33' : '1.5px solid #E2E8F0',
-                    backgroundColor: isCurrent ? '#0B1F33' : answered ? '#DCFCE7' : 'white',
-                    color: isCurrent ? '#F7F9FC' : answered ? '#166534' : '#94A3B8',
+                    backgroundColor: isCurrent ? '#0B1F33' : answered ? '#e6f7f6' : 'white',
+                    color: isCurrent ? '#F7F9FC' : answered ? '#007a72' : '#94A3B8',
                     cursor: 'pointer',
                   }}
                 >

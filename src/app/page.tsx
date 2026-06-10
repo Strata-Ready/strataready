@@ -171,19 +171,19 @@ export default function Home() {
             </div>
 
             <div style={{ backgroundColor: '#F7F9FC', borderRadius: 12, overflow: 'hidden', boxShadow: '0 24px 64px rgba(0,0,0,0.4)' }}>
-              <div style={{ padding: '16px 20px', borderBottom: '1px solid #E2E8F0', display: 'flex', alignItems: 'center', justifyContent: 'space-between', backgroundColor: '#FFF5F5' }}>
+              <div style={{ padding: '16px 20px', borderBottom: '1px solid #E2E8F0', display: 'flex', alignItems: 'center', justifyContent: 'space-between', backgroundColor: '#fff0f0' }}>
                 <span style={{ fontSize: 12, fontWeight: 600, color: '#64748B', letterSpacing: '0.05em' }}>QUESTION 47 — RESULT</span>
-                <span style={{ fontSize: 12, backgroundColor: '#FEE2E2', color: '#991B1B', padding: '3px 8px', borderRadius: 4, fontWeight: 500 }}>Incorrect</span>
+                <span style={{ fontSize: 12, backgroundColor: '#fce8e9', color: '#8f1e22', padding: '3px 8px', borderRadius: 4, fontWeight: 500 }}>Incorrect</span>
               </div>
               <div style={{ padding: '20px' }}>
                 <p style={{ fontSize: 13, color: '#2D3748', lineHeight: 1.6, marginBottom: 16 }}>
                   Which of the following best describes the strata corporation&apos;s duty to repair and maintain common property under the <em>Strata Property Act</em>?
                 </p>
-                <div style={{ backgroundColor: '#FEE2E2', border: '1px solid #FECACA', borderRadius: 6, padding: '10px 12px', marginBottom: 8 }}>
-                  <p style={{ fontSize: 12, color: '#991B1B' }}><strong>Your answer (A):</strong> The strata corporation may delegate all repair responsibilities to individual owners by bylaw.</p>
+                <div style={{ backgroundColor: '#fce8e9', border: '1px solid #f2b0b3', borderRadius: 6, padding: '10px 12px', marginBottom: 8 }}>
+                  <p style={{ fontSize: 12, color: '#8f1e22' }}><strong>Your answer (A):</strong> The strata corporation may delegate all repair responsibilities to individual owners by bylaw.</p>
                 </div>
-                <div style={{ backgroundColor: '#DCFCE7', border: '1px solid #BBF7D0', borderRadius: 6, padding: '10px 12px', marginBottom: 14 }}>
-                  <p style={{ fontSize: 12, color: '#166534' }}><strong>Correct answer (C):</strong> The strata corporation must repair and maintain common property and common assets.</p>
+                <div style={{ backgroundColor: '#e6f7f6', border: '1px solid #b3e8e5', borderRadius: 6, padding: '10px 12px', marginBottom: 14 }}>
+                  <p style={{ fontSize: 12, color: '#007a72' }}><strong>Correct answer (C):</strong> The strata corporation must repair and maintain common property and common assets.</p>
                 </div>
                 <p style={{ fontSize: 12, color: '#64748B', lineHeight: 1.65, marginBottom: 12 }}>
                   Option (A) is incorrect because bylaws cannot override the statutory duty to repair — the SPA imposes this obligation directly on the strata corporation. Option (B) confuses repair obligations with insurance obligations. Option (D) incorrectly limits the duty to structural elements only.

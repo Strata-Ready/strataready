@@ -365,7 +365,7 @@ export default function DashboardPage() {
           </div>
           <div style={{ display: 'flex', gap: 10 }}>
             {inProgressAttempt && (
-              <Link href="/exam" style={{ backgroundColor: '#fdf0e6', color: '#a35520', fontSize: 13, fontWeight: 600, padding: '10px 20px', borderRadius: 8, textDecoration: 'none', border: '1px solid #FDE68A' }}>
+              <Link href="/exam" style={{ backgroundColor: '#fdf0e6', color: '#a35520', fontSize: 13, fontWeight: 600, padding: '10px 20px', borderRadius: 8, textDecoration: 'none', border: '1px solid #f9d4b0' }}>
                 ↩ Resume exam
               </Link>
             )}
@@ -460,7 +460,7 @@ export default function DashboardPage() {
                 </div>
                 <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
                   {strongSections.map(s => (
-                    <div key={s.id} style={{ backgroundColor: '#F0FDF4', border: '1px solid #BBF7D0', borderRadius: 8, padding: '8px 14px', display: 'flex', alignItems: 'center', gap: 8 }}>
+                    <div key={s.id} style={{ backgroundColor: '#edfaf9', border: '1px solid #b3e8e5', borderRadius: 8, padding: '8px 14px', display: 'flex', alignItems: 'center', gap: 8 }}>
                       <span style={{ fontSize: 13, color: '#007a72', fontWeight: 500 }}>{s.title}</span>
                       <span style={{ fontSize: 12, fontWeight: 700, color: '#00a79d' }}>{s.pct}%</span>
                     </div>

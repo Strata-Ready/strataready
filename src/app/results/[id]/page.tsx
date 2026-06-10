@@ -94,7 +94,7 @@ export default function ResultsPage({ params }: { params: Promise<{ id: string }
     return (
       <div style={{ minHeight: '100vh', backgroundColor: '#F7F9FC', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <div style={{ textAlign: 'center' }}>
-          <p style={{ color: '#991B1B', fontSize: 14, marginBottom: 16 }}>{error || 'Results not found.'}</p>
+          <p style={{ color: '#8f1e22', fontSize: 14, marginBottom: 16 }}>{error || 'Results not found.'}</p>
           <Link href="/dashboard" style={{ backgroundColor: '#0B1F33', color: '#F7F9FC', padding: '10px 20px', borderRadius: 8, textDecoration: 'none', fontSize: 14 }}>Back to dashboard</Link>
         </div>
       </div>
@@ -143,13 +143,13 @@ export default function ResultsPage({ params }: { params: Promise<{ id: string }
               <h1 style={{ fontSize: 32, fontWeight: 800, color: '#0B1F33', letterSpacing: '-0.8px' }}>{attempt.score}/{attempt.total_questions} correct</h1>
               <p style={{ fontSize: 13, color: '#64748B', marginTop: 4 }}>Time: {elapsed(attempt.started_at, attempt.completed_at)}</p>
             </div>
-            <div style={{ width: 80, height: 80, borderRadius: '50%', backgroundColor: passed ? '#DCFCE7' : '#FEE2E2', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-              <span style={{ fontSize: 24, fontWeight: 800, color: passed ? '#166534' : '#991B1B' }}>{pct}%</span>
+            <div style={{ width: 80, height: 80, borderRadius: '50%', backgroundColor: passed ? '#e6f7f6' : '#fce8e9', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+              <span style={{ fontSize: 24, fontWeight: 800, color: passed ? '#007a72' : '#8f1e22' }}>{pct}%</span>
             </div>
           </div>
           <div style={{ marginBottom: 16 }}>
             <div style={{ height: 8, backgroundColor: '#E2E8F0', borderRadius: 4, marginBottom: 6 }}>
-              <div style={{ height: 8, borderRadius: 4, width: `${pct}%`, backgroundColor: passed ? '#16A34A' : '#DC2626' }} />
+              <div style={{ height: 8, borderRadius: 4, width: `${pct}%`, backgroundColor: passed ? '#00a79d' : '#c22934' }} />
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12, color: '#94A3B8' }}>
               <span>0%</span>
@@ -157,8 +157,8 @@ export default function ResultsPage({ params }: { params: Promise<{ id: string }
               <span>100%</span>
             </div>
           </div>
-          <div style={{ backgroundColor: passed ? '#F0FDF4' : '#FFF7ED', border: `1px solid ${passed ? '#BBF7D0' : '#FED7AA'}`, borderRadius: 8, padding: '14px 16px' }}>
-            <p style={{ fontSize: 14, color: passed ? '#166534' : '#9A3412', lineHeight: 1.6 }}>
+          <div style={{ backgroundColor: passed ? '#edfaf9' : '#fff3ea', border: `1px solid ${passed ? '#b3e8e5' : '#FED7AA'}`, borderRadius: 8, padding: '14px 16px' }}>
+            <p style={{ fontSize: 14, color: passed ? '#007a72' : '#9A3412', lineHeight: 1.6 }}>
               {passed
                 ? 'Congratulations — you passed. Review the results below to reinforce your weaker areas before the real exam.'
                 : `You scored ${pct}% — ${70 - pct}% below the passing mark. Use the study references below to focus your preparation.`}
@@ -180,10 +180,10 @@ export default function ResultsPage({ params }: { params: Promise<{ id: string }
               <div key={s.sectionId} style={{ backgroundColor: 'white', borderRadius: 10, border: '1px solid #E2E8F0', padding: '16px 20px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6 }}>
                   <span style={{ fontSize: 13, fontWeight: 500, color: '#0B1F33' }}>{s.title}</span>
-                  <span style={{ fontSize: 13, fontWeight: 700, color: s.pct >= 70 ? '#166534' : s.pct >= 50 ? '#92400E' : '#991B1B' }}>{s.pct}%</span>
+                  <span style={{ fontSize: 13, fontWeight: 700, color: s.pct >= 70 ? '#007a72' : s.pct >= 50 ? '#a35520' : '#8f1e22' }}>{s.pct}%</span>
                 </div>
                 <div style={{ height: 6, backgroundColor: '#E2E8F0', borderRadius: 3 }}>
-                  <div style={{ height: 6, borderRadius: 3, width: `${s.pct}%`, backgroundColor: s.pct >= 70 ? '#16A34A' : s.pct >= 50 ? '#D97706' : '#DC2626' }} />
+                  <div style={{ height: 6, borderRadius: 3, width: `${s.pct}%`, backgroundColor: s.pct >= 70 ? '#00a79d' : s.pct >= 50 ? '#d67229' : '#c22934' }} />
                 </div>
                 <p style={{ fontSize: 12, color: '#94A3B8', marginTop: 4 }}>{s.correct}/{s.total} correct</p>
               </div>
@@ -200,19 +200,19 @@ export default function ResultsPage({ params }: { params: Promise<{ id: string }
               const selectedText = answer.selected_answer ? optionText(answer, answer.selected_answer) : 'Not answered'
               const correctText = optionText(answer, q.correct_answer)
               return (
-                <div key={answer.id} style={{ backgroundColor: 'white', borderRadius: 12, border: `1px solid ${correct ? '#BBF7D0' : '#FECACA'}`, overflow: 'hidden' }}>
-                  <div style={{ padding: '14px 20px', borderBottom: `1px solid ${correct ? '#DCFCE7' : '#FEE2E2'}`, display: 'flex', alignItems: 'center', justifyContent: 'space-between', backgroundColor: correct ? '#F0FDF4' : '#FFF5F5' }}>
-                    <span style={{ fontSize: 12, fontWeight: 700, color: correct ? '#166534' : '#991B1B' }}>{correct ? '✓' : '✗'} Q{i + 1}</span>
-                    <span style={{ fontSize: 12, fontWeight: 500, padding: '2px 8px', borderRadius: 4, backgroundColor: correct ? '#DCFCE7' : '#FEE2E2', color: correct ? '#166534' : '#991B1B' }}>{correct ? 'Correct' : 'Incorrect'}</span>
+                <div key={answer.id} style={{ backgroundColor: 'white', borderRadius: 12, border: `1px solid ${correct ? '#b3e8e5' : '#f2b0b3'}`, overflow: 'hidden' }}>
+                  <div style={{ padding: '14px 20px', borderBottom: `1px solid ${correct ? '#e6f7f6' : '#fce8e9'}`, display: 'flex', alignItems: 'center', justifyContent: 'space-between', backgroundColor: correct ? '#edfaf9' : '#fff0f0' }}>
+                    <span style={{ fontSize: 12, fontWeight: 700, color: correct ? '#007a72' : '#8f1e22' }}>{correct ? '✓' : '✗'} Q{i + 1}</span>
+                    <span style={{ fontSize: 12, fontWeight: 500, padding: '2px 8px', borderRadius: 4, backgroundColor: correct ? '#e6f7f6' : '#fce8e9', color: correct ? '#007a72' : '#8f1e22' }}>{correct ? 'Correct' : 'Incorrect'}</span>
                   </div>
                   <div style={{ padding: '16px 20px' }}>
                     <p style={{ fontSize: 13, color: '#2D3748', lineHeight: 1.65, marginBottom: 14 }}>{q.question_text}</p>
                     {!correct && (
                       <div style={{ display: 'flex', flexDirection: 'column', gap: 6, marginBottom: 14 }}>
-                        <div style={{ fontSize: 13, color: '#991B1B', backgroundColor: '#FEE2E2', padding: '8px 12px', borderRadius: 6 }}>
+                        <div style={{ fontSize: 13, color: '#8f1e22', backgroundColor: '#fce8e9', padding: '8px 12px', borderRadius: 6 }}>
                           <strong>Your answer ({answer.selected_answer || '—'}):</strong> {selectedText}
                         </div>
-                        <div style={{ fontSize: 13, color: '#166534', backgroundColor: '#DCFCE7', padding: '8px 12px', borderRadius: 6 }}>
+                        <div style={{ fontSize: 13, color: '#007a72', backgroundColor: '#e6f7f6', padding: '8px 12px', borderRadius: 6 }}>
                           <strong>Correct answer ({q.correct_answer}):</strong> {correctText}
                         </div>
                       </div>

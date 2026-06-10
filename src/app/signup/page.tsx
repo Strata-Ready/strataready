@@ -18,7 +18,7 @@ const CARD_STYLE = {
       fontFamily: 'inherit',
       '::placeholder': { color: '#94A3B8' },
     },
-    invalid: { color: '#991B1B' },
+    invalid: { color: '#8f1e22' },
   },
 }
 
@@ -173,8 +173,8 @@ function SignupForm() {
           </div>
 
           {error && (
-            <div style={{ backgroundColor: '#FEE2E2', border: '1px solid #FECACA', borderRadius: 8, padding: '10px 14px' }}>
-              <p style={{ fontSize: 13, color: '#991B1B' }}>{error}</p>
+            <div style={{ backgroundColor: '#fce8e9', border: '1px solid #f2b0b3', borderRadius: 8, padding: '10px 14px' }}>
+              <p style={{ fontSize: 13, color: '#8f1e22' }}>{error}</p>
             </div>
           )}
 

@@ -192,13 +192,13 @@ export default function AdminPage() {
                       <p style={{ fontSize: 12, color: '#94A3B8' }}>{user.email}</p>
                     </td>
                     <td style={{ padding: '14px 20px' }}>
-                      <span style={{ fontSize: 11, fontWeight: 600, padding: '2px 8px', borderRadius: 20, backgroundColor: user.plan === 'unlimited' ? '#DCFCE7' : '#F0F4F8', color: user.plan === 'unlimited' ? '#166534' : '#64748B' }}>
+                      <span style={{ fontSize: 11, fontWeight: 600, padding: '2px 8px', borderRadius: 20, backgroundColor: user.plan === 'unlimited' ? '#e6f7f6' : '#F0F4F8', color: user.plan === 'unlimited' ? '#007a72' : '#64748B' }}>
                         {user.plan === 'unlimited' ? 'Full prep' : 'Per exam'}
                       </span>
                     </td>
                     <td style={{ padding: '14px 20px', fontSize: 13, color: '#64748B', whiteSpace: 'nowrap' }}>{formatDate(user.created_at)}</td>
                     <td style={{ padding: '14px 20px', fontSize: 13, fontWeight: 600, color: '#0B1F33' }}>{stats.exams}</td>
-                    <td style={{ padding: '14px 20px', fontSize: 13, fontWeight: 600, color: stats.avgScore >= 70 ? '#166534' : stats.avgScore >= 50 ? '#92400E' : stats.exams === 0 ? '#94A3B8' : '#991B1B' }}>
+                    <td style={{ padding: '14px 20px', fontSize: 13, fontWeight: 600, color: stats.avgScore >= 70 ? '#007a72' : stats.avgScore >= 50 ? '#a35520' : stats.exams === 0 ? '#94A3B8' : '#8f1e22' }}>
                       {stats.exams > 0 ? `${stats.avgScore}%` : '—'}
                     </td>
                     <td style={{ padding: '14px 20px', fontSize: 13, color: '#64748B' }}>
