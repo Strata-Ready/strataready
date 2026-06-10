@@ -12,12 +12,12 @@ export async function GET(request: Request, { params }: { params: Promise<{ id: 
     const adminKey = request.headers.get('x-admin-key')
     const isAdmin = adminKey && adminKey === process.env.ADMIN_KEY
 
-    const attemptQuery = adminClient
+    let attemptQuery = adminClient
       .from('exam_attempts')
       .select('id, started_at, completed_at, score, total_questions, passed')
       .eq('id', id)
 
-    if (!isAdmin) attemptQuery.eq('user_id', user.id)
+    if (!isAdmin) attemptQuery = attemptQuery.eq('user_id', user.id)
 
     const { data: attempt } = await attemptQuery.single()
 

@@ -29,8 +29,8 @@ function SkillsMap({ sections }: { sections: SectionPerf[] }) {
     const midAngle = (startAngle + endAngle) / 2
     const fillR = innerR + (outerR - innerR) * (s.pct / 100)
     const labelR = outerR + 14
-    const color = s.pct >= 70 ? '#16A34A' : s.pct >= 50 ? '#D97706' : '#DC2626'
-    const bgColor = s.pct >= 70 ? '#DCFCE7' : s.pct >= 50 ? '#FEF3C7' : '#FEE2E2'
+    const color = s.pct >= 70 ? '#00a79d' : s.pct >= 50 ? '#d67229' : '#c22934'
+    const bgColor = s.pct >= 70 ? '#e6f7f6' : s.pct >= 50 ? '#fdf0e6' : '#fce8e9'
     const large = endAngle - startAngle > Math.PI ? 1 : 0
     const bgX1 = cx + outerR * Math.cos(startAngle); const bgY1 = cy + outerR * Math.sin(startAngle)
     const bgX2 = cx + outerR * Math.cos(endAngle); const bgY2 = cy + outerR * Math.sin(endAngle)
@@ -97,7 +97,7 @@ function ExamReadiness({ attempts, sectionPerf }: { attempts: Attempt[], section
   const readiness = Math.round(avgScore * 0.30 + tier1Score * 0.25 + examBonus * 0.15 + trendScore * 0.10 + recentAvg * 0.20)
   const capped = Math.min(readiness, 95)
   const label = capped >= 80 ? 'Exam Ready' : capped >= 65 ? 'Nearly Ready' : capped >= 45 ? 'In Progress' : 'Early Stage'
-  const color = capped >= 80 ? '#16A34A' : capped >= 65 ? '#00a79d' : capped >= 45 ? '#D97706' : '#DC2626'
+  const color = capped >= 80 ? '#00a79d' : capped >= 65 ? '#00a79d' : capped >= 45 ? '#d67229' : '#c22934'
   const message = capped >= 80 ? 'Scores suggest well prepared.' : capped >= 65 ? 'Close — focus on weak sections.' : capped >= 45 ? 'In progress — more exams needed.' : 'Early stage.'
   const circumference = 2 * Math.PI * 44
   const dash = (capped / 100) * circumference
@@ -172,7 +172,7 @@ export default function AdminUserPage({ params }: { params: Promise<{ id: string
   if (error || !user) return (
     <div style={{ minHeight: '100vh', backgroundColor: '#F7F9FC', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
       <div style={{ textAlign: 'center' }}>
-        <p style={{ color: '#991B1B', fontSize: 14, marginBottom: 16 }}>{error || 'User not found.'}</p>
+        <p style={{ color: '#8f1e22', fontSize: 14, marginBottom: 16 }}>{error || 'User not found.'}</p>
         <Link href="/admin" style={{ color: '#00a79d', fontSize: 14, fontWeight: 600, textDecoration: 'none' }}>← Back to admin</Link>
       </div>
     </div>
@@ -209,7 +209,7 @@ export default function AdminUserPage({ params }: { params: Promise<{ id: string
               <h1 style={{ fontSize: 24, fontWeight: 800, color: '#0B1F33', letterSpacing: '-0.5px', marginBottom: 4 }}>{user.full_name || 'No name'}</h1>
               <p style={{ fontSize: 14, color: '#64748B', marginBottom: 12 }}>{user.email}</p>
               <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', alignItems: 'center' }}>
-                <span style={{ fontSize: 11, fontWeight: 600, padding: '3px 10px', borderRadius: 20, backgroundColor: user.plan === 'unlimited' ? '#DCFCE7' : '#F0F4F8', color: user.plan === 'unlimited' ? '#166534' : '#64748B' }}>
+                <span style={{ fontSize: 11, fontWeight: 600, padding: '3px 10px', borderRadius: 20, backgroundColor: user.plan === 'unlimited' ? '#e6f7f6' : '#F0F4F8', color: user.plan === 'unlimited' ? '#007a72' : '#64748B' }}>
                   {user.plan === 'unlimited' ? 'Full Prep Access' : 'Per Exam'}
                 </span>
                 <span style={{ fontSize: 11, color: '#94A3B8' }}>Joined {formatDate(user.created_at)}</span>
@@ -274,13 +274,13 @@ export default function AdminUserPage({ params }: { params: Promise<{ id: string
                         <td style={{ padding: '14px 28px' }}>
                           <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                             <div style={{ width: 80, height: 4, backgroundColor: '#E2E8F0', borderRadius: 2 }}>
-                              <div style={{ height: 4, borderRadius: 2, width: `${pct}%`, backgroundColor: passed ? '#16A34A' : '#DC2626' }} />
+                              <div style={{ height: 4, borderRadius: 2, width: `${pct}%`, backgroundColor: passed ? '#00a79d' : '#c22934' }} />
                             </div>
                             <span style={{ fontSize: 13, fontWeight: 700, color: '#0B1F33' }}>{pct}%</span>
                           </div>
                         </td>
                         <td style={{ padding: '14px 28px' }}>
-                          <span style={{ fontSize: 12, fontWeight: 500, padding: '3px 10px', borderRadius: 20, backgroundColor: passed ? '#DCFCE7' : '#FEE2E2', color: passed ? '#166534' : '#991B1B' }}>
+                          <span style={{ fontSize: 12, fontWeight: 500, padding: '3px 10px', borderRadius: 20, backgroundColor: passed ? '#e6f7f6' : '#fce8e9', color: passed ? '#007a72' : '#8f1e22' }}>
                             {passed ? 'Pass' : 'Fail'}
                           </span>
                         </td>
