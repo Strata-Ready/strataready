@@ -63,8 +63,8 @@ export default function ResultsPage({ params }: { params: Promise<{ id: string }
       try {
         const { id } = await params
         const adminKey = sessionStorage.getItem('admin_key')
-        const params = new URLSearchParams(window.location.search)
-        const isAdmin = params.get('admin') === '1' && adminKey
+        const urlParams = new URLSearchParams(window.location.search)
+        const isAdmin = urlParams.get('admin') === '1' && adminKey
         const res = await fetch(`/api/results/${id}`, {
           headers: isAdmin ? { 'x-admin-key': adminKey } : {}
         })
