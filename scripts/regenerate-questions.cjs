@@ -17,13 +17,37 @@ async function getKBContent(sectionId) {
     .eq('id', sectionId)
     .single()
 
-  const { data: docs } = await supabase
+  // Legislation first (source of truth), then assignments, then chapters
+  const { data: legislation } = await supabase
     .from('kb_documents')
     .select('extracted_text')
-    .or(`lesson_number.eq.${section.number},chapter_number.eq.${section.number}`)
-    .limit(2)
+    .eq('doc_type', 'data')
 
-  const text = (docs || []).map(d => d.extracted_text).join('\n\n').slice(0, 6000)
+  const { data: assignments } = await supabase
+    .from('kb_documents')
+    .select('extracted_text')
+    .eq('doc_type', 'assignment')
+    .or(`lesson_number.eq.${section.number},chapter_number.eq.${section.number}`)
+
+  const { data: chapters } = await supabase
+    .from('kb_documents')
+    .select('extracted_text')
+    .eq('doc_type', 'chapter')
+    .or(`lesson_number.eq.${section.number},chapter_number.eq.${section.number}`)
+
+  const legislationText = (legislation || []).map(d => d.extracted_text).join('\n\n').slice(0, 4000)
+  const assignmentText = (assignments || []).map(d => d.extracted_text).join('\n\n').slice(0, 1500)
+  const chapterText = (chapters || []).map(d => d.extracted_text).join('\n\n').slice(0, 500)
+
+  const text = [
+    '=== LEGISLATION (SOURCE OF TRUTH — takes precedence over all other material) ===',
+    legislationText,
+    '=== ASSIGNMENT QUESTIONS (style and format guide only) ===',
+    assignmentText,
+    '=== CHAPTER CONTENT (background context only) ===',
+    chapterText,
+  ].filter(Boolean).join('\n\n')
+
   return { section, text }
 }
 
