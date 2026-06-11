@@ -63,6 +63,18 @@ async function parsePDF(buffer) {
 async function processFile(filePath) {
   const fileName = filePath.split('/').pop()
   process.stdout.write(`${filePath} ... `)
+  
+  // Handle txt files directly
+  if (fileName.endsWith('.txt')) {
+    const { data: fileData, error } = await supabase.storage.from('knowledge-base').download(filePath)
+    if (error || !fileData) { console.log('FAILED'); return }
+    const buffer = Buffer.from(await fileData.arrayBuffer())
+    const text = buffer.toString('utf8')
+    const meta = detectFileInfo(fileName)
+    await supabase.from('kb_documents').insert({ file_path: filePath, file_name: fileName, doc_type: meta.docType, lesson_number: meta.lessonNumber, chapter_number: meta.chapterNumber, act_name: meta.actName, extracted_text: text, page_count: 1 })
+    console.log('OK (txt)')
+    return
+  }
   try {
     const { data, error } = await supabase.storage.from('knowledge-base').download(filePath)
     if (error || !data) { console.log(`FAILED: ${error?.message}`); return }

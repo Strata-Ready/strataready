@@ -35,7 +35,7 @@ async function getKBContent(sectionId) {
     .eq('doc_type', 'chapter')
     .or(`lesson_number.eq.${section.number},chapter_number.eq.${section.number}`)
 
-  const legislationText = (legislation || []).map(d => d.extracted_text).join('\n\n').slice(0, 4000)
+  const legislationText = (legislation || []).map(d => d.extracted_text).join('\n\n').slice(0, 10000)
   const assignmentText = (assignments || []).map(d => d.extracted_text).join('\n\n').slice(0, 1500)
   const chapterText = (chapters || []).map(d => d.extracted_text).join('\n\n').slice(0, 500)
 
