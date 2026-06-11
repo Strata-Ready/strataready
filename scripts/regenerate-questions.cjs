@@ -89,7 +89,12 @@ QUESTION PATTERNS TO USE (vary these across your 20 questions — use each type 
 6. "Which of the following MUST / is REQUIRED to..." — test mandatory obligations
 7. "Under the [Act], which of the following is correct regarding [specific situation]?"
 8. Scenario → "What should [character] do?" — test procedural knowledge
-9. Calculation scenario → strata fee, CRF contribution, depreciation calculation
+9. Calculation scenario → strata fee, CRF contribution, depreciation calculation. CRITICAL RULES FOR CALCULATION QUESTIONS:
+   - Calculate the correct answer FIRST using the numbers in the scenario
+   - Verify that the correct answer is one of the four options BEFORE finalizing the question
+   - Build distractors by using common errors: wrong formula (e.g. dividing by number of units instead of total unit entitlement), omitting the CRF contribution, using monthly instead of annual figures, or rounding errors
+   - NEVER publish a calculation question where the correct answer does not exactly match one of the four options
+   - Always show the calculation in the explanation: e.g. "(120/6000) × $340,000 = $6,800/year ÷ 12 = $566.67/month"
 10. Chronological/procedural → "What is the correct sequence of steps?" or "What must happen FIRST?"
 
 QUESTION TYPE BALANCE — for each section of 20 questions:
