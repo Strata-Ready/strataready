@@ -116,7 +116,7 @@ export default function Home() {
               {
                 num: '02',
                 title: 'Receive instant feedback',
-                desc: 'The moment you finish, you'll see exactly how you performed. Every incorrect answer includes a detailed explanation, the correct answer, and references to the legislation that supports it.',
+                desc: 'The moment you finish, you&apos;ll see exactly how you performed. Every incorrect answer includes a detailed explanation, the correct answer, and references to the legislation that supports it.',
               },
               {
                 num: '03',
