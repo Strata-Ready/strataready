@@ -50,17 +50,17 @@ export default function Home() {
               <span style={{ color: '#00a79d', fontSize: 12, fontWeight: 500, letterSpacing: '0.08em', textTransform: 'uppercase' }}>BC Strata Management Exam Prep</span>
             </div>
             <h1 style={{ fontSize: 56, fontWeight: 700, color: '#F7F9FC', lineHeight: 1.05, letterSpacing: '-1.5px', marginBottom: 24 }}>
-              Two attempts.<br />Make the first<br />one count.
+              Pass the BC Strata Management<br />Licensing Exam with Confidence.
             </h1>
             <p style={{ fontSize: 18, color: 'rgba(247,249,252,0.65)', lineHeight: 1.7, marginBottom: 12, maxWidth: 520 }}>
-              Practice with realistic BC strata management licensing exam questions. Identify weak areas, study with source-cited explanations, and verify your readiness before writing the real exam.
+              Practice with realistic licensing exams that mirror the real test. Get instant feedback, legislation-backed explanations, and a clear understanding of what to study before exam day.
             </p>
             <p style={{ fontSize: 15, color: 'rgba(247,249,252,0.4)', lineHeight: 1.6, marginBottom: 40, maxWidth: 520 }}>
               100 questions · 3 hours · 70% required to pass.
             </p>
             <div className="flex flex-col sm:flex-row items-start gap-4">
               <Link href="/demo" style={{ backgroundColor: '#00a79d', color: '#ffffff', fontSize: 15, fontWeight: 600, padding: '14px 28px', borderRadius: 8, letterSpacing: '-0.2px', whiteSpace: 'nowrap' }} className="hover:opacity-90 transition-opacity">
-                Start Free Diagnostic Exam →
+                Take Free Diagnostic Exam →
               </Link>
               <a href="#how-it-works" style={{ color: 'rgba(247,249,252,0.6)', fontSize: 14, borderBottom: '1px solid rgba(247,249,252,0.2)', paddingBottom: 1, marginTop: 14 }} className="hover:text-white transition-colors">
                 How it works
@@ -100,10 +100,10 @@ export default function Home() {
           <div className="mb-16">
             <p style={{ fontSize: 11, fontWeight: 600, color: '#00a79d', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 12 }}>The Exam</p>
             <h2 style={{ fontSize: 48, fontWeight: 700, color: '#0B1F33', letterSpacing: '-0.8px', maxWidth: 640, marginBottom: 16 }}>
-              What the BC Strata Management Licensing Exam Looks Like
+              Prepare for the Exam You'll Actually Write
             </h2>
             <p style={{ fontSize: 16, color: '#64748B', lineHeight: 1.7, maxWidth: 680 }}>
-              The Strata Management Licensing Examination consists of 100 multiple-choice questions completed over three hours. A minimum score of 70% is required to pass. StrataReady helps you prepare under realistic exam conditions so you can assess your readiness before writing the official examination.
+              Instead of simply studying the material, practise under the same conditions you'll face on exam day. Build confidence, identify weak areas, and know you're ready before you pay to write the real examination.
             </p>
           </div>
           <div className="grid md:grid-cols-3 gap-12">
@@ -111,17 +111,17 @@ export default function Home() {
               {
                 num: '01',
                 title: 'Practice under real exam conditions',
-                desc: '100 multiple-choice questions across all exam topics, weighted to reflect the actual licensing examination. Timed. The same format as the BC Strata Management licensing examination — so there are no surprises on exam day.',
+                desc: 'Complete a full 100-question practice exam designed to reflect the format, timing, and topic weighting of the BC Strata Management Licensing Examination. No surprises. No guesswork.',
               },
               {
                 num: '02',
-                title: 'Receive your score instantly',
-                desc: 'No waiting. Your score appears the moment you submit. Every wrong answer is shown alongside the correct answer and a clear explanation of why — including the specific legislation that applies.',
+                title: 'Receive instant feedback',
+                desc: 'The moment you finish, you'll see exactly how you performed. Every incorrect answer includes a detailed explanation, the correct answer, and references to the legislation that supports it.',
               },
               {
                 num: '03',
                 title: 'Know exactly what to study',
-                desc: 'A personalised skills map identifies your weak areas with direct links to the Strata Property Act, RESA, PIPA, and other authoritative sources so you can study the right material before your next attempt.',
+                desc: 'Instead of wondering what to review next, StrataReady identifies your weakest topics and directs you to the legislation and regulatory guidance that matters most.',
               },
             ].map(item => (
               <div key={item.num}>
@@ -149,12 +149,18 @@ export default function Home() {
             <div>
               <p style={{ fontSize: 11, fontWeight: 600, color: '#00a79d', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 12 }}>Why StrataReady</p>
               <h2 style={{ fontSize: 48, fontWeight: 700, color: '#F7F9FC', letterSpacing: '-0.8px', marginBottom: 20 }}>
-                Every Answer Includes a Source Citation
+                Learn the Law—Not Just the Answers
               </h2>
-              <p style={{ fontSize: 16, color: 'rgba(247,249,252,0.6)', lineHeight: 1.7, marginBottom: 24 }}>
-                Every explanation links back to the relevant legislation and regulatory sources. Instead of simply showing the correct answer, StrataReady shows where the answer comes from and why it is correct.
+              <p style={{ fontSize: 16, color: 'rgba(247,249,252,0.6)', lineHeight: 1.7, marginBottom: 8 }}>
+                Anyone can show you the correct answer.
               </p>
-              <p style={{ fontSize: 15, color: 'rgba(247,249,252,0.5)', lineHeight: 1.7, marginBottom: 24 }}>Students can verify answers against:</p>
+              <p style={{ fontSize: 16, color: 'rgba(247,249,252,0.85)', fontWeight: 600, lineHeight: 1.7, marginBottom: 16 }}>
+                StrataReady shows why it&apos;s correct.
+              </p>
+              <p style={{ fontSize: 16, color: 'rgba(247,249,252,0.6)', lineHeight: 1.7, marginBottom: 24 }}>
+                Every explanation is backed by legislation or regulatory guidance, helping you build real understanding instead of memorizing practice questions.
+              </p>
+              <p style={{ fontSize: 15, color: 'rgba(247,249,252,0.5)', lineHeight: 1.7, marginBottom: 24 }}>Every explanation links directly to authoritative BC sources, including:</p>
               <ul style={{ listStyle: 'none', padding: 0, margin: 0 }} className="space-y-3">
                 {[
                   'Strata Property Act and Regulation',
@@ -218,10 +224,9 @@ export default function Home() {
               </p>
               <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 32px 0' }}>
                 {[
-                  '21 sections, hundreds of cards',
-                  'Organized to match the exam skills map',
-                  'Shuffle cards each study session',
-                  'Updated for 2024 legislative amendments',
+                  '21 curriculum sections',
+                  'Hundreds of flashcards',
+                  'Updated for current legislation',
                 ].map(item => (
                   <li key={item} style={{ display: 'flex', alignItems: 'center', gap: 10, fontSize: 14, color: '#475569', marginBottom: 10 }}>
                     <div style={{ width: 4, height: 4, backgroundColor: '#00a79d', borderRadius: '50%', flexShrink: 0 }}></div>
@@ -244,10 +249,10 @@ export default function Home() {
           <div className="mb-12">
             <p style={{ fontSize: 11, fontWeight: 600, color: '#00a79d', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 12 }}>Curriculum</p>
             <h2 style={{ fontSize: 48, fontWeight: 700, color: '#0B1F33', letterSpacing: '-0.8px', marginBottom: 16 }}>
-              Coverage Across All Major Licensing Topics
+              Complete Coverage of the Licensing Curriculum
             </h2>
             <p style={{ fontSize: 16, color: '#64748B', lineHeight: 1.7, maxWidth: 600 }}>
-              Practice questions are organized across all subject areas tested in the BC Strata Management Licensing curriculum, weighted to reflect the actual exam emphasis.
+              The licensing exam tests much more than the Strata Property Act. StrataReady covers every major subject area in the BC licensing curriculum — from governance and budgeting to insurance, contracts, privacy, accounting, and agency law — weighted to reflect the actual examination.
             </p>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
@@ -288,13 +293,13 @@ export default function Home() {
         <div className="max-w-6xl mx-auto px-6">
           <div className="mb-16">
             <p style={{ fontSize: 11, fontWeight: 600, color: '#00a79d', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 12 }}>Pricing</p>
-            <h2 style={{ fontSize: 48, fontWeight: 700, color: '#0B1F33', letterSpacing: '-0.8px' }}>Simple. No subscriptions.</h2>
-            <p style={{ fontSize: 16, color: '#64748B', marginTop: 8 }}>Less than the cost of a single exam attempt. A fraction of the cost of failing one.</p>
+            <h2 style={{ fontSize: 48, fontWeight: 700, color: '#0B1F33', letterSpacing: '-0.8px' }}>Simple Pricing. No Subscription Required.</h2>
+            <p style={{ fontSize: 16, color: '#64748B', marginTop: 8 }}>Preparing properly costs far less than rewriting the licensing exam. Choose a single practice exam or unlock unlimited access until you&apos;re confident you&apos;re ready.</p>
           </div>
           <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
             <div style={{ border: '1px solid #E2E8F0', borderRadius: 12, padding: '28px 24px', backgroundColor: 'white' }}>
               <p style={{ fontSize: 13, fontWeight: 600, color: '#0B1F33', marginBottom: 4 }}>Free Diagnostic</p>
-              <p style={{ fontSize: 13, color: '#94A3B8', marginBottom: 24 }}>See what StrataReady can do</p>
+              <p style={{ fontSize: 13, color: '#94A3B8', marginBottom: 24 }}>Find out how prepared you are in just a few minutes.</p>
               <p style={{ fontSize: 36, fontWeight: 700, color: '#0B1F33', letterSpacing: '-1px', marginBottom: 24 }}>$0</p>
               <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 28px 0' }} className="space-y-2">
                 {['5 sample questions', 'Instant score', 'Sample study references', 'No account required'].map(f => (
@@ -312,7 +317,7 @@ export default function Home() {
                 MOST POPULAR
               </div>
               <p style={{ fontSize: 13, fontWeight: 600, color: '#0B1F33', marginBottom: 4 }}>Per Exam</p>
-              <p style={{ fontSize: 13, color: '#94A3B8', marginBottom: 24 }}>Pay as you go</p>
+              <p style={{ fontSize: 13, color: '#94A3B8', marginBottom: 24 }}>One complete licensing simulation.</p>
               <div style={{ marginBottom: 24 }}>
                 <span style={{ fontSize: 36, fontWeight: 700, color: '#0B1F33', letterSpacing: '-1px' }}>$19.99</span>
                 <span style={{ fontSize: 13, color: '#94A3B8', marginLeft: 4 }}>/ attempt</span>
@@ -330,13 +335,13 @@ export default function Home() {
             </div>
             <div style={{ border: '1px solid #E2E8F0', borderRadius: 12, padding: '28px 24px', backgroundColor: 'white' }}>
               <p style={{ fontSize: 13, fontWeight: 600, color: '#0B1F33', marginBottom: 4 }}>Full Prep Access</p>
-              <p style={{ fontSize: 13, color: '#94A3B8', marginBottom: 24 }}>Best value for serious prep</p>
+              <p style={{ fontSize: 13, color: '#94A3B8', marginBottom: 24 }}>Everything you need to prepare with confidence.</p>
               <div style={{ marginBottom: 24 }}>
                 <span style={{ fontSize: 36, fontWeight: 700, color: '#0B1F33', letterSpacing: '-1px' }}>$49.99</span>
                 <span style={{ fontSize: 13, color: '#94A3B8', marginLeft: 4 }}>one-time</span>
               </div>
               <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 28px 0' }} className="space-y-2">
-                {['Unlimited exam attempts', 'Everything in Per Exam', 'Progress tracking over time', 'Score trend analysis', 'Exam readiness score'].map(f => (
+                {['Unlimited practice exams', 'Flashcards', 'Progress tracking', 'Performance history', 'Exam readiness insights'].map(f => (
                   <li key={f} style={{ fontSize: 13, color: '#64748B', display: 'flex', gap: 8, alignItems: 'center' }}>
                     <span style={{ color: '#00a79d', fontWeight: 600 }}>✓</span>{f}
                   </li>
@@ -372,12 +377,12 @@ export default function Home() {
                 a: 'Under the challenge process, candidates are permitted two attempts at the licensing examination. This is why preparation matters — there is limited room for error.',
               },
               {
-                q: 'Is the Strata Management Licensing Exam difficult?',
-                a: 'Many students find the breadth of material challenging. The exam covers legislation, governance, accounting, contracts, budgeting, agency law, and strata operations across 20+ subject areas. Candidates who take multiple timed practice exams consistently perform better than those who study from other sources alone.',
+                q: 'How difficult is the BC Strata Management Licensing Exam?',
+                a: 'The exam covers legislation, governance, budgeting, accounting, contracts, agency law, insurance, privacy, and strata operations. Many candidates find the breadth of material more challenging than the individual questions. The best preparation is repeated practice under timed conditions followed by careful review of every incorrect answer.',
               },
               {
-                q: 'How should I prepare for the exam?',
-                a: 'The most effective preparation combines course study with repeated practice exams. Focus on high-weight areas like the Strata Property Act, governance, budgeting, and the CRF — these sections carry the most marks. Review every wrong answer and trace it back to the source legislation.',
+                q: 'What is the best way to prepare?',
+                a: 'Start by identifying your current knowledge with a practice exam. Review every explanation carefully, study the supporting legislation, then repeat the process until your scores are consistently above the passing mark. The goal isn't simply to answer questions correctly — it's to understand why the correct answer is correct.',
               },
               {
                 q: 'Are StrataReady questions based on BC legislation?',
@@ -410,13 +415,13 @@ export default function Home() {
         <div style={{ position: 'absolute', inset: 0, backgroundImage: 'url(/hero-building.jpg)', backgroundSize: 'cover', backgroundPosition: 'center', opacity: 0.08 }} />
         <div className="max-w-3xl mx-auto px-6 text-center relative" style={{ zIndex: 1 }}>
           <h2 style={{ fontSize: 48, fontWeight: 700, color: '#F7F9FC', letterSpacing: '-0.8px', marginBottom: 16 }}>
-            Ready to find out if you&apos;re exam ready?
+            Know You're Ready Before Exam Day
           </h2>
           <p style={{ fontSize: 16, color: 'rgba(247,249,252,0.55)', marginBottom: 12, lineHeight: 1.8 }}>
-            Take a free 5-question diagnostic based on the BC Strata Management Licensing curriculum.
+            Walk into the licensing examination knowing what to expect — not hoping you've studied enough. Take a free five-question diagnostic exam and see where you stand in just a few minutes.
           </p>
           <div style={{ display: 'flex', justifyContent: 'center', gap: 12, flexWrap: 'wrap', marginBottom: 36, fontSize: 13, color: 'rgba(247,249,252,0.45)' }}>
-            {['Timed exam environment', 'Detailed explanations', 'Source citations', 'Performance breakdown by topic'].map(f => (
+            {['Timed experience', 'Instant results', 'Detailed explanations', 'Topic-by-topic feedback'].map(f => (
               <span key={f}>✓ {f}</span>
             ))}
           </div>
