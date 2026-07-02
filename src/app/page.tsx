@@ -103,7 +103,7 @@ export default function Home() {
               Prepare for the Exam You'll Actually Write
             </h2>
             <p style={{ fontSize: 16, color: '#64748B', lineHeight: 1.7, maxWidth: 680 }}>
-              Instead of simply studying the material, practise under the same conditions you'll face on exam day. Build confidence, identify weak areas, and know you're ready before you pay to write the real examination.
+              Instead of simply studying the material, practise under the same conditions you&apos;ll face on exam day. Build confidence, identify weak areas, and know you&apos;re ready before you pay to write the real examination.
             </p>
           </div>
           <div className="grid md:grid-cols-3 gap-12">
@@ -382,7 +382,7 @@ export default function Home() {
               },
               {
                 q: 'What is the best way to prepare?',
-                a: 'Start by identifying your current knowledge with a practice exam. Review every explanation carefully, study the supporting legislation, then repeat the process until your scores are consistently above the passing mark. The goal isn&apos;t simply to answer questions correctly — it's to understand why the correct answer is correct.',
+                a: 'Start by identifying your current knowledge with a practice exam. Review every explanation carefully, study the supporting legislation, then repeat the process until your scores are consistently above the passing mark. The goal isn&apos;t simply to answer questions correctly — it&apos;s to understand why the correct answer is correct.',
               },
               {
                 q: 'Are StrataReady questions based on BC legislation?',
