@@ -118,9 +118,10 @@ function SkillsMap({ sections }: { sections: SectionPerf[] }) {
     <div style={{ display: 'flex', justifyContent: 'center', padding: '8px 0' }}>
       <svg width={size} height={size} style={{ overflow: 'visible' }}>
         {segments.map(({ s, bgPath, fillPath, color, bgColor }) => (
-          <g key={s.id}>
+          <g key={s.id} onClick={() => window.location.href = `/flashcards?section=${s.id}`} style={{ cursor: 'pointer' }}>
             <path d={bgPath} fill={bgColor} opacity="0.4" />
             <path d={fillPath} fill={color} opacity="0.85" />
+            <title>Study {s.title} flashcards</title>
           </g>
         ))}
         <circle cx={cx} cy={cy} r={innerR - 2} fill="white" />
@@ -439,16 +440,18 @@ export default function DashboardPage() {
                         <div style={{ height: 4, borderRadius: 2, width: `${s.pct}%`, backgroundColor: s.pct < 50 ? '#c22934' : '#d67229' }} />
                       </div>
                       <p style={{ fontSize: 11, color: '#94A3B8', marginBottom: 8 }}>{s.correct}/{s.total} correct</p>
-                      {SECTION_LEGISLATION[s.id] && (
-                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
-                          {SECTION_LEGISLATION[s.id].map(leg => (
-                            <a key={leg.url} href={leg.url} target="_blank" rel="noopener noreferrer"
-                              style={{ fontSize: 11, color: '#0B1F33', backgroundColor: '#F8FAFC', padding: '3px 8px', borderRadius: 4, textDecoration: 'none', fontWeight: 500, border: '1px solid #E2E8F0' }}>
-                              {leg.label} ↗
-                            </a>
-                          ))}
-                        </div>
-                      )}
+                      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, alignItems: 'center' }}>
+                        <a href={`/flashcards?section=${s.id}`}
+                          style={{ fontSize: 11, color: '#00a79d', backgroundColor: 'rgba(0,167,157,0.08)', padding: '3px 8px', borderRadius: 4, textDecoration: 'none', fontWeight: 600, border: '1px solid rgba(0,167,157,0.2)' }}>
+                          🃏 Study flashcards
+                        </a>
+                        {SECTION_LEGISLATION[s.id] && SECTION_LEGISLATION[s.id].map(leg => (
+                          <a key={leg.url} href={leg.url} target="_blank" rel="noopener noreferrer"
+                            style={{ fontSize: 11, color: '#0B1F33', backgroundColor: '#F8FAFC', padding: '3px 8px', borderRadius: 4, textDecoration: 'none', fontWeight: 500, border: '1px solid #E2E8F0' }}>
+                            {leg.label} ↗
+                          </a>
+                        ))}
+                      </div>
                     </div>
                   ))}
                 </div>
