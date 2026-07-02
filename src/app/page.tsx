@@ -13,7 +13,6 @@ export const metadata: Metadata = {
   },
 }
 
-
 export default function Home() {
   return (
     <main className="min-h-screen" style={{ backgroundColor: '#F7F9FC', color: '#0B1F33' }}>
@@ -132,7 +131,6 @@ export default function Home() {
             ))}
           </div>
         </div>
-
         <div className="max-w-6xl mx-auto px-6 pb-0 pt-16" style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
           <Link href="/signup" style={{ backgroundColor: '#0B1F33', color: '#F7F9FC', fontSize: 14, fontWeight: 600, padding: '12px 24px', borderRadius: 8, textDecoration: 'none' }}>
             Get started →
@@ -170,7 +168,6 @@ export default function Home() {
                 ))}
               </ul>
             </div>
-
             <div style={{ backgroundColor: '#F7F9FC', borderRadius: 12, overflow: 'hidden', boxShadow: '0 24px 64px rgba(0,0,0,0.4)' }}>
               <div style={{ padding: '16px 20px', borderBottom: '1px solid #E2E8F0', display: 'flex', alignItems: 'center', justifyContent: 'space-between', backgroundColor: '#fff0f0' }}>
                 <span style={{ fontSize: 12, fontWeight: 600, color: '#64748B', letterSpacing: '0.05em' }}>QUESTION 47 — RESULT</span>
@@ -203,7 +200,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
 
       {/* Topics coverage */}
       <section id="topics" className="py-24" style={{ backgroundColor: '#F7F9FC' }}>
@@ -259,7 +255,6 @@ export default function Home() {
             <p style={{ fontSize: 16, color: '#64748B', marginTop: 8 }}>Less than the cost of a single exam attempt. A fraction of the cost of failing one.</p>
           </div>
           <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-
             <div style={{ border: '1px solid #E2E8F0', borderRadius: 12, padding: '28px 24px', backgroundColor: 'white' }}>
               <p style={{ fontSize: 13, fontWeight: 600, color: '#0B1F33', marginBottom: 4 }}>Free Diagnostic</p>
               <p style={{ fontSize: 13, color: '#94A3B8', marginBottom: 24 }}>See what StrataReady can do</p>
@@ -275,7 +270,6 @@ export default function Home() {
                 Start diagnostic
               </Link>
             </div>
-
             <div style={{ border: '2px solid #0B1F33', borderRadius: 12, padding: '28px 24px', backgroundColor: 'white', position: 'relative' }}>
               <div style={{ position: 'absolute', top: -12, left: '50%', transform: 'translateX(-50%)', backgroundColor: '#0B1F33', color: '#00a79d', fontSize: 11, fontWeight: 600, padding: '4px 12px', borderRadius: 20, letterSpacing: '0.06em', whiteSpace: 'nowrap' }}>
                 MOST POPULAR
@@ -297,7 +291,6 @@ export default function Home() {
                 Get started
               </Link>
             </div>
-
             <div style={{ border: '1px solid #E2E8F0', borderRadius: 12, padding: '28px 24px', backgroundColor: 'white' }}>
               <p style={{ fontSize: 13, fontWeight: 600, color: '#0B1F33', marginBottom: 4 }}>Full Prep Access</p>
               <p style={{ fontSize: 13, color: '#94A3B8', marginBottom: 24 }}>Best value for serious prep</p>
@@ -316,7 +309,6 @@ export default function Home() {
                 Get full access
               </Link>
             </div>
-
           </div>
         </div>
       </section>
