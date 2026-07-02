@@ -22,6 +22,7 @@ function FlashcardsContent() {
     async function checkAuth() {
       const supabase = createClient()
       const { data: { user } } = await supabase.auth.getUser()
+      if (!user) { router.push('/login'); return }
       setUser(user)
       setLoading(false)
 
