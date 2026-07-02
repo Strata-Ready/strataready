@@ -1,13 +1,13 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
 import Logo from '@/components/logo'
 import { createClient } from '@/lib/supabase/client'
 import { FLASHCARD_SECTIONS, FREE_PREVIEW_COUNT } from '@/data/flashcards'
 
-export default function FlashcardsPage() {
+function FlashcardsContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const [user, setUser] = useState<any>(null)
@@ -307,5 +307,13 @@ export default function FlashcardsPage() {
         )}
       </div>
     </div>
+  )
+}
+
+export default function FlashcardsPage() {
+  return (
+    <Suspense fallback={<div style={{ minHeight: '100vh', backgroundColor: '#F7F9FC', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><p style={{ color: '#64748B', fontSize: 14 }}>Loading...</p></div>}>
+      <FlashcardsContent />
+    </Suspense>
   )
 }
