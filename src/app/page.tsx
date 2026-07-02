@@ -1,4 +1,4 @@
-import React from 'react'
+import { useState } from 'react'
 import Link from 'next/link'
 import Logo from '@/components/logo'
 import type { Metadata } from 'next'
@@ -16,8 +16,8 @@ export const metadata: Metadata = {
 
 
 function FlashcardDemo() {
-  const [cardIndex, setCardIndex] = React.useState(0)
-  const [flipped, setFlipped] = React.useState(false)
+  const [cardIndex, setCardIndex] = useState(0)
+  const [flipped, setFlipped] = useState(false)
 
   const cards = [
     {
