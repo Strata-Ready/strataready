@@ -369,7 +369,11 @@ export default function DashboardPage() {
                 ↩ Resume exam
               </Link>
             )}
-            <button onClick={handleStartExam} style={{ backgroundColor: '#00a79d', color: 'white', fontSize: 13, fontWeight: 600, padding: '10px 24px', borderRadius: 8, border: 'none', cursor: 'pointer' }}>
+            <a href="/flashcards" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, backgroundColor: 'white', color: '#0B1F33', fontSize: 13, fontWeight: 600, padding: '10px 20px', borderRadius: 8, border: '1px solid #E2E8F0', textDecoration: 'none' }}>
+                🃏 Flashcards
+                <span style={{ fontSize: 10, fontWeight: 700, color: '#00a79d', backgroundColor: 'rgba(0,167,157,0.1)', padding: '2px 6px', borderRadius: 10, border: '1px solid rgba(0,167,157,0.2)' }}>NEW</span>
+              </a>
+              <button onClick={handleStartExam} style={{ backgroundColor: '#00a79d', color: 'white', fontSize: 13, fontWeight: 600, padding: '10px 24px', borderRadius: 8, border: 'none', cursor: 'pointer' }}>
               {completedAttempts.length === 0 ? 'Start Exam →' : 'Start Exam →'}
             </button>
           </div>
