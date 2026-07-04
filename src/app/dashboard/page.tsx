@@ -410,7 +410,7 @@ export default function DashboardPage() {
               <div style={{ backgroundColor: 'white', borderRadius: 16, border: '1px solid #E2E8F0', padding: '20px' }}>
                 <div style={{ marginBottom: 12 }}>
                   <h2 style={{ fontSize: 15, fontWeight: 700, color: '#0B1F33', marginBottom: 4 }}>Skills Map</h2>
-                  <p style={{ fontSize: 12, color: '#94A3B8' }}>Simple average of all section scores. Green = 70%+ · Amber = 50–69% · Red = below 50%</p>
+                  <p style={{ fontSize: 12, color: '#94A3B8' }}>Simple average of all section scores. Green = 70%+ · Amber = 50–69% · Red = below 50% · <span style={{ color: '#00a79d', fontWeight: 600 }}>Click a section to study flashcards</span></p>
                 </div>
                 <SkillsMap sections={sectionPerf} />
               </div>
