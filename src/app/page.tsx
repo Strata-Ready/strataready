@@ -244,14 +244,14 @@ export default function Home() {
       </section>
 
       {/* Topics coverage */}
-      <section id="topics" className="py-24" style={{ backgroundColor: '#F7F9FC' }}>
+      <section id="topics" className="py-24" style={{ backgroundColor: '#0B1F33' }}>
         <div className="max-w-6xl mx-auto px-6">
           <div className="mb-12">
             <p style={{ fontSize: 11, fontWeight: 600, color: '#00a79d', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 12 }}>Curriculum</p>
-            <h2 style={{ fontSize: 48, fontWeight: 700, color: '#0B1F33', letterSpacing: '-0.8px', marginBottom: 16 }}>
+            <h2 style={{ fontSize: 48, fontWeight: 700, color: '#F7F9FC', letterSpacing: '-0.8px', marginBottom: 16 }}>
               Complete Coverage of the Licensing Curriculum
             </h2>
-            <p style={{ fontSize: 16, color: '#64748B', lineHeight: 1.7, maxWidth: 600 }}>
+            <p style={{ fontSize: 16, color: 'rgba(247,249,252,0.6)', lineHeight: 1.7, maxWidth: 600 }}>
               The licensing exam tests much more than the Strata Property Act. StrataReady covers every major subject area in the BC licensing curriculum — from governance and budgeting to insurance, contracts, privacy, accounting, and agency law — weighted to reflect the actual examination.
             </p>
           </div>
