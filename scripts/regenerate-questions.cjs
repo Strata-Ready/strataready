@@ -162,6 +162,55 @@ Return ONLY the JSON array. No preamble, no markdown, no explanation.`
   return JSON.parse(clean)
 }
 
+
+function validateCalculationQuestion(q) {
+  const text = q.question_text
+  
+  // Only validate if it looks like a unit entitlement calculation
+  const ueMatch = text.match(/unit entitlement[^0-9]*([0-9,]+)[^0-9]*total[^0-9]*([0-9,]+)/i) ||
+                  text.match(/([0-9,]+)[^0-9]*unit entitlement[^a-z]*total[^0-9]*([0-9,]+)/i)
+  
+  if (!ueMatch) return { valid: true }
+  
+  const lotUE = parseFloat(ueMatch[1].replace(/,/g, ''))
+  const totalUE = parseFloat(ueMatch[2].replace(/,/g, ''))
+  
+  // Extract budget amounts
+  const budgetAmounts = [...text.matchAll(/\$([0-9,]+(?:\.[0-9]+)?)/g)]
+    .map(m => parseFloat(m[1].replace(/,/g, '')))
+    .filter(n => n > 1000)
+  
+  if (budgetAmounts.length === 0) return { valid: true }
+  
+  // Total budget is sum of the two largest budget figures
+  budgetAmounts.sort((a,b) => b-a)
+  const totalBudget = budgetAmounts[0] + (budgetAmounts[1] || 0)
+  
+  const annualFee = (lotUE / totalUE) * totalBudget
+  const monthlyFee = annualFee / 12
+  
+  // Check if correct answer matches calculation (within 1%)
+  const options = { A: q.option_a, B: q.option_b, C: q.option_c, D: q.option_d }
+  const correctOption = options[q.correct_answer] || ''
+  const correctAmountMatch = correctOption.match(/\$?([0-9,]+(?:\.[0-9]+)?)/)
+  
+  if (!correctAmountMatch) return { valid: true }
+  
+  const claimedAnswer = parseFloat(correctAmountMatch[1].replace(/,/g, ''))
+  const tolerance = monthlyFee * 0.02 // 2% tolerance
+  
+  if (Math.abs(claimedAnswer - monthlyFee) > tolerance && Math.abs(claimedAnswer - annualFee) > tolerance) {
+    return { 
+      valid: false, 
+      reason: `Calculated monthly: ${monthlyFee.toFixed(2)}, annual: ${annualFee.toFixed(2)}, but correct answer ${q.correct_answer} claims ${claimedAnswer}`,
+      monthlyFee,
+      annualFee
+    }
+  }
+  
+  return { valid: true }
+}
+
 async function main() {
   const { data: sections } = await supabase.from('sections').select('id, number, title').order('number')
 
