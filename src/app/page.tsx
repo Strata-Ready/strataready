@@ -210,6 +210,39 @@ export default function Home() {
       </section>
 
 
+      {/* Flashcard Feature */}
+      <section className="py-24" style={{ backgroundColor: '#F7F9FC' }}>
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="grid md:grid-cols-2 gap-16 items-center">
+            <div>
+              <p style={{ fontSize: 11, fontWeight: 600, color: '#00a79d', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 12 }}>Flashcards</p>
+              <h2 style={{ fontSize: 48, fontWeight: 700, color: '#0B1F33', letterSpacing: '-0.8px', marginBottom: 20 }}>
+                Study the concepts. Then test yourself.
+              </h2>
+              <p style={{ fontSize: 16, color: '#64748B', lineHeight: 1.7, marginBottom: 24 }}>
+                Flashcards cover all 21 exam sections — definitions, legal principles, voting thresholds, and key rules from the SPA, RESA, PIPA, and the Residential Tenancy Act. Study a section, then take a practice exam to see what stuck.
+              </p>
+              <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 32px 0' }}>
+                {[
+                  '21 curriculum sections',
+                  'Hundreds of flashcards',
+                  'Updated for current legislation',
+                ].map(item => (
+                  <li key={item} style={{ display: 'flex', alignItems: 'center', gap: 10, fontSize: 14, color: '#475569', marginBottom: 10 }}>
+                    <div style={{ width: 4, height: 4, backgroundColor: '#00a79d', borderRadius: '50%', flexShrink: 0 }}></div>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <Link href="/signup" style={{ display: 'inline-block', backgroundColor: '#0B1F33', color: '#F7F9FC', fontSize: 14, fontWeight: 600, padding: '12px 24px', borderRadius: 8, textDecoration: 'none' }}>
+                Get full access →
+              </Link>
+            </div>
+            <FlashcardDemo />
+          </div>
+        </div>
+      </section>
+
       {/* Skills Map Feature */}
       <section className="py-24" style={{ backgroundColor: '#F7F9FC' }}>
         <div className="max-w-6xl mx-auto px-6">
@@ -240,41 +273,6 @@ export default function Home() {
             </div>
 
             <SkillsMapDemo />
-          </div>
-        </div>
-      </section>
-
-      {/* Flashcard Feature */}
-      <section className="py-24" style={{ backgroundColor: '#F7F9FC' }}>
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="grid md:grid-cols-2 gap-16 items-center">
-            <div>
-              <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, backgroundColor: 'rgba(0,167,157,0.1)', border: '1px solid rgba(0,167,157,0.2)', borderRadius: 4, padding: '5px 12px', marginBottom: 16 }}>
-                <span style={{ fontSize: 11, fontWeight: 700, color: '#00a79d', letterSpacing: '0.08em', textTransform: 'uppercase' }}>New</span>
-              </div>
-              <h2 style={{ fontSize: 48, fontWeight: 700, color: '#0B1F33', letterSpacing: '-0.8px', marginBottom: 20 }}>
-                Study the concepts. Then test yourself.
-              </h2>
-              <p style={{ fontSize: 16, color: '#64748B', lineHeight: 1.7, marginBottom: 24 }}>
-                Flashcards cover all 21 exam sections — definitions, legal principles, voting thresholds, and key rules from the SPA, RESA, PIPA, and the Residential Tenancy Act. Study a section, then take a practice exam to see what stuck.
-              </p>
-              <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 32px 0' }}>
-                {[
-                  '21 curriculum sections',
-                  'Hundreds of flashcards',
-                  'Updated for current legislation',
-                ].map(item => (
-                  <li key={item} style={{ display: 'flex', alignItems: 'center', gap: 10, fontSize: 14, color: '#475569', marginBottom: 10 }}>
-                    <div style={{ width: 4, height: 4, backgroundColor: '#00a79d', borderRadius: '50%', flexShrink: 0 }}></div>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-              <Link href="/signup" style={{ display: 'inline-block', backgroundColor: '#0B1F33', color: '#F7F9FC', fontSize: 14, fontWeight: 600, padding: '12px 24px', borderRadius: 8, textDecoration: 'none' }}>
-                Get full access →
-              </Link>
-            </div>
-            <FlashcardDemo />
           </div>
         </div>
       </section>
