@@ -416,7 +416,7 @@ export default function Home() {
               },
               {
                 q: 'What is the best way to prepare?',
-                a: 'Start by identifying your current knowledge with a practice exam. Review every explanation carefully, study the supporting legislation, then repeat the process until your scores are consistently above the passing mark. The goal isn&apos;t simply to answer questions correctly — it&apos;s to understand why the correct answer is correct.',
+                a: 'Start by identifying your current knowledge with a practice exam. Review every explanation carefully, study the supporting legislation, then repeat the process until your scores are consistently above the passing mark. The goal isn’t simply to answer questions correctly — it’s to understand why the correct answer is correct.',
               },
               {
                 q: 'Are StrataReady questions based on BC legislation?',
