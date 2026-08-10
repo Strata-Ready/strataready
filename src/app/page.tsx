@@ -2,7 +2,6 @@ import Link from 'next/link'
 import Logo from '@/components/logo'
 import FlashcardDemo from '@/components/flashcard-demo'
 import SkillsMapDemo from '@/components/skills-map-demo'
-import SkillsMapDemo from '@/components/skills-map-demo'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
