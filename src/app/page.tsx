@@ -220,14 +220,13 @@ export default function Home() {
                 Know exactly where to focus next.
               </h2>
               <p style={{ fontSize: 16, color: '#64748B', lineHeight: 1.7, marginBottom: 24 }}>
-                After every practice exam, StrataReady generates a personalised skills map showing your score across all 21 curriculum sections — so you can see at a glance where your knowledge is strong and where you need work.
+                After every practice exam, StrataReady updates a personalized skills map showing your score so you can see at a glance where your knowledge is strong and where you need to focus.
               </p>
               <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 32px 0' }}>
                 {[
                   'Colour-coded by performance — green, amber, and red at a glance',
                   'Click any section to open its flashcard study set',
                   'Linked directly to the Strata Property Act, RESA, PIPA, and the Residential Tenancy Act',
-                  'Track your improvement across multiple exam attempts',
                 ].map(item => (
                   <li key={item} style={{ display: 'flex', alignItems: 'flex-start', gap: 10, fontSize: 14, color: '#475569', marginBottom: 12 }}>
                     <div style={{ width: 4, height: 4, backgroundColor: '#00a79d', borderRadius: '50%', flexShrink: 0, marginTop: 7 }}></div>
