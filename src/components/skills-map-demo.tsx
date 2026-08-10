@@ -39,7 +39,14 @@ export default function SkillsMapDemo() {
     const ctx = canvas.getContext('2d')
     if (!ctx) return
 
-    const size = canvas.width
+    const dpr = window.devicePixelRatio || 2
+    const size = 540
+    canvas.width = size * dpr
+    canvas.height = size * dpr
+    canvas.style.width = '100%'
+    canvas.style.maxWidth = size + 'px'
+    ctx.scale(dpr, dpr)
+
     const cx = size / 2, cy = size / 2
     const outerR = size * 0.38, innerR = size * 0.195
     const gap = 0.025
@@ -126,7 +133,7 @@ export default function SkillsMapDemo() {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 16 }}>
-      <canvas ref={canvasRef} width={540} height={540} style={{ width: '100%', maxWidth: 540 }} />
+      <canvas ref={canvasRef} style={{ width: '100%', maxWidth: 540, display: 'block' }} />
       <div style={{ display: 'flex', gap: 20, fontSize: 12 }}>
         {[
           { color: '#00a79d', label: '70%+ Strong' },
