@@ -244,7 +244,7 @@ export default function Home() {
       </section>
 
       {/* Skills Map Feature */}
-      <section className="py-24" style={{ backgroundColor: 'white' }}>
+      <section className="py-24" style={{ backgroundColor: '#F7F9FC' }}>
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid md:grid-cols-2 gap-16 items-center">
             <div>
