@@ -208,6 +208,107 @@ export default function Home() {
         </div>
       </section>
 
+
+      {/* Skills Map Feature */}
+      <section className="py-24" style={{ backgroundColor: '#F7F9FC' }}>
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="grid md:grid-cols-2 gap-16 items-center">
+            <div>
+              <p style={{ fontSize: 11, fontWeight: 600, color: '#00a79d', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 12 }}>Learn From Every Attempt</p>
+              <h2 style={{ fontSize: 48, fontWeight: 700, color: '#0B1F33', letterSpacing: '-0.8px', marginBottom: 20 }}>
+                Know exactly where to focus next.
+              </h2>
+              <p style={{ fontSize: 16, color: '#64748B', lineHeight: 1.7, marginBottom: 24 }}>
+                After every practice exam, StrataReady generates a personalised skills map showing your score across all 21 curriculum sections — so you can see at a glance where your knowledge is strong and where you need work.
+              </p>
+              <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 32px 0' }}>
+                {[
+                  'Colour-coded by performance — green, amber, and red at a glance',
+                  'Click any section to open its flashcard study set',
+                  'Linked directly to the Strata Property Act, RESA, PIPA, and the Residential Tenancy Act',
+                  'Track your improvement across multiple exam attempts',
+                ].map(item => (
+                  <li key={item} style={{ display: 'flex', alignItems: 'flex-start', gap: 10, fontSize: 14, color: '#475569', marginBottom: 12 }}>
+                    <div style={{ width: 4, height: 4, backgroundColor: '#00a79d', borderRadius: '50%', flexShrink: 0, marginTop: 7 }}></div>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <Link href="/signup" style={{ display: 'inline-block', backgroundColor: '#0B1F33', color: '#F7F9FC', fontSize: 14, fontWeight: 600, padding: '12px 24px', borderRadius: 8, textDecoration: 'none' }}>
+                Get started →
+              </Link>
+            </div>
+
+            {/* Static illustrative skills map */}
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 24 }}>
+              <div style={{ position: 'relative', width: 320, height: 320 }}>
+                <svg width="320" height="320" viewBox="0 0 320 320">
+                  {/* Background ring segments */}
+                  {[
+                    { color: '#00a79d', pct: 82, start: -90, span: 60 },
+                    { color: '#00a79d', pct: 75, start: -30, span: 50 },
+                    { color: '#d67229', pct: 58, start: 20, span: 55 },
+                    { color: '#d67229', pct: 64, start: 75, span: 45 },
+                    { color: '#c22934', pct: 41, start: 120, span: 60 },
+                    { color: '#00a79d', pct: 79, start: 180, span: 50 },
+                    { color: '#c22934', pct: 48, start: 230, span: 55 },
+                    { color: '#00a79d', pct: 88, start: 285, span: 45 },
+                  ].map((seg, i) => {
+                    const cx = 160, cy = 160
+                    const outerR = 130, innerR = 70
+                    const startRad = (seg.start * Math.PI) / 180
+                    const endRad = ((seg.start + seg.span - 2) * Math.PI) / 180
+                    const fillR = innerR + (outerR - innerR) * (seg.pct / 100)
+                    const large = seg.span > 180 ? 1 : 0
+                    const x1 = cx + outerR * Math.cos(startRad)
+                    const y1 = cy + outerR * Math.sin(startRad)
+                    const x2 = cx + outerR * Math.cos(endRad)
+                    const y2 = cy + outerR * Math.sin(endRad)
+                    const i1 = cx + innerR * Math.cos(startRad)
+                    const i2 = cy + innerR * Math.sin(startRad)
+                    const i3 = cx + innerR * Math.cos(endRad)
+                    const i4 = cy + innerR * Math.sin(endRad)
+                    const f1x = cx + fillR * Math.cos(startRad)
+                    const f1y = cy + fillR * Math.sin(startRad)
+                    const f2x = cx + fillR * Math.cos(endRad)
+                    const f2y = cy + fillR * Math.sin(endRad)
+                    const bgPath = `M ${i1} ${i2} L ${x1} ${y1} A ${outerR} ${outerR} 0 ${large} 1 ${x2} ${y2} L ${i3} ${i4} A ${innerR} ${innerR} 0 ${large} 0 ${i1} ${i2} Z`
+                    const fillPath = `M ${i1} ${i2} L ${f1x} ${f1y} A ${fillR} ${fillR} 0 ${large} 1 ${f2x} ${f2y} L ${i3} ${i4} A ${innerR} ${innerR} 0 ${large} 0 ${i1} ${i2} Z`
+                    return (
+                      <g key={i}>
+                        <path d={bgPath} fill={seg.color} opacity="0.15" />
+                        <path d={fillPath} fill={seg.color} opacity="0.85" />
+                      </g>
+                    )
+                  })}
+                  <circle cx="160" cy="160" r="68" fill="white" />
+                  <text x="160" y="154" textAnchor="middle" fontSize="11" fill="#94A3B8" fontWeight="500">avg score</text>
+                  <text x="160" y="174" textAnchor="middle" fontSize="22" fill="#0B1F33" fontWeight="800">67%</text>
+                </svg>
+              </div>
+
+              {/* Legend */}
+              <div style={{ display: 'flex', gap: 20, fontSize: 12 }}>
+                {[
+                  { color: '#00a79d', label: '70%+ Strong' },
+                  { color: '#d67229', label: '50–69% Review' },
+                  { color: '#c22934', label: 'Below 50% Focus' },
+                ].map(l => (
+                  <div key={l.label} style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                    <div style={{ width: 10, height: 10, borderRadius: '50%', backgroundColor: l.color }} />
+                    <span style={{ color: '#64748B' }}>{l.label}</span>
+                  </div>
+                ))}
+              </div>
+
+              <p style={{ fontSize: 12, color: '#94A3B8', textAlign: 'center', maxWidth: 280 }}>
+                Your personalised skills map appears after your first practice exam.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Flashcard Feature */}
       <section className="py-24" style={{ backgroundColor: '#F7F9FC' }}>
         <div className="max-w-6xl mx-auto px-6">
