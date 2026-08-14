@@ -460,10 +460,7 @@ export default function Home() {
                 q: 'Can I take a free practice exam before purchasing?',
                 a: 'Yes — the free diagnostic exam includes 5 questions with instant results and source references. No account required.',
               },
-              {
-                q: 'Is there a refund policy?',
-                a: 'Yes. If StrataReady isn’t right for you, email us at support@strataready.ca within 7 days of purchase for a full refund — no questions asked.',
-              },
+
             ].map((item, i, arr) => (
               <div key={item.q} style={{ borderTop: '1px solid #E2E8F0', padding: '24px 0', borderBottom: i === arr.length - 1 ? '1px solid #E2E8F0' : 'none' }}>
                 <h3 style={{ fontSize: 15, fontWeight: 600, color: '#0B1F33', marginBottom: 10, lineHeight: 1.5 }}>{item.q}</h3>
