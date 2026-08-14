@@ -87,17 +87,24 @@ const structuredData = {
   "offers": [
     {
       "@type": "Offer",
-      "name": "Per Exam",
-      "price": "9.99",
+      "name": "Free Diagnostic",
+      "price": "0",
       "priceCurrency": "CAD",
-      "description": "Single exam attempt with instant results and study references",
+      "description": "5 sample questions with instant results and source references — no account required",
+    },
+    {
+      "@type": "Offer",
+      "name": "Per Exam",
+      "price": "19.99",
+      "priceCurrency": "CAD",
+      "description": "Single full 100-question practice exam with instant results, source citations, and section performance breakdown",
     },
     {
       "@type": "Offer",
       "name": "Full Prep Access",
       "price": "49.99",
       "priceCurrency": "CAD",
-      "description": "Unlimited exam attempts with progress tracking",
+      "description": "Unlimited exam attempts with progress tracking, score trends, flashcards, and exam readiness score",
     },
   ],
   "educationalUse": "Practice",

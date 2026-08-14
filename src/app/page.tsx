@@ -30,7 +30,7 @@ export default function Home() {
             <a href="#how-it-works" style={{ color: 'rgba(247,249,252,0.6)', fontSize: 14 }} className="hidden md:block hover:text-white transition-colors">How it works</a>
             <a href="#topics" style={{ color: 'rgba(247,249,252,0.6)', fontSize: 14 }} className="hidden md:block hover:text-white transition-colors">Topics</a>
             <a href="#faq" style={{ color: 'rgba(247,249,252,0.6)', fontSize: 14 }} className="hidden md:block hover:text-white transition-colors">FAQ</a>
-            <a href="#pricing" style={{ color: 'rgba(247,249,252,0.6)', fontSize: 14 }} className="hidden md:block hover:text-white transition-colors">Pricing</a>
+            <Link href="/pricing" style={{ color: 'rgba(247,249,252,0.6)', fontSize: 14 }} className="hidden md:block hover:text-white transition-colors">Pricing</Link>
             <Link href="/login" style={{ color: 'rgba(247,249,252,0.6)', fontSize: 14 }} className="hover:text-white transition-colors">Sign in</Link>
             <Link href="/signup" style={{ color: 'rgba(247,249,252,0.6)', fontSize: 14, border: '1px solid rgba(247,249,252,0.2)', padding: '7px 16px', borderRadius: 6 }} className="hidden md:block hover:text-white transition-colors">Get started</Link>
             <Link href="/demo" style={{ backgroundColor: '#00a79d', color: '#ffffff', fontSize: 13, fontWeight: 600, padding: '8px 18px', borderRadius: 6, letterSpacing: '0.01em' }} className="hover:opacity-90 transition-opacity">
@@ -42,10 +42,11 @@ export default function Home() {
 
       {/* Hero */}
       <section style={{ position: 'relative', backgroundColor: '#0B1F33', overflow: 'hidden', minHeight: 680, display: 'flex', alignItems: 'center' }}>
-        <div style={{ position: 'absolute', inset: 0, backgroundImage: 'url(/hero-building.jpg)', backgroundSize: 'cover', backgroundPosition: 'center bottom', opacity: 0.45 }} />
+        <div style={{ position: 'absolute', inset: 0, backgroundImage: 'url(/hero-building.jpg)', backgroundSize: 'cover', backgroundPosition: 'center bottom', opacity: 0.45 }} aria-hidden="true" />
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(90deg, rgba(11,31,51,0.97) 35%, rgba(11,31,51,0.55) 100%)' }} />
         <div className="max-w-6xl mx-auto px-6 py-24 relative" style={{ zIndex: 1, width: '100%' }}>
-          <div className="max-w-2xl">
+          <span className="sr-only">StrataReady — BC strata building exterior. Practice your BC Strata Management licensing exam with 420 scenario-based questions.</span>
+            <div className="max-w-2xl">
             <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, backgroundColor: 'rgba(176,141,87,0.15)', border: '1px solid rgba(176,141,87,0.3)', borderRadius: 4, padding: '5px 12px', marginBottom: 32 }}>
               <div style={{ width: 6, height: 6, backgroundColor: '#00a79d', borderRadius: '50%' }}></div>
               <span style={{ color: '#00a79d', fontSize: 12, fontWeight: 500, letterSpacing: '0.08em', textTransform: 'uppercase' }}>BC Strata Management Exam Prep</span>
@@ -54,7 +55,7 @@ export default function Home() {
               Pass the BC Strata Management<br />Licensing Exam with Confidence.
             </h1>
             <p style={{ fontSize: 18, color: 'rgba(247,249,252,0.65)', lineHeight: 1.7, marginBottom: 12, maxWidth: 520 }}>
-              Practice with realistic licensing exams that mirror the real test. Get instant feedback, legislation-backed explanations, and a clear understanding of what to study before exam day.
+              Practice with realistic licensing exams drawn from a 420-question bank — every mock exam is a fresh 100 questions. Get instant feedback, legislation-backed explanations, and a clear understanding of what to study before exam day.
             </p>
             <p style={{ fontSize: 15, color: 'rgba(247,249,252,0.4)', lineHeight: 1.6, marginBottom: 40, maxWidth: 520 }}>
               100 questions · 3 hours · 70% required to pass.
@@ -80,7 +81,7 @@ export default function Home() {
         <div className="max-w-6xl mx-auto px-6 py-5">
           <div className="flex flex-wrap items-center justify-center gap-8 md:gap-16">
             {[
-              { value: '100', label: 'Multiple choice questions' },
+              { value: '100', label: 'Questions per exam' },
               { value: '3 hrs', label: 'Exam duration' },
               { value: '70%', label: 'Required to pass' },
               { value: '2', label: 'Attempts permitted' },
@@ -149,9 +150,10 @@ export default function Home() {
           <div className="grid md:grid-cols-2 gap-16 items-center">
             <div>
               <p style={{ fontSize: 11, fontWeight: 600, color: '#00a79d', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 12 }}>Why StrataReady</p>
-              <h2 style={{ fontSize: 48, fontWeight: 700, color: '#F7F9FC', letterSpacing: '-0.8px', marginBottom: 20 }}>
+              <h2 style={{ fontSize: 48, fontWeight: 700, color: '#F7F9FC', letterSpacing: '-0.8px', marginBottom: 12 }}>
                 Learn the Law—Not Just the Answers
               </h2>
+              <p style={{ fontSize: 16, color: '#00a79d', fontWeight: 500, marginBottom: 16 }}>Every wrong answer explained in plain English, with the exact legislation cited.</p>
               <p style={{ fontSize: 16, color: 'rgba(247,249,252,0.6)', lineHeight: 1.7, marginBottom: 8 }}>
                 Anyone can show you the correct answer.
               </p>
@@ -355,6 +357,7 @@ export default function Home() {
               <div style={{ marginBottom: 24 }}>
                 <span style={{ fontSize: 36, fontWeight: 700, color: '#0B1F33', letterSpacing: '-1px' }}>$19.99</span>
                 <span style={{ fontSize: 13, color: '#94A3B8', marginLeft: 4 }}>/ attempt</span>
+                <p style={{ fontSize: 11, color: '#94A3B8', marginTop: 4 }}>Less than one exam re-booking fee</p>
               </div>
               <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 28px 0' }} className="space-y-2">
                 {['100 questions', 'Instant results', 'Full study guide', 'Source citations for every answer', 'Section performance breakdown'].map(f => (
@@ -366,6 +369,7 @@ export default function Home() {
               <Link href="/signup" style={{ display: 'block', textAlign: 'center', backgroundColor: '#0B1F33', color: '#F7F9FC', fontSize: 13, fontWeight: 600, padding: '10px 0', borderRadius: 8 }} className="hover:opacity-90 transition-opacity">
                 Get started
               </Link>
+              <p style={{ fontSize: 11, color: '#94A3B8', textAlign: 'center', marginTop: 10 }}>7-day money-back guarantee</p>
             </div>
             <div style={{ border: '1px solid #E2E8F0', borderRadius: 12, padding: '28px 24px', backgroundColor: 'white' }}>
               <p style={{ fontSize: 13, fontWeight: 600, color: '#0B1F33', marginBottom: 4 }}>Full Prep Access</p>
@@ -373,6 +377,7 @@ export default function Home() {
               <div style={{ marginBottom: 24 }}>
                 <span style={{ fontSize: 36, fontWeight: 700, color: '#0B1F33', letterSpacing: '-1px' }}>$49.99</span>
                 <span style={{ fontSize: 13, color: '#94A3B8', marginLeft: 4 }}>one-time</span>
+                <p style={{ fontSize: 11, color: '#94A3B8', marginTop: 4 }}>A fraction of the cost of the licensing course</p>
               </div>
               <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 28px 0' }} className="space-y-2">
                 {['Unlimited practice exams', 'Flashcards', 'Progress tracking', 'Performance history', 'Exam readiness insights'].map(f => (
@@ -384,11 +389,32 @@ export default function Home() {
               <Link href="/signup?plan=unlimited" style={{ display: 'block', textAlign: 'center', border: '1px solid #E2E8F0', color: '#0B1F33', fontSize: 13, fontWeight: 600, padding: '10px 0', borderRadius: 8 }} className="hover:bg-gray-50 transition-colors">
                 Get full access
               </Link>
+              <p style={{ fontSize: 11, color: '#94A3B8', textAlign: 'center', marginTop: 10 }}>7-day money-back guarantee</p>
             </div>
           </div>
         </div>
       </section>
 
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            { "@type": "Question", "name": "How many questions are on the BC Strata Management Licensing Exam?", "acceptedAnswer": { "@type": "Answer", "text": "The exam contains 100 multiple-choice questions completed within three hours." } },
+            { "@type": "Question", "name": "What mark do I need to pass?", "acceptedAnswer": { "@type": "Answer", "text": "Students must achieve a minimum score of 70% to pass the licensing examination." } },
+            { "@type": "Question", "name": "How many attempts am I allowed?", "acceptedAnswer": { "@type": "Answer", "text": "Under the challenge process, candidates are permitted two attempts at the licensing examination." } },
+            { "@type": "Question", "name": "How difficult is the BC Strata Management Licensing Exam?", "acceptedAnswer": { "@type": "Answer", "text": "The exam covers legislation, governance, budgeting, accounting, contracts, agency law, insurance, privacy, and strata operations. Many candidates find the breadth of material more challenging than the individual questions." } },
+            { "@type": "Question", "name": "What is the best way to prepare?", "acceptedAnswer": { "@type": "Answer", "text": "Start by identifying your current knowledge with a practice exam. Review every explanation carefully, study the supporting legislation, then repeat the process until your scores are consistently above the passing mark." } },
+            { "@type": "Question", "name": "Are StrataReady questions based on BC legislation?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Every question is sourced from authoritative BC regulatory sources including the Strata Property Act, RESA, PIPA, and the Residential Tenancy Act. Every explanation includes a source citation." } },
+            { "@type": "Question", "name": "Is StrataReady affiliated with UBC Sauder or the BCFSA?", "acceptedAnswer": { "@type": "Answer", "text": "No. StrataReady is an independent exam preparation tool. It is not affiliated with, endorsed by, or connected to UBC Sauder School of Business, the BC Financial Services Authority, or any other regulatory or educational body." } },
+            { "@type": "Question", "name": "What is the difference between the Per Exam and Full Prep Access plans?", "acceptedAnswer": { "@type": "Answer", "text": "Per Exam ($19.99) gives you one full 100-question practice exam with complete results and source citations. Full Prep Access ($49.99 one-time) gives you unlimited attempts plus progress tracking, score trends, and an exam readiness score across all your attempts." } },
+            { "@type": "Question", "name": "Can I take a free practice exam before purchasing?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — the free diagnostic exam includes 5 questions with instant results and source references. No account required." } },
+            { "@type": "Question", "name": "Is there a refund policy?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. If StrataReady isn't right for you, email us at support@strataready.ca within 7 days of purchase for a full refund — no questions asked." } },
+          ]
+        }) }}
+      />
       {/* FAQ */}
       <section id="faq" className="py-24" style={{ backgroundColor: '#F7F9FC' }}>
         <div className="max-w-3xl mx-auto px-6">
@@ -433,6 +459,10 @@ export default function Home() {
               {
                 q: 'Can I take a free practice exam before purchasing?',
                 a: 'Yes — the free diagnostic exam includes 5 questions with instant results and source references. No account required.',
+              },
+              {
+                q: 'Is there a refund policy?',
+                a: 'Yes. If StrataReady isn’t right for you, email us at support@strataready.ca within 7 days of purchase for a full refund — no questions asked.',
               },
             ].map((item, i, arr) => (
               <div key={item.q} style={{ borderTop: '1px solid #E2E8F0', padding: '24px 0', borderBottom: i === arr.length - 1 ? '1px solid #E2E8F0' : 'none' }}>
