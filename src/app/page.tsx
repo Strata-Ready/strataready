@@ -45,7 +45,7 @@ export default function Home() {
         <div style={{ position: 'absolute', inset: 0, backgroundImage: 'url(/hero-building.jpg)', backgroundSize: 'cover', backgroundPosition: 'center bottom', opacity: 0.45 }} aria-hidden="true" />
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(90deg, rgba(11,31,51,0.97) 35%, rgba(11,31,51,0.55) 100%)' }} />
         <div className="max-w-6xl mx-auto px-6 py-24 relative" style={{ zIndex: 1, width: '100%' }}>
-          <span className="sr-only">StrataReady — BC strata building exterior. Practice your BC Strata Management licensing exam with 420 scenario-based questions.</span>
+          <span className="sr-only">StrataReady — BC strata building exterior. Practice your BC Strata Management licensing exam with 670+ scenario-based questions.</span>
             <div className="max-w-2xl">
             <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, backgroundColor: 'rgba(176,141,87,0.15)', border: '1px solid rgba(176,141,87,0.3)', borderRadius: 4, padding: '5px 12px', marginBottom: 32 }}>
               <div style={{ width: 6, height: 6, backgroundColor: '#00a79d', borderRadius: '50%' }}></div>
@@ -55,7 +55,7 @@ export default function Home() {
               Pass the BC Strata Management<br />Licensing Exam with Confidence.
             </h1>
             <p style={{ fontSize: 18, color: 'rgba(247,249,252,0.65)', lineHeight: 1.7, marginBottom: 12, maxWidth: 520 }}>
-              Practice with realistic licensing exams drawn from a 420-question bank — every mock exam is a fresh 100 questions. Get instant feedback, legislation-backed explanations, and a clear understanding of what to study before exam day.
+              Practice with realistic licensing exams drawn from a 670+-question bank — every mock exam is a fresh 100 questions. Get instant feedback, legislation-backed explanations, and a clear understanding of what to study before exam day.
             </p>
             <p style={{ fontSize: 15, color: 'rgba(247,249,252,0.4)', lineHeight: 1.6, marginBottom: 40, maxWidth: 520 }}>
               100 questions · 3 hours · 70% required to pass.
