@@ -33,6 +33,14 @@ export default function ExamPage() {
   const [error, setError] = useState('')
   const [showSubmitConfirm, setShowSubmitConfirm] = useState(false)
   const [startTime] = useState(Date.now())
+  const [elapsed, setElapsed] = useState(0)
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setElapsed(Math.floor((Date.now() - startTime) / 1000))
+    }, 1000)
+    return () => clearInterval(interval)
+  }, [startTime])
   const attemptIdRef = useRef<string | null>(null)
 
   useEffect(() => {
@@ -155,6 +163,14 @@ export default function ExamPage() {
     { key: 'D', text: q.option_d },
   ]
 
+  const THREE_HOURS = 3 * 60 * 60
+  const remaining = Math.max(0, THREE_HOURS - elapsed)
+  const rh = Math.floor(remaining / 3600)
+  const rm = Math.floor((remaining % 3600) / 60)
+  const rs = remaining % 60
+  const timerStr = `${String(rh).padStart(2,'0')}:${String(rm).padStart(2,'0')}:${String(rs).padStart(2,'0')}`
+  const timerWarning = remaining < 600 // red under 10 minutes
+
   return (
     <div style={{ minHeight: '100vh', backgroundColor: '#F7F9FC', display: 'flex', flexDirection: 'column' }}>
 
@@ -167,6 +183,9 @@ export default function ExamPage() {
         <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
           <span style={{ fontSize: 13, color: 'rgba(247,249,252,0.6)' }}>
             {totalAnswered} of {questions.length} answered
+          </span>
+          <span style={{ fontSize: 13, fontWeight: 600, fontFamily: 'monospace', color: timerWarning ? '#c22934' : 'rgba(247,249,252,0.6)', letterSpacing: '0.05em' }}>
+            {timerStr}
           </span>
           <button
             onClick={() => setShowSubmitConfirm(true)}
