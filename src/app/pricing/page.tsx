@@ -70,7 +70,6 @@ export default function PricingPage() {
               <Link href="/signup" style={{ display: 'block', textAlign: 'center', backgroundColor: '#0B1F33', color: '#F7F9FC', fontSize: 13, fontWeight: 600, padding: '10px 0', borderRadius: 8 }} className="hover:opacity-90 transition-opacity">
                 Get started
               </Link>
-              <p style={{ fontSize: 11, color: '#94A3B8', textAlign: 'center', marginTop: 10 }}>7-day money-back guarantee</p>
             </div>
 
             <div style={{ border: '1px solid #E2E8F0', borderRadius: 12, padding: '28px 24px', backgroundColor: 'white' }}>
@@ -91,7 +90,6 @@ export default function PricingPage() {
               <Link href="/signup?plan=unlimited" style={{ display: 'block', textAlign: 'center', border: '1px solid #E2E8F0', color: '#0B1F33', fontSize: 13, fontWeight: 600, padding: '10px 0', borderRadius: 8 }} className="hover:bg-gray-50 transition-colors">
                 Get full access
               </Link>
-              <p style={{ fontSize: 11, color: '#94A3B8', textAlign: 'center', marginTop: 10 }}>7-day money-back guarantee</p>
             </div>
 
           </div>

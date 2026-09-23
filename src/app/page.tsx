@@ -366,7 +366,6 @@ export default function Home() {
               <Link href="/signup" style={{ display: 'block', textAlign: 'center', backgroundColor: '#0B1F33', color: '#F7F9FC', fontSize: 13, fontWeight: 600, padding: '10px 0', borderRadius: 8 }} className="hover:opacity-90 transition-opacity">
                 Get started
               </Link>
-              <p style={{ fontSize: 11, color: '#94A3B8', textAlign: 'center', marginTop: 10 }}>7-day money-back guarantee</p>
             </div>
             <div style={{ border: '2px solid #0B1F33', borderRadius: 12, padding: '28px 24px', backgroundColor: 'white', position: 'relative' }}>
               <div style={{ position: 'absolute', top: -12, left: '50%', transform: 'translateX(-50%)', backgroundColor: '#0B1F33', color: '#00a79d', fontSize: 11, fontWeight: 600, padding: '4px 12px', borderRadius: 20, letterSpacing: '0.06em', whiteSpace: 'nowrap' }}>
@@ -389,7 +388,6 @@ export default function Home() {
               <Link href="/signup?plan=unlimited" style={{ display: 'block', textAlign: 'center', border: '1px solid #E2E8F0', color: '#0B1F33', fontSize: 13, fontWeight: 600, padding: '10px 0', borderRadius: 8 }} className="hover:bg-gray-50 transition-colors">
                 Get full access
               </Link>
-              <p style={{ fontSize: 11, color: '#94A3B8', textAlign: 'center', marginTop: 10 }}>7-day money-back guarantee</p>
             </div>
           </div>
         </div>
