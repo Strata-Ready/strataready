@@ -348,10 +348,7 @@ export default function Home() {
                 Start diagnostic
               </Link>
             </div>
-            <div style={{ border: '2px solid #0B1F33', borderRadius: 12, padding: '28px 24px', backgroundColor: 'white', position: 'relative' }}>
-              <div style={{ position: 'absolute', top: -12, left: '50%', transform: 'translateX(-50%)', backgroundColor: '#0B1F33', color: '#00a79d', fontSize: 11, fontWeight: 600, padding: '4px 12px', borderRadius: 20, letterSpacing: '0.06em', whiteSpace: 'nowrap' }}>
-                MOST POPULAR
-              </div>
+            <div style={{ border: '1px solid #E2E8F0', borderRadius: 12, padding: '28px 24px', backgroundColor: 'white' }}>
               <p style={{ fontSize: 13, fontWeight: 600, color: '#0B1F33', marginBottom: 4 }}>Per Exam</p>
               <p style={{ fontSize: 13, color: '#94A3B8', marginBottom: 24 }}>One complete licensing simulation.</p>
               <div style={{ marginBottom: 24 }}>
@@ -371,7 +368,10 @@ export default function Home() {
               </Link>
               <p style={{ fontSize: 11, color: '#94A3B8', textAlign: 'center', marginTop: 10 }}>7-day money-back guarantee</p>
             </div>
-            <div style={{ border: '1px solid #E2E8F0', borderRadius: 12, padding: '28px 24px', backgroundColor: 'white' }}>
+            <div style={{ border: '2px solid #0B1F33', borderRadius: 12, padding: '28px 24px', backgroundColor: 'white', position: 'relative' }}>
+              <div style={{ position: 'absolute', top: -12, left: '50%', transform: 'translateX(-50%)', backgroundColor: '#0B1F33', color: '#00a79d', fontSize: 11, fontWeight: 600, padding: '4px 12px', borderRadius: 20, letterSpacing: '0.06em', whiteSpace: 'nowrap' }}>
+                MOST POPULAR
+              </div>
               <p style={{ fontSize: 13, fontWeight: 600, color: '#0B1F33', marginBottom: 4 }}>Full Prep Access</p>
               <p style={{ fontSize: 13, color: '#94A3B8', marginBottom: 24 }}>Everything you need to prepare with confidence.</p>
               <div style={{ marginBottom: 24 }}>
