@@ -501,9 +501,18 @@ export default function Home() {
           <p style={{ fontSize: 12, color: '#94A3B8', textAlign: 'center' }}>
             BC Strata Management Licensing Exam Preparation · Not affiliated with the BC Financial Services Authority
           </p>
-          <div className="flex gap-6">
-            <Link href="/privacy" style={{ fontSize: 12, color: '#94A3B8' }} className="hover:text-gray-600">Privacy</Link>
-            <Link href="/terms" style={{ fontSize: 12, color: '#94A3B8' }} className="hover:text-gray-600">Terms</Link>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+            <div className="flex gap-6">
+              <Link href="/privacy" style={{ fontSize: 12, color: '#94A3B8' }} className="hover:text-gray-600">Privacy</Link>
+              <Link href="/terms" style={{ fontSize: 12, color: '#94A3B8' }} className="hover:text-gray-600">Terms</Link>
+            </div>
+            <div style={{ width: 1, height: 14, backgroundColor: '#E2E8F0' }} />
+            <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+              <span style={{ fontSize: 11, color: '#94A3B8' }}>Powered by</span>
+              <a href="https://trickfilm.com" target="_blank" rel="noopener noreferrer">
+                <img src="/trickfilm-logo.svg" alt="Trickfilm" style={{ height: 14, opacity: 0.5 }} />
+              </a>
+            </div>
           </div>
         </div>
         <div style={{ borderTop: '1px solid #E2E8F0', padding: '10px 0', textAlign: 'center' }}>
