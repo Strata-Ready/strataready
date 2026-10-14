@@ -514,12 +514,6 @@ export default function Home() {
             </div>
           </div>
         </div>
-
-          <span style={{ fontSize: 11, color: '#CBD5E1' }}>Photo by </span>
-          <a href="https://unsplash.com/@victor_g" target="_blank" rel="noopener noreferrer" style={{ fontSize: 11, color: '#94A3B8' }}>Victor</a>
-          <span style={{ fontSize: 11, color: '#CBD5E1' }}> on </span>
-          <a href="https://unsplash.com/photos/JONURCNG7fQ" target="_blank" rel="noopener noreferrer" style={{ fontSize: 11, color: '#94A3B8' }}>Unsplash</a>
-        </div>
       </footer>
 
     </main>
