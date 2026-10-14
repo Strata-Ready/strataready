@@ -69,6 +69,7 @@ export default function Home() {
               </a>
             </div>
             <p style={{ color: 'rgba(247,249,252,0.3)', fontSize: 13, marginTop: 16 }}>No account required · 5 questions · Instant results</p>
+          <p style={{ color: 'rgba(247,249,252,0.2)', fontSize: 10, marginTop: 32 }}>Photo by <a href="https://unsplash.com/@victor_g" target="_blank" rel="noopener noreferrer" style={{ color: 'rgba(247,249,252,0.2)' }}>Victor</a> on <a href="https://unsplash.com/photos/J0NURCNG7fQ" target="_blank" rel="noopener noreferrer" style={{ color: 'rgba(247,249,252,0.2)' }}>Unsplash</a></p>
           </div>
         </div>
         <div style={{ position: 'absolute', bottom: 12, right: 16, zIndex: 2 }}>
@@ -499,7 +500,7 @@ export default function Home() {
             <span style={{ fontSize: 13, fontWeight: 600, color: '#0B1F33' }}>StrataReady</span>
           </div>
           <p style={{ fontSize: 12, color: '#94A3B8', textAlign: 'center' }}>
-            BC Strata Management Licensing Exam Preparation · Not affiliated with the BC Financial Services Authority
+            © 2026 Trickfilm Entertainment Inc. StrataReady.ca is a product of Trickfilm.
           </p>
           <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
             <div className="flex gap-6">
@@ -513,8 +514,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div style={{ borderTop: '1px solid #E2E8F0', padding: '10px 24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <span style={{ fontSize: 11, color: '#94A3B8' }}>© 2026 Trickfilm Entertainment Inc. StrataReady.ca is a product of Trickfilm.</span>
+
           <span style={{ fontSize: 11, color: '#CBD5E1' }}>Photo by </span>
           <a href="https://unsplash.com/@victor_g" target="_blank" rel="noopener noreferrer" style={{ fontSize: 11, color: '#94A3B8' }}>Victor</a>
           <span style={{ fontSize: 11, color: '#CBD5E1' }}> on </span>
